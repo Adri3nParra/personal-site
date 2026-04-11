@@ -1,0 +1,32 @@
+colorScheme = "fire"
+defaultAppearance = "light"
+autoSwitchAppearance = true
+
+enableSearch = false
+enableCodeCopy = true
+enableImageLazyLoading = true
+
+[header]
+  layout = "basic"
+  showTitle = true
+
+[footer]
+  showCopyright = true
+  showThemeAttribution = false
+  showScrollToTop = true
+
+[homepage]
+  layout = "profile"
+  showRecent = false
+
+[article]
+  showDate = false
+  showAuthor = false
+  showReadingTime = false
+  showBreadcrumbs = true
+  showHeadingAnchors = true
+  showTableOfContents = true
+
+[list]
+  showSummary = true
+  groupByYear = false

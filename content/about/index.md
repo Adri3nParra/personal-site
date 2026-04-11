@@ -1,0 +1,75 @@
+---
+title: "À propos"
+draft: false
+---
+
+Platform Engineer avec 5 ans d'expérience, spécialisé sur **Kubernetes, Cloud, les pipelines CI/CD et Linux**.
+
+Je suis quelqu'un de très curieux — je teste régulièrement de nouveaux outils, je lis des annonces de releases comme d'autres lisent les actualités, et j'ai souvent un POC qui tourne en local sur un truc qui m'a intrigué la semaine d'avant. Cette curiosité n'est pas un à-côté : c'est ce qui fait que je comprends rapidement un nouvel environnement, que je propose des solutions auxquelles l'équipe n'avait pas pensé, et que je reste à jour dans un écosystème qui évolue vite.
+
+Le reste du temps, j'aime les environnements simples, fiables et proches de la production. Pragmatique, je privilégie les solutions robustes et reproductibles plutôt que la complexité pour la complexité.
+
+Certifié **CKA** (Certified Kubernetes Administrator) et **CKAD** (Certified Kubernetes Application Developer).
+
+## Compétences techniques
+
+**Orchestration & Cloud**
+Kubernetes · OVH MKS · GKE · Docker Swarm · Helm · OpenTofu
+
+**GitOps & CI/CD**
+ArgoCD · GitLab CI · Harbor · Nexus · SonarQube · Jenkins
+
+**Sécurité**
+Trivy · Kyverno · Falco · CrowdSec · Sealed Secrets · Gitleaks
+
+**Monitoring**
+Prometheus · Grafana · Loki · Alertmanager · Zabbix
+
+**Réseau & Ingress**
+Traefik · Cert-Manager · TCP/IP · DNS · HTTP/S
+
+**Systèmes & BDD**
+Linux (Debian / Ubuntu / RHEL) · PostgreSQL · MySQL · Shell
+
+## Formation
+
+**Master en Informatique** — EPSI, Nantes · 2020–2022
+
+**Licence professionnelle** — EPSI, Nantes · 2019–2020
+
+**BTS SIO** — EPSI, Nantes · 2017–2019
+
+**Bac STI2D, Option SIN** — La Joliverie, Saint-Sébastien-sur-Loire · 2016–2017
+
+## Langues
+
+Français — Natif · Anglais — B2 · Espagnol — B1
+
+## Certifications
+
+<div style="display: flex; gap: 2rem; flex-wrap: wrap; margin-bottom: 1rem;">
+  <div style="text-align: center; max-width: 160px;">
+    <a href="https://www.credly.com/users/adrien-parra.05aa4654" target="_blank" rel="noopener">
+      <img src="https://images.credly.com/size/340x340/images/8b8ed108-e77d-4396-ac59-2504583b9d54/cka_from_cncfsite__281_29.png" alt="CKA - Certified Kubernetes Administrator" width="140" />
+    </a>
+    <p style="margin-top: 0.5rem; font-size: 0.85rem;"><strong>CKA</strong> — Mars 2026</p>
+  </div>
+  <div style="text-align: center; max-width: 160px;">
+    <a href="https://www.credly.com/users/adrien-parra.05aa4654" target="_blank" rel="noopener">
+      <img src="https://images.credly.com/size/340x340/images/cc8adc83-1dc6-4d57-8e20-22171247e052/blob" alt="CKAD - Certified Kubernetes Application Developer" width="140" />
+    </a>
+    <p style="margin-top: 0.5rem; font-size: 0.85rem;"><strong>CKAD</strong> — Avril 2026</p>
+  </div>
+</div>
+
+## Environnement de travail
+
+Je travaille **100%** Linux (**et j'y tiens énormément**) — **Ubuntu 24.04** au quotidien, Windows uniquement pour le jeu. Ça fait une vraie différence : les outils, les réflexes et les environnements sont cohérents du poste à la prod.
+
+Pour le développement et la veille, je tourne un cluster **K3S** local qui me permet de tester des charts Helm, des manifests ou des nouvelles technos avant de les approcher en production. J'utilise **nerdctl** pour le build et la manipulation d'images — CLI compatible Docker mais par-dessus containerd, sans démon.
+
+L'éditeur c'est **VSCode**, le terminal c'est Bash, et les outils du quotidien sont ceux qu'on retrouve dans n'importe quel environnement DevOps sérieux : kubectl, Helm, OpenTofu, git.
+
+## En dehors du travail
+
+Open Source & Linux 🐧 · Moto 🏍️ · Raid sur WoW 🛡️

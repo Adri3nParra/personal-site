@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+
+version: '3'
+
+vars:
+  IMAGE_NAME: rg.fr-par.scw.cloud/funcscwportfolio7b05b454/portfolio
+  IMAGE_TAG: latest
+  BASE_URL: https://ops.adrienparra.eu
+
+tasks:
+  buildImage:
+    desc: Build de l'image docker avec tag pour Scaleway Container
+    cmds:
+      - nerdctl build --build-arg BASE_URL={{.BASE_URL}} -t {{.IMAGE_NAME}}:{{.IMAGE_TAG}} .
+
+  pushImage:
+    desc: Push de l'image docker chez Scaleway
+    cmds:
+      - nerdctl push {{.IMAGE_NAME}}:{{.IMAGE_TAG}}
+
+  allInOne:
+    desc: Build et Push de l'image docker portfolio
+    cmds:
+      - task: buildImage
+      - task: pushImage

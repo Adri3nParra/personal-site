@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Traefik on Adrien PARRA</title>
+    <link>http://localhost:1313/tags/traefik/</link>
+    <description>Recent content in Traefik on Adrien PARRA</description>
+    <generator>Hugo</generator>
+    <language>fr</language>
+    <lastBuildDate>Sun, 29 Mar 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/traefik/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Traefik v3 Deep Dive : au-delà de l&#39;Ingress basique</title>
+      <link>http://localhost:1313/articles/traefik-v3-deep-dive/</link>
+      <pubDate>Sun, 29 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/articles/traefik-v3-deep-dive/</guid>
+      <description>Traefik v3 ne se résume pas à un IngressController. Middlewares, IngressRoute CRD, TCP/UDP routing, plugins, dashboard et observabilité : tout ce qui fait de Traefik un reverse proxy complet sur Kubernetes.</description>
+    </item>
+    <item>
+      <title>Kubernetes Gateway API : le successeur d&#39;Ingress est là</title>
+      <link>http://localhost:1313/articles/kubernetes-gateway-api/</link>
+      <pubDate>Mon, 10 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/articles/kubernetes-gateway-api/</guid>
+      <description>La Gateway API est GA depuis Kubernetes 1.28. Voici pourquoi elle remplace avantageusement Ingress, comment elle fonctionne, et comment la mettre en place avec Traefik.</description>
+    </item>
+  </channel>
+</rss>

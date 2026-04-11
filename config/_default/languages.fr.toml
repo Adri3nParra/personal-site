@@ -1,0 +1,19 @@
+languageCode = "fr"
+languageName = "Français"
+weight = 1
+
+title = "Adrien PARRA"
+
+[params]
+  dateFormat = "January 2006"
+  description = "Ingénieur DevOps · CKA/CKAD Certifié · Kubernetes · CI/CD · Linux"
+
+[params.author]
+  name = "Adrien PARRA"
+  image = "img/avatar.jpg"
+  headline = "Platform Engineer | CKA · CKAD Certifié"
+  bio = "5 ans d'expérience sur Linux, Kubernetes et les pipelines CI/CD. Solutions simples, fiables et proches de la production."
+  links = [
+    { linkedin = "https://www.linkedin.com/in/adrien-parra-5473a0159/" },
+    { github = "https://github.com/Adri3nParra" },
+  ]

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Gateway API on Adrien PARRA</title>
+    <link>http://localhost:1313/tags/gateway-api/</link>
+    <description>Recent content in Gateway API on Adrien PARRA</description>
+    <generator>Hugo</generator>
+    <language>fr</language>
+    <lastBuildDate>Mon, 10 Nov 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/gateway-api/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Kubernetes Gateway API : le successeur d&#39;Ingress est là</title>
+      <link>http://localhost:1313/articles/kubernetes-gateway-api/</link>
+      <pubDate>Mon, 10 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/articles/kubernetes-gateway-api/</guid>
+      <description>La Gateway API est GA depuis Kubernetes 1.28. Voici pourquoi elle remplace avantageusement Ingress, comment elle fonctionne, et comment la mettre en place avec Traefik.</description>
+    </item>
+  </channel>
+</rss>

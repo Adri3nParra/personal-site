@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Helm on Adrien PARRA</title>
+    <link>http://localhost:1313/tags/helm/</link>
+    <description>Recent content in Helm on Adrien PARRA</description>
+    <generator>Hugo</generator>
+    <language>fr</language>
+    <lastBuildDate>Sun, 29 Mar 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/helm/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Docker Swarm to Kubernetes : stratégies de migration</title>
+      <link>http://localhost:1313/articles/docker-swarm-to-kubernetes/</link>
+      <pubDate>Sun, 29 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/articles/docker-swarm-to-kubernetes/</guid>
+      <description>Migrer de Docker Swarm à Kubernetes ne se fait pas en un week-end. Mapping des concepts, patterns de migration, pièges à éviter et retour d&amp;rsquo;expérience concret sur une migration en production.</description>
+    </item>
+    <item>
+      <title>Contribuer à l&#39;open source : un Helm chart pour transfer.sh</title>
+      <link>http://localhost:1313/articles/transfersh-helm-chart/</link>
+      <pubDate>Fri, 20 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/articles/transfersh-helm-chart/</guid>
+      <description>transfer.sh est un outil de partage de fichiers en ligne de commande très utilisé, mais il ne proposait aucun Helm chart officiel. J&amp;rsquo;ai comblé ce manque avec une contribution open source — et ouvert une PR sur le dépôt upstream.</description>
+    </item>
+  </channel>
+</rss>

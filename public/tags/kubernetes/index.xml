@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Kubernetes on Adrien PARRA</title>
+    <link>http://localhost:1313/tags/kubernetes/</link>
+    <description>Recent content in Kubernetes on Adrien PARRA</description>
+    <generator>Hugo</generator>
+    <language>fr</language>
+    <lastBuildDate>Sun, 29 Mar 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Docker Swarm to Kubernetes : stratégies de migration</title>
+      <link>http://localhost:1313/articles/docker-swarm-to-kubernetes/</link>
+      <pubDate>Sun, 29 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/articles/docker-swarm-to-kubernetes/</guid>
+      <description>Migrer de Docker Swarm à Kubernetes ne se fait pas en un week-end. Mapping des concepts, patterns de migration, pièges à éviter et retour d&amp;rsquo;expérience concret sur une migration en production.</description>
+    </item>
+    <item>
+      <title>K3S for Local Development : Un mini cluster de production</title>
+      <link>http://localhost:1313/articles/k3s-local-development/</link>
+      <pubDate>Sun, 29 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/articles/k3s-local-development/</guid>
+      <description>K3S n&amp;rsquo;est pas qu&amp;rsquo;un cluster pour l&amp;rsquo;IoT. Voici comment l&amp;rsquo;utiliser comme environnement de développement local qui reflète ta prod, sans les 2000 euros de factures cloud par mois.</description>
+    </item>
+    <item>
+      <title>Kubernetes Monitoring : Stack Prometheus &#43; Grafana</title>
+      <link>http://localhost:1313/articles/kubernetes-monitoring-prometheus-grafana/</link>
+      <pubDate>Sun, 29 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/articles/kubernetes-monitoring-prometheus-grafana/</guid>
+      <description>Mettre en place une stack de monitoring complète sur Kubernetes avec kube-prometheus-stack : installation, dashboards Grafana, règles d&amp;rsquo;alerte, Alertmanager et bonnes pratiques de production.</description>
+    </item>
+    <item>
+      <title>Traefik v3 Deep Dive : au-delà de l&#39;Ingress basique</title>
+      <link>http://localhost:1313/articles/traefik-v3-deep-dive/</link>
+      <pubDate>Sun, 29 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/articles/traefik-v3-deep-dive/</guid>
+      <description>Traefik v3 ne se résume pas à un IngressController. Middlewares, IngressRoute CRD, TCP/UDP routing, plugins, dashboard et observabilité : tout ce qui fait de Traefik un reverse proxy complet sur Kubernetes.</description>
+    </item>
+    <item>
+      <title>ArgoCD en pratique : GitOps simplifie</title>
+      <link>http://localhost:1313/articles/argocd-introduction/</link>
+      <pubDate>Sat, 28 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/articles/argocd-introduction/</guid>
+      <description>GitOps est le standard pour deployer sur Kubernetes, et ArgoCD en est l&amp;rsquo;implementation la plus populaire. Retour d&amp;rsquo;experience : comment ca marche, pourquoi c&amp;rsquo;est different d&amp;rsquo;un pipeline CI/CD classique, et comment structurer ses deploiements.</description>
+    </item>
+    <item>
+      <title>Container Security : Trivy et Kyverno en production</title>
+      <link>http://localhost:1313/articles/container-security-trivy-kyverno/</link>
+      <pubDate>Sat, 28 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/articles/container-security-trivy-kyverno/</guid>
+      <description>Sécuriser un cluster Kubernetes en production, c&amp;rsquo;est pas qu&amp;rsquo;une question de réseau. Scan de vulnérabilités, politiques d&amp;rsquo;admission,least privilege : retour d&amp;rsquo;expérience avec Trivy et Kyverno.</description>
+    </item>
+    <item>
+      <title>Souverainete cloud : pourquoi basculer sur un hebergeur europeen</title>
+      <link>http://localhost:1313/articles/sovereignete-cloud/</link>
+      <pubDate>Sat, 28 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/articles/sovereignete-cloud/</guid>
+      <description>AWS, GCP, Azure dominent le cloud public, mais les hebergeurs europeens ont muri. Retour d&amp;rsquo;experience sur OVHCloud et Scaleway, comparaison technique, et arguments pour un cloud plus souverain.</description>
+    </item>
+    <item>
+      <title>CKA : retour d&#39;expérience sur la certification Kubernetes Administrator</title>
+      <link>http://localhost:1313/articles/retour-experience-cka/</link>
+      <pubDate>Sun, 15 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/articles/retour-experience-cka/</guid>
+      <description>J&amp;rsquo;ai passé et obtenu le CKA (Certified Kubernetes Administrator) en mars 2026. Voici comment je m&amp;rsquo;y suis préparé, ce que l&amp;rsquo;examen teste vraiment, et ce que j&amp;rsquo;en retire concrètement.</description>
+    </item>
+    <item>
+      <title>nerdctl : le CLI Docker pour containerd</title>
+      <link>http://localhost:1313/articles/nerdctl/</link>
+      <pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/articles/nerdctl/</guid>
+      <description>nerdctl reprend la syntaxe Docker à l&amp;rsquo;identique, mais s&amp;rsquo;appuie sur containerd directement. Un outil utile pour déboguer un cluster Kubernetes, travailler sans Docker daemon, ou expérimenter des fonctionnalités que Docker ne propose pas encore.</description>
+    </item>
+    <item>
+      <title>Contribuer à l&#39;open source : un Helm chart pour transfer.sh</title>
+      <link>http://localhost:1313/articles/transfersh-helm-chart/</link>
+      <pubDate>Fri, 20 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/articles/transfersh-helm-chart/</guid>
+      <description>transfer.sh est un outil de partage de fichiers en ligne de commande très utilisé, mais il ne proposait aucun Helm chart officiel. J&amp;rsquo;ai comblé ce manque avec une contribution open source — et ouvert une PR sur le dépôt upstream.</description>
+    </item>
+    <item>
+      <title>Kubernetes Gateway API : le successeur d&#39;Ingress est là</title>
+      <link>http://localhost:1313/articles/kubernetes-gateway-api/</link>
+      <pubDate>Mon, 10 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/articles/kubernetes-gateway-api/</guid>
+      <description>La Gateway API est GA depuis Kubernetes 1.28. Voici pourquoi elle remplace avantageusement Ingress, comment elle fonctionne, et comment la mettre en place avec Traefik.</description>
+    </item>
+  </channel>
+</rss>

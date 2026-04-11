@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>OpenTofu on Adrien PARRA</title>
+    <link>http://localhost:1313/tags/opentofu/</link>
+    <description>Recent content in OpenTofu on Adrien PARRA</description>
+    <generator>Hugo</generator>
+    <language>fr</language>
+    <lastBuildDate>Fri, 05 Dec 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/opentofu/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>OpenTofu : l&#39;IaC open source qui reprend le flambeau de Terraform</title>
+      <link>http://localhost:1313/articles/opentofu-decouverte/</link>
+      <pubDate>Fri, 05 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/articles/opentofu-decouverte/</guid>
+      <description>En août 2023, HashiCorp a changé la licence de Terraform. Quelques semaines plus tard, OpenTofu naissait sous l&amp;rsquo;égide de la Linux Foundation. Retour sur la genèse du projet, ce qu&amp;rsquo;il apporte de nouveau, et pourquoi il mérite votre attention.</description>
+    </item>
+  </channel>
+</rss>

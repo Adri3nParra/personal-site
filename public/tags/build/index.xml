@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Build on Adrien PARRA</title>
+    <link>http://localhost:1313/tags/build/</link>
+    <description>Recent content in Build on Adrien PARRA</description>
+    <generator>Hugo</generator>
+    <language>fr</language>
+    <lastBuildDate>Sat, 28 Mar 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/build/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Taskfile : le remplaçant moderne de Makefile</title>
+      <link>http://localhost:1313/articles/taskfile-introduction/</link>
+      <pubDate>Sat, 28 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/articles/taskfile-introduction/</guid>
+      <description>Taskfile (Task) est un task runner écrit en Go qui remplace avantageusement Make pour les projets modernes. Retour sur son histoire, ses avantages, et un comparatif avec Make, Just et les scripts shell.</description>
+    </item>
+  </channel>
+</rss>

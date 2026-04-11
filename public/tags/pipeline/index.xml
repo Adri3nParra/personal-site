@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Pipeline on Adrien PARRA</title>
+    <link>http://localhost:1313/tags/pipeline/</link>
+    <description>Recent content in Pipeline on Adrien PARRA</description>
+    <generator>Hugo</generator>
+    <language>fr</language>
+    <lastBuildDate>Tue, 20 Jan 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/pipeline/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>GitLab CI/CD : inputs, components et le catalogue — la fin du copier-coller</title>
+      <link>http://localhost:1313/articles/gitlab-cicd-inputs-components/</link>
+      <pubDate>Tue, 20 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/articles/gitlab-cicd-inputs-components/</guid>
+      <description>GitLab a profondément revu la réutilisabilité de ses pipelines. Les inputs typés remplacent les variables fragiles, les components structurent le partage, et le catalogue permet de les découvrir. Tour d&amp;rsquo;horizon pratique.</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>PostgreSQL on Adrien PARRA</title>
+    <link>http://localhost:1313/tags/postgresql/</link>
+    <description>Recent content in PostgreSQL on Adrien PARRA</description>
+    <generator>Hugo</generator>
+    <language>fr</language>
+    <lastBuildDate>Sun, 01 Jun 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/postgresql/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Nom du projet</title>
+      <link>http://localhost:1313/projects/projet-exemple/</link>
+      <pubDate>Sun, 01 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/projects/projet-exemple/</guid>
+      <description>Une phrase qui décrit ce que fait ce projet et le problème qu&amp;rsquo;il résout.</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,6 @@
+baseURL = 'https://example.org/'
+defaultContentLanguage = 'fr'
+title = 'Adrien PARRA — Ingénieur DevOps'
+
+[markup.goldmark.renderer]
+  unsafe = true

@@ -1,0 +1,587 @@
+
+
+
+
+
+
+<!doctype html>
+<html
+  lang="fr"
+  dir="ltr"
+  class="scroll-smooth"
+  data-default-appearance="light"
+  data-auto-appearance="true"
+><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#FFFFFF" />
+  
+  <title>Construire un cluster Kubernetes de production sur OVHcloud — retour d&#39;expérience &middot; Adrien PARRA</title>
+    <meta name="title" content="Construire un cluster Kubernetes de production sur OVHcloud — retour d&#39;expérience &middot; Adrien PARRA" />
+  
+  
+  
+  
+  
+  <script
+    type="text/javascript"
+    src="http://localhost:1313/js/appearance.min.8a082f81b27f3cb2ee528df0b0bdc39787034cf2cc34d4669fbc9977c929023c.js"
+    integrity="sha256-iggvgbJ/PLLuUo3wsL3Dl4cDTPLMNNRmn7yZd8kpAjw="
+  ></script>
+  
+  
+  
+  
+  
+  
+  
+  
+  <link
+    type="text/css"
+    rel="stylesheet"
+    href="http://localhost:1313/css/main.bundle.min.100caa677b4bc416cdd884107b203b4869f9b413a19aa57d12069fb826f1abe9.css"
+    integrity="sha256-EAyqZ3tLxBbN2IQQeyA7SGn5tBOhmqV9EgafuCbxq&#43;k="
+  />
+  
+  
+  
+    
+    
+  
+  
+  
+  
+    
+    <script
+      defer
+      type="text/javascript"
+      id="script-bundle"
+      src="http://localhost:1313/js/main.bundle.min.08a9220ae61dd334b11a887737885eaf1530f54c827ad77237e0dba74a179ea6.js"
+      integrity="sha256-CKkiCuYd0zSxGoh3N4herxUw9UyCetdyN&#43;Dbp0oXnqY="
+      data-copy="Copier"
+      data-copied="Copié"
+    ></script>
+  
+  
+  <meta
+    name="description"
+    content="
+      
+        Concevoir et opérer un cluster Kubernetes managé sur OVHcloud, from scratch : choix d&rsquo;architecture, stack outillage, sécurité, observabilité et GitOps. Retour sur les décisions prises et les leçons apprises.
+      
+    "
+  />
+  
+  
+  
+  
+    <link rel="canonical" href="http://localhost:1313/articles/cluster-kubernetes-ovhcloud/" />
+  
+  
+  
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+  
+  
+  
+  
+  
+  
+  
+  
+  <meta property="og:url" content="http://localhost:1313/articles/cluster-kubernetes-ovhcloud/">
+  <meta property="og:site_name" content="Adrien PARRA">
+  <meta property="og:title" content="Construire un cluster Kubernetes de production sur OVHcloud — retour d&#39;expérience">
+  <meta property="og:description" content="Concevoir et opérer un cluster Kubernetes managé sur OVHcloud, from scratch : choix d’architecture, stack outillage, sécurité, observabilité et GitOps. Retour sur les décisions prises et les leçons apprises.">
+  <meta property="og:locale" content="fr">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="articles">
+    <meta property="article:published_time" content="2026-03-22T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-03-22T00:00:00+00:00">
+    <meta property="article:tag" content="Kubernetes">
+    <meta property="article:tag" content="OVHcloud">
+    <meta property="article:tag" content="DevOps">
+    <meta property="article:tag" content="Infrastructure">
+
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Construire un cluster Kubernetes de production sur OVHcloud — retour d&#39;expérience">
+  <meta name="twitter:description" content="Concevoir et opérer un cluster Kubernetes managé sur OVHcloud, from scratch : choix d’architecture, stack outillage, sécurité, observabilité et GitOps. Retour sur les décisions prises et les leçons apprises.">
+
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "articleSection": "Articles",
+    "name": "Construire un cluster Kubernetes de production sur OVHcloud — retour d\u0027expérience",
+    "headline": "Construire un cluster Kubernetes de production sur OVHcloud — retour d\u0027expérience",
+    
+    "abstract": "Concevoir et opérer un cluster Kubernetes managé sur OVHcloud, from scratch : choix d\u0026rsquo;architecture, stack outillage, sécurité, observabilité et GitOps. Retour sur les décisions prises et les leçons apprises.",
+    "inLanguage": "fr",
+    "url" : "http:\/\/localhost:1313\/articles\/cluster-kubernetes-ovhcloud\/",
+    "author" : {
+      "@type": "Person",
+      "name": "Adrien PARRA"
+    },
+    "copyrightYear": "2026",
+    "dateCreated": "2026-03-22T00:00:00\u002b00:00",
+    "datePublished": "2026-03-22T00:00:00\u002b00:00",
+    
+    "dateModified": "2026-03-22T00:00:00\u002b00:00",
+    
+    "keywords": ["Kubernetes","OVHcloud","DevOps","Infrastructure"],
+    
+    "mainEntityOfPage": "true",
+    "wordCount": "1265"
+  }
+  </script>
+    
+    <script type="application/ld+json">
+    {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+     {
+       "@type": "ListItem",
+       "item": "http://localhost:1313/",
+       "name": "Accueil",
+       "position": 1
+     },
+     {
+       "@type": "ListItem",
+       "item": "http://localhost:1313/articles/",
+       "name": "Articles",
+       "position": 2
+     },
+     {
+       "@type": "ListItem",
+       "name": "Construire Un Cluster Kubernetes De Production Sur Ovhcloud — Retour D'expérience",
+       "position": 3
+     }
+   ]
+ }
+  </script>
+
+  
+  
+    <meta name="author" content="Adrien PARRA" />
+  
+  
+    
+      <link href="https://linkedin.com/in/adrien-parra" rel="me" />
+    
+      <link href="https://github.com/adrienparra" rel="me" />
+    
+  
+  
+  
+
+
+
+
+
+
+
+  
+  
+
+  
+  
+</head>
+<body
+    class="m-auto flex h-screen max-w-7xl flex-col bg-neutral px-6 text-lg leading-7 text-neutral-900 dark:bg-neutral-800 dark:text-neutral sm:px-14 md:px-24 lg:px-32"
+  >
+    <div id="the-top" class="absolute flex self-center">
+      <a
+        class="-translate-y-8 rounded-b-lg bg-primary-200 px-3 py-1 text-sm focus:translate-y-0 dark:bg-neutral-600"
+        href="#main-content"
+        ><span class="pe-2 font-bold text-primary-600 dark:text-primary-400">&darr;</span
+        >Aller au contenu</a
+      >
+    </div>
+    
+    
+      <header class="py-6 font-semibold text-neutral-900 dark:text-neutral sm:py-10 print:hidden">
+  <nav class="flex items-start justify-between sm:items-center">
+    
+    <div class="flex flex-row items-center">
+      
+  <a
+    class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2"
+    rel="me"
+    href="/"
+    >Adrien PARRA</a
+  >
+
+    </div>
+    
+    
+      <ul class="flex list-none flex-col text-end sm:flex-row">
+        
+          
+            
+            <li class="group mb-1 sm:mb-0 sm:me-7 sm:last:me-0.5">
+              
+                <a
+                  href="/about/"
+                  title="À propos"
+                  
+                  
+                  ><span
+                      class="decoration-primary-500 group-hover:underline group-hover:decoration-2 group-hover:underline-offset-2"
+                      >À propos</span
+                    >
+                  </a
+                >
+              
+            </li>
+          
+            
+            <li class="group mb-1 sm:mb-0 sm:me-7 sm:last:me-0.5">
+              
+                <a
+                  href="/experience/"
+                  title="Expérience"
+                  
+                  
+                  ><span
+                      class="decoration-primary-500 group-hover:underline group-hover:decoration-2 group-hover:underline-offset-2"
+                      >Expérience</span
+                    >
+                  </a
+                >
+              
+            </li>
+          
+            
+            <li class="group mb-1 sm:mb-0 sm:me-7 sm:last:me-0.5">
+              
+                <a
+                  href="/articles/"
+                  title="Articles"
+                  
+                  
+                  ><span
+                      class="decoration-primary-500 group-hover:underline group-hover:decoration-2 group-hover:underline-offset-2"
+                      >Articles</span
+                    >
+                  </a
+                >
+              
+            </li>
+          
+            
+            <li class="group mb-1 sm:mb-0 sm:me-7 sm:last:me-0.5">
+              
+                <a
+                  href="/contact/"
+                  title="Contact"
+                  
+                  
+                  ><span
+                      class="decoration-primary-500 group-hover:underline group-hover:decoration-2 group-hover:underline-offset-2"
+                      >Contact</span
+                    >
+                  </a
+                >
+              
+            </li>
+          
+          
+        
+      </ul>
+    
+  </nav>
+</header>
+
+    
+    <div class="relative flex grow flex-col">
+      <main id="main-content" class="grow">
+        
+  <article>
+    <header class="max-w-prose">
+      
+        <ol class="text-sm text-neutral-500 dark:text-neutral-400 print:hidden">
+  
+  
+    
+  
+    
+  
+  <li class="hidden inline">
+    <a
+      class="dark:underline-neutral-600 decoration-neutral-300 hover:underline"
+      href="http://localhost:1313/"
+      >Accueil</a
+    ><span class="px-1 text-primary-500">/</span>
+  </li>
+
+  
+  <li class=" inline">
+    <a
+      class="dark:underline-neutral-600 decoration-neutral-300 hover:underline"
+      href="http://localhost:1313/articles/"
+      >Articles</a
+    ><span class="px-1 text-primary-500">/</span>
+  </li>
+
+  
+  <li class="hidden inline">
+    <a
+      class="dark:underline-neutral-600 decoration-neutral-300 hover:underline"
+      href="http://localhost:1313/articles/cluster-kubernetes-ovhcloud/"
+      >Construire un cluster Kubernetes de production sur OVHcloud — retour d&#39;expérience</a
+    ><span class="px-1 text-primary-500">/</span>
+  </li>
+
+</ol>
+
+
+      
+      <h1 class="mb-8 mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
+        Construire un cluster Kubernetes de production sur OVHcloud — retour d'expérience
+      </h1>
+      
+      
+    </header>
+    <section class="prose mt-0 flex max-w-full flex-col dark:prose-invert lg:flex-row">
+      
+        <div class="order-first px-0 lg:order-last lg:max-w-xs lg:ps-8">
+          <div class="toc pe-5 lg:sticky lg:top-10 print:hidden">
+            <details open class="-ms-5 mt-0 overflow-hidden rounded-lg ps-5">
+  <summary
+    class="block cursor-pointer bg-neutral-100 py-1 ps-5 text-lg font-semibold text-neutral-800 dark:bg-neutral-700 dark:text-neutral-100 lg:hidden"
+  >
+    Sommaire
+  </summary>
+  <div class="border-s border-dotted border-neutral-300 py-2 ps-5 dark:border-neutral-600">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#le-contexte">Le contexte</a></li>
+    <li><a href="#provisionnement-avec-opentofu">Provisionnement avec OpenTofu</a></li>
+    <li><a href="#larchitecture-applicative-du-cluster">L&rsquo;architecture applicative du cluster</a>
+      <ul>
+        <li><a href="#ingress-et-tls">Ingress et TLS</a></li>
+        <li><a href="#sécurité--défense-en-profondeur">Sécurité — défense en profondeur</a></li>
+        <li><a href="#observabilité">Observabilité</a></li>
+        <li><a href="#gitops-avec-argocd">GitOps avec ArgoCD</a></li>
+        <li><a href="#stockage-multi-tiers">Stockage multi-tiers</a></li>
+        <li><a href="#opérations">Opérations</a></li>
+      </ul>
+    </li>
+    <li><a href="#les-choix-structurants">Les choix structurants</a>
+      <ul>
+        <li><a href="#pourquoi-ovhcloud-mks-">Pourquoi OVHcloud MKS ?</a></li>
+        <li><a href="#les-limites-rencontrées">Les limites rencontrées</a></li>
+        <li><a href="#pourquoi-tout-en-helm-plutôt-quen-manifestes-bruts-">Pourquoi tout en Helm plutôt qu&rsquo;en manifestes bruts ?</a></li>
+      </ul>
+    </li>
+    <li><a href="#ce-que-ça-donne-au-quotidien">Ce que ça donne au quotidien</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+  </div>
+</details>
+
+          </div>
+        </div>
+      
+      <div class="min-h-0 min-w-0 max-w-prose grow">
+        <p>Monter un cluster Kubernetes, ce n&rsquo;est pas juste lancer un <code>kubectl create cluster</code>. C&rsquo;est assembler des dizaines de briques — réseau, stockage, sécurité, monitoring, déploiement — pour obtenir une plateforme fiable et opérable au quotidien. Voici le retour d&rsquo;expérience de la construction from scratch d&rsquo;un cluster de production sur OVHcloud Managed Kubernetes (MKS).</p>
+<h2 id="le-contexte" class="relative group">Le contexte <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#le-contexte" aria-label="Ancre">#</a></span></h2><p>L&rsquo;objectif : fournir une <strong>plateforme mutualisée</strong> capable d&rsquo;héberger plusieurs projets applicatifs pour des équipes de développement, avec des environnements de dev, recette et production sur le même cluster. Le tout en souveraineté européenne — d&rsquo;où le choix d&rsquo;OVHcloud plutôt qu&rsquo;un hyperscaler américain.</p>
+<p>Les contraintes dès le départ :</p>
+<ul>
+<li><strong>Infrastructure as Code</strong> — tout doit être versionné, reproductible, auditable.</li>
+<li><strong>Sécurité renforcée</strong> — chiffrement, WAF, audit, scan de vulnérabilités.</li>
+<li><strong>Observabilité complète</strong> — métriques, logs, alerting, monitoring externe.</li>
+<li><strong>Autonomie des équipes</strong> — les développeurs déploient sans intervention infra.</li>
+<li><strong>Maîtrise des coûts</strong> — extinction automatique des environnements hors heures ouvrées.</li>
+</ul>
+<h2 id="provisionnement-avec-opentofu" class="relative group">Provisionnement avec OpenTofu <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#provisionnement-avec-opentofu" aria-label="Ancre">#</a></span></h2><p>Le cluster et son réseau sont provisionnés via <strong>OpenTofu</strong> (fork open source de Terraform). Trois modules structurent l&rsquo;infra :</p>
+<ul>
+<li><strong>network</strong> — réseau privé VRack avec un sous-réseau dédié au cluster.</li>
+<li><strong>gateway</strong> — passerelle managée pour la sortie internet des pods.</li>
+<li><strong>kubernetes</strong> — cluster MKS avec un node pool de machines <code>b3-16</code>.</li>
+</ul>
+<p>Le tout est découpé par environnement (production, hors-prod, outillage) avec des variables dédiées par contexte. Le state est stocké de manière sécurisée et les imports de ressources existantes sont documentés pour les reprises en main.</p>
+<h2 id="larchitecture-applicative-du-cluster" class="relative group">L&rsquo;architecture applicative du cluster <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#larchitecture-applicative-du-cluster" aria-label="Ancre">#</a></span></h2><p>Une fois le cluster debout, il faut l&rsquo;habiller. Voici les briques déployées, toutes gérées via <strong>Helm</strong> et versionnées en Git.</p>
+<h3 id="ingress-et-tls" class="relative group">Ingress et TLS <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#ingress-et-tls" aria-label="Ancre">#</a></span></h3><p><strong>Traefik</strong> en tant qu&rsquo;ingress controller, déployé en haute disponibilité avec deux réplicas et une anti-affinité de pods. Les certificats TLS sont gérés par <strong>cert-manager</strong> avec validation DNS via l&rsquo;API OVH, ce qui permet les certificats wildcard Let&rsquo;s Encrypt sans exposer de ports supplémentaires.</p>
+<p>Un contrôleur <strong>Reflector</strong> propage automatiquement les secrets TLS dans les namespaces applicatifs — les équipes n&rsquo;ont pas à se soucier de la gestion des certificats.</p>
+<h3 id="sécurité--défense-en-profondeur" class="relative group">Sécurité — défense en profondeur <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#s%c3%a9curit%c3%a9--d%c3%a9fense-en-profondeur" aria-label="Ancre">#</a></span></h3><p>La sécurité du cluster repose sur plusieurs couches complémentaires :</p>
+<ul>
+<li><strong>CrowdSec</strong> — WAF intégré à Traefik via le bouncer plugin. L&rsquo;AppSec applique les règles OWASP CRS en virtual patching. Les IP malveillantes sont bloquées en amont, alimentées par la threat intelligence communautaire de CrowdSec.</li>
+<li><strong>Kyverno</strong> — moteur de policies Kubernetes en mode audit. Interdit les workloads dans le namespace <code>default</code>, nettoie automatiquement les pods orphelins et les ReplicaSets inutilisés.</li>
+<li><strong>Trivy Operator</strong> — scan continu des images déployées sur le cluster. Les vulnérabilités critiques déclenchent des alertes par email, routées vers l&rsquo;équipe responsable du namespace concerné.</li>
+<li><strong>Falco</strong> — audit des appels API Kubernetes via le plugin OVH. Détecte les accès suspects aux secrets, les modifications de RBAC non autorisées, les exécutions de shell dans les pods.</li>
+<li><strong>Sealed Secrets</strong> — tous les secrets sont chiffrés dans Git. Seul le contrôleur Sealed Secrets dans le cluster peut les déchiffrer.</li>
+</ul>
+<h3 id="observabilité" class="relative group">Observabilité <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#observabilit%c3%a9" aria-label="Ancre">#</a></span></h3><p>La stack monitoring s&rsquo;articule autour de trois piliers :</p>
+<ul>
+<li><strong>Métriques</strong> — Prometheus scrape les composants du cluster et les applications. Grafana fournit les dashboards avec SSO via Keycloak. AlertManager route les alertes par email avec des templates personnalisées et un routage par namespace.</li>
+<li><strong>Logs</strong> — Promtail collecte les logs de tous les pods avec un pipeline de parsing JSON structuré. Loki les stocke et les rend requêtables depuis Grafana.</li>
+<li><strong>Monitoring externe</strong> — Blackbox Exporter surveille la disponibilité des services exposés (HTTPS) avec des alertes sur les temps de réponse et l&rsquo;expiration des certificats SSL.</li>
+</ul>
+<h3 id="gitops-avec-argocd" class="relative group">GitOps avec ArgoCD <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#gitops-avec-argocd" aria-label="Ancre">#</a></span></h3><p>Les déploiements applicatifs passent par <strong>ArgoCD</strong> : les équipes poussent leur code, la CI construit l&rsquo;image, et ArgoCD Image Updater détecte la nouvelle version et met à jour le déploiement automatiquement. Quatre niveaux de RBAC (admin, développeur, chef de projet, lecture seule) sont synchronisés via Keycloak.</p>
+<p>Les développeurs ont la main sur le <code>sync</code> et les overrides de leurs applications, mais pas sur la création ou suppression de projets ArgoCD — c&rsquo;est l&rsquo;équipe infra qui garde le contrôle du périmètre.</p>
+<h3 id="stockage-multi-tiers" class="relative group">Stockage multi-tiers <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#stockage-multi-tiers" aria-label="Ancre">#</a></span></h3><p>OVHcloud propose plusieurs types de stockage, tous exploités ici :</p>
+<table>
+  <thead>
+      <tr>
+          <th>Type</th>
+          <th>Service OVH</th>
+          <th>Usage</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Block (RWO)</strong></td>
+          <td>Cinder High Speed / Classic</td>
+          <td>Prometheus, Grafana, AlertManager</td>
+      </tr>
+      <tr>
+          <td><strong>Object (S3)</strong></td>
+          <td>Object Storage S3</td>
+          <td>Backups Velero, stockage applicatif</td>
+      </tr>
+      <tr>
+          <td><strong>Fichier (RWX)</strong></td>
+          <td>NAS-HA via CSI NFS</td>
+          <td>Loki, données partagées entre pods</td>
+      </tr>
+  </tbody>
+</table>
+<p>Les StorageClasses sont configurées en <code>Retain</code> pour éviter la suppression accidentelle des volumes persistants.</p>
+<h3 id="opérations" class="relative group">Opérations <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#op%c3%a9rations" aria-label="Ancre">#</a></span></h3><ul>
+<li><strong>Velero</strong> — sauvegarde quotidienne complète du cluster vers le stockage objet OVH, avec backup filesystem (Kopia) pour les volumes NFS. Rétention de 72 heures.</li>
+<li><strong>kube-green</strong> — suspend automatiquement les environnements de développement et recette en dehors des heures ouvrées (22h → 6h, lundi-vendredi). Sur un cluster mutualisé, l&rsquo;économie de ressources est significative.</li>
+<li><strong>External Secrets Operator</strong> — synchronise les secrets depuis les variables CI/CD GitLab vers le cluster, évitant la duplication manuelle.</li>
+</ul>
+<h2 id="les-choix-structurants" class="relative group">Les choix structurants <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#les-choix-structurants" aria-label="Ancre">#</a></span></h2><h3 id="pourquoi-ovhcloud-mks-" class="relative group">Pourquoi OVHcloud MKS ? <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#pourquoi-ovhcloud-mks-" aria-label="Ancre">#</a></span></h3><ul>
+<li><strong>Souveraineté</strong> — données hébergées en France (Strasbourg), conformité RGPD native.</li>
+<li><strong>Kubernetes managé</strong> — le control plane est opéré par OVH, ce qui réduit la charge d&rsquo;exploitation.</li>
+<li><strong>VRack</strong> — réseau privé L2 performant entre les nœuds, sans surcoût.</li>
+<li><strong>Coût maîtrisé</strong> — le control plane MKS est gratuit, on ne paie que les nœuds et le stockage.</li>
+</ul>
+<h3 id="les-limites-rencontrées" class="relative group">Les limites rencontrées <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#les-limites-rencontr%c3%a9es" aria-label="Ancre">#</a></span></h3><p>Quelques spécificités du MKS OVH qui ont demandé des adaptations :</p>
+<ul>
+<li><strong>Pas d&rsquo;accès au control plane</strong> — impossible de scraper les métriques de l&rsquo;API server, du scheduler ou de l&rsquo;etcd directement. Le monitoring se concentre sur le kubelet et les composants applicatifs.</li>
+<li><strong>Falco en mode dégradé</strong> — pas d&rsquo;accès au kernel des nœuds managés. Falco fonctionne en Deployment (pas DaemonSet) via le plugin d&rsquo;audit OVH plutôt qu&rsquo;en interception syscall.</li>
+<li><strong>Pas de LoadBalancer natif intégré</strong> — Traefik gère tout le trafic entrant via NodePort + Proxy Protocol.</li>
+</ul>
+<h3 id="pourquoi-tout-en-helm-plutôt-quen-manifestes-bruts-" class="relative group">Pourquoi tout en Helm plutôt qu&rsquo;en manifestes bruts ? <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#pourquoi-tout-en-helm-plut%c3%b4t-quen-manifestes-bruts-" aria-label="Ancre">#</a></span></h3><p>Avec plus de vingt composants à gérer, Helm apporte :</p>
+<ul>
+<li><strong>Versioning</strong> — chaque composant a une version pinée, les mises à jour sont tracées en Git.</li>
+<li><strong>Templating</strong> — les values files sont le seul point de configuration, tout le reste est géré par les charts upstream.</li>
+<li><strong>Reproductibilité</strong> — un <code>helm upgrade</code> sur un nouveau cluster reconstruit la même stack.</li>
+</ul>
+<h2 id="ce-que-ça-donne-au-quotidien" class="relative group">Ce que ça donne au quotidien <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#ce-que-%c3%a7a-donne-au-quotidien" aria-label="Ancre">#</a></span></h2><p>Une fois la plateforme en place, le workflow pour une nouvelle application est simple :</p>
+<ol>
+<li>L&rsquo;équipe dev crée son projet GitLab avec un <code>Dockerfile</code> et un chart Helm.</li>
+<li>La CI GitLab construit et pousse l&rsquo;image sur le registre.</li>
+<li>L&rsquo;infra crée le namespace et le projet ArgoCD correspondant.</li>
+<li>ArgoCD détecte le chart, déploie l&rsquo;application, et met à jour automatiquement les versions d&rsquo;images.</li>
+<li>Les métriques et logs sont immédiatement disponibles dans Grafana.</li>
+<li>Les alertes de sécurité (Trivy, CrowdSec, Falco) sont routées vers les bonnes équipes.</li>
+<li>Les sauvegardes tournent, les environnements s&rsquo;éteignent la nuit, les certificats se renouvellent.</li>
+</ol>
+<p>L&rsquo;équipe infra intervient pour les opérations transverses (mises à jour du cluster, ajout de composants, gestion des politiques de sécurité), mais les équipes applicatives sont autonomes sur leur périmètre.</p>
+<h2 id="conclusion" class="relative group">Conclusion <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#conclusion" aria-label="Ancre">#</a></span></h2><p>Monter un cluster Kubernetes de production, ce n&rsquo;est pas le cluster lui-même qui est complexe — c&rsquo;est tout ce qu&rsquo;on met autour. Le réseau, la sécurité, l&rsquo;observabilité, le GitOps, les sauvegardes, l&rsquo;optimisation des coûts : chaque brique prise isolément est simple, mais c&rsquo;est leur intégration cohérente qui fait la différence entre un cluster &ldquo;qui tourne&rdquo; et une plateforme réellement opérable.</p>
+<p>Le choix d&rsquo;OVHcloud s&rsquo;est avéré pertinent pour le contexte : souveraineté, coût maîtrisé, et un Kubernetes managé qui fait le travail. Les quelques limitations (accès au control plane, Falco sans kernel) se contournent sans compromis majeur sur la sécurité ou l&rsquo;observabilité.</p>
+<p>L&rsquo;investissement initial dans l&rsquo;IaC et l&rsquo;automatisation se rentabilise dès le deuxième projet embarqué sur la plateforme.</p>
+
+      </div>
+    </section>
+    <footer class="max-w-prose pt-8 print:hidden">
+      
+
+      
+
+      
+  
+    
+    
+    
+    <div class="pt-8">
+      <hr class="border-dotted border-neutral-300 dark:border-neutral-600" />
+      <div class="flex justify-between pt-3">
+        <span>
+          
+            <a class="group flex" href="http://localhost:1313/articles/transfersh-helm-chart/">
+              <span
+                class="me-2 text-neutral-700 transition-transform group-hover:-translate-x-[2px] group-hover:text-primary-600 dark:text-neutral dark:group-hover:text-primary-400"
+                ><span class="ltr:inline rtl:hidden">&larr;</span
+                ><span class="ltr:hidden rtl:inline">&rarr;</span></span
+              >
+              <span class="flex flex-col">
+                <span
+                  class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500"
+                  >Contribuer à l'open source : un Helm chart pour transfer.sh</span
+                >
+                <span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
+                  
+                </span>
+              </span>
+            </a>
+          
+        </span>
+        <span>
+          
+        </span>
+      </div>
+    </div>
+  
+
+
+      
+    </footer>
+  </article>
+
+      </main>
+      
+        <div
+          class="pointer-events-none absolute bottom-0 end-0 top-[100vh] w-12"
+          id="to-top"
+          hidden="true"
+        >
+          <a
+            href="#the-top"
+            class="pointer-events-auto sticky top-[calc(100vh-5.5rem)] flex h-12 w-12 items-center justify-center rounded-full bg-neutral/50 text-xl text-neutral-700 backdrop-blur hover:text-primary-600 dark:bg-neutral-800/50 dark:text-neutral dark:hover:text-primary-400"
+            aria-label="Faire défiler jusqu&#39;au bas de la page"
+            title="Faire défiler jusqu&#39;au bas de la page"
+          >
+            &uarr;
+          </a>
+        </div>
+      <footer class="py-10 print:hidden">
+  
+  
+  <div class="flex items-center justify-between">
+    <div>
+      
+      
+        <p class="text-sm text-neutral-500 dark:text-neutral-400">
+            &copy;
+            2026
+            Adrien PARRA
+        </p>
+      
+      
+      
+    </div>
+    <div class="flex flex-row items-center">
+      
+      
+      
+      
+    </div>
+  </div>
+  
+  
+</footer>
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Open Source on Adrien PARRA</title>
+    <link>http://localhost:1313/tags/open-source/</link>
+    <description>Recent content in Open Source on Adrien PARRA</description>
+    <generator>Hugo</generator>
+    <language>fr</language>
+    <lastBuildDate>Fri, 20 Feb 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/open-source/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Contribuer à l&#39;open source : un Helm chart pour transfer.sh</title>
+      <link>http://localhost:1313/articles/transfersh-helm-chart/</link>
+      <pubDate>Fri, 20 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/articles/transfersh-helm-chart/</guid>
+      <description>transfer.sh est un outil de partage de fichiers en ligne de commande très utilisé, mais il ne proposait aucun Helm chart officiel. J&amp;rsquo;ai comblé ce manque avec une contribution open source — et ouvert une PR sur le dépôt upstream.</description>
+    </item>
+    <item>
+      <title>OpenTofu : l&#39;IaC open source qui reprend le flambeau de Terraform</title>
+      <link>http://localhost:1313/articles/opentofu-decouverte/</link>
+      <pubDate>Fri, 05 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/articles/opentofu-decouverte/</guid>
+      <description>En août 2023, HashiCorp a changé la licence de Terraform. Quelques semaines plus tard, OpenTofu naissait sous l&amp;rsquo;égide de la Linux Foundation. Retour sur la genèse du projet, ce qu&amp;rsquo;il apporte de nouveau, et pourquoi il mérite votre attention.</description>
+    </item>
+  </channel>
+</rss>

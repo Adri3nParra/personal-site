@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>CKA on Adrien PARRA</title>
+    <link>http://localhost:1313/tags/cka/</link>
+    <description>Recent content in CKA on Adrien PARRA</description>
+    <generator>Hugo</generator>
+    <language>fr</language>
+    <lastBuildDate>Sun, 15 Mar 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/cka/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CKA : retour d&#39;expérience sur la certification Kubernetes Administrator</title>
+      <link>http://localhost:1313/articles/retour-experience-cka/</link>
+      <pubDate>Sun, 15 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/articles/retour-experience-cka/</guid>
+      <description>J&amp;rsquo;ai passé et obtenu le CKA (Certified Kubernetes Administrator) en mars 2026. Voici comment je m&amp;rsquo;y suis préparé, ce que l&amp;rsquo;examen teste vraiment, et ce que j&amp;rsquo;en retire concrètement.</description>
+    </item>
+  </channel>
+</rss>

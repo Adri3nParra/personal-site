@@ -1,0 +1,1008 @@
+
+
+
+
+
+
+<!doctype html>
+<html
+  lang="fr"
+  dir="ltr"
+  class="scroll-smooth"
+  data-default-appearance="light"
+  data-auto-appearance="true"
+><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#FFFFFF" />
+  
+  <title>Taskfile : le remplaçant moderne de Makefile &middot; Adrien PARRA</title>
+    <meta name="title" content="Taskfile : le remplaçant moderne de Makefile &middot; Adrien PARRA" />
+  
+  
+  
+  
+  
+  <script
+    type="text/javascript"
+    src="http://localhost:1313/js/appearance.min.8a082f81b27f3cb2ee528df0b0bdc39787034cf2cc34d4669fbc9977c929023c.js"
+    integrity="sha256-iggvgbJ/PLLuUo3wsL3Dl4cDTPLMNNRmn7yZd8kpAjw="
+  ></script>
+  
+  
+  
+  
+  
+  
+  
+    
+  
+  
+  <link
+    type="text/css"
+    rel="stylesheet"
+    href="http://localhost:1313/css/main.bundle.min.0de763b2899dc6cb9886d78b6c56064836bffc4b9441a2489023bd81177731f2.css"
+    integrity="sha256-DedjsomdxsuYhteLbFYGSDa//EuUQaJIkCO9gRd3MfI="
+  />
+  
+  
+  
+    
+    
+  
+  
+  
+  
+    
+    <script
+      defer
+      type="text/javascript"
+      id="script-bundle"
+      src="http://localhost:1313/js/main.bundle.min.08a9220ae61dd334b11a887737885eaf1530f54c827ad77237e0dba74a179ea6.js"
+      integrity="sha256-CKkiCuYd0zSxGoh3N4herxUw9UyCetdyN&#43;Dbp0oXnqY="
+      data-copy="Copier"
+      data-copied="Copié"
+    ></script>
+  
+  
+  <meta
+    name="description"
+    content="
+      
+        Taskfile (Task) est un task runner écrit en Go qui remplace avantageusement Make pour les projets modernes. Retour sur son histoire, ses avantages, et un comparatif avec Make, Just et les scripts shell.
+      
+    "
+  />
+  
+  
+  
+  
+    <link rel="canonical" href="http://localhost:1313/articles/taskfile-introduction/" />
+  
+  
+  
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <meta property="og:url" content="http://localhost:1313/articles/taskfile-introduction/">
+  <meta property="og:site_name" content="Adrien PARRA">
+  <meta property="og:title" content="Taskfile : le remplaçant moderne de Makefile">
+  <meta property="og:description" content="Taskfile (Task) est un task runner écrit en Go qui remplace avantageusement Make pour les projets modernes. Retour sur son histoire, ses avantages, et un comparatif avec Make, Just et les scripts shell.">
+  <meta property="og:locale" content="fr">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="articles">
+    <meta property="article:published_time" content="2026-03-28T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-03-28T00:00:00+00:00">
+    <meta property="article:tag" content="Taskfile">
+    <meta property="article:tag" content="Task">
+    <meta property="article:tag" content="DevOps">
+    <meta property="article:tag" content="Build">
+    <meta property="article:tag" content="Go">
+
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Taskfile : le remplaçant moderne de Makefile">
+  <meta name="twitter:description" content="Taskfile (Task) est un task runner écrit en Go qui remplace avantageusement Make pour les projets modernes. Retour sur son histoire, ses avantages, et un comparatif avec Make, Just et les scripts shell.">
+
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "articleSection": "Articles",
+    "name": "Taskfile : le remplaçant moderne de Makefile",
+    "headline": "Taskfile : le remplaçant moderne de Makefile",
+    
+    "abstract": "Taskfile (Task) est un task runner écrit en Go qui remplace avantageusement Make pour les projets modernes. Retour sur son histoire, ses avantages, et un comparatif avec Make, Just et les scripts shell.",
+    "inLanguage": "fr",
+    "url" : "http:\/\/localhost:1313\/articles\/taskfile-introduction\/",
+    "author" : {
+      "@type": "Person",
+      "name": "Adrien PARRA"
+    },
+    "copyrightYear": "2026",
+    "dateCreated": "2026-03-28T00:00:00\u002b00:00",
+    "datePublished": "2026-03-28T00:00:00\u002b00:00",
+    
+    "dateModified": "2026-03-28T00:00:00\u002b00:00",
+    
+    "keywords": ["Taskfile","Task","DevOps","Build","Go"],
+    
+    "mainEntityOfPage": "true",
+    "wordCount": "1405"
+  }
+  </script>
+    
+    <script type="application/ld+json">
+    {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+     {
+       "@type": "ListItem",
+       "item": "http://localhost:1313/",
+       "name": "Accueil",
+       "position": 1
+     },
+     {
+       "@type": "ListItem",
+       "item": "http://localhost:1313/articles/",
+       "name": "Articles",
+       "position": 2
+     },
+     {
+       "@type": "ListItem",
+       "name": "Taskfile Le Remplaçant Moderne De Makefile",
+       "position": 3
+     }
+   ]
+ }
+  </script>
+
+  
+  
+    <meta name="author" content="Adrien PARRA" />
+  
+  
+    
+      <link href="https://www.linkedin.com/in/adrien-parra-5473a0159/" rel="me" />
+    
+      <link href="https://github.com/Adri3nParra" rel="me" />
+    
+  
+  
+  
+
+
+
+
+
+
+
+  
+  
+
+  
+  
+</head>
+<body
+    class="m-auto flex h-screen max-w-7xl flex-col bg-neutral px-6 text-lg leading-7 text-neutral-900 dark:bg-neutral-800 dark:text-neutral sm:px-14 md:px-24 lg:px-32"
+  >
+    <div id="the-top" class="absolute flex self-center">
+      <a
+        class="-translate-y-8 rounded-b-lg bg-primary-200 px-3 py-1 text-sm focus:translate-y-0 dark:bg-neutral-600"
+        href="#main-content"
+        ><span class="pe-2 font-bold text-primary-600 dark:text-primary-400">&darr;</span
+        >Aller au contenu</a
+      >
+    </div>
+    
+    
+      <header class="py-6 font-semibold text-neutral-900 dark:text-neutral sm:py-10 print:hidden">
+  <nav class="flex items-start justify-between sm:items-center">
+    
+    <div class="flex flex-row items-center">
+      
+  <a
+    class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2"
+    rel="me"
+    href="/"
+    >Adrien PARRA</a
+  >
+
+    </div>
+    
+    
+      <ul class="flex list-none flex-col text-end sm:flex-row">
+        
+          
+            
+            <li class="group mb-1 sm:mb-0 sm:me-7 sm:last:me-0.5">
+              
+                <a
+                  href="/about/"
+                  title="À propos"
+                  
+                  
+                  ><span
+                      class="decoration-primary-500 group-hover:underline group-hover:decoration-2 group-hover:underline-offset-2"
+                      >À propos</span
+                    >
+                  </a
+                >
+              
+            </li>
+          
+            
+            <li class="group mb-1 sm:mb-0 sm:me-7 sm:last:me-0.5">
+              
+                <a
+                  href="/experience/"
+                  title="Expérience"
+                  
+                  
+                  ><span
+                      class="decoration-primary-500 group-hover:underline group-hover:decoration-2 group-hover:underline-offset-2"
+                      >Expérience</span
+                    >
+                  </a
+                >
+              
+            </li>
+          
+            
+            <li class="group mb-1 sm:mb-0 sm:me-7 sm:last:me-0.5">
+              
+                <a
+                  href="/articles/"
+                  title="Articles"
+                  
+                  
+                  ><span
+                      class="decoration-primary-500 group-hover:underline group-hover:decoration-2 group-hover:underline-offset-2"
+                      >Articles</span
+                    >
+                  </a
+                >
+              
+            </li>
+          
+            
+            <li class="group mb-1 sm:mb-0 sm:me-7 sm:last:me-0.5">
+              
+                <a
+                  href="/contact/"
+                  title="Contact"
+                  
+                  
+                  ><span
+                      class="decoration-primary-500 group-hover:underline group-hover:decoration-2 group-hover:underline-offset-2"
+                      >Contact</span
+                    >
+                  </a
+                >
+              
+            </li>
+          
+          
+        
+      </ul>
+    
+  </nav>
+</header>
+
+    
+    <div class="relative flex grow flex-col">
+      <main id="main-content" class="grow">
+        
+  <article>
+    <header class="max-w-prose">
+      
+        <ol class="text-sm text-neutral-500 dark:text-neutral-400 print:hidden">
+  
+  
+    
+  
+    
+  
+  <li class="hidden inline">
+    <a
+      class="dark:underline-neutral-600 decoration-neutral-300 hover:underline"
+      href="http://localhost:1313/"
+      >Accueil</a
+    ><span class="px-1 text-primary-500">/</span>
+  </li>
+
+  
+  <li class=" inline">
+    <a
+      class="dark:underline-neutral-600 decoration-neutral-300 hover:underline"
+      href="http://localhost:1313/articles/"
+      >Articles</a
+    ><span class="px-1 text-primary-500">/</span>
+  </li>
+
+  
+  <li class="hidden inline">
+    <a
+      class="dark:underline-neutral-600 decoration-neutral-300 hover:underline"
+      href="http://localhost:1313/articles/taskfile-introduction/"
+      >Taskfile : le remplaçant moderne de Makefile</a
+    ><span class="px-1 text-primary-500">/</span>
+  </li>
+
+</ol>
+
+
+      
+      <h1 class="mb-8 mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
+        Taskfile : le remplaçant moderne de Makefile
+      </h1>
+      
+      
+    </header>
+    <section class="prose mt-0 flex max-w-full flex-col dark:prose-invert lg:flex-row">
+      
+        <div class="order-first px-0 lg:order-last lg:max-w-xs lg:ps-8">
+          <div class="toc pe-5 lg:sticky lg:top-10 print:hidden">
+            <details open class="-ms-5 mt-0 overflow-hidden rounded-lg ps-5">
+  <summary
+    class="block cursor-pointer bg-neutral-100 py-1 ps-5 text-lg font-semibold text-neutral-800 dark:bg-neutral-700 dark:text-neutral-100 lg:hidden"
+  >
+    Sommaire
+  </summary>
+  <div class="border-s border-dotted border-neutral-300 py-2 ps-5 dark:border-neutral-600">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#un-peu-dhistoire">Un peu d&rsquo;histoire</a>
+      <ul>
+        <li><a href="#make-le-classique-indémodable">Make, le classique indémodable</a></li>
+        <li><a href="#les-limites-de-make">Les limites de Make</a></li>
+        <li><a href="#lémergence-des-alternatives">L&rsquo;émergence des alternatives</a></li>
+      </ul>
+    </li>
+    <li><a href="#taskfile-cest-quoi-">Taskfile, c&rsquo;est quoi ?</a>
+      <ul>
+        <li><a href="#installation">Installation</a></li>
+        <li><a href="#un-premier-exemple">Un premier exemple</a></li>
+      </ul>
+    </li>
+    <li><a href="#les-fonctionnalités-qui-font-la-différence">Les fonctionnalités qui font la différence</a>
+      <ul>
+        <li><a href="#dépendances-entre-tâches">Dépendances entre tâches</a></li>
+        <li><a href="#variables-denvironnement-et-interpolation">Variables d&rsquo;environnement et interpolation</a></li>
+        <li><a href="#watching-et-builds">Watching et builds</a></li>
+        <li><a href="#templates-et-includes">Templates et includes</a></li>
+        <li><a href="#prompts-interactifs">Prompts interactifs</a></li>
+      </ul>
+    </li>
+    <li><a href="#makefile-vs-taskfile--le-comparatif">Makefile vs Taskfile — Le comparatif</a>
+      <ul>
+        <li><a href="#exemple-make-vs-task">Exemple Make vs Task</a></li>
+      </ul>
+    </li>
+    <li><a href="#just-vs-taskfile">Just vs Taskfile</a></li>
+    <li><a href="#cas-dusage">Cas d&rsquo;usage</a>
+      <ul>
+        <li><a href="#projet-go">Projet Go</a></li>
+        <li><a href="#projet-nodejs">Projet Node.js</a></li>
+        <li><a href="#multi-services-docker-compose">Multi-services Docker Compose</a></li>
+      </ul>
+    </li>
+    <li><a href="#létat-de-lécosystème-en-2026">L&rsquo;état de l&rsquo;écosystème en 2026</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+  </div>
+</details>
+
+          </div>
+        </div>
+      
+      <div class="min-h-0 min-w-0 max-w-prose grow">
+        <p>Depuis des décennies, Make est l&rsquo;outil de référence pour automatiser les tâches de build et de développement. Mais force est de constater que sa syntaxe cryptique et ses limitations en font un outil parfois douloureux au quotidien. Taskfile — aussi appelé <strong>Task</strong> — propose une alternative moderne, lisible et multi-plateforme. Voici pourquoi il mérite ton attention.</p>
+<h2 id="un-peu-dhistoire" class="relative group">Un peu d&rsquo;histoire <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#un-peu-dhistoire" aria-label="Ancre">#</a></span></h2><h3 id="make-le-classique-indémodable" class="relative group">Make, le classique indémodable <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#make-le-classique-ind%c3%a9modable" aria-label="Ancre">#</a></span></h3><p>Make est né en 1977 dans les laboratoires Bell, créé par Stuart Feldman pour remplacer les scripts shell utilisés pour compiler Unix. Son principe fondamental : un <strong>Makefile</strong> définit des règles basées sur des <strong>cibles</strong> (targets), des <strong>prérequis</strong>, et des <strong>commandes</strong> à exécuter. Make compare les dates de modification des fichiers pour ne rebuild que ce qui a changé.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-makefile" data-lang="makefile"><span style="display:flex;"><span><span style="color:#a6e22e">.PHONY</span><span style="color:#f92672">:</span> build
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">build</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    go build -o bin/myapp ./cmd/myapp
+</span></span></code></pre></div><p>Pendant près de 50 ans, Make a été l&rsquo;outil ubiquitous pour les projets C/C++, puis pour tout projet nécessitant de l&rsquo;automatisation. Il est installé par défaut sur quasi toutes les distributions Unix/Linux/macOS.</p>
+<h3 id="les-limites-de-make" class="relative group">Les limites de Make <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#les-limites-de-make" aria-label="Ancre">#</a></span></h3><p>Make a été conçu pour un monde différent du nôtre :</p>
+<ul>
+<li><strong>Syntaxe opaque</strong> : les tabulations vs espaces, les variables avec <code>$()</code> ou <code>${}</code>, les règles pattern <code>%</code> — tout est source de confusion.</li>
+<li><strong>Pas de support natif JSON/YAML</strong> : les Makefiles sont du texte brut sans structure de données.</li>
+<li><strong>Écosystème limité</strong> : pas de registry de tasks, pas de dépendances entre tasks résolues automatiquement.</li>
+<li><strong>Shell-dependency</strong> : les commandes s&rsquo;exécutent dans un sous-shell, ce qui peut varier selon l&rsquo;OS.</li>
+<li><strong>Makefiles générés</strong> : beaucoup de projets finissent par générer leur Makefile via des outils (cmake, automake, etc.), ajoutant une couche d&rsquo;indirection.</li>
+</ul>
+<h3 id="lémergence-des-alternatives" class="relative group">L&rsquo;émergence des alternatives <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#l%c3%a9mergence-des-alternatives" aria-label="Ancre">#</a></span></h3><p>La communauté a progressivement développé des alternatives :</p>
+<ul>
+<li><strong>Ant</strong> (2000) — XML, verbose, popularisé par Java</li>
+<li><strong>Rake</strong> (2004) — Ruby DSL, élégant mais Ruby-requis</li>
+<li><strong>Gradle</strong> (2008) — Groovy/Kotlin, standard Java/Kotlin</li>
+<li><strong>Jake</strong> (2010) — JavaScript, disparu</li>
+<li><strong>just</strong> (2016) — Simplicité, recettes inspirées de Make mais modernisées</li>
+<li><strong>Task</strong> (2017) — YAML, multi-plateforme, inspiré par Go</li>
+</ul>
+<h2 id="taskfile-cest-quoi-" class="relative group">Taskfile, c&rsquo;est quoi ? <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#taskfile-cest-quoi-" aria-label="Ancre">#</a></span></h2><p><strong>Task</strong> (github.com/go-task/task) est un task runner écrit en Go, disponible sous licence MIT. Il utilise des fichiers <code>Taskfile.yml</code> en YAML pour définir les tâches, ce qui le rend accessible à quiconque connaît déjà Kubernetes, GitHub Actions, ou Ansible.</p>
+<h3 id="installation" class="relative group">Installation <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#installation" aria-label="Ancre">#</a></span></h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># macOS</span>
+</span></span><span style="display:flex;"><span>brew install go-task/tap/go-task
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Linux (script officiel)</span>
+</span></span><span style="display:flex;"><span>sh -c <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>curl -sL https://taskfile.dev/install.sh<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Windows (Scoop, Chocolatey, ou via GitHub releases)</span>
+</span></span><span style="display:flex;"><span>scoop install task
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Via Go</span>
+</span></span><span style="display:flex;"><span>go install github.com/go-task/task/v3/cmd/task@latest
+</span></span></code></pre></div><h3 id="un-premier-exemple" class="relative group">Un premier exemple <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#un-premier-exemple" aria-label="Ancre">#</a></span></h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">version</span>: <span style="color:#e6db74">&#39;3&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">tasks</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">default</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">deps</span>: [<span style="color:#ae81ff">build]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">cmds</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">./bin/myapp --help</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">build</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">desc</span>: <span style="color:#ae81ff">Build the application</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">dir</span>: <span style="color:#ae81ff">./cmd/myapp</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">cmds</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">go build -o ../../bin/myapp .</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">test</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">desc</span>: <span style="color:#ae81ff">Run tests</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">cmds</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">go test -v ./...</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">lint</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">desc</span>: <span style="color:#ae81ff">Lint code</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">cmds</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">golangci-lint run</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">clean</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">desc</span>: <span style="color:#ae81ff">Clean build artifacts</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">cmds</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">rm -rf bin/</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Lister les tâches disponibles</span>
+</span></span><span style="display:flex;"><span>task --list
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Exécuter la tâche par défaut</span>
+</span></span><span style="display:flex;"><span>task
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Exécuter une tâche spécifique</span>
+</span></span><span style="display:flex;"><span>task build
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Exécuter avec une variable</span>
+</span></span><span style="display:flex;"><span>task deploy ENV<span style="color:#f92672">=</span>production
+</span></span></code></pre></div><h2 id="les-fonctionnalités-qui-font-la-différence" class="relative group">Les fonctionnalités qui font la différence <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#les-fonctionnalit%c3%a9s-qui-font-la-diff%c3%a9rence" aria-label="Ancre">#</a></span></h2><h3 id="dépendances-entre-tâches" class="relative group">Dépendances entre tâches <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#d%c3%a9pendances-entre-t%c3%a2ches" aria-label="Ancre">#</a></span></h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">tasks</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">build</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">deps</span>: [<span style="color:#ae81ff">deps, lint, test]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">cmds</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">go build ./...</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">deps</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">cmds</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">go mod download</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">lint</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">cmds</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">golangci-lint run</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">test</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">cmds</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">go test ./...</span>
+</span></span></code></pre></div><p>Les dépendances s&rsquo;exécutent en parallèle par défaut. Pour une exécution séquentielle, utilise <code>depends</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">tasks</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">setup</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">depends</span>: [<span style="color:#ae81ff">create-db, migrate-db]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">cmds</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">echo &#34;Setup complete&#34;</span>
+</span></span></code></pre></div><h3 id="variables-denvironnement-et-interpolation" class="relative group">Variables d&rsquo;environnement et interpolation <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#variables-denvironnement-et-interpolation" aria-label="Ancre">#</a></span></h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">version</span>: <span style="color:#e6db74">&#39;3&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">env</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">APP_NAME</span>: <span style="color:#ae81ff">myapp</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">VERSION</span>: <span style="color:#e6db74">&#39;1.0.0&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">vars</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">BINARY_NAME</span>: <span style="color:#e6db74">&#34;{{.APP_NAME}}-{{.OS}}-{{.ARCH}}&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">tasks</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">build</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">vars</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">OUTPUT</span>: <span style="color:#e6db74">&#34;./dist/{{.BINARY_NAME}}&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">cmds</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">go build -ldflags=&#34;-X main.version={{.VERSION}}&#34; -o {{.OUTPUT}} ./cmd/myapp</span>
+</span></span></code></pre></div><p>Task expose des variables:</p>
+<ul>
+<li><code>.OS</code> — système d&rsquo;exploitation (linux, darwin, windows)</li>
+<li><code>.ARCH</code> — architecture (amd64, arm64, etc.)</li>
+<li><code>.TASK</code> — nom de la tâche en cours</li>
+<li><code>.CLI_ARGS</code> — arguments passés en ligne de commande</li>
+</ul>
+<h3 id="watching-et-builds" class="relative group">Watching et builds <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#watching-et-builds" aria-label="Ancre">#</a></span></h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">version</span>: <span style="color:#e6db74">&#39;3&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">tasks</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">dev</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">desc</span>: <span style="color:#ae81ff">Run development server with hot reload</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">cmds</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">task</span>: <span style="color:#ae81ff">watch-src</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">watch</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">go run ./cmd/server</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">watch-src</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">desc</span>: <span style="color:#ae81ff">Watch source files and rebuild</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">cmds</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">while true; do</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#ae81ff">inotifywait -q -e modify src/*.go;</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#ae81ff">go build ./cmd/server;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">done</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">status</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">test -f ./server</span>
+</span></span></code></pre></div><p>Ou en utilisant la directive <code>watch</code> native (v3.26+) :</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">tasks</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">build</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">cmds</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">go build ./...</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">watch</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">sources</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">src/**/*.go</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">generate</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">task</span>: <span style="color:#ae81ff">build</span>
+</span></span></code></pre></div><h3 id="templates-et-includes" class="relative group">Templates et includes <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#templates-et-includes" aria-label="Ancre">#</a></span></h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#75715e"># Taskfile.yml principal</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">version</span>: <span style="color:#e6db74">&#39;3&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">includes</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">docker</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">taskfile</span>: <span style="color:#ae81ff">./Taskfile.docker.yml</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">vars</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">TAG</span>: <span style="color:#ae81ff">latest</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">.shared</span>: <span style="color:#ae81ff">./Taskfile.shared.yml</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#75715e"># Taskfile.shared.yml</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">version</span>: <span style="color:#e6db74">&#39;3&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">tasks</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">log</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">cmds</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">echo &#34;Version: {{.VERSION}}&#34;</span>
+</span></span></code></pre></div><h3 id="prompts-interactifs" class="relative group">Prompts interactifs <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#prompts-interactifs" aria-label="Ancre">#</a></span></h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">tasks</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">deploy</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">prompt</span>: <span style="color:#e6db74">&#34;Are you sure you want to deploy to {{.ENV}}? [y/N]&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">confirm</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">cmd</span>: <span style="color:#ae81ff">echo &#34;Deploying...&#34;</span>
+</span></span></code></pre></div><h2 id="makefile-vs-taskfile--le-comparatif" class="relative group">Makefile vs Taskfile — Le comparatif <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#makefile-vs-taskfile--le-comparatif" aria-label="Ancre">#</a></span></h2><table>
+  <thead>
+      <tr>
+          <th></th>
+          <th>Makefile</th>
+          <th>Taskfile</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Syntaxe</strong></td>
+          <td>Make DSL</td>
+          <td>YAML</td>
+      </tr>
+      <tr>
+          <td><strong>Lisible</strong></td>
+          <td>⭐⭐</td>
+          <td>⭐⭐⭐⭐⭐</td>
+      </tr>
+      <tr>
+          <td><strong>Multi-plateforme</strong></td>
+          <td>⚠️ (msys, gmake)</td>
+          <td>✅ Natif</td>
+      </tr>
+      <tr>
+          <td><strong>Variables</strong></td>
+          <td><code>${VAR}</code> ou <code>$(shell ...)</code></td>
+          <td><code>{{.VAR}}</code></td>
+      </tr>
+      <tr>
+          <td><strong>Dépendances</strong></td>
+          <td>Manuelles</td>
+          <td>Automatiques avec <code>deps</code></td>
+      </tr>
+      <tr>
+          <td><strong>Exécution parallèle</strong></td>
+          <td><code>-j</code> flag global</td>
+          <td>Par défaut dans <code>deps</code></td>
+      </tr>
+      <tr>
+          <td><strong>Fichiers de config</strong></td>
+          <td>Non</td>
+          <td>Oui (includes JSON/YAML)</td>
+      </tr>
+      <tr>
+          <td><strong>Prompts interactifs</strong></td>
+          <td>Non</td>
+          <td>Oui</td>
+      </tr>
+      <tr>
+          <td><strong>Watch mode</strong></td>
+          <td>Via tools externes</td>
+          <td>Natif</td>
+      </tr>
+      <tr>
+          <td><strong>Registry de tasks</strong></td>
+          <td>Non</td>
+          <td>Non (DIY)</td>
+      </tr>
+      <tr>
+          <td><strong>Installabilité</strong></td>
+          <td>Make installé</td>
+          <td>binary ou brew</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="exemple-make-vs-task" class="relative group">Exemple Make vs Task <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#exemple-make-vs-task" aria-label="Ancre">#</a></span></h3><p><strong>Makefile</strong> :</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-makefile" data-lang="makefile"><span style="display:flex;"><span><span style="color:#a6e22e">.PHONY</span><span style="color:#f92672">:</span> build test lint clean
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>APP_NAME <span style="color:#f92672">:=</span> myapp
+</span></span><span style="display:flex;"><span>VERSION <span style="color:#f92672">:=</span> <span style="color:#66d9ef">$(</span>shell git describe --tags --always<span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>BIN <span style="color:#f92672">:=</span> bin/<span style="color:#66d9ef">$(</span>APP_NAME<span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>SRC <span style="color:#f92672">:=</span> <span style="color:#66d9ef">$(</span>wildcard cmd/**/*.go<span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">build</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">$(</span>BIN<span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">$(BIN)</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">$(</span>SRC<span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>	go build -ldflags<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;-X main.version=</span><span style="color:#66d9ef">$(</span>VERSION<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span> -o <span style="color:#66d9ef">$(</span>BIN<span style="color:#66d9ef">)</span> ./cmd/myapp
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">test</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>	go test -v ./...
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">lint</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>	golangci-lint run
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">clean</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>	rm -rf bin/
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">install</span><span style="color:#f92672">:</span> build
+</span></span><span style="display:flex;"><span>	install -Dm755 <span style="color:#66d9ef">$(</span>BIN<span style="color:#66d9ef">)</span> /usr/local/bin/<span style="color:#66d9ef">$(</span>APP_NAME<span style="color:#66d9ef">)</span>
+</span></span></code></pre></div><p><strong>Taskfile.yml</strong> :</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">version</span>: <span style="color:#e6db74">&#39;3&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">vars</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">APP_NAME</span>: <span style="color:#ae81ff">myapp</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">VERSION</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">sh</span>: <span style="color:#ae81ff">git describe --tags --always</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">BIN</span>: <span style="color:#ae81ff">bin/{{.APP_NAME}}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">tasks</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">default</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">deps</span>: [<span style="color:#ae81ff">lint, test, build]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">build</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">desc</span>: <span style="color:#ae81ff">Build the application</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">cmds</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">go build -ldflags=&#34;-X main.version={{.VERSION}}&#34; -o {{.BIN}} ./cmd/myapp</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">test</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">desc</span>: <span style="color:#ae81ff">Run tests</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">cmds</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">go test -v ./...</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">lint</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">desc</span>: <span style="color:#ae81ff">Lint code</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">cmds</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">golangci-lint run</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">clean</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">desc</span>: <span style="color:#ae81ff">Clean artifacts</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">cmds</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">rm -rf bin/</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">install</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">desc</span>: <span style="color:#ae81ff">Install binary</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">deps</span>: [<span style="color:#ae81ff">build]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">cmds</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">install -Dm755 {{.BIN}} /usr/local/bin/{{.APP_NAME}}</span>
+</span></span></code></pre></div><p>Le Taskfile est plus explicite (<code>desc</code>, <code>vars</code>, structure), le Makefile plus concis mais cryptique.</p>
+<h2 id="just-vs-taskfile" class="relative group">Just vs Taskfile <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#just-vs-taskfile" aria-label="Ancre">#</a></span></h2><p><strong>Just</strong> (github.com/casey/just) est un autre competitor sérieux, écrit en Rust. Sa syntaxe de recettes ressemble à Make mais en mieux :</p>
+<pre tabindex="0"><code class="language-just" data-lang="just"># .justfile
+APP_NAME := &#34;myapp&#34;
+VERSION := `git describe --tags --always`
+
+build:
+    go build -ldflags=&#34;-X main.version={{VERSION}}&#34; -o bin/{{APP_NAME}} ./cmd/myapp
+
+test:
+    go test -v ./...
+
+default: build test
+</code></pre><table>
+  <thead>
+      <tr>
+          <th></th>
+          <th>Just</th>
+          <th>Task</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Syntaxe</strong></td>
+          <td>DSL custom (recettes)</td>
+          <td>YAML</td>
+      </tr>
+      <tr>
+          <td><strong>Fichiers</strong></td>
+          <td><code>.justfile</code></td>
+          <td><code>Taskfile.yml</code></td>
+      </tr>
+      <tr>
+          <td><strong>Lisible</strong></td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+      </tr>
+      <tr>
+          <td><strong>Learning curve</strong></td>
+          <td>Faible (syntaxe proche de Make)</td>
+          <td>Faible (YAML connu)</td>
+      </tr>
+      <tr>
+          <td><strong>Variables</strong></td>
+          <td>Similaire à Make</td>
+          <td>Template <code>{{.VAR}}</code></td>
+      </tr>
+      <tr>
+          <td><strong>Includes</strong></td>
+          <td>Oui</td>
+          <td>Oui</td>
+      </tr>
+      <tr>
+          <td><strong>Watch mode</strong></td>
+          <td>Plugin</td>
+          <td>Natif</td>
+      </tr>
+      <tr>
+          <td><strong>Exécution parallèle</strong></td>
+          <td>Via recipe dependances</td>
+          <td>Automatique dans <code>deps</code></td>
+      </tr>
+      <tr>
+          <td><strong>Prompts</strong></td>
+          <td>Non</td>
+          <td>Oui</td>
+      </tr>
+  </tbody>
+</table>
+<p>Just est excellent si tu préfères une syntaxe recipe-style. Task excelle dans les projets où le YAML est déjà le standard (Kubernetes, CI/CD).</p>
+<h2 id="cas-dusage" class="relative group">Cas d&rsquo;usage <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#cas-dusage" aria-label="Ancre">#</a></span></h2><h3 id="projet-go" class="relative group">Projet Go <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#projet-go" aria-label="Ancre">#</a></span></h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">version</span>: <span style="color:#e6db74">&#39;3&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">tasks</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">default</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">deps</span>: [<span style="color:#ae81ff">test, build]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">dev</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">desc</span>: <span style="color:#ae81ff">Run with hot reload</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">cmds</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">air</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">test</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">cmds</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">go test -race -v ./...</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">lint</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">cmds</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">golangci-lint run</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">build</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">cmds</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">go build -ldflags=&#34;-s -w&#34; -o bin/myapp ./cmd/myapp</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">container</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">deps</span>: [<span style="color:#ae81ff">build]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">cmds</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">docker build -t myapp:{{.VERSION}} .</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">release</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">deps</span>: [<span style="color:#ae81ff">test, lint]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">cmds</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">goreleaser release --clean</span>
+</span></span></code></pre></div><h3 id="projet-nodejs" class="relative group">Projet Node.js <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#projet-nodejs" aria-label="Ancre">#</a></span></h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">version</span>: <span style="color:#e6db74">&#39;3&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">tasks</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">default</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">deps</span>: [<span style="color:#ae81ff">lint, test]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">install</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">cmds</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">npm install</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">test</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">deps</span>: [<span style="color:#ae81ff">install]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">cmds</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">npm run test</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">lint</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">deps</span>: [<span style="color:#ae81ff">install]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">cmds</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">npm run lint</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">build</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">deps</span>: [<span style="color:#ae81ff">install]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">cmds</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">npm run build</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">docker:build</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">cmds</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">docker build -t myapp:{{.TAG}} .</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">docker:push</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">deps</span>: [<span style="color:#ae81ff">docker:build]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">cmds</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">docker push myapp:{{.TAG}}</span>
+</span></span></code></pre></div><h3 id="multi-services-docker-compose" class="relative group">Multi-services Docker Compose <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#multi-services-docker-compose" aria-label="Ancre">#</a></span></h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">version</span>: <span style="color:#e6db74">&#39;3&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">tasks</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">up</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">cmds</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">docker compose up -d</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">down</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">cmds</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">docker compose down</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">logs</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">cmds</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">docker compose logs -f {{.SERVICE}}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">restart</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">deps</span>: [<span style="color:#ae81ff">down, up]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">db:migrate</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">cmds</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">docker compose exec api npm run db:migrate</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">db:seed</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">cmds</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">docker compose exec api npm run db:seed</span>
+</span></span></code></pre></div><h2 id="létat-de-lécosystème-en-2026" class="relative group">L&rsquo;état de l&rsquo;écosystème en 2026 <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#l%c3%a9tat-de-l%c3%a9cosyst%c3%a8me-en-2026" aria-label="Ancre">#</a></span></h2><p>Task est un projet mature :</p>
+<ul>
+<li><strong>+15 000 étoiles</strong> sur GitHub</li>
+<li><strong>1 million+ de téléchargements</strong> par mois</li>
+<li>Support natif dans plusieurs IDE (VS Code extension)</li>
+<li>Intégration dans des outils CI/CD</li>
+<li>Équipe active avec releases régulières (v3.49.x en mars 2026)</li>
+</ul>
+<p>Le projet reste maintenu par la communauté, sans corporate backing majeur — ce qui peut être un avantage (indépendance) ou un risque (dépendance aux contributeurs).</p>
+<h2 id="conclusion" class="relative group">Conclusion <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#conclusion" aria-label="Ancre">#</a></span></h2><p>Taskfile comble les lacunes de Make tout en gardant sa philosophie : un outil simple pour exécuter des tâches courantes. Le YAML le rend immédiatement accessible, les <code>deps</code> automatiques simplifient le graphe de dépendances, et le multi-plateforme élimine les surprises.</p>
+<p>Personnellement, je l&rsquo;utilise principalement pour bootstraper les composants de base dans un cluster Kubernetes, en définissant des tâches pour appliquer les manifests essentiels (Namespace, ServiceAccount, RBAC, CNI, etc.) et orchestrer le déploiement des Operators.</p>
+<p>Un dernier conseil : quel que soit l&rsquo;outil choisi, documente tes tasks avec <code>desc</code> ou commentaires. Un projet sans documentation de ses tâches, c&rsquo;est un projet où chaque développeur réinvente la roue au déploiement.</p>
+
+      </div>
+    </section>
+    <footer class="max-w-prose pt-8 print:hidden">
+      
+
+      
+
+      
+  
+    
+    
+    
+    <div class="pt-8">
+      <hr class="border-dotted border-neutral-300 dark:border-neutral-600" />
+      <div class="flex justify-between pt-3">
+        <span>
+          
+            <a class="group flex" href="http://localhost:1313/articles/retour-experience-cka/">
+              <span
+                class="me-2 text-neutral-700 transition-transform group-hover:-translate-x-[2px] group-hover:text-primary-600 dark:text-neutral dark:group-hover:text-primary-400"
+                ><span class="ltr:inline rtl:hidden">&larr;</span
+                ><span class="ltr:hidden rtl:inline">&rarr;</span></span
+              >
+              <span class="flex flex-col">
+                <span
+                  class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500"
+                  >CKA : retour d'expérience sur la certification Kubernetes Administrator</span
+                >
+                <span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
+                  
+                </span>
+              </span>
+            </a>
+          
+        </span>
+        <span>
+          
+            <a class="group flex text-right" href="http://localhost:1313/articles/sovereignete-cloud/">
+              <span class="flex flex-col">
+                <span
+                  class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500"
+                  >Souverainete cloud : pourquoi basculer sur un hebergeur europeen</span
+                >
+                <span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
+                  
+                </span>
+              </span>
+              <span
+                class="ms-2 text-neutral-700 transition-transform group-hover:-translate-x-[-2px] group-hover:text-primary-600 dark:text-neutral dark:group-hover:text-primary-400"
+                ><span class="ltr:inline rtl:hidden">&rarr;</span
+                ><span class="ltr:hidden rtl:inline">&larr;</span></span
+              >
+            </a>
+          
+        </span>
+      </div>
+    </div>
+  
+
+
+      
+    </footer>
+  </article>
+
+      </main>
+      
+        <div
+          class="pointer-events-none absolute bottom-0 end-0 top-[100vh] w-12"
+          id="to-top"
+          hidden="true"
+        >
+          <a
+            href="#the-top"
+            class="pointer-events-auto sticky top-[calc(100vh-5.5rem)] flex h-12 w-12 items-center justify-center rounded-full bg-neutral/50 text-xl text-neutral-700 backdrop-blur hover:text-primary-600 dark:bg-neutral-800/50 dark:text-neutral dark:hover:text-primary-400"
+            aria-label="Faire défiler jusqu&#39;au bas de la page"
+            title="Faire défiler jusqu&#39;au bas de la page"
+          >
+            &uarr;
+          </a>
+        </div>
+      <footer class="py-10 print:hidden">
+  
+  
+  <div class="flex items-center justify-between">
+    <div>
+      
+      
+        <p class="text-sm text-neutral-500 dark:text-neutral-400">
+            &copy;
+            2026
+            Adrien PARRA
+        </p>
+      
+      
+      
+    </div>
+    <div class="flex flex-row items-center">
+      
+      
+      
+      
+    </div>
+  </div>
+  
+  
+    <div class="mt-3 flex items-center gap-4 text-xs text-neutral-400 dark:text-neutral-500">
+  <a href="https://www.docker.com" target="_blank" rel="noopener" class="flex items-center gap-1 hover:text-primary-500 transition-colors" title="Conteneurisé avec Docker">
+    <span class="h-4 w-4"><span class="icon relative inline-block px-1 align-text-bottom"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M13.983 11.078h2.119a.186.186 0 0 0 .186-.185V9.006a.186.186 0 0 0-.186-.186h-2.119a.185.185 0 0 0-.185.185v1.888c0 .102.083.185.185.185m-2.954-5.43h2.118a.186.186 0 0 0 .186-.186V3.574a.186.186 0 0 0-.186-.185h-2.118a.185.185 0 0 0-.185.185v1.888c0 .102.082.185.185.185m0 2.716h2.118a.187.187 0 0 0 .186-.186V6.29a.186.186 0 0 0-.186-.185h-2.118a.185.185 0 0 0-.185.185v1.887c0 .102.082.186.185.186m-2.93 0h2.12a.186.186 0 0 0 .184-.186V6.29a.185.185 0 0 0-.185-.185H8.1a.185.185 0 0 0-.185.185v1.887c0 .102.083.186.185.186m-2.964 0h2.119a.186.186 0 0 0 .185-.186V6.29a.185.185 0 0 0-.185-.185H5.136a.186.186 0 0 0-.186.185v1.887c0 .102.084.186.186.186m5.893 2.715h2.118a.186.186 0 0 0 .186-.185V9.006a.186.186 0 0 0-.186-.186h-2.118a.185.185 0 0 0-.185.185v1.888c0 .102.082.185.185.185m-2.93 0h2.12a.185.185 0 0 0 .184-.185V9.006a.185.185 0 0 0-.184-.186h-2.12a.185.185 0 0 0-.184.185v1.888c0 .102.083.185.185.185m-2.964 0h2.119a.185.185 0 0 0 .185-.185V9.006a.185.185 0 0 0-.184-.186h-2.12a.186.186 0 0 0-.186.186v1.887c0 .102.084.185.186.185m-2.92 0h2.12a.185.185 0 0 0 .184-.185V9.006a.185.185 0 0 0-.184-.186h-2.12a.185.185 0 0 0-.184.185v1.888c0 .102.082.185.185.185M23.763 9.89c-.065-.051-.672-.51-1.954-.51-.338.001-.676.03-1.01.087-.248-1.7-1.653-2.53-1.716-2.566l-.344-.199-.226.327c-.284.438-.49.922-.612 1.43-.23.97-.09 1.882.403 2.661-.595.332-1.55.413-1.744.42H.751a.751.751 0 0 0-.75.748 11.376 11.376 0 0 0 .692 4.062c.545 1.428 1.355 2.48 2.41 3.124 1.18.723 3.1 1.137 5.275 1.137.983.003 1.963-.086 2.93-.266a12.248 12.248 0 0 0 3.823-1.389c.98-.567 1.86-1.288 2.61-2.136 1.252-1.418 1.998-2.997 2.553-4.4h.221c1.372 0 2.215-.549 2.68-1.009.309-.293.55-.65.707-1.046l.098-.288Z"/></svg>
+</span></span>
+    Docker
+  </a>
+  <a href="https://www.scaleway.com" target="_blank" rel="noopener" class="flex items-center gap-1 hover:text-primary-500 transition-colors" title="Hébergé sur Scaleway">
+    <span class="h-4 w-4"><span class="icon relative inline-block px-1 align-text-bottom"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M14.193 12.014a2.179 2.179 0 0 1-2.176 2.176H7.383a2.179 2.179 0 0 1-2.176-2.176 2.179 2.179 0 0 1 2.176-2.176h4.634a2.179 2.179 0 0 1 2.176 2.176zm8.043-4.589C20.859 3.048 16.788 0 12.003 0 7.22 0 3.15 3.046 1.766 7.424A5.565 5.565 0 0 0 0 11.986a5.56 5.56 0 0 0 1.805 4.123C3.261 20.999 7.302 24 12.003 24c4.7 0 8.742-3.001 10.197-7.191A5.558 5.558 0 0 0 24 12.014c0-1.683-.748-3.19-1.764-4.589zm-1.843 7.593c-1.126 3.441-4.354 5.93-8.39 5.93-4.038 0-7.265-2.489-8.39-5.93a4.007 4.007 0 0 1-1.065-2.717c0-.922.313-1.771.838-2.449C4.514 6.41 7.853 4.048 12.003 4.048c4.149 0 7.488 2.362 8.617 5.804a4 4 0 0 1 .833 2.449 3.998 3.998 0 0 1-1.06 2.717z"/></svg>
+</span></span>
+    Scaleway
+  </a>
+  <a href="https://gohugo.io" target="_blank" rel="noopener" class="flex items-center gap-1 hover:text-primary-500 transition-colors" title="Généré par Hugo">
+    <span class="h-4 w-4"><span class="icon relative inline-block px-1 align-text-bottom"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M11.754 0a.75.75 0 0 0-.405.122L.344 7.205A.75.75 0 0 0 0 7.88v8.366a.75.75 0 0 0 .344.633l11.005 7.083c.25.161.568.161.818 0l5.58-3.592V24l.008-.006.008.006v-3.63l5.237-3.372a.75.75 0 0 0 .344-.633v-8.61a.75.75 0 0 0-.315-.61L12.178.122A.75.75 0 0 0 11.754 0zm.008 1.64 10.254 6.86v7.866l-4.486 2.89V8.38l.007-.006-.007-.005v-.006h-1.5v11.954L11.762 22.4 1.5 16.366V8.5zm-.75 7.24v5.63H9.547V12h-3.54v2.51H4.502v-5.63h1.505v1.62h3.54v-1.62z"/></svg>
+</span></span>
+    Hugo
+  </a>
+</div>
+
+  
+</footer>
+
+    </div>
+  </body>
+</html>

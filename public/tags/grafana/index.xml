@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Grafana on Adrien PARRA</title>
+    <link>http://localhost:1313/tags/grafana/</link>
+    <description>Recent content in Grafana on Adrien PARRA</description>
+    <generator>Hugo</generator>
+    <language>fr</language>
+    <lastBuildDate>Sun, 29 Mar 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/grafana/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Kubernetes Monitoring : Stack Prometheus &#43; Grafana</title>
+      <link>http://localhost:1313/articles/kubernetes-monitoring-prometheus-grafana/</link>
+      <pubDate>Sun, 29 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/articles/kubernetes-monitoring-prometheus-grafana/</guid>
+      <description>Mettre en place une stack de monitoring complète sur Kubernetes avec kube-prometheus-stack : installation, dashboards Grafana, règles d&amp;rsquo;alerte, Alertmanager et bonnes pratiques de production.</description>
+    </item>
+  </channel>
+</rss>

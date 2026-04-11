@@ -1,0 +1,34 @@
+name: Build and deploy
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - v*
+
+jobs:
+
+  buildImage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Docker build and push
+        run: |
+          echo "${REGISTRY_TOKEN}" | docker login rg.fr-par.scw.cloud/funcscwportfolio7b05b454 -u nologin --password-stdin
+          docker image build -f Dockerfile --build-arg BASE_URL=${BASE_URL} -t ${IMAGE_NAME}:${IMAGE_TAG} .
+          docker image push ${IMAGE_NAME}:${IMAGE_TAG}
+
+  deploySCW:
+    runs-on: ubuntu-latest
+    container:
+      image: scaleway/cli:2.54
+      options: --entrypoint ""
+    needs: [buildImage]
+    steps:
+      - name: Deploy container to Serverless
+        run: |
+          scw container container deploy ${SCW_CONTAINER_ID} region=fr-par --wait
+
