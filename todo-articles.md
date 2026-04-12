@@ -20,7 +20,7 @@
   - Aligne avec: Trivy, Kyverno (competences)
   - Peut couvrir: Vulnerability scanning, admission policies, compliance
 
-- [ ] **K3S for Local Development: Un mini cluster de production**
+- [x] ~~**K3S for Local Development: Un mini cluster de production**~~ (termine)
   - Aligne avec: Page About mentionne K3S en local
   - Peut couvrir: Setup, testing Helm charts, GitOps loop
 
@@ -34,7 +34,7 @@
   - Aligne avec: Sealed Secrets (competences)
   - Peut couvrir: Comparison, implementation pratique
 
-- [ ] **Falco: Runtime Security Monitoring on Kubernetes**
+- [x] ~~**Falco: Runtime Security Monitoring on Kubernetes**~~ (termine)
   - Aligne avec: Falco (competences)
   - Peut couvrir: Rule writing, alert integration, threat detection
 
@@ -42,7 +42,7 @@
   - Aligne avec: Experience de migration chez Conserto
   - Peut couvrir: Patterns, pitfalls, tooling
 
-- [ ] **OpenTofu Advanced: State Encryption & Multi-Environment**
+- [x] ~~**OpenTofu Advanced: State Encryption & Multi-Environment**~~ (termine)
   - Aligne avec: Article intro existant
   - Peut couvrir: State encryption real-world, workspace strategies
 
