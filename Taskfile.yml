@@ -11,7 +11,7 @@ tasks:
   buildImage:
     desc: Build de l'image docker avec tag pour Scaleway Container
     cmds:
-      - nerdctl build --build-arg BASE_URL={{.BASE_URL}} -t {{.IMAGE_NAME}}:{{.IMAGE_TAG}} .
+      - nerdctl build -f packaging/Dockerfile --build-arg BASE_URL={{.BASE_URL}} -t {{.IMAGE_NAME}}:{{.IMAGE_TAG}} .
 
   pushImage:
     desc: Push de l'image docker chez Scaleway

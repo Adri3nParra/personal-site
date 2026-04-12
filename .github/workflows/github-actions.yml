@@ -23,7 +23,7 @@ jobs:
           IMAGE_TAG: latest
         run: |
           echo "${REGISTRY_TOKEN}" | docker login rg.fr-par.scw.cloud/funcscwportfolio7b05b454 -u nologin --password-stdin
-          docker image build -f Dockerfile --build-arg BASE_URL=${BASE_URL} -t ${IMAGE_NAME}:${IMAGE_TAG} .
+          docker image build -f packaging/Dockerfile --build-arg BASE_URL=${BASE_URL} -t ${IMAGE_NAME}:${IMAGE_TAG} .
           docker image push ${IMAGE_NAME}:${IMAGE_TAG}
 
   deploySCW:
