@@ -10,4 +10,4 @@ Tu peux me joindre par :
 
 Basé à Nantes (44) · Permis B · Disponible en hybride.
 
-[Télécharger mon CV (PDF)](/cv-adrien-parra.pdf)
+<!-- [Télécharger mon CV (PDF)](/cv-adrien-parra.pdf) -->

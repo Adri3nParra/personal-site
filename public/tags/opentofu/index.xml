@@ -6,8 +6,15 @@
     <description>Recent content in OpenTofu on Adrien PARRA</description>
     <generator>Hugo</generator>
     <language>fr</language>
-    <lastBuildDate>Fri, 05 Dec 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 12 Apr 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/opentofu/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>OpenTofu Avancé : State Encryption &amp; Stratégies Multi-Environnements</title>
+      <link>http://localhost:1313/articles/opentofu-advanced-state-encryption-multi-env/</link>
+      <pubDate>Sun, 12 Apr 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/articles/opentofu-advanced-state-encryption-multi-env/</guid>
+      <description>L&amp;rsquo;article d&amp;rsquo;intro couvrait le pourquoi d&amp;rsquo;OpenTofu. Celui-ci couvre le comment en production : chiffrement du state avec plusieurs key providers, rotation de clés, migration d&amp;rsquo;un state existant, et les patterns multi-environnements qui tiennent à l&amp;rsquo;échelle.</description>
+    </item>
     <item>
       <title>OpenTofu : l&#39;IaC open source qui reprend le flambeau de Terraform</title>
       <link>http://localhost:1313/articles/opentofu-decouverte/</link>

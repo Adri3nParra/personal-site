@@ -6,8 +6,22 @@
     <description>Recent content in Accueil on Adrien PARRA</description>
     <generator>Hugo</generator>
     <language>fr</language>
-    <lastBuildDate>Sun, 29 Mar 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 12 Apr 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Falco : Runtime Security Monitoring on Kubernetes</title>
+      <link>http://localhost:1313/articles/falco-runtime-security-kubernetes/</link>
+      <pubDate>Sun, 12 Apr 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/articles/falco-runtime-security-kubernetes/</guid>
+      <description>Trivy scanne les images, Kyverno valide les déploiements — mais qu&amp;rsquo;est-ce qui surveille ce qui se passe une fois les conteneurs lancés ? Falco, le CNCF project, surveille les syscalls en temps réel et alerte dès qu&amp;rsquo;un comportement anormal est détecté.</description>
+    </item>
+    <item>
+      <title>OpenTofu Avancé : State Encryption &amp; Stratégies Multi-Environnements</title>
+      <link>http://localhost:1313/articles/opentofu-advanced-state-encryption-multi-env/</link>
+      <pubDate>Sun, 12 Apr 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/articles/opentofu-advanced-state-encryption-multi-env/</guid>
+      <description>L&amp;rsquo;article d&amp;rsquo;intro couvrait le pourquoi d&amp;rsquo;OpenTofu. Celui-ci couvre le comment en production : chiffrement du state avec plusieurs key providers, rotation de clés, migration d&amp;rsquo;un state existant, et les patterns multi-environnements qui tiennent à l&amp;rsquo;échelle.</description>
+    </item>
     <item>
       <title>Docker Swarm to Kubernetes : stratégies de migration</title>
       <link>http://localhost:1313/articles/docker-swarm-to-kubernetes/</link>
@@ -118,7 +132,7 @@
       <link>http://localhost:1313/contact/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/contact/</guid>
-      <description>&lt;p&gt;Tu peux me joindre par :&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;LinkedIn&lt;/strong&gt; — &lt;a href=&#34;https://www.linkedin.com/in/adrien-parra-5473a0159/&#34; target=&#34;_blank&#34; rel=&#34;noreferrer&#34;&gt;linkedin.com/in/adrien-parra-5473a0159&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;GitHub&lt;/strong&gt; — &lt;a href=&#34;https://github.com/Adri3nParra&#34; target=&#34;_blank&#34; rel=&#34;noreferrer&#34;&gt;github.com/Adri3nParra&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;Basé à Nantes (44) · Permis B · Disponible en hybride.&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;http://localhost:1313/cv-adrien-parra.pdf&#34;&gt;Télécharger mon CV (PDF)&lt;/a&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Tu peux me joindre par :&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;LinkedIn&lt;/strong&gt; — &lt;a href=&#34;https://www.linkedin.com/in/adrien-parra-5473a0159/&#34; target=&#34;_blank&#34; rel=&#34;noreferrer&#34;&gt;linkedin.com/in/adrien-parra-5473a0159&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;GitHub&lt;/strong&gt; — &lt;a href=&#34;https://github.com/Adri3nParra&#34; target=&#34;_blank&#34; rel=&#34;noreferrer&#34;&gt;github.com/Adri3nParra&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;Basé à Nantes (44) · Permis B · Disponible en hybride.&lt;/p&gt;&#xA;&lt;!-- [Télécharger mon CV (PDF)](/cv-adrien-parra.pdf) --&gt;</description>
     </item>
     <item>
       <title>Expérience</title>

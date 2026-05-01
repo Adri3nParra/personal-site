@@ -6,8 +6,15 @@
     <description>Recent content in Kubernetes on Adrien PARRA</description>
     <generator>Hugo</generator>
     <language>fr</language>
-    <lastBuildDate>Sun, 29 Mar 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 12 Apr 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Falco : Runtime Security Monitoring on Kubernetes</title>
+      <link>http://localhost:1313/articles/falco-runtime-security-kubernetes/</link>
+      <pubDate>Sun, 12 Apr 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/articles/falco-runtime-security-kubernetes/</guid>
+      <description>Trivy scanne les images, Kyverno valide les déploiements — mais qu&amp;rsquo;est-ce qui surveille ce qui se passe une fois les conteneurs lancés ? Falco, le CNCF project, surveille les syscalls en temps réel et alerte dès qu&amp;rsquo;un comportement anormal est détecté.</description>
+    </item>
     <item>
       <title>Docker Swarm to Kubernetes : stratégies de migration</title>
       <link>http://localhost:1313/articles/docker-swarm-to-kubernetes/</link>

@@ -1,4 +1,4 @@
-languageCode = "fr"
+Local = "fr"
 languageName = "Français"
 weight = 1
 
@@ -11,7 +11,7 @@ title = "Adrien PARRA"
 [params.author]
   name = "Adrien PARRA"
   image = "img/avatar.jpg"
-  headline = "Platform Engineer | CKA · CKAD Certifié"
+  headline = "Platform Engineer | CKA · CKAD · KCNA Certifié"
   bio = "5 ans d'expérience sur Linux, Kubernetes et les pipelines CI/CD. Solutions simples, fiables et proches de la production."
   links = [
     { linkedin = "https://www.linkedin.com/in/adrien-parra-5473a0159/" },

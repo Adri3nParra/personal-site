@@ -22,6 +22,7 @@ draft: false
 
 🔄 **Transverse**
 
+- Intervention sur des projets de migration d’environnements hyperscaler vers des clouds européens (OVH, Scaleway)
 - Référent technique DevOps au sein des équipes
 - Contribution à l'amélioration des pratiques et environnements
 
@@ -92,6 +93,4 @@ draft: false
 - Participation au projet de migration du SI vers l'environnement BNP Paribas
 - Rédaction de procédures et documentation SI
 
----
-
-[Télécharger mon CV (PDF)](/cv-adrien-parra.pdf)
+<!-- [Télécharger mon CV (PDF)](/cv-adrien-parra.pdf) -->

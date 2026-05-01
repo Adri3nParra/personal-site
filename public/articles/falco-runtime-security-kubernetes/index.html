@@ -1,0 +1,937 @@
+
+
+
+
+
+
+<!doctype html>
+<html
+  lang="fr"
+  dir="ltr"
+  class="scroll-smooth"
+  data-default-appearance="light"
+  data-auto-appearance="true"
+><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#FFFFFF" />
+  
+  <title>Falco : Runtime Security Monitoring on Kubernetes &middot; Adrien PARRA</title>
+    <meta name="title" content="Falco : Runtime Security Monitoring on Kubernetes &middot; Adrien PARRA" />
+  
+  
+  
+  
+  
+  <script
+    type="text/javascript"
+    src="http://localhost:1313/js/appearance.min.8a082f81b27f3cb2ee528df0b0bdc39787034cf2cc34d4669fbc9977c929023c.js"
+    integrity="sha256-iggvgbJ/PLLuUo3wsL3Dl4cDTPLMNNRmn7yZd8kpAjw="
+  ></script>
+  
+  
+  
+  
+  
+  
+  
+    
+  
+  
+  <link
+    type="text/css"
+    rel="stylesheet"
+    href="http://localhost:1313/css/main.bundle.min.0de763b2899dc6cb9886d78b6c56064836bffc4b9441a2489023bd81177731f2.css"
+    integrity="sha256-DedjsomdxsuYhteLbFYGSDa//EuUQaJIkCO9gRd3MfI="
+  />
+  
+  
+  
+    
+    
+  
+  
+  
+  
+    
+    <script
+      defer
+      type="text/javascript"
+      id="script-bundle"
+      src="http://localhost:1313/js/main.bundle.min.08a9220ae61dd334b11a887737885eaf1530f54c827ad77237e0dba74a179ea6.js"
+      integrity="sha256-CKkiCuYd0zSxGoh3N4herxUw9UyCetdyN&#43;Dbp0oXnqY="
+      data-copy="Copier"
+      data-copied="Copié"
+    ></script>
+  
+  
+  <meta
+    name="description"
+    content="
+      
+        Trivy scanne les images, Kyverno valide les déploiements — mais qu&rsquo;est-ce qui surveille ce qui se passe une fois les conteneurs lancés ? Falco, le CNCF project, surveille les syscalls en temps réel et alerte dès qu&rsquo;un comportement anormal est détecté.
+      
+    "
+  />
+  
+  
+  
+  
+    <link rel="canonical" href="http://localhost:1313/articles/falco-runtime-security-kubernetes/" />
+  
+  
+  
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <meta property="og:url" content="http://localhost:1313/articles/falco-runtime-security-kubernetes/">
+  <meta property="og:site_name" content="Adrien PARRA">
+  <meta property="og:title" content="Falco : Runtime Security Monitoring on Kubernetes">
+  <meta property="og:description" content="Trivy scanne les images, Kyverno valide les déploiements — mais qu’est-ce qui surveille ce qui se passe une fois les conteneurs lancés ? Falco, le CNCF project, surveille les syscalls en temps réel et alerte dès qu’un comportement anormal est détecté.">
+  <meta property="og:locale" content="fr">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="articles">
+    <meta property="article:published_time" content="2026-04-12T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-04-12T00:00:00+00:00">
+    <meta property="article:tag" content="Kubernetes">
+    <meta property="article:tag" content="Falco">
+    <meta property="article:tag" content="Sécurité">
+    <meta property="article:tag" content="DevOps">
+    <meta property="article:tag" content="EBPF">
+
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Falco : Runtime Security Monitoring on Kubernetes">
+  <meta name="twitter:description" content="Trivy scanne les images, Kyverno valide les déploiements — mais qu’est-ce qui surveille ce qui se passe une fois les conteneurs lancés ? Falco, le CNCF project, surveille les syscalls en temps réel et alerte dès qu’un comportement anormal est détecté.">
+
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "articleSection": "Articles",
+    "name": "Falco : Runtime Security Monitoring on Kubernetes",
+    "headline": "Falco : Runtime Security Monitoring on Kubernetes",
+    
+    "abstract": "Trivy scanne les images, Kyverno valide les déploiements — mais qu\u0026rsquo;est-ce qui surveille ce qui se passe une fois les conteneurs lancés ? Falco, le CNCF project, surveille les syscalls en temps réel et alerte dès qu\u0026rsquo;un comportement anormal est détecté.",
+    "inLanguage": "fr",
+    "url" : "http:\/\/localhost:1313\/articles\/falco-runtime-security-kubernetes\/",
+    "author" : {
+      "@type": "Person",
+      "name": "Adrien PARRA"
+    },
+    "copyrightYear": "2026",
+    "dateCreated": "2026-04-12T00:00:00\u002b00:00",
+    "datePublished": "2026-04-12T00:00:00\u002b00:00",
+    
+    "dateModified": "2026-04-12T00:00:00\u002b00:00",
+    
+    "keywords": ["Kubernetes","Falco","Sécurité","DevOps","eBPF"],
+    
+    "mainEntityOfPage": "true",
+    "wordCount": "1902"
+  }
+  </script>
+    
+    <script type="application/ld+json">
+    {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+     {
+       "@type": "ListItem",
+       "item": "http://localhost:1313/",
+       "name": "Accueil",
+       "position": 1
+     },
+     {
+       "@type": "ListItem",
+       "item": "http://localhost:1313/articles/",
+       "name": "Articles",
+       "position": 2
+     },
+     {
+       "@type": "ListItem",
+       "name": "Falco Runtime Security Monitoring on Kubernetes",
+       "position": 3
+     }
+   ]
+ }
+  </script>
+
+  
+  
+    <meta name="author" content="Adrien PARRA" />
+  
+  
+    
+      <link href="https://www.linkedin.com/in/adrien-parra-5473a0159/" rel="me" />
+    
+      <link href="https://github.com/Adri3nParra" rel="me" />
+    
+  
+  
+  
+
+
+
+
+
+
+
+  
+  
+
+  
+  
+</head>
+<body
+    class="m-auto flex h-screen max-w-7xl flex-col bg-neutral px-6 text-lg leading-7 text-neutral-900 dark:bg-neutral-800 dark:text-neutral sm:px-14 md:px-24 lg:px-32"
+  >
+    <div id="the-top" class="absolute flex self-center">
+      <a
+        class="-translate-y-8 rounded-b-lg bg-primary-200 px-3 py-1 text-sm focus:translate-y-0 dark:bg-neutral-600"
+        href="#main-content"
+        ><span class="pe-2 font-bold text-primary-600 dark:text-primary-400">&darr;</span
+        >Aller au contenu</a
+      >
+    </div>
+    
+    
+      <header class="py-6 font-semibold text-neutral-900 dark:text-neutral sm:py-10 print:hidden">
+  <nav class="flex items-start justify-between sm:items-center">
+    
+    <div class="flex flex-row items-center">
+      
+  <a
+    class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2"
+    rel="me"
+    href="/"
+    >Adrien PARRA</a
+  >
+
+    </div>
+    
+    
+      <ul class="flex list-none flex-col text-end sm:flex-row">
+        
+          
+            
+            <li class="group mb-1 sm:mb-0 sm:me-7 sm:last:me-0.5">
+              
+                <a
+                  href="/about/"
+                  title="À propos"
+                  
+                  
+                  ><span
+                      class="decoration-primary-500 group-hover:underline group-hover:decoration-2 group-hover:underline-offset-2"
+                      >À propos</span
+                    >
+                  </a
+                >
+              
+            </li>
+          
+            
+            <li class="group mb-1 sm:mb-0 sm:me-7 sm:last:me-0.5">
+              
+                <a
+                  href="/experience/"
+                  title="Expérience"
+                  
+                  
+                  ><span
+                      class="decoration-primary-500 group-hover:underline group-hover:decoration-2 group-hover:underline-offset-2"
+                      >Expérience</span
+                    >
+                  </a
+                >
+              
+            </li>
+          
+            
+            <li class="group mb-1 sm:mb-0 sm:me-7 sm:last:me-0.5">
+              
+                <a
+                  href="/articles/"
+                  title="Articles"
+                  
+                  
+                  ><span
+                      class="decoration-primary-500 group-hover:underline group-hover:decoration-2 group-hover:underline-offset-2"
+                      >Articles</span
+                    >
+                  </a
+                >
+              
+            </li>
+          
+            
+            <li class="group mb-1 sm:mb-0 sm:me-7 sm:last:me-0.5">
+              
+                <a
+                  href="/contact/"
+                  title="Contact"
+                  
+                  
+                  ><span
+                      class="decoration-primary-500 group-hover:underline group-hover:decoration-2 group-hover:underline-offset-2"
+                      >Contact</span
+                    >
+                  </a
+                >
+              
+            </li>
+          
+          
+        
+      </ul>
+    
+  </nav>
+</header>
+
+    
+    <div class="relative flex grow flex-col">
+      <main id="main-content" class="grow">
+        
+  <article>
+    <header class="max-w-prose">
+      
+        <ol class="text-sm text-neutral-500 dark:text-neutral-400 print:hidden">
+  
+  
+    
+  
+    
+  
+  <li class="hidden inline">
+    <a
+      class="dark:underline-neutral-600 decoration-neutral-300 hover:underline"
+      href="http://localhost:1313/"
+      >Accueil</a
+    ><span class="px-1 text-primary-500">/</span>
+  </li>
+
+  
+  <li class=" inline">
+    <a
+      class="dark:underline-neutral-600 decoration-neutral-300 hover:underline"
+      href="http://localhost:1313/articles/"
+      >Articles</a
+    ><span class="px-1 text-primary-500">/</span>
+  </li>
+
+  
+  <li class="hidden inline">
+    <a
+      class="dark:underline-neutral-600 decoration-neutral-300 hover:underline"
+      href="http://localhost:1313/articles/falco-runtime-security-kubernetes/"
+      >Falco : Runtime Security Monitoring on Kubernetes</a
+    ><span class="px-1 text-primary-500">/</span>
+  </li>
+
+</ol>
+
+
+      
+      <h1 class="mb-8 mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
+        Falco : Runtime Security Monitoring on Kubernetes
+      </h1>
+      
+      
+    </header>
+    <section class="prose mt-0 flex max-w-full flex-col dark:prose-invert lg:flex-row">
+      
+        <div class="order-first px-0 lg:order-last lg:max-w-xs lg:ps-8">
+          <div class="toc pe-5 lg:sticky lg:top-10 print:hidden">
+            <details open class="-ms-5 mt-0 overflow-hidden rounded-lg ps-5">
+  <summary
+    class="block cursor-pointer bg-neutral-100 py-1 ps-5 text-lg font-semibold text-neutral-800 dark:bg-neutral-700 dark:text-neutral-100 lg:hidden"
+  >
+    Sommaire
+  </summary>
+  <div class="border-s border-dotted border-neutral-300 py-2 ps-5 dark:border-neutral-600">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#quest-ce-que-falco-">Qu&rsquo;est-ce que Falco ?</a></li>
+    <li><a href="#architecture--ebpf-vs-kernel-module">Architecture : eBPF vs kernel module</a></li>
+    <li><a href="#installation-via-helm">Installation via Helm</a>
+      <ul>
+        <li><a href="#vérifier-que-falco-détecte">Vérifier que Falco détecte</a></li>
+      </ul>
+    </li>
+    <li><a href="#les-règles-par-défaut">Les règles par défaut</a>
+      <ul>
+        <li><a href="#lister-toutes-les-règles-actives">Lister toutes les règles actives</a></li>
+      </ul>
+    </li>
+    <li><a href="#anatomie-dune-règle">Anatomie d&rsquo;une règle</a>
+      <ul>
+        <li><a href="#les-macros-et-les-listes">Les macros et les listes</a></li>
+      </ul>
+    </li>
+    <li><a href="#écrire-des-règles-personnalisées">Écrire des règles personnalisées</a>
+      <ul>
+        <li><a href="#cas-1--détecter-une-connexion-vers-une-ip-externe-inattendue">Cas 1 : détecter une connexion vers une IP externe inattendue</a></li>
+        <li><a href="#cas-2--surveiller-les-accès-aux-secrets-kubernetes">Cas 2 : surveiller les accès aux secrets Kubernetes</a></li>
+        <li><a href="#cas-3--détecter-lexécution-de-curl-ou-wget">Cas 3 : détecter l’exécution de <code>curl</code> ou <code>wget</code></a></li>
+        <li><a href="#déployer-des-règles-personnalisées-via-helm">Déployer des règles personnalisées via Helm</a></li>
+      </ul>
+    </li>
+    <li><a href="#falcosidekick--router-les-alertes">Falcosidekick — router les alertes</a>
+      <ul>
+        <li><a href="#configuration-slack">Configuration Slack</a></li>
+        <li><a href="#intégration-prometheus--alertmanager">Intégration Prometheus + Alertmanager</a></li>
+        <li><a href="#falco-ui">Falco UI</a></li>
+      </ul>
+    </li>
+    <li><a href="#scénarios-de-détection-concrets">Scénarios de détection concrets</a>
+      <ul>
+        <li><a href="#détection-dun-reverse-shell">Détection d&rsquo;un reverse shell</a></li>
+        <li><a href="#détection-de-container-drift">Détection de container drift</a></li>
+        <li><a href="#détection-de-lecture-de-credentials">Détection de lecture de credentials</a></li>
+      </ul>
+    </li>
+    <li><a href="#ajuster-les-faux-positifs">Ajuster les faux positifs</a>
+      <ul>
+        <li><a href="#exclure-des-containers-connus">Exclure des containers connus</a></li>
+        <li><a href="#exclure-par-namespace">Exclure par namespace</a></li>
+        <li><a href="#ajuster-la-priorité-minimale">Ajuster la priorité minimale</a></li>
+      </ul>
+    </li>
+    <li><a href="#limites">Limites</a>
+      <ul>
+        <li><a href="#ce-que-falco-ne-fait-pas">Ce que Falco ne fait pas</a></li>
+        <li><a href="#overhead-kernel">Overhead kernel</a></li>
+      </ul>
+    </li>
+    <li><a href="#bonnes-pratiques">Bonnes pratiques</a>
+      <ul>
+        <li><a href="#1-commencer-en-mode-observation">1. Commencer en mode observation</a></li>
+        <li><a href="#2-versionner-les-règles-personnalisées">2. Versionner les règles personnalisées</a></li>
+        <li><a href="#3-enrichir-les-alertes">3. Enrichir les alertes</a></li>
+        <li><a href="#4-coupler-avec-les-audit-logs-kubernetes">4. Coupler avec les audit logs Kubernetes</a></li>
+      </ul>
+    </li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+  </div>
+</details>
+
+          </div>
+        </div>
+      
+      <div class="min-h-0 min-w-0 max-w-prose grow">
+        <p>Dans l&rsquo;article sur 
+      
+    <a href="http://localhost:1313/articles/container-security-trivy-kyverno/">Trivy et Kyverno</a>, j&rsquo;avais posé le cadre en trois couches : build, admission, runtime. Trivy et Kyverno couvrent les deux premières. Falco, c&rsquo;est la troisième.</p>
+<p>Le problème avec la sécurité Kubernetes, c&rsquo;est qu&rsquo;une image propre peut être compromise à l&rsquo;exécution. Un conteneur qui part en prod sans vulnérabilité connue peut ensuite :</p>
+<ul>
+<li>Télécharger un script malveillant avec <code>curl</code></li>
+<li>Ouvrir un shell interactif dans un conteneur de prod</li>
+<li>Lire des fichiers en dehors de son contexte attendu</li>
+<li>Établir une connexion vers un serveur C2</li>
+</ul>
+<p>Trivy ne voit pas ça. Kyverno ne voit pas ça. Falco, si.</p>
+<h2 id="quest-ce-que-falco-" class="relative group">Qu&rsquo;est-ce que Falco ? <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#quest-ce-que-falco-" aria-label="Ancre">#</a></span></h2><p>Falco est un outil open source de détection de menaces à l&rsquo;exécution, originellement créé par Sysdig, maintenant un projet CNCF incubé. Il surveille les appels système (syscalls) du kernel Linux — la couche la plus basse observable sans modifier les applications.</p>
+<p>Son principe : définir des <strong>règles</strong> qui décrivent un comportement anormal. Si un conteneur viole une règle, Falco génère une alerte.</p>
+<p>Ce n&rsquo;est pas un WAF, pas un IDS réseau — c&rsquo;est un moniteur de comportement au niveau kernel.</p>
+<pre tabindex="0"><code>Application
+     │
+     ▼
+Syscalls (open, exec, connect, read…)
+     │
+     ▼
+Falco intercepte et évalue les règles
+     │
+     ├── Comportement attendu → rien
+     └── Violation de règle → alerte
+</code></pre><h2 id="architecture--ebpf-vs-kernel-module" class="relative group">Architecture : eBPF vs kernel module <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#architecture--ebpf-vs-kernel-module" aria-label="Ancre">#</a></span></h2><p>Falco peut s&rsquo;insérer dans le kernel de deux façons :</p>
+<table>
+  <thead>
+      <tr>
+          <th>Mode</th>
+          <th>Mécanisme</th>
+          <th>Avantages</th>
+          <th>Inconvénients</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Kernel module</td>
+          <td>Module <code>.ko</code> chargé dans le kernel</td>
+          <td>Maturité, support large</td>
+          <td>Kernel rebuild si version change, plus invasif</td>
+      </tr>
+      <tr>
+          <td>eBPF</td>
+          <td>Programme sandboxé dans le kernel</td>
+          <td>Sécurisé, pas de module, GKE/EKS/AKS compatible</td>
+          <td>Nécessite kernel ≥ 4.14</td>
+      </tr>
+      <tr>
+          <td>Modern eBPF</td>
+          <td>eBPF CO-RE (Compile Once, Run Everywhere)</td>
+          <td>Pas de headers kernel requis</td>
+          <td>Kernel ≥ 5.8 requis</td>
+      </tr>
+  </tbody>
+</table>
+<p>En 2026, le mode <strong>Modern eBPF</strong> est recommandé. Les clouds majeurs l&rsquo;exposent sans configuration spéciale.</p>
+<pre tabindex="0"><code>┌─────────────────────────────────┐
+│          Userspace              │
+│                                 │
+│   Falco daemon                  │
+│   (rules engine + alerting)     │
+└────────────────┬────────────────┘
+                 │ events
+┌────────────────▼────────────────┐
+│          Kernel space           │
+│                                 │
+│   eBPF probe (Modern eBPF)      │
+│   intercepte les syscalls       │
+└─────────────────────────────────┘
+</code></pre><h2 id="installation-via-helm" class="relative group">Installation via Helm <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#installation-via-helm" aria-label="Ancre">#</a></span></h2><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>helm repo add falcosecurity https://falcosecurity.github.io/charts
+</span></span><span style="display:flex;"><span>helm repo update
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>helm install falco falcosecurity/falco <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --namespace falco <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --create-namespace <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --set driver.kind<span style="color:#f92672">=</span>modern_ebpf <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --set falcosidekick.enabled<span style="color:#f92672">=</span>true <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --set falcosidekick.webui.enabled<span style="color:#f92672">=</span>true
+</span></span></code></pre></div><p>Vérifier que les pods sont up :</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get pods -n falco
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># NAME                              READY   STATUS</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># falco-xxxxx                       2/2     Running</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># falco-falcosidekick-xxxxx         1/1     Running</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># falco-falcosidekick-ui-xxxxx      1/1     Running</span>
+</span></span></code></pre></div><p>Le DaemonSet Falco tourne sur chaque nœud — c&rsquo;est un prérequis pour intercepter tous les syscalls du cluster.</p>
+<h3 id="vérifier-que-falco-détecte" class="relative group">Vérifier que Falco détecte <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#v%c3%a9rifier-que-falco-d%c3%a9tecte" aria-label="Ancre">#</a></span></h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Dans un namespace de test, lance un shell dans un conteneur</span>
+</span></span><span style="display:flex;"><span>kubectl run test-pod --image<span style="color:#f92672">=</span>ubuntu --rm -it -- bash
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Dans le pod, essaie quelque chose de suspect</span>
+</span></span><span style="display:flex;"><span>cat /etc/shadow
+</span></span></code></pre></div><p>Côté Falco :</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl logs -n falco -l app.kubernetes.io/name<span style="color:#f92672">=</span>falco -f | grep Warning
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 09:14:32.123 Warning Sensitive file opened for reading...</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#   (user=root command=cat /etc/shadow container=test-pod)</span>
+</span></span></code></pre></div><h2 id="les-règles-par-défaut" class="relative group">Les règles par défaut <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#les-r%c3%a8gles-par-d%c3%a9faut" aria-label="Ancre">#</a></span></h2><p>Falco est livré avec ~100 règles prêtes à l&rsquo;emploi. Les plus utiles en production :</p>
+<table>
+  <thead>
+      <tr>
+          <th>Règle</th>
+          <th>Déclencheur</th>
+          <th>Priorité</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Terminal shell in container</td>
+          <td><code>bash</code>/<code>sh</code> interactif dans un conteneur</td>
+          <td>WARNING</td>
+      </tr>
+      <tr>
+          <td>Sensitive file read</td>
+          <td>Lecture de <code>/etc/shadow</code>, <code>/etc/passwd</code></td>
+          <td>WARNING</td>
+      </tr>
+      <tr>
+          <td>Write below root</td>
+          <td>Écriture hors des chemins attendus</td>
+          <td>ERROR</td>
+      </tr>
+      <tr>
+          <td>Unexpected network connection</td>
+          <td>Connexion réseau non prévue</td>
+          <td>NOTICE</td>
+      </tr>
+      <tr>
+          <td>Outbound connection to C2</td>
+          <td>IPs connues de serveurs C2</td>
+          <td>CRITICAL</td>
+      </tr>
+      <tr>
+          <td>Container drift detected</td>
+          <td>Nouveau exécutable créé dans un conteneur</td>
+          <td>CRITICAL</td>
+      </tr>
+      <tr>
+          <td>Read sensitive file untrusted</td>
+          <td>Lecture de secrets/tokens K8s</td>
+          <td>WARNING</td>
+      </tr>
+  </tbody>
+</table>
+<p>Ces règles couvrent les patterns d&rsquo;attaque les plus communs : escalade de privilèges, exfiltration, lateral movement.</p>
+<h3 id="lister-toutes-les-règles-actives" class="relative group">Lister toutes les règles actives <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#lister-toutes-les-r%c3%a8gles-actives" aria-label="Ancre">#</a></span></h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl exec -n falco daemonset/falco -- falco --list
+</span></span></code></pre></div><h2 id="anatomie-dune-règle" class="relative group">Anatomie d&rsquo;une règle <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#anatomie-dune-r%c3%a8gle" aria-label="Ancre">#</a></span></h2><p>Une règle Falco ressemble à ça :</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>- <span style="color:#f92672">rule</span>: <span style="color:#ae81ff">Shell spawned in container</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">desc</span>: <span style="color:#ae81ff">Un shell interactif a été ouvert dans un conteneur. Potentielle intrusion.</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">condition</span>: &gt;<span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    spawned_process
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    and container
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    and shell_procs
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    and proc.tty != 0</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">output</span>: &gt;<span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Shell interactif détecté (user=%user.name cmd=%proc.cmdline
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    container=%container.name image=%container.image.repository:%container.image.tag
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    k8s_pod=%k8s.pod.name k8s_ns=%k8s.ns.name)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">priority</span>: <span style="color:#ae81ff">WARNING</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">tags</span>: [<span style="color:#ae81ff">shell, intrusion]</span>
+</span></span></code></pre></div><p>Les éléments clés :</p>
+<ul>
+<li><strong><code>condition</code></strong> — filtre en langage Falco (proche de SQL)</li>
+<li><strong><code>output</code></strong> — message d&rsquo;alerte avec variables enrichies</li>
+<li><strong><code>priority</code></strong> — <code>DEBUG</code>, <code>INFO</code>, <code>NOTICE</code>, <code>WARNING</code>, <code>ERROR</code>, <code>CRITICAL</code></li>
+<li><strong><code>tags</code></strong> — pour filtrer et router les alertes</li>
+</ul>
+<h3 id="les-macros-et-les-listes" class="relative group">Les macros et les listes <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#les-macros-et-les-listes" aria-label="Ancre">#</a></span></h3><p>Falco est composable via des macros et des listes réutilisables :</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#75715e"># Liste de shells connus</span>
+</span></span><span style="display:flex;"><span>- <span style="color:#f92672">list</span>: <span style="color:#ae81ff">shell_binaries</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">items</span>: [<span style="color:#ae81ff">bash, sh, zsh, fish, ksh]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Macro réutilisable</span>
+</span></span><span style="display:flex;"><span>- <span style="color:#f92672">macro</span>: <span style="color:#ae81ff">shell_procs</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">condition</span>: <span style="color:#ae81ff">proc.name in (shell_binaries)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Macro container (exclut le host)</span>
+</span></span><span style="display:flex;"><span>- <span style="color:#f92672">macro</span>: <span style="color:#ae81ff">container</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">condition</span>: <span style="color:#ae81ff">container.id != host</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Macro spawned_process</span>
+</span></span><span style="display:flex;"><span>- <span style="color:#f92672">macro</span>: <span style="color:#ae81ff">spawned_process</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">condition</span>: <span style="color:#ae81ff">evt.type = execve and evt.dir = &lt;</span>
+</span></span></code></pre></div><p>Ces macros sont définies dans les règles par défaut et peuvent être étendues.</p>
+<h2 id="écrire-des-règles-personnalisées" class="relative group">Écrire des règles personnalisées <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#%c3%a9crire-des-r%c3%a8gles-personnalis%c3%a9es" aria-label="Ancre">#</a></span></h2><h3 id="cas-1--détecter-une-connexion-vers-une-ip-externe-inattendue" class="relative group">Cas 1 : détecter une connexion vers une IP externe inattendue <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#cas-1--d%c3%a9tecter-une-connexion-vers-une-ip-externe-inattendue" aria-label="Ancre">#</a></span></h3><p>Ton service ne devrait parler qu&rsquo;à la base de données et à une API interne. Tout le reste est suspect :</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>- <span style="color:#f92672">list</span>: <span style="color:#ae81ff">allowed_outbound_destinations</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">items</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">10.0.0.0</span><span style="color:#ae81ff">/8    </span> <span style="color:#75715e"># réseau interne</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">192.168.0.0</span><span style="color:#ae81ff">/16</span> <span style="color:#75715e"># réseau local</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>- <span style="color:#f92672">rule</span>: <span style="color:#ae81ff">Unexpected outbound connection</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">desc</span>: <span style="color:#ae81ff">Connexion réseau vers une destination non autorisée</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">condition</span>: &gt;<span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    outbound
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    and container
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    and not fd.net in (allowed_outbound_destinations)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    and container.image.repository = &#34;mon-org/mon-api&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">output</span>: &gt;<span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Connexion inattendue depuis le conteneur (dest=%fd.rip:%fd.rport
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    container=%container.name pod=%k8s.pod.name ns=%k8s.ns.name)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">priority</span>: <span style="color:#ae81ff">WARNING</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">tags</span>: [<span style="color:#ae81ff">network, exfiltration]</span>
+</span></span></code></pre></div><h3 id="cas-2--surveiller-les-accès-aux-secrets-kubernetes" class="relative group">Cas 2 : surveiller les accès aux secrets Kubernetes <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#cas-2--surveiller-les-acc%c3%a8s-aux-secrets-kubernetes" aria-label="Ancre">#</a></span></h3><p>Les tokens ServiceAccount sont montés dans <code>/var/run/secrets/kubernetes.io/</code>. Un conteneur qui lit son token directement est souvent suspect (sauf si c&rsquo;est prévu) :</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>- <span style="color:#f92672">macro</span>: <span style="color:#ae81ff">k8s_token_read</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">condition</span>: &gt;<span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    open_read
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    and fd.name startswith /var/run/secrets/kubernetes.io/serviceaccount</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>- <span style="color:#f92672">rule</span>: <span style="color:#ae81ff">K8s serviceaccount token read</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">desc</span>: <span style="color:#ae81ff">Un processus lit le token ServiceAccount</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">condition</span>: &gt;<span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    k8s_token_read
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    and container
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    and not proc.name in (allowed_k8s_clients)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">output</span>: &gt;<span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Token K8s lu (user=%user.name cmd=%proc.cmdline
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    file=%fd.name container=%container.name pod=%k8s.pod.name)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">priority</span>: <span style="color:#ae81ff">WARNING</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">tags</span>: [<span style="color:#ae81ff">k8s, credentials]</span>
+</span></span></code></pre></div><h3 id="cas-3--détecter-lexécution-de-curl-ou-wget" class="relative group">Cas 3 : détecter l&rsquo;exécution de <code>curl</code> ou <code>wget</code> <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#cas-3--d%c3%a9tecter-lex%c3%a9cution-de-curl-ou-wget" aria-label="Ancre">#</a></span></h3><p>Dans un conteneur de prod, personne n&rsquo;a besoin de télécharger quoi que ce soit :</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>- <span style="color:#f92672">list</span>: <span style="color:#ae81ff">download_tools</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">items</span>: [<span style="color:#ae81ff">curl, wget, nc, netcat, ncat]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>- <span style="color:#f92672">rule</span>: <span style="color:#ae81ff">Download tool executed in container</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">desc</span>: <span style="color:#ae81ff">Un outil de téléchargement a été exécuté dans un conteneur</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">condition</span>: &gt;<span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    spawned_process
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    and container
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    and proc.name in (download_tools)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">output</span>: &gt;<span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Outil de téléchargement détecté (cmd=%proc.cmdline
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    container=%container.name pod=%k8s.pod.name ns=%k8s.ns.name)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">priority</span>: <span style="color:#ae81ff">ERROR</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">tags</span>: [<span style="color:#ae81ff">malware, download]</span>
+</span></span></code></pre></div><h3 id="déployer-des-règles-personnalisées-via-helm" class="relative group">Déployer des règles personnalisées via Helm <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#d%c3%a9ployer-des-r%c3%a8gles-personnalis%c3%a9es-via-helm" aria-label="Ancre">#</a></span></h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#75715e"># values-falco.yaml</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">customRules</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">custom-rules.yaml</span>: |-<span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    - list: allowed_outbound_destinations
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      items:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        - 10.0.0.0/8
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    - rule: Unexpected outbound connection
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      desc: Connexion réseau vers une destination non autorisée
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      condition: &gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        outbound and container
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        and not fd.net in (allowed_outbound_destinations)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      output: &gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        Connexion inattendue (dest=%fd.rip:%fd.rport pod=%k8s.pod.name)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      priority: WARNING
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      tags: [network]</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>helm upgrade falco falcosecurity/falco <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --namespace falco <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --values values-falco.yaml
+</span></span></code></pre></div><h2 id="falcosidekick--router-les-alertes" class="relative group">Falcosidekick — router les alertes <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#falcosidekick--router-les-alertes" aria-label="Ancre">#</a></span></h2><p>Falco génère des alertes dans ses logs. Sans Falcosidekick, tu ne verras rien en temps réel. Falcosidekick est un proxy d&rsquo;alerting qui supporte ~50 destinations.</p>
+<pre tabindex="0"><code>Falco ──► Falcosidekick ──► Slack
+                       ├──► PagerDuty
+                       ├──► Prometheus (Alertmanager)
+                       ├──► Elasticsearch
+                       ├──► Webhook générique
+                       └──► Falco UI (dashboard web)
+</code></pre><h3 id="configuration-slack" class="relative group">Configuration Slack <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#configuration-slack" aria-label="Ancre">#</a></span></h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#75715e"># values-falco.yaml</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">falcosidekick</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">enabled</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">config</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">slack</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">webhookurl</span>: <span style="color:#e6db74">&#34;https://hooks.slack.com/services/T.../B.../...&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">minimumpriority</span>: <span style="color:#ae81ff">warning </span> <span style="color:#75715e"># Ignorer DEBUG/INFO/NOTICE</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">messageformat</span>: &gt;<span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        *[{priority}]* {rule} dans `{output_fields.k8s.ns.name}/{output_fields.k8s.pod.name}`
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        _{output}_</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>helm upgrade falco falcosecurity/falco <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --namespace falco <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --values values-falco.yaml
+</span></span></code></pre></div><p>Les alertes Slack incluent : rule, priority, timestamp, pod name, namespace, image.</p>
+<h3 id="intégration-prometheus--alertmanager" class="relative group">Intégration Prometheus + Alertmanager <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#int%c3%a9gration-prometheus--alertmanager" aria-label="Ancre">#</a></span></h3><p>Falcosidekick expose des métriques Prometheus et peut envoyer vers Alertmanager :</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">falcosidekick</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">config</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">prometheusalertmanager</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">hostport</span>: <span style="color:#e6db74">&#34;http://alertmanager.monitoring:9093&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">minimumpriority</span>: <span style="color:#ae81ff">warning</span>
+</span></span></code></pre></div><p>Ou via les métriques exposées :</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">falcosidekick</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">config</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">prometheus</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">extralabels</span>: <span style="color:#e6db74">&#34;cluster=prod,team=platform&#34;</span>
+</span></span></code></pre></div><p>Métriques disponibles :</p>
+<ul>
+<li><code>falcosidekick_inputs_total</code> — événements reçus par priorité</li>
+<li><code>falcosidekick_outputs_total</code> — alertes envoyées par destination</li>
+</ul>
+<h3 id="falco-ui" class="relative group">Falco UI <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#falco-ui" aria-label="Ancre">#</a></span></h3><p>Falcosidekick UI est un dashboard web pour visualiser les alertes en temps réel :</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Port-forward vers le UI</span>
+</span></span><span style="display:flex;"><span>kubectl port-forward -n falco svc/falco-falcosidekick-ui 2802:2802
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Ouvrir http://localhost:2802</span>
+</span></span></code></pre></div><p>Le dashboard affiche un historique des événements, filtrable par priorité, règle, namespace, et pod.</p>
+<h2 id="scénarios-de-détection-concrets" class="relative group">Scénarios de détection concrets <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#sc%c3%a9narios-de-d%c3%a9tection-concrets" aria-label="Ancre">#</a></span></h2><h3 id="détection-dun-reverse-shell" class="relative group">Détection d&rsquo;un reverse shell <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#d%c3%a9tection-dun-reverse-shell" aria-label="Ancre">#</a></span></h3><p>Un attaquant qui obtient l&rsquo;exécution de code dans un conteneur ouvre souvent un reverse shell. Falco détecte ça via plusieurs règles combinées :</p>
+<ol>
+<li><code>Shell spawned in container</code> — un shell est ouvert</li>
+<li><code>Unexpected outbound connection</code> — connexion sortante vers une IP externe</li>
+<li><code>Network activity from non-expected process</code> — processus shell qui fait du réseau</li>
+</ol>
+<p>Les trois alertes en moins d&rsquo;une seconde, c&rsquo;est un signal fort.</p>
+<h3 id="détection-de-container-drift" class="relative group">Détection de container drift <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#d%c3%a9tection-de-container-drift" aria-label="Ancre">#</a></span></h3><p>Container drift = un nouveau binaire est créé ou modifié dans un conteneur en cours d&rsquo;exécution. Ce n&rsquo;est jamais censé arriver dans une image immutable :</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Règle intégrée : Container Drift Detected</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Se déclenche si un nouveau fichier exécutable est créé dans un conteneur</span>
+</span></span></code></pre></div><p>Si ton image est immutable (ce qu&rsquo;elle devrait être), et qu&rsquo;un exécutable apparaît, c&rsquo;est une intrusion.</p>
+<h3 id="détection-de-lecture-de-credentials" class="relative group">Détection de lecture de credentials <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#d%c3%a9tection-de-lecture-de-credentials" aria-label="Ancre">#</a></span></h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># /var/run/secrets/ — tokens K8s</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># /root/.kube/config — kubeconfig</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># /etc/kubernetes/ — certs cluster</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ~/.aws/credentials — AWS</span>
+</span></span></code></pre></div><p>Falco surveille ces chemins par défaut. Un conteneur API qui lit <code>/etc/kubernetes/admin.conf</code>, c&rsquo;est anormal.</p>
+<h2 id="ajuster-les-faux-positifs" class="relative group">Ajuster les faux positifs <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#ajuster-les-faux-positifs" aria-label="Ancre">#</a></span></h2><p>Les règles par défaut génèrent des faux positifs sur certains workloads légitimes. Pour les gérer :</p>
+<h3 id="exclure-des-containers-connus" class="relative group">Exclure des containers connus <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#exclure-des-containers-connus" aria-label="Ancre">#</a></span></h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>- <span style="color:#f92672">rule</span>: <span style="color:#ae81ff">Terminal shell in container</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Override de la règle existante pour exclure les pods de debug</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">exceptions</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">known_debug_pods</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">fields</span>: [<span style="color:#ae81ff">k8s.pod.name]</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">comps</span>: [<span style="color:#ae81ff">startswith]</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">values</span>:
+</span></span><span style="display:flex;"><span>        - [<span style="color:#ae81ff">debug-]</span>
+</span></span><span style="display:flex;"><span>        - [<span style="color:#ae81ff">toolbox-]</span>
+</span></span></code></pre></div><h3 id="exclure-par-namespace" class="relative group">Exclure par namespace <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#exclure-par-namespace" aria-label="Ancre">#</a></span></h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>- <span style="color:#f92672">macro</span>: <span style="color:#ae81ff">not_monitoring_ns</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">condition</span>: &gt;<span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    k8s.ns.name != &#34;monitoring&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    and k8s.ns.name != &#34;kube-system&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    and k8s.ns.name != &#34;falco&#34;</span>
+</span></span></code></pre></div><h3 id="ajuster-la-priorité-minimale" class="relative group">Ajuster la priorité minimale <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#ajuster-la-priorit%c3%a9-minimale" aria-label="Ancre">#</a></span></h3><p>Pour réduire le bruit, ne traiter que les WARNING et au-dessus :</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#75715e"># values-falco.yaml</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">falco</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">jsonOutput</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">logLevel</span>: <span style="color:#ae81ff">warning</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">priority</span>: <span style="color:#ae81ff">warning </span> <span style="color:#75715e"># Ne loguer que WARNING et au-dessus</span>
+</span></span></code></pre></div><h2 id="limites" class="relative group">Limites <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#limites" aria-label="Ancre">#</a></span></h2><h3 id="ce-que-falco-ne-fait-pas" class="relative group">Ce que Falco ne fait pas <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#ce-que-falco-ne-fait-pas" aria-label="Ancre">#</a></span></h3><ul>
+<li><strong>Ne bloque pas</strong> — Falco détecte et alerte, il n&rsquo;arrête pas le processus. Pour bloquer, combine avec un admission controller ou un mécanisme d&rsquo;isolation.</li>
+<li><strong>Pas de forensics réseau complet</strong> — Falco surveille les connexions (IP, port) mais pas le contenu des paquets.</li>
+<li><strong>Ne remplace pas un SIEM</strong> — Falco génère des événements, mais l&rsquo;agrégation et la corrélation sur le long terme, c&rsquo;est Elasticsearch/Splunk/Loki.</li>
+</ul>
+<h3 id="overhead-kernel" class="relative group">Overhead kernel <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#overhead-kernel" aria-label="Ancre">#</a></span></h3><p>eBPF a un coût CPU (~1-3% par nœud selon la charge de syscalls). Sur des nœuds très actifs (beaucoup d&rsquo;I/O ou de fork), surveille les métriques du daemon Falco.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl top pod -n falco
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># NAME            CPU(cores)   MEMORY(bytes)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># falco-xxxxx     42m          128Mi</span>
+</span></span></code></pre></div><h2 id="bonnes-pratiques" class="relative group">Bonnes pratiques <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#bonnes-pratiques" aria-label="Ancre">#</a></span></h2><h3 id="1-commencer-en-mode-observation" class="relative group">1. Commencer en mode observation <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#1-commencer-en-mode-observation" aria-label="Ancre">#</a></span></h3><p>Ne jamais déployer Falco en prod et agir sur chaque alerte sans avoir calibré les règles. Passe deux semaines en mode observation, note les faux positifs, et adapte.</p>
+<h3 id="2-versionner-les-règles-personnalisées" class="relative group">2. Versionner les règles personnalisées <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#2-versionner-les-r%c3%a8gles-personnalis%c3%a9es" aria-label="Ancre">#</a></span></h3><p>Tes règles sont du code. Git + PR + review avant de déployer en prod.</p>
+<pre tabindex="0"><code>rules/
+├── network-rules.yaml
+├── credential-access.yaml
+└── container-integrity.yaml
+</code></pre><h3 id="3-enrichir-les-alertes" class="relative group">3. Enrichir les alertes <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#3-enrichir-les-alertes" aria-label="Ancre">#</a></span></h3><p>Falco peut envoyer le contexte Kubernetes dans chaque alerte. Active l&rsquo;enrichissement K8s metadata :</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">falco</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">plugins</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">k8saudit</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">library_path</span>: <span style="color:#ae81ff">libk8saudit.so</span>
+</span></span></code></pre></div><p>Tes alertes incluront automatiquement : pod, namespace, image, labels, annotations.</p>
+<h3 id="4-coupler-avec-les-audit-logs-kubernetes" class="relative group">4. Coupler avec les audit logs Kubernetes <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#4-coupler-avec-les-audit-logs-kubernetes" aria-label="Ancre">#</a></span></h3><p>Falco peut aussi ingérer les K8s Audit Logs (API server) via le plugin <code>k8saudit</code>. Ça permet de détecter :</p>
+<ul>
+<li>Création de ClusterRoleBinding suspects</li>
+<li>Accès RBAC anormaux</li>
+<li>Requêtes vers des ressources sensibles (secrets, configmaps)</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#75715e"># values-falco.yaml</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">falco</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">plugins</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">k8saudit</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">library_path</span>: <span style="color:#ae81ff">libk8saudit.so</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">open_params</span>: <span style="color:#e6db74">&#34;http://0.0.0.0:9765/k8s-audit&#34;</span>
+</span></span></code></pre></div><h2 id="conclusion" class="relative group">Conclusion <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#conclusion" aria-label="Ancre">#</a></span></h2><p>Falco complète le triangle de sécurité Kubernetes :</p>
+<table>
+  <thead>
+      <tr>
+          <th>Couche</th>
+          <th>Outil</th>
+          <th>Moment</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Build</td>
+          <td>Trivy</td>
+          <td>Image scan avant push</td>
+      </tr>
+      <tr>
+          <td>Admission</td>
+          <td>Kyverno</td>
+          <td>Validation au déploiement</td>
+      </tr>
+      <tr>
+          <td>Runtime</td>
+          <td>Falco</td>
+          <td>Surveillance en continu</td>
+      </tr>
+  </tbody>
+</table>
+<p>Pas de ces trois couches n&rsquo;est suffisante seule. Une image propre peut être compromise. Un déploiement conforme peut dériver. Falco est la dernière ligne de défense — il détecte ce qui échappe aux deux premières.</p>
+<p>L&rsquo;overhead est faible (eBPF), le déploiement est simple (Helm en 5 minutes), et les règles par défaut couvrent l&rsquo;essentiel. Le vrai travail, c&rsquo;est le calibrage : réduire les faux positifs, écrire les règles métier, brancher les alertes sur ce que ton équipe surveille déjà.</p>
+
+      </div>
+    </section>
+    <footer class="max-w-prose pt-8 print:hidden">
+      
+
+      
+
+      
+  
+    
+    
+    
+    <div class="pt-8">
+      <hr class="border-dotted border-neutral-300 dark:border-neutral-600" />
+      <div class="flex justify-between pt-3">
+        <span>
+          
+            <a class="group flex" href="http://localhost:1313/articles/opentofu-advanced-state-encryption-multi-env/">
+              <span
+                class="me-2 text-neutral-700 transition-transform group-hover:-translate-x-[2px] group-hover:text-primary-600 dark:text-neutral dark:group-hover:text-primary-400"
+                ><span class="ltr:inline rtl:hidden">&larr;</span
+                ><span class="ltr:hidden rtl:inline">&rarr;</span></span
+              >
+              <span class="flex flex-col">
+                <span
+                  class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500"
+                  >OpenTofu Avancé : State Encryption & Stratégies Multi-Environnements</span
+                >
+                <span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
+                  
+                </span>
+              </span>
+            </a>
+          
+        </span>
+        <span>
+          
+        </span>
+      </div>
+    </div>
+  
+
+
+      
+    </footer>
+  </article>
+
+      </main>
+      
+        <div
+          class="pointer-events-none absolute bottom-0 end-0 top-[100vh] w-12"
+          id="to-top"
+          hidden="true"
+        >
+          <a
+            href="#the-top"
+            class="pointer-events-auto sticky top-[calc(100vh-5.5rem)] flex h-12 w-12 items-center justify-center rounded-full bg-neutral/50 text-xl text-neutral-700 backdrop-blur hover:text-primary-600 dark:bg-neutral-800/50 dark:text-neutral dark:hover:text-primary-400"
+            aria-label="Faire défiler jusqu&#39;au bas de la page"
+            title="Faire défiler jusqu&#39;au bas de la page"
+          >
+            &uarr;
+          </a>
+        </div>
+      <footer class="py-10 print:hidden">
+  
+  
+  <div class="flex items-center justify-between">
+    <div>
+      
+      
+        <p class="text-sm text-neutral-500 dark:text-neutral-400">
+            &copy;
+            2026
+            Adrien PARRA
+        </p>
+      
+      
+      
+    </div>
+    <div class="flex flex-row items-center">
+      
+      
+      
+      
+    </div>
+  </div>
+  
+  
+    <div class="mt-3 flex items-center gap-4 text-xs text-neutral-400 dark:text-neutral-500">
+  <a href="https://www.docker.com" target="_blank" rel="noopener" class="flex items-center gap-1 hover:text-primary-500 transition-colors" title="Conteneurisé avec Docker">
+    <span class="h-4 w-4"><span class="icon relative inline-block px-1 align-text-bottom"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M13.983 11.078h2.119a.186.186 0 0 0 .186-.185V9.006a.186.186 0 0 0-.186-.186h-2.119a.185.185 0 0 0-.185.185v1.888c0 .102.083.185.185.185m-2.954-5.43h2.118a.186.186 0 0 0 .186-.186V3.574a.186.186 0 0 0-.186-.185h-2.118a.185.185 0 0 0-.185.185v1.888c0 .102.082.185.185.185m0 2.716h2.118a.187.187 0 0 0 .186-.186V6.29a.186.186 0 0 0-.186-.185h-2.118a.185.185 0 0 0-.185.185v1.887c0 .102.082.186.185.186m-2.93 0h2.12a.186.186 0 0 0 .184-.186V6.29a.185.185 0 0 0-.185-.185H8.1a.185.185 0 0 0-.185.185v1.887c0 .102.083.186.185.186m-2.964 0h2.119a.186.186 0 0 0 .185-.186V6.29a.185.185 0 0 0-.185-.185H5.136a.186.186 0 0 0-.186.185v1.887c0 .102.084.186.186.186m5.893 2.715h2.118a.186.186 0 0 0 .186-.185V9.006a.186.186 0 0 0-.186-.186h-2.118a.185.185 0 0 0-.185.185v1.888c0 .102.082.185.185.185m-2.93 0h2.12a.185.185 0 0 0 .184-.185V9.006a.185.185 0 0 0-.184-.186h-2.12a.185.185 0 0 0-.184.185v1.888c0 .102.083.185.185.185m-2.964 0h2.119a.185.185 0 0 0 .185-.185V9.006a.185.185 0 0 0-.184-.186h-2.12a.186.186 0 0 0-.186.186v1.887c0 .102.084.185.186.185m-2.92 0h2.12a.185.185 0 0 0 .184-.185V9.006a.185.185 0 0 0-.184-.186h-2.12a.185.185 0 0 0-.184.185v1.888c0 .102.082.185.185.185M23.763 9.89c-.065-.051-.672-.51-1.954-.51-.338.001-.676.03-1.01.087-.248-1.7-1.653-2.53-1.716-2.566l-.344-.199-.226.327c-.284.438-.49.922-.612 1.43-.23.97-.09 1.882.403 2.661-.595.332-1.55.413-1.744.42H.751a.751.751 0 0 0-.75.748 11.376 11.376 0 0 0 .692 4.062c.545 1.428 1.355 2.48 2.41 3.124 1.18.723 3.1 1.137 5.275 1.137.983.003 1.963-.086 2.93-.266a12.248 12.248 0 0 0 3.823-1.389c.98-.567 1.86-1.288 2.61-2.136 1.252-1.418 1.998-2.997 2.553-4.4h.221c1.372 0 2.215-.549 2.68-1.009.309-.293.55-.65.707-1.046l.098-.288Z"/></svg>
+</span></span>
+    Docker
+  </a>
+  <a href="https://www.scaleway.com" target="_blank" rel="noopener" class="flex items-center gap-1 hover:text-primary-500 transition-colors" title="Hébergé sur Scaleway">
+    <span class="h-4 w-4"><span class="icon relative inline-block px-1 align-text-bottom"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M14.193 12.014a2.179 2.179 0 0 1-2.176 2.176H7.383a2.179 2.179 0 0 1-2.176-2.176 2.179 2.179 0 0 1 2.176-2.176h4.634a2.179 2.179 0 0 1 2.176 2.176zm8.043-4.589C20.859 3.048 16.788 0 12.003 0 7.22 0 3.15 3.046 1.766 7.424A5.565 5.565 0 0 0 0 11.986a5.56 5.56 0 0 0 1.805 4.123C3.261 20.999 7.302 24 12.003 24c4.7 0 8.742-3.001 10.197-7.191A5.558 5.558 0 0 0 24 12.014c0-1.683-.748-3.19-1.764-4.589zm-1.843 7.593c-1.126 3.441-4.354 5.93-8.39 5.93-4.038 0-7.265-2.489-8.39-5.93a4.007 4.007 0 0 1-1.065-2.717c0-.922.313-1.771.838-2.449C4.514 6.41 7.853 4.048 12.003 4.048c4.149 0 7.488 2.362 8.617 5.804a4 4 0 0 1 .833 2.449 3.998 3.998 0 0 1-1.06 2.717z"/></svg>
+</span></span>
+    Scaleway
+  </a>
+  <a href="https://gohugo.io" target="_blank" rel="noopener" class="flex items-center gap-1 hover:text-primary-500 transition-colors" title="Généré par Hugo">
+    <span class="h-4 w-4"><span class="icon relative inline-block px-1 align-text-bottom"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M11.754 0a.75.75 0 0 0-.405.122L.344 7.205A.75.75 0 0 0 0 7.88v8.366a.75.75 0 0 0 .344.633l11.005 7.083c.25.161.568.161.818 0l5.58-3.592V24l.008-.006.008.006v-3.63l5.237-3.372a.75.75 0 0 0 .344-.633v-8.61a.75.75 0 0 0-.315-.61L12.178.122A.75.75 0 0 0 11.754 0zm.008 1.64 10.254 6.86v7.866l-4.486 2.89V8.38l.007-.006-.007-.005v-.006h-1.5v11.954L11.762 22.4 1.5 16.366V8.5zm-.75 7.24v5.63H9.547V12h-3.54v2.51H4.502v-5.63h1.505v1.62h3.54v-1.62z"/></svg>
+</span></span>
+    Hugo
+  </a>
+</div>
+
+  
+</footer>
+
+    </div>
+  </body>
+</html>

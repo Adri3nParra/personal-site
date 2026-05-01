@@ -5,15 +5,45 @@
     
       <url>
             <loc>http://localhost:1313/</loc>
-            <lastmod>2026-03-29T00:00:00+00:00</lastmod>
+            <lastmod>2026-04-12T00:00:00+00:00</lastmod>
           </url>
     
   
     
       <url>
             <loc>http://localhost:1313/articles/</loc>
-            <lastmod>2026-03-29T00:00:00+00:00</lastmod>
+            <lastmod>2026-04-12T00:00:00+00:00</lastmod>
           </url>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <url>
+            <loc>http://localhost:1313/articles/falco-runtime-security-kubernetes/</loc>
+            <lastmod>2026-04-12T00:00:00+00:00</lastmod>
+          </url>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <url>
+            <loc>http://localhost:1313/articles/opentofu-advanced-state-encryption-multi-env/</loc>
+            <lastmod>2026-04-12T00:00:00+00:00</lastmod>
+          </url>
+    
+  
+    
+  
     
   
     
@@ -47,14 +77,10 @@
     
   
     
-  
-    
       <url>
             <loc>http://localhost:1313/articles/kubernetes-monitoring-prometheus-grafana/</loc>
             <lastmod>2026-03-29T00:00:00+00:00</lastmod>
           </url>
-    
-  
     
   
     
@@ -92,8 +118,6 @@
             <loc>http://localhost:1313/articles/container-security-trivy-kyverno/</loc>
             <lastmod>2026-03-28T00:00:00+00:00</lastmod>
           </url>
-    
-  
     
   
     
@@ -175,16 +199,10 @@
     
   
     
-  
-    
-  
-    
       <url>
             <loc>http://localhost:1313/articles/opentofu-decouverte/</loc>
             <lastmod>2025-12-05T00:00:00+00:00</lastmod>
           </url>
-    
-  
     
   
     

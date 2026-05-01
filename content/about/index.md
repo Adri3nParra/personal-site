@@ -60,6 +60,12 @@ Français — Natif · Anglais — B2 · Espagnol — B1
     </a>
     <p style="margin-top: 0.5rem; font-size: 0.85rem;"><strong>CKAD</strong> — Avril 2026</p>
   </div>
+  <div style="text-align: center; max-width: 160px;">
+    <a href="https://www.credly.com/users/adrien-parra.05aa4654" target="_blank" rel="noopener">
+      <img src="https://images.credly.com/size/340x340/images/f28f1d88-428a-47f6-95b5-7da1dd6c1000/KCNA_badge.png" alt="KCNA - Kubernetes and Cloud Native Associate" width="140" />
+    </a>
+    <p style="margin-top: 0.5rem; font-size: 0.85rem;"><strong>KCNA</strong> — Avril 2026</p>
+  </div>
 </div>
 
 ## Environnement de travail
