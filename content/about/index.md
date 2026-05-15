@@ -9,7 +9,7 @@ Je suis quelqu'un de très curieux — je teste régulièrement de nouveaux outi
 
 Le reste du temps, j'aime les environnements simples, fiables et proches de la production. Pragmatique, je privilégie les solutions robustes et reproductibles plutôt que la complexité pour la complexité.
 
-Certifié **CKA** (Certified Kubernetes Administrator) et **CKAD** (Certified Kubernetes Application Developer).
+Certifié **CKA** (Certified Kubernetes Administrator), **CKAD** (Certified Kubernetes Application Developer), **CKS** (Certified Kubernetes Security Specialist).
 
 ## Compétences techniques
 
@@ -50,19 +50,25 @@ Français — Natif · Anglais — B2 · Espagnol — B1
 <div style="display: flex; gap: 2rem; flex-wrap: wrap; margin-bottom: 1rem;">
   <div style="text-align: center; max-width: 160px;">
     <a href="https://www.credly.com/users/adrien-parra.05aa4654" target="_blank" rel="noopener">
-      <img src="https://images.credly.com/size/340x340/images/8b8ed108-e77d-4396-ac59-2504583b9d54/cka_from_cncfsite__281_29.png" alt="CKA - Certified Kubernetes Administrator" width="140" />
+      <img src="/kubernetes-cka-color.png" alt="CKA - Certified Kubernetes Administrator" width="140" />
     </a>
     <p style="margin-top: 0.5rem; font-size: 0.85rem;"><strong>CKA</strong> — Mars 2026</p>
   </div>
   <div style="text-align: center; max-width: 160px;">
     <a href="https://www.credly.com/users/adrien-parra.05aa4654" target="_blank" rel="noopener">
-      <img src="https://images.credly.com/size/340x340/images/cc8adc83-1dc6-4d57-8e20-22171247e052/blob" alt="CKAD - Certified Kubernetes Application Developer" width="140" />
+      <img src="/kubernetes-ckad-color.png" alt="CKAD - Certified Kubernetes Application Developer" width="140" />
     </a>
     <p style="margin-top: 0.5rem; font-size: 0.85rem;"><strong>CKAD</strong> — Avril 2026</p>
   </div>
   <div style="text-align: center; max-width: 160px;">
     <a href="https://www.credly.com/users/adrien-parra.05aa4654" target="_blank" rel="noopener">
-      <img src="https://images.credly.com/size/340x340/images/f28f1d88-428a-47f6-95b5-7da1dd6c1000/KCNA_badge.png" alt="KCNA - Kubernetes and Cloud Native Associate" width="140" />
+      <img src="/kubernetes-security-specialist-color.png" alt="CKS - Certified Kubernetes Security Specialist" width="140" />
+    </a>
+    <p style="margin-top: 0.5rem; font-size: 0.85rem;"><strong>CKS</strong> — Mai 2026</p>
+  </div>
+  <div style="text-align: center; max-width: 160px;">
+    <a href="https://www.credly.com/users/adrien-parra.05aa4654" target="_blank" rel="noopener">
+      <img src="/kubernetes-kcna-color.png" alt="KCNA - Kubernetes and Cloud Native Associate" width="140" />
     </a>
     <p style="margin-top: 0.5rem; font-size: 0.85rem;"><strong>KCNA</strong> — Avril 2026</p>
   </div>
