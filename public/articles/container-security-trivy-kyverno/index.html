@@ -92,24 +92,24 @@
   
   
   <meta property="og:url" content="http://localhost:1313/articles/container-security-trivy-kyverno/">
-  <meta property="og:site_name" content="Adrien PARRA">
-  <meta property="og:title" content="Container Security : Trivy et Kyverno en production">
-  <meta property="og:description" content="Sécuriser un cluster Kubernetes en production, c’est pas qu’une question de réseau. Scan de vulnérabilités, politiques d’admission,least privilege : retour d’expérience avec Trivy et Kyverno.">
-  <meta property="og:locale" content="fr">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="articles">
-    <meta property="article:published_time" content="2026-03-28T00:00:00+00:00">
-    <meta property="article:modified_time" content="2026-03-28T00:00:00+00:00">
-    <meta property="article:tag" content="Kubernetes">
-    <meta property="article:tag" content="Sécurité">
-    <meta property="article:tag" content="Trivy">
-    <meta property="article:tag" content="Kyverno">
-    <meta property="article:tag" content="DevOps">
+	<meta property="og:site_name" content="Adrien PARRA">
+	<meta property="og:title" content="Container Security : Trivy et Kyverno en production">
+	<meta property="og:description" content="Sécuriser un cluster Kubernetes en production, c’est pas qu’une question de réseau. Scan de vulnérabilités, politiques d’admission,least privilege : retour d’expérience avec Trivy et Kyverno.">
+	<meta property="og:locale" content="fr">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="articles">
+		<meta property="article:published_time" content="2026-03-28T00:00:00+00:00">
+		<meta property="article:modified_time" content="2026-03-28T00:00:00+00:00">
+		<meta property="article:tag" content="Kubernetes">
+		<meta property="article:tag" content="Sécurité">
+		<meta property="article:tag" content="Trivy">
+		<meta property="article:tag" content="Kyverno">
+		<meta property="article:tag" content="DevOps">
 
   
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Container Security : Trivy et Kyverno en production">
-  <meta name="twitter:description" content="Sécuriser un cluster Kubernetes en production, c’est pas qu’une question de réseau. Scan de vulnérabilités, politiques d’admission,least privilege : retour d’expérience avec Trivy et Kyverno.">
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="Container Security : Trivy et Kyverno en production">
+	<meta name="twitter:description" content="Sécuriser un cluster Kubernetes en production, c’est pas qu’une question de réseau. Scan de vulnérabilités, politiques d’admission,least privilege : retour d’expérience avec Trivy et Kyverno.">
 
   
   <script type="application/ld+json">
@@ -507,22 +507,22 @@ curl                  pkg   CVE-2024-12345  MEDIUM    Fixed
 </span></span></code></pre></div><p><code>(runAsNonRoot): true</code> — les parenthèses signifient &ldquo;cette valeur doit exister et être true&rdquo;. Sans parenthèses, ça vérifie juste la présence.</p>
 <h3 id="valider-avant-dappliquer" class="relative group">Valider avant d&rsquo;appliquer <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#valider-avant-dappliquer" aria-label="Ancre">#</a></span></h3><p>Les politiques ont trois modes :</p>
 <table>
-  <thead>
-      <tr>
-          <th>Mode</th>
-          <th>Comportement</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>Audit</code></td>
-          <td>Log les violations, n&rsquo;empêche pas le déploiement</td>
-      </tr>
-      <tr>
-          <td><code>Enforce</code></td>
-          <td>Bloque le déploiement si violation</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>Mode</th>
+					<th>Comportement</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>Audit</code></td>
+					<td>Log les violations, n&rsquo;empêche pas le déploiement</td>
+			</tr>
+			<tr>
+					<td><code>Enforce</code></td>
+					<td>Bloque le déploiement si violation</td>
+			</tr>
+	</tbody>
 </table>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">validationFailureAction</span>: <span style="color:#ae81ff">Audit </span> <span style="color:#75715e"># Pour tester avant d&#39;Enforce</span>
@@ -637,30 +637,30 @@ curl                  pkg   CVE-2024-12345  MEDIUM    Fixed
 </span></span></code></pre></div><p>Déployer dans <code>production</code> ? Kyverno ajoute automatiquement le sidecar.</p>
 <h2 id="trivy--kyverno--le-combo" class="relative group">Trivy + Kyverno : le combo <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#trivy--kyverno--le-combo" aria-label="Ancre">#</a></span></h2><p>Les deux outils se complètent :</p>
 <table>
-  <thead>
-      <tr>
-          <th></th>
-          <th>Trivy</th>
-          <th>Kyverno</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>Quand</strong></td>
-          <td>Build, admission, scan continu</td>
-          <td>Admission controller</td>
-      </tr>
-      <tr>
-          <td><strong>Quoi</strong></td>
-          <td>Vulnérabilités, config, IaC</td>
-          <td>Politiques (validate/mutate/generate)</td>
-      </tr>
-      <tr>
-          <td><strong>Action</strong></td>
-          <td>Détecte</td>
-          <td>Bloque ou modifie</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th></th>
+					<th>Trivy</th>
+					<th>Kyverno</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>Quand</strong></td>
+					<td>Build, admission, scan continu</td>
+					<td>Admission controller</td>
+			</tr>
+			<tr>
+					<td><strong>Quoi</strong></td>
+					<td>Vulnérabilités, config, IaC</td>
+					<td>Politiques (validate/mutate/generate)</td>
+			</tr>
+			<tr>
+					<td><strong>Action</strong></td>
+					<td>Détecte</td>
+					<td>Bloque ou modifie</td>
+			</tr>
+	</tbody>
 </table>
 <p>Mon setup typique :</p>
 <pre tabindex="0"><code>CI/CD Pipeline

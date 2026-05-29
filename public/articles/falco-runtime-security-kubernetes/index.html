@@ -92,24 +92,24 @@
   
   
   <meta property="og:url" content="http://localhost:1313/articles/falco-runtime-security-kubernetes/">
-  <meta property="og:site_name" content="Adrien PARRA">
-  <meta property="og:title" content="Falco : Runtime Security Monitoring on Kubernetes">
-  <meta property="og:description" content="Trivy scanne les images, Kyverno valide les déploiements — mais qu’est-ce qui surveille ce qui se passe une fois les conteneurs lancés ? Falco, le CNCF project, surveille les syscalls en temps réel et alerte dès qu’un comportement anormal est détecté.">
-  <meta property="og:locale" content="fr">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="articles">
-    <meta property="article:published_time" content="2026-04-12T00:00:00+00:00">
-    <meta property="article:modified_time" content="2026-04-12T00:00:00+00:00">
-    <meta property="article:tag" content="Kubernetes">
-    <meta property="article:tag" content="Falco">
-    <meta property="article:tag" content="Sécurité">
-    <meta property="article:tag" content="DevOps">
-    <meta property="article:tag" content="EBPF">
+	<meta property="og:site_name" content="Adrien PARRA">
+	<meta property="og:title" content="Falco : Runtime Security Monitoring on Kubernetes">
+	<meta property="og:description" content="Trivy scanne les images, Kyverno valide les déploiements — mais qu’est-ce qui surveille ce qui se passe une fois les conteneurs lancés ? Falco, le CNCF project, surveille les syscalls en temps réel et alerte dès qu’un comportement anormal est détecté.">
+	<meta property="og:locale" content="fr">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="articles">
+		<meta property="article:published_time" content="2026-04-12T00:00:00+00:00">
+		<meta property="article:modified_time" content="2026-04-12T00:00:00+00:00">
+		<meta property="article:tag" content="Kubernetes">
+		<meta property="article:tag" content="Falco">
+		<meta property="article:tag" content="Sécurité">
+		<meta property="article:tag" content="DevOps">
+		<meta property="article:tag" content="EBPF">
 
   
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Falco : Runtime Security Monitoring on Kubernetes">
-  <meta name="twitter:description" content="Trivy scanne les images, Kyverno valide les déploiements — mais qu’est-ce qui surveille ce qui se passe une fois les conteneurs lancés ? Falco, le CNCF project, surveille les syscalls en temps réel et alerte dès qu’un comportement anormal est détecté.">
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="Falco : Runtime Security Monitoring on Kubernetes">
+	<meta name="twitter:description" content="Trivy scanne les images, Kyverno valide les déploiements — mais qu’est-ce qui surveille ce qui se passe une fois les conteneurs lancés ? Falco, le CNCF project, surveille les syscalls en temps réel et alerte dès qu’un comportement anormal est détecté.">
 
   
   <script type="application/ld+json">
@@ -457,34 +457,34 @@ Falco intercepte et évalue les règles
      └── Violation de règle → alerte
 </code></pre><h2 id="architecture--ebpf-vs-kernel-module" class="relative group">Architecture : eBPF vs kernel module <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#architecture--ebpf-vs-kernel-module" aria-label="Ancre">#</a></span></h2><p>Falco peut s&rsquo;insérer dans le kernel de deux façons :</p>
 <table>
-  <thead>
-      <tr>
-          <th>Mode</th>
-          <th>Mécanisme</th>
-          <th>Avantages</th>
-          <th>Inconvénients</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>Kernel module</td>
-          <td>Module <code>.ko</code> chargé dans le kernel</td>
-          <td>Maturité, support large</td>
-          <td>Kernel rebuild si version change, plus invasif</td>
-      </tr>
-      <tr>
-          <td>eBPF</td>
-          <td>Programme sandboxé dans le kernel</td>
-          <td>Sécurisé, pas de module, GKE/EKS/AKS compatible</td>
-          <td>Nécessite kernel ≥ 4.14</td>
-      </tr>
-      <tr>
-          <td>Modern eBPF</td>
-          <td>eBPF CO-RE (Compile Once, Run Everywhere)</td>
-          <td>Pas de headers kernel requis</td>
-          <td>Kernel ≥ 5.8 requis</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>Mode</th>
+					<th>Mécanisme</th>
+					<th>Avantages</th>
+					<th>Inconvénients</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Kernel module</td>
+					<td>Module <code>.ko</code> chargé dans le kernel</td>
+					<td>Maturité, support large</td>
+					<td>Kernel rebuild si version change, plus invasif</td>
+			</tr>
+			<tr>
+					<td>eBPF</td>
+					<td>Programme sandboxé dans le kernel</td>
+					<td>Sécurisé, pas de module, GKE/EKS/AKS compatible</td>
+					<td>Nécessite kernel ≥ 4.14</td>
+			</tr>
+			<tr>
+					<td>Modern eBPF</td>
+					<td>eBPF CO-RE (Compile Once, Run Everywhere)</td>
+					<td>Pas de headers kernel requis</td>
+					<td>Kernel ≥ 5.8 requis</td>
+			</tr>
+	</tbody>
 </table>
 <p>En 2026, le mode <strong>Modern eBPF</strong> est recommandé. Les clouds majeurs l&rsquo;exposent sans configuration spéciale.</p>
 <pre tabindex="0"><code>┌─────────────────────────────────┐
@@ -527,50 +527,50 @@ Falco intercepte et évalue les règles
 </span></span><span style="display:flex;"><span><span style="color:#75715e">#   (user=root command=cat /etc/shadow container=test-pod)</span>
 </span></span></code></pre></div><h2 id="les-règles-par-défaut" class="relative group">Les règles par défaut <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#les-r%c3%a8gles-par-d%c3%a9faut" aria-label="Ancre">#</a></span></h2><p>Falco est livré avec ~100 règles prêtes à l&rsquo;emploi. Les plus utiles en production :</p>
 <table>
-  <thead>
-      <tr>
-          <th>Règle</th>
-          <th>Déclencheur</th>
-          <th>Priorité</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>Terminal shell in container</td>
-          <td><code>bash</code>/<code>sh</code> interactif dans un conteneur</td>
-          <td>WARNING</td>
-      </tr>
-      <tr>
-          <td>Sensitive file read</td>
-          <td>Lecture de <code>/etc/shadow</code>, <code>/etc/passwd</code></td>
-          <td>WARNING</td>
-      </tr>
-      <tr>
-          <td>Write below root</td>
-          <td>Écriture hors des chemins attendus</td>
-          <td>ERROR</td>
-      </tr>
-      <tr>
-          <td>Unexpected network connection</td>
-          <td>Connexion réseau non prévue</td>
-          <td>NOTICE</td>
-      </tr>
-      <tr>
-          <td>Outbound connection to C2</td>
-          <td>IPs connues de serveurs C2</td>
-          <td>CRITICAL</td>
-      </tr>
-      <tr>
-          <td>Container drift detected</td>
-          <td>Nouveau exécutable créé dans un conteneur</td>
-          <td>CRITICAL</td>
-      </tr>
-      <tr>
-          <td>Read sensitive file untrusted</td>
-          <td>Lecture de secrets/tokens K8s</td>
-          <td>WARNING</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>Règle</th>
+					<th>Déclencheur</th>
+					<th>Priorité</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Terminal shell in container</td>
+					<td><code>bash</code>/<code>sh</code> interactif dans un conteneur</td>
+					<td>WARNING</td>
+			</tr>
+			<tr>
+					<td>Sensitive file read</td>
+					<td>Lecture de <code>/etc/shadow</code>, <code>/etc/passwd</code></td>
+					<td>WARNING</td>
+			</tr>
+			<tr>
+					<td>Write below root</td>
+					<td>Écriture hors des chemins attendus</td>
+					<td>ERROR</td>
+			</tr>
+			<tr>
+					<td>Unexpected network connection</td>
+					<td>Connexion réseau non prévue</td>
+					<td>NOTICE</td>
+			</tr>
+			<tr>
+					<td>Outbound connection to C2</td>
+					<td>IPs connues de serveurs C2</td>
+					<td>CRITICAL</td>
+			</tr>
+			<tr>
+					<td>Container drift detected</td>
+					<td>Nouveau exécutable créé dans un conteneur</td>
+					<td>CRITICAL</td>
+			</tr>
+			<tr>
+					<td>Read sensitive file untrusted</td>
+					<td>Lecture de secrets/tokens K8s</td>
+					<td>WARNING</td>
+			</tr>
+	</tbody>
 </table>
 <p>Ces règles couvrent les patterns d&rsquo;attaque les plus communs : escalade de privilèges, exfiltration, lateral movement.</p>
 <h3 id="lister-toutes-les-règles-actives" class="relative group">Lister toutes les règles actives <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#lister-toutes-les-r%c3%a8gles-actives" aria-label="Ancre">#</a></span></h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl exec -n falco daemonset/falco -- falco --list
@@ -795,30 +795,30 @@ Falco intercepte et évalue les règles
 </span></span><span style="display:flex;"><span>      <span style="color:#f92672">open_params</span>: <span style="color:#e6db74">&#34;http://0.0.0.0:9765/k8s-audit&#34;</span>
 </span></span></code></pre></div><h2 id="conclusion" class="relative group">Conclusion <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#conclusion" aria-label="Ancre">#</a></span></h2><p>Falco complète le triangle de sécurité Kubernetes :</p>
 <table>
-  <thead>
-      <tr>
-          <th>Couche</th>
-          <th>Outil</th>
-          <th>Moment</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>Build</td>
-          <td>Trivy</td>
-          <td>Image scan avant push</td>
-      </tr>
-      <tr>
-          <td>Admission</td>
-          <td>Kyverno</td>
-          <td>Validation au déploiement</td>
-      </tr>
-      <tr>
-          <td>Runtime</td>
-          <td>Falco</td>
-          <td>Surveillance en continu</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>Couche</th>
+					<th>Outil</th>
+					<th>Moment</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Build</td>
+					<td>Trivy</td>
+					<td>Image scan avant push</td>
+			</tr>
+			<tr>
+					<td>Admission</td>
+					<td>Kyverno</td>
+					<td>Validation au déploiement</td>
+			</tr>
+			<tr>
+					<td>Runtime</td>
+					<td>Falco</td>
+					<td>Surveillance en continu</td>
+			</tr>
+	</tbody>
 </table>
 <p>Pas de ces trois couches n&rsquo;est suffisante seule. Une image propre peut être compromise. Un déploiement conforme peut dériver. Falco est la dernière ligne de défense — il détecte ce qui échappe aux deux premières.</p>
 <p>L&rsquo;overhead est faible (eBPF), le déploiement est simple (Helm en 5 minutes), et les règles par défaut couvrent l&rsquo;essentiel. Le vrai travail, c&rsquo;est le calibrage : réduire les faux positifs, écrire les règles métier, brancher les alertes sur ce que ton équipe surveille déjà.</p>

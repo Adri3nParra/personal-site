@@ -92,24 +92,24 @@
   
   
   <meta property="og:url" content="http://localhost:1313/articles/docker-swarm-to-kubernetes/">
-  <meta property="og:site_name" content="Adrien PARRA">
-  <meta property="og:title" content="Docker Swarm to Kubernetes : stratégies de migration">
-  <meta property="og:description" content="Migrer de Docker Swarm à Kubernetes ne se fait pas en un week-end. Mapping des concepts, patterns de migration, pièges à éviter et retour d’expérience concret sur une migration en production.">
-  <meta property="og:locale" content="fr">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="articles">
-    <meta property="article:published_time" content="2026-03-29T00:00:00+00:00">
-    <meta property="article:modified_time" content="2026-03-29T00:00:00+00:00">
-    <meta property="article:tag" content="Kubernetes">
-    <meta property="article:tag" content="Docker Swarm">
-    <meta property="article:tag" content="Migration">
-    <meta property="article:tag" content="DevOps">
-    <meta property="article:tag" content="Helm">
+	<meta property="og:site_name" content="Adrien PARRA">
+	<meta property="og:title" content="Docker Swarm to Kubernetes : stratégies de migration">
+	<meta property="og:description" content="Migrer de Docker Swarm à Kubernetes ne se fait pas en un week-end. Mapping des concepts, patterns de migration, pièges à éviter et retour d’expérience concret sur une migration en production.">
+	<meta property="og:locale" content="fr">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="articles">
+		<meta property="article:published_time" content="2026-03-29T00:00:00+00:00">
+		<meta property="article:modified_time" content="2026-03-29T00:00:00+00:00">
+		<meta property="article:tag" content="Kubernetes">
+		<meta property="article:tag" content="Docker Swarm">
+		<meta property="article:tag" content="Migration">
+		<meta property="article:tag" content="DevOps">
+		<meta property="article:tag" content="Helm">
 
   
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Docker Swarm to Kubernetes : stratégies de migration">
-  <meta name="twitter:description" content="Migrer de Docker Swarm à Kubernetes ne se fait pas en un week-end. Mapping des concepts, patterns de migration, pièges à éviter et retour d’expérience concret sur une migration en production.">
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="Docker Swarm to Kubernetes : stratégies de migration">
+	<meta name="twitter:description" content="Migrer de Docker Swarm à Kubernetes ne se fait pas en un week-end. Mapping des concepts, patterns de migration, pièges à éviter et retour d’expérience concret sur une migration en production.">
 
   
   <script type="application/ld+json">
@@ -422,87 +422,87 @@
 <p>La question n&rsquo;est pas &ldquo;faut-il migrer ?&rdquo; mais &ldquo;comment migrer proprement ?&rdquo;.</p>
 <h2 id="mapping-des-concepts" class="relative group">Mapping des concepts <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#mapping-des-concepts" aria-label="Ancre">#</a></span></h2><p>Avant de toucher au code, il faut comprendre comment les concepts Swarm se traduisent en Kubernetes.</p>
 <h3 id="ressources-de-base" class="relative group">Ressources de base <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#ressources-de-base" aria-label="Ancre">#</a></span></h3><table>
-  <thead>
-      <tr>
-          <th>Docker Swarm</th>
-          <th>Kubernetes</th>
-          <th>Notes</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>docker stack</code></td>
-          <td>Namespace + Helm Release</td>
-          <td>Un stack Swarm = un namespace logique</td>
-      </tr>
-      <tr>
-          <td><code>docker service</code></td>
-          <td>Deployment + Service</td>
-          <td>Swarm mélange les deux concepts</td>
-      </tr>
-      <tr>
-          <td><code>replicas</code></td>
-          <td><code>spec.replicas</code></td>
-          <td>Mapping direct</td>
-      </tr>
-      <tr>
-          <td><code>docker config</code></td>
-          <td>ConfigMap</td>
-          <td>Quasi identique</td>
-      </tr>
-      <tr>
-          <td><code>docker secret</code></td>
-          <td>Secret</td>
-          <td>Même logique, encodage base64 en plus</td>
-      </tr>
-      <tr>
-          <td><code>docker network</code> (overlay)</td>
-          <td>NetworkPolicy + CNI</td>
-          <td>Kubernetes sépare réseau et politique</td>
-      </tr>
-      <tr>
-          <td><code>docker volume</code></td>
-          <td>PersistentVolumeClaim</td>
-          <td>Plus structuré côté Kubernetes</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>Docker Swarm</th>
+					<th>Kubernetes</th>
+					<th>Notes</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>docker stack</code></td>
+					<td>Namespace + Helm Release</td>
+					<td>Un stack Swarm = un namespace logique</td>
+			</tr>
+			<tr>
+					<td><code>docker service</code></td>
+					<td>Deployment + Service</td>
+					<td>Swarm mélange les deux concepts</td>
+			</tr>
+			<tr>
+					<td><code>replicas</code></td>
+					<td><code>spec.replicas</code></td>
+					<td>Mapping direct</td>
+			</tr>
+			<tr>
+					<td><code>docker config</code></td>
+					<td>ConfigMap</td>
+					<td>Quasi identique</td>
+			</tr>
+			<tr>
+					<td><code>docker secret</code></td>
+					<td>Secret</td>
+					<td>Même logique, encodage base64 en plus</td>
+			</tr>
+			<tr>
+					<td><code>docker network</code> (overlay)</td>
+					<td>NetworkPolicy + CNI</td>
+					<td>Kubernetes sépare réseau et politique</td>
+			</tr>
+			<tr>
+					<td><code>docker volume</code></td>
+					<td>PersistentVolumeClaim</td>
+					<td>Plus structuré côté Kubernetes</td>
+			</tr>
+	</tbody>
 </table>
 <h3 id="concepts-sans-équivalent-direct" class="relative group">Concepts sans équivalent direct <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#concepts-sans-%c3%a9quivalent-direct" aria-label="Ancre">#</a></span></h3><p>Certaines fonctionnalités Swarm n&rsquo;ont pas de pendant direct en Kubernetes :</p>
 <table>
-  <thead>
-      <tr>
-          <th>Docker Swarm</th>
-          <th>Kubernetes</th>
-          <th>Approche</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>deploy.placement.constraints</code></td>
-          <td><code>nodeSelector</code> / <code>affinity</code></td>
-          <td>Plus expressif côté K8s</td>
-      </tr>
-      <tr>
-          <td><code>deploy.update_config</code></td>
-          <td><code>strategy.rollingUpdate</code></td>
-          <td>Paramètres différents</td>
-      </tr>
-      <tr>
-          <td><code>deploy.rollback_config</code></td>
-          <td><code>kubectl rollout undo</code></td>
-          <td>Rollback manuel ou GitOps</td>
-      </tr>
-      <tr>
-          <td>Routing mesh intégré</td>
-          <td>Service type LoadBalancer / Ingress</td>
-          <td>Nécessite un Ingress Controller</td>
-      </tr>
-      <tr>
-          <td><code>docker stack deploy</code></td>
-          <td><code>helm install</code> / <code>kubectl apply</code></td>
-          <td>ArgoCD pour le GitOps</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>Docker Swarm</th>
+					<th>Kubernetes</th>
+					<th>Approche</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>deploy.placement.constraints</code></td>
+					<td><code>nodeSelector</code> / <code>affinity</code></td>
+					<td>Plus expressif côté K8s</td>
+			</tr>
+			<tr>
+					<td><code>deploy.update_config</code></td>
+					<td><code>strategy.rollingUpdate</code></td>
+					<td>Paramètres différents</td>
+			</tr>
+			<tr>
+					<td><code>deploy.rollback_config</code></td>
+					<td><code>kubectl rollout undo</code></td>
+					<td>Rollback manuel ou GitOps</td>
+			</tr>
+			<tr>
+					<td>Routing mesh intégré</td>
+					<td>Service type LoadBalancer / Ingress</td>
+					<td>Nécessite un Ingress Controller</td>
+			</tr>
+			<tr>
+					<td><code>docker stack deploy</code></td>
+					<td><code>helm install</code> / <code>kubectl apply</code></td>
+					<td>ArgoCD pour le GitOps</td>
+			</tr>
+	</tbody>
 </table>
 <h2 id="migration-pas-à-pas" class="relative group">Migration pas à pas <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#migration-pas-%c3%a0-pas" aria-label="Ancre">#</a></span></h2><h3 id="phase-1--inventaire-et-priorisation" class="relative group">Phase 1 : inventaire et priorisation <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#phase-1--inventaire-et-priorisation" aria-label="Ancre">#</a></span></h3><p>Avant de migrer quoi que ce soit, fais l&rsquo;inventaire complet :</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Lister tous les stacks</span>

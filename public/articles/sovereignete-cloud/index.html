@@ -92,24 +92,24 @@
   
   
   <meta property="og:url" content="http://localhost:1313/articles/sovereignete-cloud/">
-  <meta property="og:site_name" content="Adrien PARRA">
-  <meta property="og:title" content="Souverainete cloud : pourquoi basculer sur un hebergeur europeen">
-  <meta property="og:description" content="AWS, GCP, Azure dominent le cloud public, mais les hebergeurs europeens ont muri. Retour d’experience sur OVHCloud et Scaleway, comparaison technique, et arguments pour un cloud plus souverain.">
-  <meta property="og:locale" content="fr">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="articles">
-    <meta property="article:published_time" content="2026-03-28T00:00:00+00:00">
-    <meta property="article:modified_time" content="2026-03-28T00:00:00+00:00">
-    <meta property="article:tag" content="Cloud">
-    <meta property="article:tag" content="OVHCloud">
-    <meta property="article:tag" content="Scaleway">
-    <meta property="article:tag" content="Souverainete">
-    <meta property="article:tag" content="Kubernetes">
+	<meta property="og:site_name" content="Adrien PARRA">
+	<meta property="og:title" content="Souverainete cloud : pourquoi basculer sur un hebergeur europeen">
+	<meta property="og:description" content="AWS, GCP, Azure dominent le cloud public, mais les hebergeurs europeens ont muri. Retour d’experience sur OVHCloud et Scaleway, comparaison technique, et arguments pour un cloud plus souverain.">
+	<meta property="og:locale" content="fr">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="articles">
+		<meta property="article:published_time" content="2026-03-28T00:00:00+00:00">
+		<meta property="article:modified_time" content="2026-03-28T00:00:00+00:00">
+		<meta property="article:tag" content="Cloud">
+		<meta property="article:tag" content="OVHCloud">
+		<meta property="article:tag" content="Scaleway">
+		<meta property="article:tag" content="Souverainete">
+		<meta property="article:tag" content="Kubernetes">
 
   
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Souverainete cloud : pourquoi basculer sur un hebergeur europeen">
-  <meta name="twitter:description" content="AWS, GCP, Azure dominent le cloud public, mais les hebergeurs europeens ont muri. Retour d’experience sur OVHCloud et Scaleway, comparaison technique, et arguments pour un cloud plus souverain.">
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="Souverainete cloud : pourquoi basculer sur un hebergeur europeen">
+	<meta name="twitter:description" content="AWS, GCP, Azure dominent le cloud public, mais les hebergeurs europeens ont muri. Retour d’experience sur OVHCloud et Scaleway, comparaison technique, et arguments pour un cloud plus souverain.">
 
   
   <script type="application/ld+json">
@@ -460,103 +460,103 @@
 <li>Ecosysteme limite compare aux GAFA (en ce moment Scaleway travaille beaucoup et sort plein de nouvelles choses)</li>
 </ul>
 <h3 id="et-les-autres-" class="relative group">Et les autres ? <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#et-les-autres-" aria-label="Ancre">#</a></span></h3><table>
-  <thead>
-      <tr>
-          <th>Provider</th>
-          <th>Pays</th>
-          <th>Points forts</th>
-          <th>K8s manage</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>Hetzner Cloud</strong></td>
-          <td>Allemagne</td>
-          <td>Prix imbattables, bon reseau EU</td>
-          <td>Non (il faut se batter avec kubeadm)</td>
-      </tr>
-      <tr>
-          <td><strong>CloudFerro</strong></td>
-          <td>Pologne</td>
-          <td>Specialise EU (GAIA-X, Copernicus)</td>
-          <td>Oui (E2K)</td>
-      </tr>
-      <tr>
-          <td><strong>Outscale</strong></td>
-          <td>France</td>
-          <td>Certifie SecNumCloud, dedie government</td>
-          <td>Non (IaaS)</td>
-      </tr>
-      <tr>
-          <td><strong>Contabo</strong></td>
-          <td>Allemagne</td>
-          <td>Prix bas, mais opacite sur la localisation</td>
-          <td>Non</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>Provider</th>
+					<th>Pays</th>
+					<th>Points forts</th>
+					<th>K8s manage</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>Hetzner Cloud</strong></td>
+					<td>Allemagne</td>
+					<td>Prix imbattables, bon reseau EU</td>
+					<td>Non (il faut se batter avec kubeadm)</td>
+			</tr>
+			<tr>
+					<td><strong>CloudFerro</strong></td>
+					<td>Pologne</td>
+					<td>Specialise EU (GAIA-X, Copernicus)</td>
+					<td>Oui (E2K)</td>
+			</tr>
+			<tr>
+					<td><strong>Outscale</strong></td>
+					<td>France</td>
+					<td>Certifie SecNumCloud, dedie government</td>
+					<td>Non (IaaS)</td>
+			</tr>
+			<tr>
+					<td><strong>Contabo</strong></td>
+					<td>Allemagne</td>
+					<td>Prix bas, mais opacite sur la localisation</td>
+					<td>Non</td>
+			</tr>
+	</tbody>
 </table>
 <h2 id="comparaison-technique" class="relative group">Comparaison technique <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#comparaison-technique" aria-label="Ancre">#</a></span></h2><p>Pour du Kubernetes, voila comment ca se positionne :</p>
 <table>
-  <thead>
-      <tr>
-          <th>Critere</th>
-          <th>OVHCloud MKS</th>
-          <th>Scaleway Kapsule</th>
-          <th>AWS EKS</th>
-          <th>GCP GKE</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>Prix (2 noeuds L)`</strong></td>
-          <td>~80€/mois</td>
-          <td>~70€/mois</td>
-          <td>~150€/mois</td>
-          <td>~140€/mois</td>
-      </tr>
-      <tr>
-          <td><strong>Versions K8s</strong></td>
-          <td>1.28 (lag 2-3 mois)</td>
-          <td>1.30 (latest)</td>
-          <td>Latest</td>
-          <td>Latest</td>
-      </tr>
-      <tr>
-          <td><strong>Multi-region</strong></td>
-          <td>7 pays</td>
-          <td>2 regions</td>
-          <td>Global</td>
-          <td>Global</td>
-      </tr>
-      <tr>
-          <td><strong>Managed DB</strong></td>
-          <td>Oui (PostgreSQL, Redis…)</td>
-          <td>Oui (PostgreSQL, Redis…)</td>
-          <td>Oui (RDS, ElastiCache…)</td>
-          <td>Oui (Cloud SQL…)</td>
-      </tr>
-      <tr>
-          <td><strong>Object Storage</strong></td>
-          <td>S3-compatible</td>
-          <td>S3-compatible</td>
-          <td>S3</td>
-          <td>GCS</td>
-      </tr>
-      <tr>
-          <td><strong>Certifications</strong></td>
-          <td>SecNumCloud (partiel)</td>
-          <td>Non</td>
-          <td>SOC2, ISO27001…</td>
-          <td>SOC2, ISO27001…</td>
-      </tr>
-      <tr>
-          <td><strong>Cloud Act</strong></td>
-          <td>Non</td>
-          <td>Non</td>
-          <td>Oui</td>
-          <td>Oui</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>Critere</th>
+					<th>OVHCloud MKS</th>
+					<th>Scaleway Kapsule</th>
+					<th>AWS EKS</th>
+					<th>GCP GKE</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>Prix (2 noeuds L)`</strong></td>
+					<td>~80€/mois</td>
+					<td>~70€/mois</td>
+					<td>~150€/mois</td>
+					<td>~140€/mois</td>
+			</tr>
+			<tr>
+					<td><strong>Versions K8s</strong></td>
+					<td>1.28 (lag 2-3 mois)</td>
+					<td>1.30 (latest)</td>
+					<td>Latest</td>
+					<td>Latest</td>
+			</tr>
+			<tr>
+					<td><strong>Multi-region</strong></td>
+					<td>7 pays</td>
+					<td>2 regions</td>
+					<td>Global</td>
+					<td>Global</td>
+			</tr>
+			<tr>
+					<td><strong>Managed DB</strong></td>
+					<td>Oui (PostgreSQL, Redis…)</td>
+					<td>Oui (PostgreSQL, Redis…)</td>
+					<td>Oui (RDS, ElastiCache…)</td>
+					<td>Oui (Cloud SQL…)</td>
+			</tr>
+			<tr>
+					<td><strong>Object Storage</strong></td>
+					<td>S3-compatible</td>
+					<td>S3-compatible</td>
+					<td>S3</td>
+					<td>GCS</td>
+			</tr>
+			<tr>
+					<td><strong>Certifications</strong></td>
+					<td>SecNumCloud (partiel)</td>
+					<td>Non</td>
+					<td>SOC2, ISO27001…</td>
+					<td>SOC2, ISO27001…</td>
+			</tr>
+			<tr>
+					<td><strong>Cloud Act</strong></td>
+					<td>Non</td>
+					<td>Non</td>
+					<td>Oui</td>
+					<td>Oui</td>
+			</tr>
+	</tbody>
 </table>
 <p><em>Prix indicatifs pour 2 noeuds avec 4 vCPU / 8 Go RAM</em></p>
 <p>Le <strong>S3-compatible</strong> d&rsquo;OVHCloud et Scaleway est important : tu peux utiliser <code>rclone</code>, <code>s3cmd</code>, ou n&rsquo;importe quel client S3 sans etre lie a AWS. Le stockage te coute une fraction du prix de S3.</p>

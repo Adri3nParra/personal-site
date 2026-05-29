@@ -92,24 +92,24 @@
   
   
   <meta property="og:url" content="http://localhost:1313/articles/taskfile-introduction/">
-  <meta property="og:site_name" content="Adrien PARRA">
-  <meta property="og:title" content="Taskfile : le remplaçant moderne de Makefile">
-  <meta property="og:description" content="Taskfile (Task) est un task runner écrit en Go qui remplace avantageusement Make pour les projets modernes. Retour sur son histoire, ses avantages, et un comparatif avec Make, Just et les scripts shell.">
-  <meta property="og:locale" content="fr">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="articles">
-    <meta property="article:published_time" content="2026-03-28T00:00:00+00:00">
-    <meta property="article:modified_time" content="2026-03-28T00:00:00+00:00">
-    <meta property="article:tag" content="Taskfile">
-    <meta property="article:tag" content="Task">
-    <meta property="article:tag" content="DevOps">
-    <meta property="article:tag" content="Build">
-    <meta property="article:tag" content="Go">
+	<meta property="og:site_name" content="Adrien PARRA">
+	<meta property="og:title" content="Taskfile : le remplaçant moderne de Makefile">
+	<meta property="og:description" content="Taskfile (Task) est un task runner écrit en Go qui remplace avantageusement Make pour les projets modernes. Retour sur son histoire, ses avantages, et un comparatif avec Make, Just et les scripts shell.">
+	<meta property="og:locale" content="fr">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="articles">
+		<meta property="article:published_time" content="2026-03-28T00:00:00+00:00">
+		<meta property="article:modified_time" content="2026-03-28T00:00:00+00:00">
+		<meta property="article:tag" content="Taskfile">
+		<meta property="article:tag" content="Task">
+		<meta property="article:tag" content="DevOps">
+		<meta property="article:tag" content="Build">
+		<meta property="article:tag" content="Go">
 
   
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Taskfile : le remplaçant moderne de Makefile">
-  <meta name="twitter:description" content="Taskfile (Task) est un task runner écrit en Go qui remplace avantageusement Make pour les projets modernes. Retour sur son histoire, ses avantages, et un comparatif avec Make, Just et les scripts shell.">
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="Taskfile : le remplaçant moderne de Makefile">
+	<meta name="twitter:description" content="Taskfile (Task) est un task runner écrit en Go qui remplace avantageusement Make pour les projets modernes. Retour sur son histoire, ses avantages, et un comparatif avec Make, Just et les scripts shell.">
 
   
   <script type="application/ld+json">
@@ -577,70 +577,70 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">confirm</span>: <span style="color:#66d9ef">true</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">cmd</span>: <span style="color:#ae81ff">echo &#34;Deploying...&#34;</span>
 </span></span></code></pre></div><h2 id="makefile-vs-taskfile--le-comparatif" class="relative group">Makefile vs Taskfile — Le comparatif <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#makefile-vs-taskfile--le-comparatif" aria-label="Ancre">#</a></span></h2><table>
-  <thead>
-      <tr>
-          <th></th>
-          <th>Makefile</th>
-          <th>Taskfile</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>Syntaxe</strong></td>
-          <td>Make DSL</td>
-          <td>YAML</td>
-      </tr>
-      <tr>
-          <td><strong>Lisible</strong></td>
-          <td>⭐⭐</td>
-          <td>⭐⭐⭐⭐⭐</td>
-      </tr>
-      <tr>
-          <td><strong>Multi-plateforme</strong></td>
-          <td>⚠️ (msys, gmake)</td>
-          <td>✅ Natif</td>
-      </tr>
-      <tr>
-          <td><strong>Variables</strong></td>
-          <td><code>${VAR}</code> ou <code>$(shell ...)</code></td>
-          <td><code>{{.VAR}}</code></td>
-      </tr>
-      <tr>
-          <td><strong>Dépendances</strong></td>
-          <td>Manuelles</td>
-          <td>Automatiques avec <code>deps</code></td>
-      </tr>
-      <tr>
-          <td><strong>Exécution parallèle</strong></td>
-          <td><code>-j</code> flag global</td>
-          <td>Par défaut dans <code>deps</code></td>
-      </tr>
-      <tr>
-          <td><strong>Fichiers de config</strong></td>
-          <td>Non</td>
-          <td>Oui (includes JSON/YAML)</td>
-      </tr>
-      <tr>
-          <td><strong>Prompts interactifs</strong></td>
-          <td>Non</td>
-          <td>Oui</td>
-      </tr>
-      <tr>
-          <td><strong>Watch mode</strong></td>
-          <td>Via tools externes</td>
-          <td>Natif</td>
-      </tr>
-      <tr>
-          <td><strong>Registry de tasks</strong></td>
-          <td>Non</td>
-          <td>Non (DIY)</td>
-      </tr>
-      <tr>
-          <td><strong>Installabilité</strong></td>
-          <td>Make installé</td>
-          <td>binary ou brew</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th></th>
+					<th>Makefile</th>
+					<th>Taskfile</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>Syntaxe</strong></td>
+					<td>Make DSL</td>
+					<td>YAML</td>
+			</tr>
+			<tr>
+					<td><strong>Lisible</strong></td>
+					<td>⭐⭐</td>
+					<td>⭐⭐⭐⭐⭐</td>
+			</tr>
+			<tr>
+					<td><strong>Multi-plateforme</strong></td>
+					<td>⚠️ (msys, gmake)</td>
+					<td>✅ Natif</td>
+			</tr>
+			<tr>
+					<td><strong>Variables</strong></td>
+					<td><code>${VAR}</code> ou <code>$(shell ...)</code></td>
+					<td><code>{{.VAR}}</code></td>
+			</tr>
+			<tr>
+					<td><strong>Dépendances</strong></td>
+					<td>Manuelles</td>
+					<td>Automatiques avec <code>deps</code></td>
+			</tr>
+			<tr>
+					<td><strong>Exécution parallèle</strong></td>
+					<td><code>-j</code> flag global</td>
+					<td>Par défaut dans <code>deps</code></td>
+			</tr>
+			<tr>
+					<td><strong>Fichiers de config</strong></td>
+					<td>Non</td>
+					<td>Oui (includes JSON/YAML)</td>
+			</tr>
+			<tr>
+					<td><strong>Prompts interactifs</strong></td>
+					<td>Non</td>
+					<td>Oui</td>
+			</tr>
+			<tr>
+					<td><strong>Watch mode</strong></td>
+					<td>Via tools externes</td>
+					<td>Natif</td>
+			</tr>
+			<tr>
+					<td><strong>Registry de tasks</strong></td>
+					<td>Non</td>
+					<td>Non (DIY)</td>
+			</tr>
+			<tr>
+					<td><strong>Installabilité</strong></td>
+					<td>Make installé</td>
+					<td>binary ou brew</td>
+			</tr>
+	</tbody>
 </table>
 <h3 id="exemple-make-vs-task" class="relative group">Exemple Make vs Task <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#exemple-make-vs-task" aria-label="Ancre">#</a></span></h3><p><strong>Makefile</strong> :</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-makefile" data-lang="makefile"><span style="display:flex;"><span><span style="color:#a6e22e">.PHONY</span><span style="color:#f92672">:</span> build test lint clean
@@ -718,60 +718,60 @@ test:
 
 default: build test
 </code></pre><table>
-  <thead>
-      <tr>
-          <th></th>
-          <th>Just</th>
-          <th>Task</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>Syntaxe</strong></td>
-          <td>DSL custom (recettes)</td>
-          <td>YAML</td>
-      </tr>
-      <tr>
-          <td><strong>Fichiers</strong></td>
-          <td><code>.justfile</code></td>
-          <td><code>Taskfile.yml</code></td>
-      </tr>
-      <tr>
-          <td><strong>Lisible</strong></td>
-          <td>⭐⭐⭐⭐</td>
-          <td>⭐⭐⭐⭐</td>
-      </tr>
-      <tr>
-          <td><strong>Learning curve</strong></td>
-          <td>Faible (syntaxe proche de Make)</td>
-          <td>Faible (YAML connu)</td>
-      </tr>
-      <tr>
-          <td><strong>Variables</strong></td>
-          <td>Similaire à Make</td>
-          <td>Template <code>{{.VAR}}</code></td>
-      </tr>
-      <tr>
-          <td><strong>Includes</strong></td>
-          <td>Oui</td>
-          <td>Oui</td>
-      </tr>
-      <tr>
-          <td><strong>Watch mode</strong></td>
-          <td>Plugin</td>
-          <td>Natif</td>
-      </tr>
-      <tr>
-          <td><strong>Exécution parallèle</strong></td>
-          <td>Via recipe dependances</td>
-          <td>Automatique dans <code>deps</code></td>
-      </tr>
-      <tr>
-          <td><strong>Prompts</strong></td>
-          <td>Non</td>
-          <td>Oui</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th></th>
+					<th>Just</th>
+					<th>Task</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>Syntaxe</strong></td>
+					<td>DSL custom (recettes)</td>
+					<td>YAML</td>
+			</tr>
+			<tr>
+					<td><strong>Fichiers</strong></td>
+					<td><code>.justfile</code></td>
+					<td><code>Taskfile.yml</code></td>
+			</tr>
+			<tr>
+					<td><strong>Lisible</strong></td>
+					<td>⭐⭐⭐⭐</td>
+					<td>⭐⭐⭐⭐</td>
+			</tr>
+			<tr>
+					<td><strong>Learning curve</strong></td>
+					<td>Faible (syntaxe proche de Make)</td>
+					<td>Faible (YAML connu)</td>
+			</tr>
+			<tr>
+					<td><strong>Variables</strong></td>
+					<td>Similaire à Make</td>
+					<td>Template <code>{{.VAR}}</code></td>
+			</tr>
+			<tr>
+					<td><strong>Includes</strong></td>
+					<td>Oui</td>
+					<td>Oui</td>
+			</tr>
+			<tr>
+					<td><strong>Watch mode</strong></td>
+					<td>Plugin</td>
+					<td>Natif</td>
+			</tr>
+			<tr>
+					<td><strong>Exécution parallèle</strong></td>
+					<td>Via recipe dependances</td>
+					<td>Automatique dans <code>deps</code></td>
+			</tr>
+			<tr>
+					<td><strong>Prompts</strong></td>
+					<td>Non</td>
+					<td>Oui</td>
+			</tr>
+	</tbody>
 </table>
 <p>Just est excellent si tu préfères une syntaxe recipe-style. Task excelle dans les projets où le YAML est déjà le standard (Kubernetes, CI/CD).</p>
 <h2 id="cas-dusage" class="relative group">Cas d&rsquo;usage <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#cas-dusage" aria-label="Ancre">#</a></span></h2><h3 id="projet-go" class="relative group">Projet Go <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#projet-go" aria-label="Ancre">#</a></span></h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">version</span>: <span style="color:#e6db74">&#39;3&#39;</span>

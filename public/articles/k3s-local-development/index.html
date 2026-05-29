@@ -92,24 +92,24 @@
   
   
   <meta property="og:url" content="http://localhost:1313/articles/k3s-local-development/">
-  <meta property="og:site_name" content="Adrien PARRA">
-  <meta property="og:title" content="K3S for Local Development : Un mini cluster de production">
-  <meta property="og:description" content="K3S n’est pas qu’un cluster pour l’IoT. Voici comment l’utiliser comme environnement de développement local qui reflète ta prod, sans les 2000 euros de factures cloud par mois.">
-  <meta property="og:locale" content="fr">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="articles">
-    <meta property="article:published_time" content="2026-03-29T00:00:00+00:00">
-    <meta property="article:modified_time" content="2026-03-29T00:00:00+00:00">
-    <meta property="article:tag" content="Kubernetes">
-    <meta property="article:tag" content="K3S">
-    <meta property="article:tag" content="Développement">
-    <meta property="article:tag" content="DevOps">
-    <meta property="article:tag" content="Homelab">
+	<meta property="og:site_name" content="Adrien PARRA">
+	<meta property="og:title" content="K3S for Local Development : Un mini cluster de production">
+	<meta property="og:description" content="K3S n’est pas qu’un cluster pour l’IoT. Voici comment l’utiliser comme environnement de développement local qui reflète ta prod, sans les 2000 euros de factures cloud par mois.">
+	<meta property="og:locale" content="fr">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="articles">
+		<meta property="article:published_time" content="2026-03-29T00:00:00+00:00">
+		<meta property="article:modified_time" content="2026-03-29T00:00:00+00:00">
+		<meta property="article:tag" content="Kubernetes">
+		<meta property="article:tag" content="K3S">
+		<meta property="article:tag" content="Développement">
+		<meta property="article:tag" content="DevOps">
+		<meta property="article:tag" content="Homelab">
 
   
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="K3S for Local Development : Un mini cluster de production">
-  <meta name="twitter:description" content="K3S n’est pas qu’un cluster pour l’IoT. Voici comment l’utiliser comme environnement de développement local qui reflète ta prod, sans les 2000 euros de factures cloud par mois.">
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="K3S for Local Development : Un mini cluster de production">
+	<meta name="twitter:description" content="K3S n’est pas qu’un cluster pour l’IoT. Voici comment l’utiliser comme environnement de développement local qui reflète ta prod, sans les 2000 euros de factures cloud par mois.">
 
   
   <script type="application/ld+json">
@@ -417,52 +417,52 @@
         <p>Quand tu bosses sur des architectures microservices qui tournent sur Kubernetes en production, développer en local sur Docker Compose, c&rsquo;est un peu comme répéter une pièce de théâtre dans ton salon alors que le spectacle est en salle. Les conditions sont différentes, les surprises sont garanties, et le public n&rsquo;est pas dupe.</p>
 <p>K3S, le cluster Kubernetes léger de Rancher (SUSE), c&rsquo;est une autre approche. Au lieu de développer sur une version dégradée de ton infra, tu tournes un vrai cluster Kubernetes sur ta machine. Les mêmes manifests, les mêmes outils, les mêmes concepts.</p>
 <h2 id="pourquoi-k3s-et-pas-kind-ou-minikube-" class="relative group">Pourquoi K3S et pas kind ou Minikube ? <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#pourquoi-k3s-et-pas-kind-ou-minikube-" aria-label="Ancre">#</a></span></h2><table>
-  <thead>
-      <tr>
-          <th>Critère</th>
-          <th>K3S</th>
-          <th>kind</th>
-          <th>Minikube</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>Multi-nœuds</td>
-          <td>Oui</td>
-          <td>Oui (via nodes extra)</td>
-          <td>Non</td>
-      </tr>
-      <tr>
-          <td>Cluster persistant</td>
-          <td>Oui</td>
-          <td>Non (reset à chaque restart)</td>
-          <td>Oui</td>
-      </tr>
-      <tr>
-          <td>Temps de démarrage</td>
-          <td>~30s</td>
-          <td>~60s</td>
-          <td>~90s</td>
-      </tr>
-      <tr>
-          <td>Production-like</td>
-          <td>Élevé</td>
-          <td>Moyen</td>
-          <td>Moyen</td>
-      </tr>
-      <tr>
-          <td>Ressources</td>
-          <td>~512Mo RAM</td>
-          <td>~2Go RAM</td>
-          <td>~2Go RAM</td>
-      </tr>
-      <tr>
-          <td>Intégration Docker</td>
-          <td>native</td>
-          <td>native</td>
-          <td>native</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>Critère</th>
+					<th>K3S</th>
+					<th>kind</th>
+					<th>Minikube</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Multi-nœuds</td>
+					<td>Oui</td>
+					<td>Oui (via nodes extra)</td>
+					<td>Non</td>
+			</tr>
+			<tr>
+					<td>Cluster persistant</td>
+					<td>Oui</td>
+					<td>Non (reset à chaque restart)</td>
+					<td>Oui</td>
+			</tr>
+			<tr>
+					<td>Temps de démarrage</td>
+					<td>~30s</td>
+					<td>~60s</td>
+					<td>~90s</td>
+			</tr>
+			<tr>
+					<td>Production-like</td>
+					<td>Élevé</td>
+					<td>Moyen</td>
+					<td>Moyen</td>
+			</tr>
+			<tr>
+					<td>Ressources</td>
+					<td>~512Mo RAM</td>
+					<td>~2Go RAM</td>
+					<td>~2Go RAM</td>
+			</tr>
+			<tr>
+					<td>Intégration Docker</td>
+					<td>native</td>
+					<td>native</td>
+					<td>native</td>
+			</tr>
+	</tbody>
 </table>
 <p>K3S démarre vite, consomme peu, et contrairement à kind, ton cluster persiste entre les sessions. C&rsquo;est le choix le plus pertinent pour un environnement de dev quotidien.</p>
 <h2 id="installation" class="relative group">Installation <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#installation" aria-label="Ancre">#</a></span></h2><h3 id="prérequis" class="relative group">Prérequis <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#pr%c3%a9requis" aria-label="Ancre">#</a></span></h3><ul>

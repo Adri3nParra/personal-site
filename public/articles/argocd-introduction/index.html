@@ -92,23 +92,23 @@
   
   
   <meta property="og:url" content="http://localhost:1313/articles/argocd-introduction/">
-  <meta property="og:site_name" content="Adrien PARRA">
-  <meta property="og:title" content="ArgoCD en pratique : GitOps simplifie">
-  <meta property="og:description" content="GitOps est le standard pour deployer sur Kubernetes, et ArgoCD en est l’implementation la plus populaire. Retour d’experience : comment ca marche, pourquoi c’est different d’un pipeline CI/CD classique, et comment structurer ses deploiements.">
-  <meta property="og:locale" content="fr">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="articles">
-    <meta property="article:published_time" content="2026-03-28T00:00:00+00:00">
-    <meta property="article:modified_time" content="2026-03-28T00:00:00+00:00">
-    <meta property="article:tag" content="GitOps">
-    <meta property="article:tag" content="ArgoCD">
-    <meta property="article:tag" content="Kubernetes">
-    <meta property="article:tag" content="DevOps">
+	<meta property="og:site_name" content="Adrien PARRA">
+	<meta property="og:title" content="ArgoCD en pratique : GitOps simplifie">
+	<meta property="og:description" content="GitOps est le standard pour deployer sur Kubernetes, et ArgoCD en est l’implementation la plus populaire. Retour d’experience : comment ca marche, pourquoi c’est different d’un pipeline CI/CD classique, et comment structurer ses deploiements.">
+	<meta property="og:locale" content="fr">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="articles">
+		<meta property="article:published_time" content="2026-03-28T00:00:00+00:00">
+		<meta property="article:modified_time" content="2026-03-28T00:00:00+00:00">
+		<meta property="article:tag" content="GitOps">
+		<meta property="article:tag" content="ArgoCD">
+		<meta property="article:tag" content="Kubernetes">
+		<meta property="article:tag" content="DevOps">
 
   
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="ArgoCD en pratique : GitOps simplifie">
-  <meta name="twitter:description" content="GitOps est le standard pour deployer sur Kubernetes, et ArgoCD en est l’implementation la plus populaire. Retour d’experience : comment ca marche, pourquoi c’est different d’un pipeline CI/CD classique, et comment structurer ses deploiements.">
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="ArgoCD en pratique : GitOps simplifie">
+	<meta name="twitter:description" content="GitOps est le standard pour deployer sur Kubernetes, et ArgoCD en est l’implementation la plus populaire. Retour d’experience : comment ca marche, pourquoi c’est different d’un pipeline CI/CD classique, et comment structurer ses deploiements.">
 
   
   <script type="application/ld+json">
@@ -410,40 +410,40 @@
 <pre tabindex="0"><code>Git (desired state)  →  ArgoCD  →  Kubernetes (actual state)
 </code></pre><p>La différence fondamentale avec un pipeline CI/CD classique :</p>
 <table>
-  <thead>
-      <tr>
-          <th></th>
-          <th>Pipeline CI/CD</th>
-          <th>GitOps (ArgoCD)</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>Déclencheur</strong></td>
-          <td>push sur la branche, MR…</td>
-          <td>commit Git</td>
-      </tr>
-      <tr>
-          <td><strong>Qui déploie</strong></td>
-          <td>Runner / Agent CI</td>
-          <td>ArgoCD (pull)</td>
-      </tr>
-      <tr>
-          <td><strong>Rollback</strong></td>
-          <td><code>git revert</code> + pipeline</td>
-          <td><code>git revert</code> (ArgoCD sync)</td>
-      </tr>
-      <tr>
-          <td><strong>Visibilité</strong></td>
-          <td>Logs de pipeline</td>
-          <td>Dashboard temps réel</td>
-      </tr>
-      <tr>
-          <td><strong>Drift detection</strong></td>
-          <td>Manuelle</td>
-          <td>Automatique</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th></th>
+					<th>Pipeline CI/CD</th>
+					<th>GitOps (ArgoCD)</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>Déclencheur</strong></td>
+					<td>push sur la branche, MR…</td>
+					<td>commit Git</td>
+			</tr>
+			<tr>
+					<td><strong>Qui déploie</strong></td>
+					<td>Runner / Agent CI</td>
+					<td>ArgoCD (pull)</td>
+			</tr>
+			<tr>
+					<td><strong>Rollback</strong></td>
+					<td><code>git revert</code> + pipeline</td>
+					<td><code>git revert</code> (ArgoCD sync)</td>
+			</tr>
+			<tr>
+					<td><strong>Visibilité</strong></td>
+					<td>Logs de pipeline</td>
+					<td>Dashboard temps réel</td>
+			</tr>
+			<tr>
+					<td><strong>Drift detection</strong></td>
+					<td>Manuelle</td>
+					<td>Automatique</td>
+			</tr>
+	</tbody>
 </table>
 <p>Dans un pipeline classique, tu pousses vers le cluster. Avec GitOps, ArgoCD tire les changements depuis le cluster.</p>
 <h2 id="installation" class="relative group">Installation <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#installation" aria-label="Ancre">#</a></span></h2><p>ArgoCD se déploie sur un cluster Kubernetes — souvent le même que celui qu&rsquo;il gère, mais il peut gérer plusieurs clusters (y compris des clusters externes).</p>
@@ -563,30 +563,30 @@ overlays/
 </span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Voir les valeurs</span>
 </span></span><span style="display:flex;"><span>argocd app get mon-app --show-yaml
 </span></span></code></pre></div><h3 id="mon-avis" class="relative group">Mon avis <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#mon-avis" aria-label="Ancre">#</a></span></h3><table>
-  <thead>
-      <tr>
-          <th></th>
-          <th>Kustomize</th>
-          <th>Helm</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>Pour</strong></td>
-          <td>Simple, pas de syntaxe nouvelle</td>
-          <td>Templates puissants, registry de charts</td>
-      </tr>
-      <tr>
-          <td><strong>Contre</strong></td>
-          <td>Pas de fonctions conditionnelles</td>
-          <td>Complexité des templates pour les overlays</td>
-      </tr>
-      <tr>
-          <td><strong>Use case ideal</strong></td>
-          <td>Tes propres apps</td>
-          <td>Charts tiers, apps avec beaucoup de config</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th></th>
+					<th>Kustomize</th>
+					<th>Helm</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>Pour</strong></td>
+					<td>Simple, pas de syntaxe nouvelle</td>
+					<td>Templates puissants, registry de charts</td>
+			</tr>
+			<tr>
+					<td><strong>Contre</strong></td>
+					<td>Pas de fonctions conditionnelles</td>
+					<td>Complexité des templates pour les overlays</td>
+			</tr>
+			<tr>
+					<td><strong>Use case ideal</strong></td>
+					<td>Tes propres apps</td>
+					<td>Charts tiers, apps avec beaucoup de config</td>
+			</tr>
+	</tbody>
 </table>
 <h2 id="projects--organiser-les-applications" class="relative group">Projects — organiser les Applications <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#projects--organiser-les-applications" aria-label="Ancre">#</a></span></h2><p>Les <strong>AppProjects</strong> permettent de regrouper les Applications et imposer des contraintes :</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">argoproj.io/v1alpha1</span>

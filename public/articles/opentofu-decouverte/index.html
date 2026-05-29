@@ -92,24 +92,24 @@
   
   
   <meta property="og:url" content="http://localhost:1313/articles/opentofu-decouverte/">
-  <meta property="og:site_name" content="Adrien PARRA">
-  <meta property="og:title" content="OpenTofu : l&#39;IaC open source qui reprend le flambeau de Terraform">
-  <meta property="og:description" content="En août 2023, HashiCorp a changé la licence de Terraform. Quelques semaines plus tard, OpenTofu naissait sous l’égide de la Linux Foundation. Retour sur la genèse du projet, ce qu’il apporte de nouveau, et pourquoi il mérite votre attention.">
-  <meta property="og:locale" content="fr">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="articles">
-    <meta property="article:published_time" content="2025-12-05T00:00:00+00:00">
-    <meta property="article:modified_time" content="2025-12-05T00:00:00+00:00">
-    <meta property="article:tag" content="OpenTofu">
-    <meta property="article:tag" content="Terraform">
-    <meta property="article:tag" content="IaC">
-    <meta property="article:tag" content="DevOps">
-    <meta property="article:tag" content="Open Source">
+	<meta property="og:site_name" content="Adrien PARRA">
+	<meta property="og:title" content="OpenTofu : l&#39;IaC open source qui reprend le flambeau de Terraform">
+	<meta property="og:description" content="En août 2023, HashiCorp a changé la licence de Terraform. Quelques semaines plus tard, OpenTofu naissait sous l’égide de la Linux Foundation. Retour sur la genèse du projet, ce qu’il apporte de nouveau, et pourquoi il mérite votre attention.">
+	<meta property="og:locale" content="fr">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="articles">
+		<meta property="article:published_time" content="2025-12-05T00:00:00+00:00">
+		<meta property="article:modified_time" content="2025-12-05T00:00:00+00:00">
+		<meta property="article:tag" content="OpenTofu">
+		<meta property="article:tag" content="Terraform">
+		<meta property="article:tag" content="IaC">
+		<meta property="article:tag" content="DevOps">
+		<meta property="article:tag" content="Open Source">
 
   
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="OpenTofu : l&#39;IaC open source qui reprend le flambeau de Terraform">
-  <meta name="twitter:description" content="En août 2023, HashiCorp a changé la licence de Terraform. Quelques semaines plus tard, OpenTofu naissait sous l’égide de la Linux Foundation. Retour sur la genèse du projet, ce qu’il apporte de nouveau, et pourquoi il mérite votre attention.">
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="OpenTofu : l&#39;IaC open source qui reprend le flambeau de Terraform">
+	<meta name="twitter:description" content="En août 2023, HashiCorp a changé la licence de Terraform. Quelques semaines plus tard, OpenTofu naissait sous l’égide de la Linux Foundation. Retour sur la genèse du projet, ce qu’il apporte de nouveau, et pourquoi il mérite votre attention.">
 
   
   <script type="application/ld+json">
@@ -509,65 +509,65 @@
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>tofu apply -exclude<span style="color:#f92672">=</span>aws_instance.expensive_one
 </span></span></code></pre></div><p>Utile pour appliquer partiellement un plan sans toucher à certaines ressources sensibles.</p>
 <h2 id="terraform-vs-opentofu--où-en-est-on-" class="relative group">Terraform vs OpenTofu — où en est-on ? <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#terraform-vs-opentofu--o%c3%b9-en-est-on-" aria-label="Ancre">#</a></span></h2><table>
-  <thead>
-      <tr>
-          <th></th>
-          <th>Terraform</th>
-          <th>OpenTofu</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>Licence</strong></td>
-          <td>BSL 1.1</td>
-          <td>MPL 2.0 (open source)</td>
-      </tr>
-      <tr>
-          <td><strong>Gouvernance</strong></td>
-          <td>HashiCorp (IBM)</td>
-          <td>Linux Foundation</td>
-      </tr>
-      <tr>
-          <td><strong>State encryption</strong></td>
-          <td>Non</td>
-          <td>Oui (1.7+)</td>
-      </tr>
-      <tr>
-          <td><strong>Bloc <code>removed</code></strong></td>
-          <td>Non</td>
-          <td>Oui (1.7+)</td>
-      </tr>
-      <tr>
-          <td><strong>Provider <code>for_each</code></strong></td>
-          <td>Non</td>
-          <td>Oui (1.9+)</td>
-      </tr>
-      <tr>
-          <td><strong>Variables dans backend</strong></td>
-          <td>Non</td>
-          <td>Oui (1.8+)</td>
-      </tr>
-      <tr>
-          <td><strong>Import <code>for_each</code></strong></td>
-          <td>Non</td>
-          <td>Oui (1.7+)</td>
-      </tr>
-      <tr>
-          <td><strong>Registre</strong></td>
-          <td>registry.terraform.io</td>
-          <td>registry.opentofu.org</td>
-      </tr>
-      <tr>
-          <td><strong>Support IDE</strong></td>
-          <td>Extension officielle</td>
-          <td>JetBrains natif (2024.3+), VS Code en cours</td>
-      </tr>
-      <tr>
-          <td><strong>Compatibilité HCL</strong></td>
-          <td>Référence</td>
-          <td>Compatible + extensions</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th></th>
+					<th>Terraform</th>
+					<th>OpenTofu</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>Licence</strong></td>
+					<td>BSL 1.1</td>
+					<td>MPL 2.0 (open source)</td>
+			</tr>
+			<tr>
+					<td><strong>Gouvernance</strong></td>
+					<td>HashiCorp (IBM)</td>
+					<td>Linux Foundation</td>
+			</tr>
+			<tr>
+					<td><strong>State encryption</strong></td>
+					<td>Non</td>
+					<td>Oui (1.7+)</td>
+			</tr>
+			<tr>
+					<td><strong>Bloc <code>removed</code></strong></td>
+					<td>Non</td>
+					<td>Oui (1.7+)</td>
+			</tr>
+			<tr>
+					<td><strong>Provider <code>for_each</code></strong></td>
+					<td>Non</td>
+					<td>Oui (1.9+)</td>
+			</tr>
+			<tr>
+					<td><strong>Variables dans backend</strong></td>
+					<td>Non</td>
+					<td>Oui (1.8+)</td>
+			</tr>
+			<tr>
+					<td><strong>Import <code>for_each</code></strong></td>
+					<td>Non</td>
+					<td>Oui (1.7+)</td>
+			</tr>
+			<tr>
+					<td><strong>Registre</strong></td>
+					<td>registry.terraform.io</td>
+					<td>registry.opentofu.org</td>
+			</tr>
+			<tr>
+					<td><strong>Support IDE</strong></td>
+					<td>Extension officielle</td>
+					<td>JetBrains natif (2024.3+), VS Code en cours</td>
+			</tr>
+			<tr>
+					<td><strong>Compatibilité HCL</strong></td>
+					<td>Référence</td>
+					<td>Compatible + extensions</td>
+			</tr>
+	</tbody>
 </table>
 <p>À noter : HashiCorp a été <strong>racheté par IBM</strong> fin 2023 pour 6,4 milliards de dollars, ce qui n&rsquo;a pas rassuré les partisans de l&rsquo;open source.</p>
 <h2 id="migrer-de-terraform-à-opentofu" class="relative group">Migrer de Terraform à OpenTofu <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#migrer-de-terraform-%c3%a0-opentofu" aria-label="Ancre">#</a></span></h2><p>La migration est conçue pour être <strong>simple et réversible</strong>.</p>

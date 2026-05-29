@@ -92,23 +92,23 @@
   
   
   <meta property="og:url" content="http://localhost:1313/articles/nerdctl/">
-  <meta property="og:site_name" content="Adrien PARRA">
-  <meta property="og:title" content="nerdctl : le CLI Docker pour containerd">
-  <meta property="og:description" content="nerdctl reprend la syntaxe Docker à l’identique, mais s’appuie sur containerd directement. Un outil utile pour déboguer un cluster Kubernetes, travailler sans Docker daemon, ou expérimenter des fonctionnalités que Docker ne propose pas encore.">
-  <meta property="og:locale" content="fr">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="articles">
-    <meta property="article:published_time" content="2026-03-01T00:00:00+00:00">
-    <meta property="article:modified_time" content="2026-03-01T00:00:00+00:00">
-    <meta property="article:tag" content="Containerd">
-    <meta property="article:tag" content="Docker">
-    <meta property="article:tag" content="Kubernetes">
-    <meta property="article:tag" content="Conteneurs">
+	<meta property="og:site_name" content="Adrien PARRA">
+	<meta property="og:title" content="nerdctl : le CLI Docker pour containerd">
+	<meta property="og:description" content="nerdctl reprend la syntaxe Docker à l’identique, mais s’appuie sur containerd directement. Un outil utile pour déboguer un cluster Kubernetes, travailler sans Docker daemon, ou expérimenter des fonctionnalités que Docker ne propose pas encore.">
+	<meta property="og:locale" content="fr">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="articles">
+		<meta property="article:published_time" content="2026-03-01T00:00:00+00:00">
+		<meta property="article:modified_time" content="2026-03-01T00:00:00+00:00">
+		<meta property="article:tag" content="Containerd">
+		<meta property="article:tag" content="Docker">
+		<meta property="article:tag" content="Kubernetes">
+		<meta property="article:tag" content="Conteneurs">
 
   
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="nerdctl : le CLI Docker pour containerd">
-  <meta name="twitter:description" content="nerdctl reprend la syntaxe Docker à l’identique, mais s’appuie sur containerd directement. Un outil utile pour déboguer un cluster Kubernetes, travailler sans Docker daemon, ou expérimenter des fonctionnalités que Docker ne propose pas encore.">
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="nerdctl : le CLI Docker pour containerd">
+	<meta name="twitter:description" content="nerdctl reprend la syntaxe Docker à l’identique, mais s’appuie sur containerd directement. Un outil utile pour déboguer un cluster Kubernetes, travailler sans Docker daemon, ou expérimenter des fonctionnalités que Docker ne propose pas encore.">
 
   
   <script type="application/ld+json">
@@ -410,26 +410,26 @@
 </span></span></code></pre></div><p>C&rsquo;est particulièrement utile pour diagnostiquer des problèmes d&rsquo;images (layer corrompu, problème de pull) ou déboguer un conteneur dont les logs ne remontent pas correctement via kubectl.</p>
 <h2 id="les-namespaces-containerd" class="relative group">Les namespaces containerd <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#les-namespaces-containerd" aria-label="Ancre">#</a></span></h2><p>Contrairement à Docker qui a un espace global, containerd organise ses ressources en <strong>namespaces</strong> isolés :</p>
 <table>
-  <thead>
-      <tr>
-          <th>Namespace</th>
-          <th>Usage</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>default</code></td>
-          <td>Conteneurs lancés manuellement via nerdctl</td>
-      </tr>
-      <tr>
-          <td><code>k8s.io</code></td>
-          <td>Conteneurs gérés par Kubernetes / kubelet</td>
-      </tr>
-      <tr>
-          <td><code>moby</code></td>
-          <td>Conteneurs Docker (si dockerd est présent)</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>Namespace</th>
+					<th>Usage</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>default</code></td>
+					<td>Conteneurs lancés manuellement via nerdctl</td>
+			</tr>
+			<tr>
+					<td><code>k8s.io</code></td>
+					<td>Conteneurs gérés par Kubernetes / kubelet</td>
+			</tr>
+			<tr>
+					<td><code>moby</code></td>
+					<td>Conteneurs Docker (si dockerd est présent)</td>
+			</tr>
+	</tbody>
 </table>
 <p>Sans <code>--namespace</code>, nerdctl opère dans <code>default</code>. Pour voir les conteneurs Kubernetes, il faut explicitement cibler <code>k8s.io</code>.</p>
 <h2 id="fonctionnalités-absentes-de-docker" class="relative group">Fonctionnalités absentes de Docker <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#fonctionnalit%c3%a9s-absentes-de-docker" aria-label="Ancre">#</a></span></h2><p>nerdctl a été créé pour expérimenter des fonctionnalités de containerd pas encore disponibles dans Docker.</p>
@@ -455,66 +455,66 @@
 </span></span><span style="display:flex;"><span>wget https://github.com/containerd/nerdctl/releases/latest/download/nerdctl-full-&lt;version&gt;-linux-amd64.tar.gz
 </span></span></code></pre></div><p>La version <code>full</code> est recommandée pour un usage autonome (sans cluster Kubernetes déjà en place). Elle inclut tout le nécessaire pour <code>nerdctl build</code> et le networking.</p>
 <h2 id="nerdctl-vs-ctr-vs-crictl" class="relative group">nerdctl vs ctr vs crictl <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#nerdctl-vs-ctr-vs-crictl" aria-label="Ancre">#</a></span></h2><table>
-  <thead>
-      <tr>
-          <th></th>
-          <th><code>docker</code></th>
-          <th><code>nerdctl</code></th>
-          <th><code>ctr</code></th>
-          <th><code>crictl</code></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>Syntaxe</strong></td>
-          <td>Référence</td>
-          <td>Compatible Docker</td>
-          <td>Bas niveau</td>
-          <td>Orienté CRI</td>
-      </tr>
-      <tr>
-          <td><strong>Compose</strong></td>
-          <td>Oui</td>
-          <td>Oui</td>
-          <td>Non</td>
-          <td>Non</td>
-      </tr>
-      <tr>
-          <td><strong>Port mapping</strong></td>
-          <td>Oui</td>
-          <td>Oui</td>
-          <td>Non</td>
-          <td>Non</td>
-      </tr>
-      <tr>
-          <td><strong>Namespaces k8s.io</strong></td>
-          <td>Non</td>
-          <td>Oui</td>
-          <td>Oui</td>
-          <td>Oui</td>
-      </tr>
-      <tr>
-          <td><strong>Build d&rsquo;images</strong></td>
-          <td>Oui</td>
-          <td>Oui (BuildKit)</td>
-          <td>Non</td>
-          <td>Non</td>
-      </tr>
-      <tr>
-          <td><strong>Rootless</strong></td>
-          <td>Partiel</td>
-          <td>Oui (bypass4netns)</td>
-          <td>Non</td>
-          <td>Non</td>
-      </tr>
-      <tr>
-          <td><strong>Daemon requis</strong></td>
-          <td>dockerd</td>
-          <td>containerd</td>
-          <td>containerd</td>
-          <td>containerd</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th></th>
+					<th><code>docker</code></th>
+					<th><code>nerdctl</code></th>
+					<th><code>ctr</code></th>
+					<th><code>crictl</code></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>Syntaxe</strong></td>
+					<td>Référence</td>
+					<td>Compatible Docker</td>
+					<td>Bas niveau</td>
+					<td>Orienté CRI</td>
+			</tr>
+			<tr>
+					<td><strong>Compose</strong></td>
+					<td>Oui</td>
+					<td>Oui</td>
+					<td>Non</td>
+					<td>Non</td>
+			</tr>
+			<tr>
+					<td><strong>Port mapping</strong></td>
+					<td>Oui</td>
+					<td>Oui</td>
+					<td>Non</td>
+					<td>Non</td>
+			</tr>
+			<tr>
+					<td><strong>Namespaces k8s.io</strong></td>
+					<td>Non</td>
+					<td>Oui</td>
+					<td>Oui</td>
+					<td>Oui</td>
+			</tr>
+			<tr>
+					<td><strong>Build d&rsquo;images</strong></td>
+					<td>Oui</td>
+					<td>Oui (BuildKit)</td>
+					<td>Non</td>
+					<td>Non</td>
+			</tr>
+			<tr>
+					<td><strong>Rootless</strong></td>
+					<td>Partiel</td>
+					<td>Oui (bypass4netns)</td>
+					<td>Non</td>
+					<td>Non</td>
+			</tr>
+			<tr>
+					<td><strong>Daemon requis</strong></td>
+					<td>dockerd</td>
+					<td>containerd</td>
+					<td>containerd</td>
+					<td>containerd</td>
+			</tr>
+	</tbody>
 </table>
 <h2 id="conclusion" class="relative group">Conclusion <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#conclusion" aria-label="Ancre">#</a></span></h2><p>nerdctl n&rsquo;est pas là pour remplacer Docker dans les workflows de développement locaux — Docker reste plus simple pour ça. Mais sur un nœud Kubernetes, sur un serveur Linux sans Docker, ou pour quelqu&rsquo;un qui veut travailler directement avec containerd sans réapprendre une nouvelle syntaxe, c&rsquo;est l&rsquo;outil le plus ergonomique disponible.</p>
 <p>La prochaine fois que tu te retrouves à taper <code>docker ps</code> sur un nœud Kubernetes en te demandant pourquoi ça ne retourne rien, la réponse c&rsquo;est nerdctl.</p>

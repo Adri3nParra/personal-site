@@ -92,23 +92,23 @@
   
   
   <meta property="og:url" content="http://localhost:1313/articles/kubernetes-gateway-api/">
-  <meta property="og:site_name" content="Adrien PARRA">
-  <meta property="og:title" content="Kubernetes Gateway API : le successeur d&#39;Ingress est là">
-  <meta property="og:description" content="La Gateway API est GA depuis Kubernetes 1.28. Voici pourquoi elle remplace avantageusement Ingress, comment elle fonctionne, et comment la mettre en place avec Traefik.">
-  <meta property="og:locale" content="fr">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="articles">
-    <meta property="article:published_time" content="2025-11-10T00:00:00+00:00">
-    <meta property="article:modified_time" content="2025-11-10T00:00:00+00:00">
-    <meta property="article:tag" content="Kubernetes">
-    <meta property="article:tag" content="Gateway API">
-    <meta property="article:tag" content="Traefik">
-    <meta property="article:tag" content="Réseau">
+	<meta property="og:site_name" content="Adrien PARRA">
+	<meta property="og:title" content="Kubernetes Gateway API : le successeur d&#39;Ingress est là">
+	<meta property="og:description" content="La Gateway API est GA depuis Kubernetes 1.28. Voici pourquoi elle remplace avantageusement Ingress, comment elle fonctionne, et comment la mettre en place avec Traefik.">
+	<meta property="og:locale" content="fr">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="articles">
+		<meta property="article:published_time" content="2025-11-10T00:00:00+00:00">
+		<meta property="article:modified_time" content="2025-11-10T00:00:00+00:00">
+		<meta property="article:tag" content="Kubernetes">
+		<meta property="article:tag" content="Gateway API">
+		<meta property="article:tag" content="Traefik">
+		<meta property="article:tag" content="Réseau">
 
   
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Kubernetes Gateway API : le successeur d&#39;Ingress est là">
-  <meta name="twitter:description" content="La Gateway API est GA depuis Kubernetes 1.28. Voici pourquoi elle remplace avantageusement Ingress, comment elle fonctionne, et comment la mettre en place avec Traefik.">
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="Kubernetes Gateway API : le successeur d&#39;Ingress est là">
+	<meta name="twitter:description" content="La Gateway API est GA depuis Kubernetes 1.28. Voici pourquoi elle remplace avantageusement Ingress, comment elle fonctionne, et comment la mettre en place avec Traefik.">
 
   
   <script type="application/ld+json">
@@ -495,30 +495,30 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#f92672">port</span>: <span style="color:#ae81ff">8080</span>
 </span></span></code></pre></div><h2 id="séparation-des-responsabilités" class="relative group">Séparation des responsabilités <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#s%c3%a9paration-des-responsabilit%c3%a9s" aria-label="Ancre">#</a></span></h2><p>C&rsquo;est le vrai gain organisationnel. La Gateway API définit trois personas :</p>
 <table>
-  <thead>
-      <tr>
-          <th>Persona</th>
-          <th>Ressources</th>
-          <th>Responsabilité</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>Infrastructure provider</strong></td>
-          <td><code>GatewayClass</code></td>
-          <td>Déploiement du controller (Traefik, Cilium…)</td>
-      </tr>
-      <tr>
-          <td><strong>Cluster operator</strong></td>
-          <td><code>Gateway</code></td>
-          <td>Listeners, TLS, namespaces autorisés</td>
-      </tr>
-      <tr>
-          <td><strong>Application developer</strong></td>
-          <td><code>HTTPRoute</code>, <code>TCPRoute</code>…</td>
-          <td>Routing applicatif dans son namespace</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>Persona</th>
+					<th>Ressources</th>
+					<th>Responsabilité</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>Infrastructure provider</strong></td>
+					<td><code>GatewayClass</code></td>
+					<td>Déploiement du controller (Traefik, Cilium…)</td>
+			</tr>
+			<tr>
+					<td><strong>Cluster operator</strong></td>
+					<td><code>Gateway</code></td>
+					<td>Listeners, TLS, namespaces autorisés</td>
+			</tr>
+			<tr>
+					<td><strong>Application developer</strong></td>
+					<td><code>HTTPRoute</code>, <code>TCPRoute</code>…</td>
+					<td>Routing applicatif dans son namespace</td>
+			</tr>
+	</tbody>
 </table>
 <p>Chaque équipe ne touche qu&rsquo;aux objets qui la concernent. Plus besoin de donner accès cluster-wide pour exposer une application.</p>
 <h2 id="installation-avec-traefik" class="relative group">Installation avec Traefik <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#installation-avec-traefik" aria-label="Ancre">#</a></span></h2><p>Traefik supporte la Gateway API depuis la v3. Il faut d&rsquo;abord installer les CRDs officiels :</p>
@@ -543,30 +543,30 @@
 </span></span><span style="display:flex;"><span>kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.2.0/experimental-install.yaml
 </span></span></code></pre></div><h2 id="migration-depuis-ingress" class="relative group">Migration depuis Ingress <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#migration-depuis-ingress" aria-label="Ancre">#</a></span></h2><p>Pas de migration automatique, mais le mapping est direct :</p>
 <table>
-  <thead>
-      <tr>
-          <th>Ingress</th>
-          <th>Gateway API</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>spec.rules[].host</code></td>
-          <td><code>HTTPRoute.spec.hostnames</code></td>
-      </tr>
-      <tr>
-          <td><code>spec.rules[].http.paths</code></td>
-          <td><code>HTTPRoute.spec.rules[].matches</code></td>
-      </tr>
-      <tr>
-          <td><code>spec.tls</code></td>
-          <td><code>Gateway.spec.listeners[].tls</code></td>
-      </tr>
-      <tr>
-          <td>Annotations propriétaires</td>
-          <td>Filtres natifs dans <code>HTTPRoute</code></td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>Ingress</th>
+					<th>Gateway API</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>spec.rules[].host</code></td>
+					<td><code>HTTPRoute.spec.hostnames</code></td>
+			</tr>
+			<tr>
+					<td><code>spec.rules[].http.paths</code></td>
+					<td><code>HTTPRoute.spec.rules[].matches</code></td>
+			</tr>
+			<tr>
+					<td><code>spec.tls</code></td>
+					<td><code>Gateway.spec.listeners[].tls</code></td>
+			</tr>
+			<tr>
+					<td>Annotations propriétaires</td>
+					<td>Filtres natifs dans <code>HTTPRoute</code></td>
+			</tr>
+	</tbody>
 </table>
 <p>Il est possible de faire cohabiter Ingress et Gateway API pendant la migration : Traefik gère les deux simultanément.</p>
 <h2 id="conclusion" class="relative group">Conclusion <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#conclusion" aria-label="Ancre">#</a></span></h2><p>La Gateway API n&rsquo;est plus une preview — elle est <strong>production-ready</strong> et activement développée. Si tu démarres un nouveau cluster ou que tu as du temps pour migrer, c&rsquo;est le bon moment. La séparation des rôles seule justifie le changement dans les environnements multi-équipes.</p>

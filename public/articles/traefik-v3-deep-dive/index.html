@@ -92,24 +92,24 @@
   
   
   <meta property="og:url" content="http://localhost:1313/articles/traefik-v3-deep-dive/">
-  <meta property="og:site_name" content="Adrien PARRA">
-  <meta property="og:title" content="Traefik v3 Deep Dive : au-delà de l&#39;Ingress basique">
-  <meta property="og:description" content="Traefik v3 ne se résume pas à un IngressController. Middlewares, IngressRoute CRD, TCP/UDP routing, plugins, dashboard et observabilité : tout ce qui fait de Traefik un reverse proxy complet sur Kubernetes.">
-  <meta property="og:locale" content="fr">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="articles">
-    <meta property="article:published_time" content="2026-03-29T00:00:00+00:00">
-    <meta property="article:modified_time" content="2026-03-29T00:00:00+00:00">
-    <meta property="article:tag" content="Traefik">
-    <meta property="article:tag" content="Kubernetes">
-    <meta property="article:tag" content="Réseau">
-    <meta property="article:tag" content="DevOps">
-    <meta property="article:tag" content="Ingress">
+	<meta property="og:site_name" content="Adrien PARRA">
+	<meta property="og:title" content="Traefik v3 Deep Dive : au-delà de l&#39;Ingress basique">
+	<meta property="og:description" content="Traefik v3 ne se résume pas à un IngressController. Middlewares, IngressRoute CRD, TCP/UDP routing, plugins, dashboard et observabilité : tout ce qui fait de Traefik un reverse proxy complet sur Kubernetes.">
+	<meta property="og:locale" content="fr">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="articles">
+		<meta property="article:published_time" content="2026-03-29T00:00:00+00:00">
+		<meta property="article:modified_time" content="2026-03-29T00:00:00+00:00">
+		<meta property="article:tag" content="Traefik">
+		<meta property="article:tag" content="Kubernetes">
+		<meta property="article:tag" content="Réseau">
+		<meta property="article:tag" content="DevOps">
+		<meta property="article:tag" content="Ingress">
 
   
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Traefik v3 Deep Dive : au-delà de l&#39;Ingress basique">
-  <meta name="twitter:description" content="Traefik v3 ne se résume pas à un IngressController. Middlewares, IngressRoute CRD, TCP/UDP routing, plugins, dashboard et observabilité : tout ce qui fait de Traefik un reverse proxy complet sur Kubernetes.">
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="Traefik v3 Deep Dive : au-delà de l&#39;Ingress basique">
+	<meta name="twitter:description" content="Traefik v3 ne se résume pas à un IngressController. Middlewares, IngressRoute CRD, TCP/UDP routing, plugins, dashboard et observabilité : tout ce qui fait de Traefik un reverse proxy complet sur Kubernetes.">
 
   
   <script type="application/ld+json">
@@ -704,34 +704,34 @@
 </span></span><span style="display:flex;"><span>curl http://localhost:9000/ping
 </span></span></code></pre></div><h2 id="observabilité" class="relative group">Observabilité <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#observabilit%c3%a9" aria-label="Ancre">#</a></span></h2><h3 id="métriques-prometheus" class="relative group">Métriques Prometheus <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#m%c3%a9triques-prometheus" aria-label="Ancre">#</a></span></h3><p>Avec la config Helm ci-dessus, Traefik expose des métriques sur <code>/metrics</code>. Les plus utiles :</p>
 <table>
-  <thead>
-      <tr>
-          <th>Métrique</th>
-          <th>Description</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>traefik_entrypoint_requests_total</code></td>
-          <td>Nombre total de requêtes par entrypoint</td>
-      </tr>
-      <tr>
-          <td><code>traefik_router_requests_total</code></td>
-          <td>Requêtes par router (avec code HTTP)</td>
-      </tr>
-      <tr>
-          <td><code>traefik_service_request_duration_seconds</code></td>
-          <td>Latence par service backend</td>
-      </tr>
-      <tr>
-          <td><code>traefik_entrypoint_open_connections</code></td>
-          <td>Connexions actives</td>
-      </tr>
-      <tr>
-          <td><code>traefik_tls_certs_not_after</code></td>
-          <td>Expiration des certificats TLS</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>Métrique</th>
+					<th>Description</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>traefik_entrypoint_requests_total</code></td>
+					<td>Nombre total de requêtes par entrypoint</td>
+			</tr>
+			<tr>
+					<td><code>traefik_router_requests_total</code></td>
+					<td>Requêtes par router (avec code HTTP)</td>
+			</tr>
+			<tr>
+					<td><code>traefik_service_request_duration_seconds</code></td>
+					<td>Latence par service backend</td>
+			</tr>
+			<tr>
+					<td><code>traefik_entrypoint_open_connections</code></td>
+					<td>Connexions actives</td>
+			</tr>
+			<tr>
+					<td><code>traefik_tls_certs_not_after</code></td>
+					<td>Expiration des certificats TLS</td>
+			</tr>
+	</tbody>
 </table>
 <p>Exemple de règle d&rsquo;alerte Prometheus :</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">groups</span>:

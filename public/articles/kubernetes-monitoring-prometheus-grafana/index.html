@@ -92,24 +92,24 @@
   
   
   <meta property="og:url" content="http://localhost:1313/articles/kubernetes-monitoring-prometheus-grafana/">
-  <meta property="og:site_name" content="Adrien PARRA">
-  <meta property="og:title" content="Kubernetes Monitoring : Stack Prometheus &#43; Grafana">
-  <meta property="og:description" content="Mettre en place une stack de monitoring complète sur Kubernetes avec kube-prometheus-stack : installation, dashboards Grafana, règles d’alerte, Alertmanager et bonnes pratiques de production.">
-  <meta property="og:locale" content="fr">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="articles">
-    <meta property="article:published_time" content="2026-03-29T00:00:00+00:00">
-    <meta property="article:modified_time" content="2026-03-29T00:00:00+00:00">
-    <meta property="article:tag" content="Kubernetes">
-    <meta property="article:tag" content="Prometheus">
-    <meta property="article:tag" content="Grafana">
-    <meta property="article:tag" content="Monitoring">
-    <meta property="article:tag" content="DevOps">
+	<meta property="og:site_name" content="Adrien PARRA">
+	<meta property="og:title" content="Kubernetes Monitoring : Stack Prometheus &#43; Grafana">
+	<meta property="og:description" content="Mettre en place une stack de monitoring complète sur Kubernetes avec kube-prometheus-stack : installation, dashboards Grafana, règles d’alerte, Alertmanager et bonnes pratiques de production.">
+	<meta property="og:locale" content="fr">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="articles">
+		<meta property="article:published_time" content="2026-03-29T00:00:00+00:00">
+		<meta property="article:modified_time" content="2026-03-29T00:00:00+00:00">
+		<meta property="article:tag" content="Kubernetes">
+		<meta property="article:tag" content="Prometheus">
+		<meta property="article:tag" content="Grafana">
+		<meta property="article:tag" content="Monitoring">
+		<meta property="article:tag" content="DevOps">
 
   
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Kubernetes Monitoring : Stack Prometheus &#43; Grafana">
-  <meta name="twitter:description" content="Mettre en place une stack de monitoring complète sur Kubernetes avec kube-prometheus-stack : installation, dashboards Grafana, règles d’alerte, Alertmanager et bonnes pratiques de production.">
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="Kubernetes Monitoring : Stack Prometheus &#43; Grafana">
+	<meta name="twitter:description" content="Mettre en place une stack de monitoring complète sur Kubernetes avec kube-prometheus-stack : installation, dashboards Grafana, règles d’alerte, Alertmanager et bonnes pratiques de production.">
 
   
   <script type="application/ld+json">
@@ -660,90 +660,90 @@ thanosrulers.monitoring.coreos.com
 </span></span></span><span style="display:flex;"><span>  namespace<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;maintenance-ns&#34;</span>
 </span></span></code></pre></div><h2 id="les-alertes-qui-comptent-vraiment" class="relative group">Les alertes qui comptent vraiment <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#les-alertes-qui-comptent-vraiment" aria-label="Ancre">#</a></span></h2><p>kube-prometheus-stack arrive avec plus de 100 règles d&rsquo;alerte préconfigurées. C&rsquo;est un bon point de départ, mais certaines sont trop sensibles (faux positifs) et d&rsquo;autres manquent. Voici celles qu&rsquo;il faut surveiller en priorité.</p>
 <h3 id="infrastructure" class="relative group">Infrastructure <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#infrastructure" aria-label="Ancre">#</a></span></h3><table>
-  <thead>
-      <tr>
-          <th>Alerte</th>
-          <th>Ce qu&rsquo;elle détecte</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>KubeNodeNotReady</code></td>
-          <td>Nœud en état NotReady depuis 15min</td>
-      </tr>
-      <tr>
-          <td><code>KubeNodeUnreachable</code></td>
-          <td>Nœud injoignable</td>
-      </tr>
-      <tr>
-          <td><code>NodeFilesystemSpaceFillingUp</code></td>
-          <td>Disque qui se remplit (prédiction linéaire)</td>
-      </tr>
-      <tr>
-          <td><code>NodeMemoryHighUtilization</code></td>
-          <td>RAM nœud &gt; 90%</td>
-      </tr>
-      <tr>
-          <td><code>KubeletTooManyPods</code></td>
-          <td>Nœud proche de la limite de pods</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>Alerte</th>
+					<th>Ce qu&rsquo;elle détecte</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>KubeNodeNotReady</code></td>
+					<td>Nœud en état NotReady depuis 15min</td>
+			</tr>
+			<tr>
+					<td><code>KubeNodeUnreachable</code></td>
+					<td>Nœud injoignable</td>
+			</tr>
+			<tr>
+					<td><code>NodeFilesystemSpaceFillingUp</code></td>
+					<td>Disque qui se remplit (prédiction linéaire)</td>
+			</tr>
+			<tr>
+					<td><code>NodeMemoryHighUtilization</code></td>
+					<td>RAM nœud &gt; 90%</td>
+			</tr>
+			<tr>
+					<td><code>KubeletTooManyPods</code></td>
+					<td>Nœud proche de la limite de pods</td>
+			</tr>
+	</tbody>
 </table>
 <h3 id="workloads" class="relative group">Workloads <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#workloads" aria-label="Ancre">#</a></span></h3><table>
-  <thead>
-      <tr>
-          <th>Alerte</th>
-          <th>Ce qu&rsquo;elle détecte</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>KubePodCrashLooping</code></td>
-          <td>Pod en restart loop (&gt; 0 restarts sur 15min)</td>
-      </tr>
-      <tr>
-          <td><code>KubePodNotReady</code></td>
-          <td>Pod non Ready depuis 15min</td>
-      </tr>
-      <tr>
-          <td><code>KubeDeploymentReplicasMismatch</code></td>
-          <td>Replicas souhaités ≠ replicas disponibles</td>
-      </tr>
-      <tr>
-          <td><code>KubeStatefulSetReplicasMismatch</code></td>
-          <td>Idem pour les StatefulSets</td>
-      </tr>
-      <tr>
-          <td><code>KubeJobFailed</code></td>
-          <td>Job Kubernetes en échec</td>
-      </tr>
-      <tr>
-          <td><code>KubeContainerOOMKilled</code></td>
-          <td>Container tué par l&rsquo;OOM killer</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>Alerte</th>
+					<th>Ce qu&rsquo;elle détecte</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>KubePodCrashLooping</code></td>
+					<td>Pod en restart loop (&gt; 0 restarts sur 15min)</td>
+			</tr>
+			<tr>
+					<td><code>KubePodNotReady</code></td>
+					<td>Pod non Ready depuis 15min</td>
+			</tr>
+			<tr>
+					<td><code>KubeDeploymentReplicasMismatch</code></td>
+					<td>Replicas souhaités ≠ replicas disponibles</td>
+			</tr>
+			<tr>
+					<td><code>KubeStatefulSetReplicasMismatch</code></td>
+					<td>Idem pour les StatefulSets</td>
+			</tr>
+			<tr>
+					<td><code>KubeJobFailed</code></td>
+					<td>Job Kubernetes en échec</td>
+			</tr>
+			<tr>
+					<td><code>KubeContainerOOMKilled</code></td>
+					<td>Container tué par l&rsquo;OOM killer</td>
+			</tr>
+	</tbody>
 </table>
 <h3 id="prometheus-lui-même" class="relative group">Prometheus lui-même <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#prometheus-lui-m%c3%aame" aria-label="Ancre">#</a></span></h3><table>
-  <thead>
-      <tr>
-          <th>Alerte</th>
-          <th>Ce qu&rsquo;elle détecte</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>PrometheusTSDBCompactionsFailing</code></td>
-          <td>Compaction de la TSDB en échec</td>
-      </tr>
-      <tr>
-          <td><code>PrometheusRuleFailures</code></td>
-          <td>Règles d&rsquo;évaluation en erreur</td>
-      </tr>
-      <tr>
-          <td><code>AlertmanagerFailedNotifications</code></td>
-          <td>Alertmanager n&rsquo;arrive pas à envoyer</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>Alerte</th>
+					<th>Ce qu&rsquo;elle détecte</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>PrometheusTSDBCompactionsFailing</code></td>
+					<td>Compaction de la TSDB en échec</td>
+			</tr>
+			<tr>
+					<td><code>PrometheusRuleFailures</code></td>
+					<td>Règles d&rsquo;évaluation en erreur</td>
+			</tr>
+			<tr>
+					<td><code>AlertmanagerFailedNotifications</code></td>
+					<td>Alertmanager n&rsquo;arrive pas à envoyer</td>
+			</tr>
+	</tbody>
 </table>
 <h3 id="règle-custom-à-ajouter--oomkilled" class="relative group">Règle custom à ajouter : OOMKilled <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#r%c3%a8gle-custom-%c3%a0-ajouter--oomkilled" aria-label="Ancre">#</a></span></h3><p>La règle par défaut ne détecte pas toujours proprement les OOMKill. En voici une plus fiable :</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">monitoring.coreos.com/v1</span>
@@ -768,38 +768,38 @@ thanosrulers.monitoring.coreos.com
 </span></span><span style="display:flex;"><span>            <span style="color:#f92672">description</span>: <span style="color:#e6db74">&#34;Le container a été tué par l&#39;OOM killer. Vérifier les limites mémoire.&#34;</span>
 </span></span></code></pre></div><h2 id="dashboards-grafana" class="relative group">Dashboards Grafana <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#dashboards-grafana" aria-label="Ancre">#</a></span></h2><p>kube-prometheus-stack installe une vingtaine de dashboards par défaut. Les plus utiles au quotidien :</p>
 <h3 id="dashboards-intégrés" class="relative group">Dashboards intégrés <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#dashboards-int%c3%a9gr%c3%a9s" aria-label="Ancre">#</a></span></h3><table>
-  <thead>
-      <tr>
-          <th>Dashboard</th>
-          <th>Usage</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>Kubernetes / Compute Resources / Cluster</strong></td>
-          <td>Vue globale CPU/RAM de tout le cluster</td>
-      </tr>
-      <tr>
-          <td><strong>Kubernetes / Compute Resources / Namespace (Pods)</strong></td>
-          <td>Consommation par namespace, drill-down par pod</td>
-      </tr>
-      <tr>
-          <td><strong>Kubernetes / Compute Resources / Pod</strong></td>
-          <td>Détail d&rsquo;un pod : CPU, RAM, réseau, filesystem</td>
-      </tr>
-      <tr>
-          <td><strong>Kubernetes / Networking / Cluster</strong></td>
-          <td>Bande passante réseau entre pods/namespaces</td>
-      </tr>
-      <tr>
-          <td><strong>Node Exporter / Nodes</strong></td>
-          <td>Métriques système des nœuds</td>
-      </tr>
-      <tr>
-          <td><strong>Alertmanager / Overview</strong></td>
-          <td>État des alertes et des silences</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>Dashboard</th>
+					<th>Usage</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>Kubernetes / Compute Resources / Cluster</strong></td>
+					<td>Vue globale CPU/RAM de tout le cluster</td>
+			</tr>
+			<tr>
+					<td><strong>Kubernetes / Compute Resources / Namespace (Pods)</strong></td>
+					<td>Consommation par namespace, drill-down par pod</td>
+			</tr>
+			<tr>
+					<td><strong>Kubernetes / Compute Resources / Pod</strong></td>
+					<td>Détail d&rsquo;un pod : CPU, RAM, réseau, filesystem</td>
+			</tr>
+			<tr>
+					<td><strong>Kubernetes / Networking / Cluster</strong></td>
+					<td>Bande passante réseau entre pods/namespaces</td>
+			</tr>
+			<tr>
+					<td><strong>Node Exporter / Nodes</strong></td>
+					<td>Métriques système des nœuds</td>
+			</tr>
+			<tr>
+					<td><strong>Alertmanager / Overview</strong></td>
+					<td>État des alertes et des silences</td>
+			</tr>
+	</tbody>
 </table>
 <h3 id="dashboard-custom--vue-sre" class="relative group">Dashboard custom : vue SRE <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#dashboard-custom--vue-sre" aria-label="Ancre">#</a></span></h3><p>Pour un dashboard opérationnel quotidien, créer un ConfigMap que Grafana charge automatiquement via le sidecar :</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>

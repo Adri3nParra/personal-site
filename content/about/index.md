@@ -9,7 +9,7 @@ Je suis quelqu'un de très curieux — je teste régulièrement de nouveaux outi
 
 Le reste du temps, j'aime les environnements simples, fiables et proches de la production. Pragmatique, je privilégie les solutions robustes et reproductibles plutôt que la complexité pour la complexité.
 
-Certifié **CKA** (Certified Kubernetes Administrator), **CKAD** (Certified Kubernetes Application Developer), **CKS** (Certified Kubernetes Security Specialist).
+Certifié **CKA** (Certified Kubernetes Administrator), **CKAD** (Certified Kubernetes Application Developer), **CKS** (Certified Kubernetes Security Specialist), **KCNA** (Kubernetes and Cloud Native Associate), **KCSA** (Kubernetes and Cloud Native Security Associate).
 
 ## Compétences techniques
 
@@ -48,6 +48,7 @@ Français — Natif · Anglais — B2 · Espagnol — B1
 ## Certifications
 
 <div style="display: flex; gap: 2rem; flex-wrap: wrap; margin-bottom: 1rem;">
+
   <div style="text-align: center; max-width: 160px;">
     <a href="https://www.credly.com/users/adrien-parra.05aa4654" target="_blank" rel="noopener">
       <img src="/kubernetes-cka-color.png" alt="CKA - Certified Kubernetes Administrator" width="140" />
@@ -71,6 +72,18 @@ Français — Natif · Anglais — B2 · Espagnol — B1
       <img src="/kubernetes-kcna-color.png" alt="KCNA - Kubernetes and Cloud Native Associate" width="140" />
     </a>
     <p style="margin-top: 0.5rem; font-size: 0.85rem;"><strong>KCNA</strong> — Avril 2026</p>
+  </div>
+  <div style="text-align: center; max-width: 160px;">
+    <a href="https://www.credly.com/users/adrien-parra.05aa4654" target="_blank" rel="noopener">
+      <img src="/kubernetes-kcsa-color.png" alt="KCSA - Kubernetes and Cloud Native Security Associate" width="140" />
+    </a>
+    <p style="margin-top: 0.5rem; font-size: 0.85rem;"><strong>KCSA</strong> — Mai 2026</p>
+  </div>
+  <div style="text-align: center; max-width: 160px;">
+    <a href="https://www.credly.com/users/adrien-parra.05aa4654" target="_blank" rel="noopener">
+      <img src="/kubestronaut-stacked-color.png" alt="Kubestronaut" width="140" />
+    </a>
+    <p style="margin-top: 0.5rem; font-size: 0.85rem;"><strong>CKA</strong> — Mai 2026</p>
   </div>
 </div>
 

@@ -92,24 +92,24 @@
   
   
   <meta property="og:url" content="http://localhost:1313/articles/opentofu-advanced-state-encryption-multi-env/">
-  <meta property="og:site_name" content="Adrien PARRA">
-  <meta property="og:title" content="OpenTofu Avancé : State Encryption & Stratégies Multi-Environnements">
-  <meta property="og:description" content="L’article d’intro couvrait le pourquoi d’OpenTofu. Celui-ci couvre le comment en production : chiffrement du state avec plusieurs key providers, rotation de clés, migration d’un state existant, et les patterns multi-environnements qui tiennent à l’échelle.">
-  <meta property="og:locale" content="fr">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="articles">
-    <meta property="article:published_time" content="2026-04-12T00:00:00+00:00">
-    <meta property="article:modified_time" content="2026-04-12T00:00:00+00:00">
-    <meta property="article:tag" content="OpenTofu">
-    <meta property="article:tag" content="Terraform">
-    <meta property="article:tag" content="IaC">
-    <meta property="article:tag" content="DevOps">
-    <meta property="article:tag" content="Sécurité">
+	<meta property="og:site_name" content="Adrien PARRA">
+	<meta property="og:title" content="OpenTofu Avancé : State Encryption & Stratégies Multi-Environnements">
+	<meta property="og:description" content="L’article d’intro couvrait le pourquoi d’OpenTofu. Celui-ci couvre le comment en production : chiffrement du state avec plusieurs key providers, rotation de clés, migration d’un state existant, et les patterns multi-environnements qui tiennent à l’échelle.">
+	<meta property="og:locale" content="fr">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="articles">
+		<meta property="article:published_time" content="2026-04-12T00:00:00+00:00">
+		<meta property="article:modified_time" content="2026-04-12T00:00:00+00:00">
+		<meta property="article:tag" content="OpenTofu">
+		<meta property="article:tag" content="Terraform">
+		<meta property="article:tag" content="IaC">
+		<meta property="article:tag" content="DevOps">
+		<meta property="article:tag" content="Sécurité">
 
   
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="OpenTofu Avancé : State Encryption & Stratégies Multi-Environnements">
-  <meta name="twitter:description" content="L’article d’intro couvrait le pourquoi d’OpenTofu. Celui-ci couvre le comment en production : chiffrement du state avec plusieurs key providers, rotation de clés, migration d’un state existant, et les patterns multi-environnements qui tiennent à l’échelle.">
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="OpenTofu Avancé : State Encryption & Stratégies Multi-Environnements">
+	<meta name="twitter:description" content="L’article d’intro couvrait le pourquoi d’OpenTofu. Celui-ci couvre le comment en production : chiffrement du state avec plusieurs key providers, rotation de clés, migration d’un state existant, et les patterns multi-environnements qui tiennent à l’échelle.">
 
   
   <script type="application/ld+json">
@@ -717,45 +717,45 @@ State chiffré → Backend (S3, GCS…)
 </span></span></code></pre></div><p>Scaleway n&rsquo;a pas d&rsquo;équivalent DynamoDB natif, donc pas de lock distribué par défaut. En équipe, utilise un backend HTTP (GitLab managed state) ou implémente un lock maison.</p>
 <h2 id="multi-environnements--le-vrai-débat" class="relative group">Multi-environnements : le vrai débat <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#multi-environnements--le-vrai-d%c3%a9bat" aria-label="Ancre">#</a></span></h2><p>C&rsquo;est le sujet qui divise le plus dans l&rsquo;écosystème IaC. Deux approches principales :</p>
 <table>
-  <thead>
-      <tr>
-          <th></th>
-          <th>Workspaces</th>
-          <th>Directories séparés</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>Structure</strong></td>
-          <td>Un seul répertoire, plusieurs states</td>
-          <td>Un répertoire par env</td>
-      </tr>
-      <tr>
-          <td><strong>Isolation</strong></td>
-          <td>Partielle (même code, state séparé)</td>
-          <td>Totale (code et state)</td>
-      </tr>
-      <tr>
-          <td><strong>DRY</strong></td>
-          <td>Élevé</td>
-          <td>Plus de duplication</td>
-      </tr>
-      <tr>
-          <td><strong>Risque</strong></td>
-          <td>Apply sur le mauvais workspace</td>
-          <td>Faible</td>
-      </tr>
-      <tr>
-          <td><strong>Dérive entre envs</strong></td>
-          <td>Difficile à détecter</td>
-          <td>Explicite</td>
-      </tr>
-      <tr>
-          <td><strong>Idéal pour</strong></td>
-          <td>Envs quasi identiques</td>
-          <td>Envs avec divergences significatives</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th></th>
+					<th>Workspaces</th>
+					<th>Directories séparés</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>Structure</strong></td>
+					<td>Un seul répertoire, plusieurs states</td>
+					<td>Un répertoire par env</td>
+			</tr>
+			<tr>
+					<td><strong>Isolation</strong></td>
+					<td>Partielle (même code, state séparé)</td>
+					<td>Totale (code et state)</td>
+			</tr>
+			<tr>
+					<td><strong>DRY</strong></td>
+					<td>Élevé</td>
+					<td>Plus de duplication</td>
+			</tr>
+			<tr>
+					<td><strong>Risque</strong></td>
+					<td>Apply sur le mauvais workspace</td>
+					<td>Faible</td>
+			</tr>
+			<tr>
+					<td><strong>Dérive entre envs</strong></td>
+					<td>Difficile à détecter</td>
+					<td>Explicite</td>
+			</tr>
+			<tr>
+					<td><strong>Idéal pour</strong></td>
+					<td>Envs quasi identiques</td>
+					<td>Envs avec divergences significatives</td>
+			</tr>
+	</tbody>
 </table>
 <h3 id="pattern-workspaces" class="relative group">Pattern Workspaces <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#pattern-workspaces" aria-label="Ancre">#</a></span></h3><pre tabindex="0"><code>infra/
 ├── main.tf
