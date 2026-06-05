@@ -6,7 +6,7 @@ summary: "L'article d'intro couvrait le pourquoi d'OpenTofu. Celui-ci couvre le 
 tags: ["OpenTofu", "Terraform", "IaC", "DevOps", "Sécurité"]
 ---
 
-L'[article d'introduction à OpenTofu](/articles/opentofu-decouverte/) couvrait l'histoire du fork et les nouvelles fonctionnalités. Deux sujets méritaient d'aller plus loin : le **chiffrement du state** — présenté avec un seul exemple HCL — et les **stratégies multi-environnements** — mentionnées sans être développées.
+L'[article d'introduction à OpenTofu](/articles/opentofu-decouverte/) couvrait l'histoire du fork et les nouvelles fonctionnalités. Deux sujets méritaient d'aller plus loin : le **chiffrement du state** (présenté avec un seul exemple HCL) et les **stratégies multi-environnements** (mentionnées sans être développées).
 
 Ce sont pourtant les deux points qui font la différence entre un projet IaC qui tient en production et un qui finit en dette technique.
 
@@ -35,11 +35,11 @@ Avant de chiffrer, il faut comprendre ce qu'on protège. Le state file `terrafor
 
 En clair. Sans chiffrement. Dans un bucket S3.
 
-Tout ce que tu déclares dans ton IaC — mots de passe RDS, clés API, tokens Kubernetes, certificats — finit dans ce fichier. Un accès en lecture au bucket S3 qui stocke le state, c'est potentiellement accès à toute l'infrastructure.
+Tout ce que tu déclares dans ton IaC (mots de passe RDS, clés API, tokens Kubernetes, certificats) finit dans ce fichier. Un accès en lecture au bucket S3 qui stocke le state, c'est potentiellement accès à toute l'infrastructure.
 
 ## State Encryption : architecture
 
-OpenTofu 1.7 introduit le chiffrement **côté client**. Ça signifie que le state est chiffré avant d'être envoyé au backend — S3, GCS, Scaleway Object Storage, ou autre. Le backend ne voit que du contenu chiffré.
+OpenTofu 1.7 introduit le chiffrement **côté client**. Ça signifie que le state est chiffré avant d'être envoyé au backend, S3, GCS, Scaleway Object Storage, ou autre. Le backend ne voit que du contenu chiffré.
 
 ```
 tofu apply
@@ -87,7 +87,7 @@ Les méthodes disponibles : `aes_gcm` (AES-256-GCM, recommandé) et `unencrypted
 
 ## Key providers
 
-### Passphrase — pour le dev/test
+### Passphrase : pour le dev/test
 
 Le plus simple : une passphrase via variable d'environnement.
 
@@ -121,7 +121,7 @@ tofu apply
 
 Le key provider `pbkdf2` dérive une clé AES-256 depuis la passphrase avec PBKDF2-SHA512. Pas idéal pour la prod (la passphrase reste un secret à gérer), mais parfait pour du dev local ou des environnements jetables.
 
-### AWS KMS — pour la prod sur AWS
+### AWS KMS : pour la prod sur AWS
 
 ```hcl
 terraform {
@@ -189,7 +189,7 @@ L'IAM Policy pour le runner CI/CD :
 
 `GenerateDataKey` pour chiffrer, `Decrypt` pour déchiffrer. Rien de plus.
 
-### GCP KMS — pour la prod sur GCP
+### GCP KMS : pour la prod sur GCP
 
 ```hcl
 terraform {
@@ -198,7 +198,7 @@ terraform {
       kms_encryption_key = "projects/mon-projet/locations/europe-west1/keyRings/opentofu/cryptoKeys/state"
 
       # Credentials via Application Default Credentials ou var
-      credentials = file("sa-key.json")  # À éviter en prod — préférer GOOGLE_CREDENTIALS
+      credentials = file("sa-key.json")  # À éviter en prod, préférer GOOGLE_CREDENTIALS
     }
 
     method "aes_gcm" "default" {
@@ -212,7 +212,7 @@ terraform {
 }
 ```
 
-### OpenBao/Vault — pour une infra on-premise ou multi-cloud
+### OpenBao/Vault : pour une infra on-premise ou multi-cloud
 
 OpenBao est le fork open source de Vault (même situation que OpenTofu/Terraform) :
 
@@ -349,7 +349,7 @@ terraform {
     key            = "prod/terraform.tfstate"
     region         = "eu-west-1"
     dynamodb_table = "opentofu-state-lock"
-    encrypt        = false               # Désactivé — on gère le chiffrement côté client
+    encrypt        = false               # Désactivé, on gère le chiffrement côté client
   }
 }
 ```
@@ -481,7 +481,7 @@ s3://mon-bucket/
 
 **Limites des workspaces** : toute la logique de différenciation entre envs est dans le code principal. Si prod et dev divergent beaucoup (services différents, topologie réseau différente), le code devient difficile à lire.
 
-### Pattern Directories — l'approche Terragrunt-compatible
+### Pattern Directories : l'approche Terragrunt-compatible
 
 ```
 infra/
@@ -544,7 +544,7 @@ Chaque env est un projet OpenTofu indépendant avec son backend. Pas de risque d
 
 ### Pattern hybride : le meilleur des deux
 
-Pour des infras complexes — plusieurs équipes, plusieurs produits — un mix des deux fonctionne bien :
+Pour des infras complexes (plusieurs équipes, plusieurs produits), un mix des deux fonctionne bien :
 
 ```
 infra/
@@ -703,7 +703,7 @@ Le plan est généré et stocké en artifact. L'apply lit cet artifact. Ça gara
 ```yaml
 apply:
   script:
-    # Le plan.tfplan contient déjà la décision — pas de surprise
+    # Le plan.tfplan contient déjà la décision, pas de surprise
     - tofu apply plan.tfplan
   dependencies:
     - plan
@@ -717,14 +717,14 @@ Activer le chiffrement sur un state existant est possible mais demande une opér
 
 ### 2. Un backend par environnement
 
-Un state séparé par env — jamais un state partagé entre dev et prod. L'isolation est la règle d'or.
+Un state séparé par env, jamais un state partagé entre dev et prod. L'isolation est la règle d'or.
 
 ```
 s3://mon-org-state-dev/
 s3://mon-org-state-prod/
 ```
 
-Pas de `s3://mon-org-state/dev/terraform.tfstate` et `s3://mon-org-state/prod/terraform.tfstate` dans le même bucket — les permissions IAM sont plus difficiles à contrôler.
+Pas de `s3://mon-org-state/dev/terraform.tfstate` et `s3://mon-org-state/prod/terraform.tfstate` dans le même bucket, les permissions IAM sont plus difficiles à contrôler.
 
 ### 3. Versionner le backend
 
@@ -748,8 +748,8 @@ Dans les pipelines CI/CD, les environments GitLab/GitHub permettent de protéger
 
 ## Conclusion
 
-Le state OpenTofu, c'est le fichier le plus sensible de ton infrastructure. Sans chiffrement, un accès lecture au bucket = accès à tous les secrets. Avec le chiffrement côté client introduit en 1.7, c'est réglé — quelle que soit la politique de sécurité de ton provider de stockage.
+Le state OpenTofu, c'est le fichier le plus sensible de ton infrastructure. Sans chiffrement, un accès lecture au bucket = accès à tous les secrets. Avec le chiffrement côté client introduit en 1.7, c'est réglé, quelle que soit la politique de sécurité de ton provider de stockage.
 
 Pour le multi-environnements, il n'y a pas de pattern universel. Workspaces pour des envs quasi identiques, directories pour des envs qui divergent, hybride pour les infras complexes. Ce qui compte, c'est la cohérence dans le projet : mixer les approches sans règle, c'est la garantie d'un state qu'on ne comprend plus.
 
-Ces deux sujets sont la base pour passer d'un usage basique d'OpenTofu — des commandes en local qui marchent — à une infrastructure managée sérieusement, dans laquelle l'équipe peut contribuer en confiance.
+Ces deux sujets sont la base pour passer d'un usage basique d'OpenTofu (des commandes en local qui marchent) à une infrastructure managée sérieusement, dans laquelle l'équipe peut contribuer en confiance.

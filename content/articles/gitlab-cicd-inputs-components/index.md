@@ -1,5 +1,5 @@
 ---
-title: "GitLab CI/CD : inputs, components et le catalogue — la fin du copier-coller"
+title: "GitLab CI/CD : inputs, components et le catalogue, la fin du copier-coller"
 date: 2026-01-20
 draft: false
 summary: "GitLab a profondément revu la réutilisabilité de ses pipelines. Les inputs typés remplacent les variables fragiles, les components structurent le partage, et le catalogue permet de les découvrir. Tour d'horizon pratique."
@@ -31,12 +31,12 @@ include:
 
 Les problèmes :
 
-- **Pas de typage** — `REPLICAS: "trois"` ne lève aucune erreur.
-- **Scope global** — les variables fuient vers tous les jobs de la pipeline.
-- **Pas de validation** — aucun moyen d'imposer un format, une liste de valeurs autorisées ou un champ obligatoire.
-- **Modifiables à l'exécution** — un job peut écraser une variable en cours de route, rendant le debug complexe.
+- **Pas de typage** : `REPLICAS: "trois"` ne lève aucune erreur.
+- **Scope global** : les variables fuient vers tous les jobs de la pipeline.
+- **Pas de validation** : aucun moyen d'imposer un format, une liste de valeurs autorisées ou un champ obligatoire.
+- **Modifiables à l'exécution** : un job peut écraser une variable en cours de route, rendant le debug complexe.
 
-## `spec:inputs` — des paramètres typés et validés
+## `spec:inputs` : des paramètres typés et validés
 
 Les inputs sont déclarés dans un header YAML séparé par `---`. Ils sont résolus **à la création de la pipeline**, pas à l'exécution.
 
@@ -84,7 +84,7 @@ include:
 |---|---|---|
 | `string` | `"staging"` | `options`, `regex`, longueur max 1 Ko |
 | `number` | `3` | Rejet des valeurs non numériques |
-| `boolean` | `true` / `false` | Strict — `"yes"` ou `1` sont rejetés |
+| `boolean` | `true` / `false` | Strict, `"yes"` ou `1` sont rejetés |
 | `array` | `["lint", "test"]` | Format JSON obligatoire |
 
 ### Validation par regex
@@ -126,7 +126,7 @@ Les options de `instance_type` changent dynamiquement en fonction du provider ch
 
 ## Les inputs de pipeline
 
-Les inputs ne servent pas qu'aux templates inclus — ils fonctionnent aussi au niveau de la pipeline elle-même. C'est là que le mot-clé `spec:inputs` prend tout son sens : quand un utilisateur lance une pipeline manuellement depuis l'interface GitLab, il obtient un **formulaire typé** au lieu des champs texte libres des variables.
+Les inputs ne servent pas qu'aux templates inclus, ils fonctionnent aussi au niveau de la pipeline elle-même. C'est là que le mot-clé `spec:inputs` prend tout son sens : quand un utilisateur lance une pipeline manuellement depuis l'interface GitLab, il obtient un **formulaire typé** au lieu des champs texte libres des variables.
 
 ```yaml
 # .gitlab-ci.yml
@@ -153,7 +153,7 @@ deploy:
     - if: $[[ inputs.dry-run ]] == false
 ```
 
-L'utilisateur voit un **dropdown** pour l'environnement et une **checkbox** pour le dry-run — au lieu de deux champs texte où il faut deviner le format attendu. La pipeline est limitée à 20 inputs maximum.
+L'utilisateur voit un **dropdown** pour l'environnement et une **checkbox** pour le dry-run, au lieu de deux champs texte où il faut deviner le format attendu. La pipeline est limitée à 20 inputs maximum.
 
 ### Sécurité : inputs vs variables
 
@@ -163,7 +163,7 @@ GitLab recommande désormais les inputs plutôt que les variables pour les décl
 - Les variables sont des **chaînes de caractères injectées comme variables d'environnement**, exposées à tous les jobs.
 - Depuis GitLab 17.7, il est possible de **désactiver les variables de pipeline** pour forcer l'utilisation des inputs.
 
-## CI/CD Components — des briques réutilisables
+## CI/CD Components : des briques réutilisables
 
 Un component est un template structuré, versionné et publiable. Il se distingue d'un simple `include` par sa découvrabilité et son cycle de vie.
 
@@ -256,9 +256,9 @@ Le component apparaît alors dans le catalogue avec sa documentation (extraite d
 
 La visibilité du component dans le catalogue suit celle du projet :
 
-- **Private** — seuls les membres du projet y accèdent.
-- **Internal** — tous les utilisateurs authentifiés de l'instance.
-- **Public** — tout le monde.
+- **Private** : seuls les membres du projet y accèdent.
+- **Internal** : tous les utilisateurs authentifiés de l'instance.
+- **Public** : tout le monde.
 
 ## Fonctions de manipulation
 
@@ -303,6 +303,6 @@ deploy:
 
 ## Conclusion
 
-Les inputs et components ne sont pas un gadget — ils changent fondamentalement la façon de structurer les pipelines GitLab. Les inputs apportent le **typage et la validation** qui manquaient cruellement aux variables, les components apportent la **modularité et le versioning**, et le catalogue apporte la **découvrabilité**.
+Les inputs et components ne sont pas un gadget, ils changent fondamentalement la façon de structurer les pipelines GitLab. Les inputs apportent le **typage et la validation** qui manquaient cruellement aux variables, les components apportent la **modularité et le versioning**, et le catalogue apporte la **découvrabilité**.
 
 Si tu maintiens des pipelines partagées entre plusieurs projets ou équipes, le passage aux components est un investissement qui se rentabilise rapidement : moins de duplication, moins de bugs silencieux, et une interface utilisateur bien plus claire pour les déclenchements manuels.

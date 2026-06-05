@@ -15,9 +15,9 @@ Le terme est devenu un mot-valise marketing, mais il recouvre des enjeux reels :
 - **Juridiction** : tes donnees sont-elles soumises au Cloud Act americain (et donc accessibles a la justice americaine meme sur des serveurs en Europe) ?
 - **Gouvernance** : qui controle l'infrastructure ? Une entreprise americaine, chinoise, ou europenne ?
 - **Disponibilite** : en cas de crise geopolitique ou de decision politique, un gouvernement peut-il bloquer l'acces a tes services ?
-- **Conformite reglementaire** : RGPD, TISAX (automobile), SecNumCloud (defense) — des certifications specifiques a l'Europe.
+- **Conformite reglementaire** : RGPD, TISAX (automobile), SecNumCloud (defense), des certifications specifiques a l'Europe.
 
-Les GAFA sont soumis au **CLOUD Act** depuis 2018. Meme si tes donnees sont stockees a Paris ou Francfort, Microsoft, Google ou AWS peuvent etre forces de les transmettre a la justice americaine sur simple demande — sans que tu le saches.
+Les GAFA sont soumis au **CLOUD Act** depuis 2018. Meme si tes donnees sont stockees a Paris ou Francfort, Microsoft, Google ou AWS peuvent etre forces de les transmettre a la justice americaine sur simple demande, sans que tu le saches.
 
 ## Les hebergeurs europeens en 2026
 
@@ -39,7 +39,7 @@ ovhcli mks cluster create \
 
 MKS est un managed Kubernetes assez classique : control plane gere par OVH, noeuds workers a ta charge. Le point fort : integration native avec leur ecosysteme (Load Balancers, Object Storage, Managed PostgreSQL…) via le plugin `ovh-cloud` ou encore `openstack` (**vrai préfèrence pour lui**).
 
-Le catalogue de flavors est large, du b2-7 (2 vCPU, 7 Go RAM) au b128-384 pour des workloads heavy. Les prix restent significativement en dessous d'AWS ou GCP — souvent 30 a 50% moins cher pour des configurations equivalentes.
+Le catalogue de flavors est large, du b2-7 (2 vCPU, 7 Go RAM) au b128-384 pour des workloads heavy. Les prix restent significativement en dessous d'AWS ou GCP, souvent 30 a 50% moins cher pour des configurations equivalentes.
 
 **Ce que j'aime :**
 - Prix transparent et competitif
@@ -75,7 +75,7 @@ scw k8s cluster create \
 
 Scaleway a aussi des serverless containers (equivalent Fargate/Lambda), des functions serverless, et un marketplace avec des images preconstruites.
 
-Pour le perso, je suis plus sur du **serverless** que du bare metal. Containers est mon terrain de jeu : pas de serveur a gérer, deployer en une commande, scaler de zero a l'infini. Ce portfolio lui-meme tourne sur Scaleway Containers — un container Docker qui sert du Hugo, pour quelques centimes par mois.
+Pour le perso, je suis plus sur du **serverless** que du bare metal. Containers est mon terrain de jeu : pas de serveur a gérer, deployer en une commande, scaler de zero a l'infini. Ce portfolio lui-meme tourne sur Scaleway Containers, un container Docker qui sert du Hugo, pour quelques centimes par mois.
 
 Le use case ideal : sites statiques, APIs legères, bots, petits services qui ne justifient pas un cluster Kubernetes.
 
@@ -134,7 +134,7 @@ Un seul interlocuteur europen, un seul interlocuteur RGPD, un seul fuseau horair
 
 ### 4. L'ecosysteme S3-compatible
 
-Le stockage objet est le nouveau standard. Photos, backups, artifacts CI, donnees ML — tout peut aller sur du S3. Les offres europeennes sont 3 a 5 fois moins cheres qu'AWS S3 :
+Le stockage objet est le nouveau standard. Photos, backups, artifacts CI, donnees ML, tout peut aller sur du S3. Les offres europeennes sont 3 a 5 fois moins cheres qu'AWS S3 :
 
 - **AWS S3 Standard** : 23€/To/mois
 - **OVHCloud Object Storage** : 5€/To/mois
@@ -178,7 +178,7 @@ OVHCloud a eu des gros incidents (incendie SBG1 en 2021, hack 2022). Scaleway au
 
 ## Conclusion
 
-Les hebergeurs europeens ne sont pas une utopie de Geeks anti-GAFA — ils sont devenus des alternatives serieuses. OVHCloud et Scaleway couvrent 80% des besoins d'une equipe DevOps moderne, a un prix qui permet de redployer des budgets ailleurs.
+Les hebergeurs europeens ne sont pas une utopie de Geeks anti-GAFA, ils sont devenus des alternatives serieuses. OVHCloud et Scaleway couvrent 80% des besoins d'une equipe DevOps moderne, a un prix qui permet de redployer des budgets ailleurs.
 
 Mon set-up personnel :
 

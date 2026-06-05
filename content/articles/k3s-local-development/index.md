@@ -295,7 +295,7 @@ kubectl proxy
 
 Ou utilise `k9s`, plus léger et en terminal (perso, je suis plus CLI kubectl).
 
-Interface en terminal avec navigation clavier, logs, describe, exec — tout ce qu'il faut sans quitter ta console.
+Interface en terminal avec navigation clavier, logs, describe, exec, tout ce qu'il faut sans quitter ta console.
 
 ## Limites et alternatives
 
@@ -368,8 +368,8 @@ echo "Ou installe k9s: brew install derailed-dev/tools/k9s"
 
 ## Conclusion
 
-K3S pour le développement local, c'est le compromis entre la simplicité de Docker Compose et la réalité de Kubernetes en production. Tu valides tes manifests, tu testes tes Helm charts, tu debug avec les vrais outils — le tout sans quitter ton terminal.
+K3S pour le développement local, c'est le compromis entre la simplicité de Docker Compose et la réalité de Kubernetes en production. Tu valides tes manifests, tu testes tes Helm charts, tu debug avec les vrais outils, le tout sans quitter ton terminal.
 
 Les tools Rancher (k3s, k3d) forment un écosystème cohérent qui couvre installation, gestion et destruction des clusters. Que ce soit pour un cluster persistant sur ton poste ou des clusters éphémères en CI, K3S s'adapte.
 
-Le vrai gain, c'est de réduire le gap entre "ça marche en dev" et "ça marche en prod". Si ton deployment, ton service, ton ingress et ton Helm chart fonctionnent en local sur K3S, ils ont de bonnes chances de fonctionner sur ton cluster prod — modulo les ressources cloud et les StorageClasses spécifiques.
+Le vrai gain, c'est de réduire le gap entre "ça marche en dev" et "ça marche en prod". Si ton deployment, ton service, ton ingress et ton Helm chart fonctionnent en local sur K3S, ils ont de bonnes chances de fonctionner sur ton cluster prod, modulo les ressources cloud et les StorageClasses spécifiques.

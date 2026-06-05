@@ -12,9 +12,9 @@ L'**Ingress** a rendu de bons services, mais il atteint vite ses limites : annot
 
 L'Ingress souffre de plusieurs problèmes structurels :
 
-- **Expressivité limitée** — le routage HTTP basique est dans la spec, tout le reste passe par des annotations `nginx.ingress.kubernetes.io/...` ou `traefik.ingress.kubernetes.io/...` qui ne sont pas portables.
-- **Pas de séparation des rôles** — l'infra et les équipes applicatives modifient le même objet.
-- **Fonctionnalités avancées absentes** — traffic splitting, header matching, redirections complexes, TCP/UDP routing : tout est hors-spec.
+- **Expressivité limitée** : le routage HTTP basique est dans la spec, tout le reste passe par des annotations `nginx.ingress.kubernetes.io/...` ou `traefik.ingress.kubernetes.io/...` qui ne sont pas portables.
+- **Pas de séparation des rôles** : l'infra et les équipes applicatives modifient le même objet.
+- **Fonctionnalités avancées absentes** : traffic splitting, header matching, redirections complexes, TCP/UDP routing : tout est hors-spec.
 
 La Gateway API résout ces trois problèmes avec un modèle orienté rôles et une spec riche.
 
@@ -204,8 +204,8 @@ kubectl get crd | grep gateway.networking.k8s.io
 
 La Gateway API est versionnée en deux canaux :
 
-- **Standard** — `HTTPRoute`, `Gateway`, `GatewayClass`, `GRPCRoute` : **GA**
-- **Experimental** — `TCPRoute`, `TLSRoute`, `UDPRoute`, `BackendLBPolicy` : beta, susceptibles d'évoluer
+- **Standard** : `HTTPRoute`, `Gateway`, `GatewayClass`, `GRPCRoute` : **GA**
+- **Experimental** : `TCPRoute`, `TLSRoute`, `UDPRoute`, `BackendLBPolicy` : beta, susceptibles d'évoluer
 
 ```bash
 # Installer le canal experimental (inclut standard)
@@ -227,6 +227,6 @@ Il est possible de faire cohabiter Ingress et Gateway API pendant la migration :
 
 ## Conclusion
 
-La Gateway API n'est plus une preview — elle est **production-ready** et activement développée. Si tu démarres un nouveau cluster ou que tu as du temps pour migrer, c'est le bon moment. La séparation des rôles seule justifie le changement dans les environnements multi-équipes.
+La Gateway API n'est plus une preview, elle est **production-ready** et activement développée. Si tu démarres un nouveau cluster ou que tu as du temps pour migrer, c'est le bon moment. La séparation des rôles seule justifie le changement dans les environnements multi-équipes.
 
 Les prochaines versions (v1.3+) devraient amener le routage mesh (service-to-service) dans la spec standard, ce qui pourrait concurrencer directement des solutions comme Istio pour les cas d'usage simples.

@@ -10,7 +10,7 @@ Un cluster Kubernetes en production, c'est des dizaines d'images Docker qui tour
 
 Deux outils complémentaires couvrent la majorité des besoins : **Trivy** pour le scan et la détection, **Kyverno** pour les politiques d'admission. Le premier te montre les problèmes, le second les bloque.
 
-## Trivy — le scanner de vulnérabilités
+## Trivy : le scanner de vulnérabilités
 
 Trivy est open source (par Aqua Security), léger, et scanne tout : images Docker, fichiers filesystem, config Kubernetes, IaC (Terraform, CloudFormation)…
 
@@ -95,7 +95,7 @@ Trivy détecte les vulnérabilités connues dans les packages, mais :
 
 Pour le runtime, il faut Falco. Pour le contrôle des déploiements, il faut Kyverno.
 
-## Kyverno — les politiques d'admission
+## Kyverno : les politiques d'admission
 
 Kyverno est un moteur de politiques pour Kubernetes. Contrairement à OPA/Gatekeeper qui utilise un DSL custom (Rego), Kyverno utilise des manifestes Kubernetes : si tu sais écrire un YAML, tu sais écrire une politique.
 
@@ -152,7 +152,7 @@ spec:
               - (runAsNonRoot): true
 ```
 
-`(runAsNonRoot): true` — les parenthèses signifient "cette valeur doit exister et être true". Sans parenthèses, ça vérifie juste la présence.
+`(runAsNonRoot): true`, les parenthèses signifient "cette valeur doit exister et être true". Sans parenthèses, ça vérifie juste la présence.
 
 ### Valider avant d'appliquer
 
@@ -402,8 +402,8 @@ kubectl get pods -n kyverno -l app.kubernetes.io/component=reports-controller
 ```
 
 Les métriques incluent :
-- `kyverno_policy_results_total` — résultats de politiques
-- `kyverno_policy_execution_duration_seconds` — latence d'exécution
+- `kyverno_policy_results_total`, résultats de politiques
+- `kyverno_policy_execution_duration_seconds`, latence d'exécution
 
 Grafana peut afficher les violations par namespace et politique.
 
@@ -456,9 +456,9 @@ Trois couches, trois moments différents.
 
 Sécuriser un cluster Kubernetes, c'est plusieurs couches :
 
-1. **Build** — Trivy scanne les images avant de les push
-2. **Admission** — Kyverno valide les manifestes au déploiement
-3. **Runtime** — Falco (hors scope ici) détecte les comportements anormaux
+1. **Build** : Trivy scanne les images avant de les push
+2. **Admission** : Kyverno valide les manifestes au déploiement
+3. **Runtime** : Falco (hors scope ici) détecte les comportements anormaux
 
 Trivy et Kyverno couvrent les deux premières couches sans friction. Trivy s'intègre naturellement dans une CI, Kyverno s'intègre dans le contrôle plane Kubernetes. Les deux sont open source, maintenus activement, et la communauté fournit des politiques prêtes à l'emploi.
 

@@ -6,7 +6,7 @@ summary: "Taskfile (Task) est un task runner écrit en Go qui remplace avantageu
 tags: ["Taskfile", "Task", "DevOps", "Build", "Go"]
 ---
 
-Depuis des décennies, Make est l'outil de référence pour automatiser les tâches de build et de développement. Mais force est de constater que sa syntaxe cryptique et ses limitations en font un outil parfois douloureux au quotidien. Taskfile — aussi appelé **Task** — propose une alternative moderne, lisible et multi-plateforme. Voici pourquoi il mérite ton attention.
+Depuis des décennies, Make est l'outil de référence pour automatiser les tâches de build et de développement. Mais force est de constater que sa syntaxe cryptique et ses limitations en font un outil parfois douloureux au quotidien. Taskfile (aussi appelé **Task**) propose une alternative moderne, lisible et multi-plateforme. Voici pourquoi il mérite ton attention.
 
 ## Un peu d'histoire
 
@@ -26,7 +26,7 @@ Pendant près de 50 ans, Make a été l'outil ubiquitous pour les projets C/C++,
 
 Make a été conçu pour un monde différent du nôtre :
 
-- **Syntaxe opaque** : les tabulations vs espaces, les variables avec `$()` ou `${}`, les règles pattern `%` — tout est source de confusion.
+- **Syntaxe opaque** : les tabulations vs espaces, les variables avec `$()` ou `${}`, les règles pattern `%`, tout est source de confusion.
 - **Pas de support natif JSON/YAML** : les Makefiles sont du texte brut sans structure de données.
 - **Écosystème limité** : pas de registry de tasks, pas de dépendances entre tasks résolues automatiquement.
 - **Shell-dependency** : les commandes s'exécutent dans un sous-shell, ce qui peut varier selon l'OS.
@@ -36,12 +36,12 @@ Make a été conçu pour un monde différent du nôtre :
 
 La communauté a progressivement développé des alternatives :
 
-- **Ant** (2000) — XML, verbose, popularisé par Java
-- **Rake** (2004) — Ruby DSL, élégant mais Ruby-requis
-- **Gradle** (2008) — Groovy/Kotlin, standard Java/Kotlin
-- **Jake** (2010) — JavaScript, disparu
-- **just** (2016) — Simplicité, recettes inspirées de Make mais modernisées
-- **Task** (2017) — YAML, multi-plateforme, inspiré par Go
+- **Ant** (2000), XML, verbose, popularisé par Java
+- **Rake** (2004), Ruby DSL, élégant mais Ruby-requis
+- **Gradle** (2008), Groovy/Kotlin, standard Java/Kotlin
+- **Jake** (2010), JavaScript, disparu
+- **just** (2016), Simplicité, recettes inspirées de Make mais modernisées
+- **Task** (2017), YAML, multi-plateforme, inspiré par Go
 
 ## Taskfile, c'est quoi ?
 
@@ -165,10 +165,10 @@ tasks:
 ```
 
 Task expose des variables:
-- `.OS` — système d'exploitation (linux, darwin, windows)
-- `.ARCH` — architecture (amd64, arm64, etc.)
-- `.TASK` — nom de la tâche en cours
-- `.CLI_ARGS` — arguments passés en ligne de commande
+- `.OS`, système d'exploitation (linux, darwin, windows)
+- `.ARCH`, architecture (amd64, arm64, etc.)
+- `.TASK`, nom de la tâche en cours
+- `.CLI_ARGS`, arguments passés en ligne de commande
 
 ### Watching et builds
 
@@ -242,7 +242,7 @@ tasks:
     cmd: echo "Deploying..."
 ```
 
-## Makefile vs Taskfile — Le comparatif
+## Makefile vs Taskfile : Le comparatif
 
 | | Makefile | Taskfile |
 |---|---|---|
@@ -481,7 +481,7 @@ Task est un projet mature :
 - Intégration dans des outils CI/CD
 - Équipe active avec releases régulières (v3.49.x en mars 2026)
 
-Le projet reste maintenu par la communauté, sans corporate backing majeur — ce qui peut être un avantage (indépendance) ou un risque (dépendance aux contributeurs).
+Le projet reste maintenu par la communauté, sans corporate backing majeur, ce qui peut être un avantage (indépendance) ou un risque (dépendance aux contributeurs).
 
 ## Conclusion
 

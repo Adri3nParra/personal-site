@@ -2,7 +2,7 @@
 title: "Falco : Runtime Security Monitoring on Kubernetes"
 date: 2026-04-12
 draft: false
-summary: "Trivy scanne les images, Kyverno valide les déploiements — mais qu'est-ce qui surveille ce qui se passe une fois les conteneurs lancés ? Falco, le CNCF project, surveille les syscalls en temps réel et alerte dès qu'un comportement anormal est détecté."
+summary: "Trivy scanne les images, Kyverno valide les déploiements, mais qu'est-ce qui surveille ce qui se passe une fois les conteneurs lancés ? Falco, le CNCF project, surveille les syscalls en temps réel et alerte dès qu'un comportement anormal est détecté."
 tags: ["Kubernetes", "Falco", "Sécurité", "DevOps", "eBPF"]
 ---
 
@@ -18,11 +18,11 @@ Trivy ne voit pas ça. Kyverno ne voit pas ça. Falco, si.
 
 ## Qu'est-ce que Falco ?
 
-Falco est un outil open source de détection de menaces à l'exécution, originellement créé par Sysdig, maintenant un projet CNCF incubé. Il surveille les appels système (syscalls) du kernel Linux — la couche la plus basse observable sans modifier les applications.
+Falco est un outil open source de détection de menaces à l'exécution, originellement créé par Sysdig, maintenant un projet CNCF incubé. Il surveille les appels système (syscalls) du kernel Linux, la couche la plus basse observable sans modifier les applications.
 
 Son principe : définir des **règles** qui décrivent un comportement anormal. Si un conteneur viole une règle, Falco génère une alerte.
 
-Ce n'est pas un WAF, pas un IDS réseau — c'est un moniteur de comportement au niveau kernel.
+Ce n'est pas un WAF, pas un IDS réseau, c'est un moniteur de comportement au niveau kernel.
 
 ```
 Application
@@ -89,7 +89,7 @@ kubectl get pods -n falco
 # falco-falcosidekick-ui-xxxxx      1/1     Running
 ```
 
-Le DaemonSet Falco tourne sur chaque nœud — c'est un prérequis pour intercepter tous les syscalls du cluster.
+Le DaemonSet Falco tourne sur chaque nœud, c'est un prérequis pour intercepter tous les syscalls du cluster.
 
 ### Vérifier que Falco détecte
 
@@ -152,10 +152,10 @@ Une règle Falco ressemble à ça :
 ```
 
 Les éléments clés :
-- **`condition`** — filtre en langage Falco (proche de SQL)
-- **`output`** — message d'alerte avec variables enrichies
-- **`priority`** — `DEBUG`, `INFO`, `NOTICE`, `WARNING`, `ERROR`, `CRITICAL`
-- **`tags`** — pour filtrer et router les alertes
+- **`condition`** : filtre en langage Falco (proche de SQL)
+- **`output`** : message d'alerte avec variables enrichies
+- **`priority`** : `DEBUG`, `INFO`, `NOTICE`, `WARNING`, `ERROR`, `CRITICAL`
+- **`tags`** : pour filtrer et router les alertes
 
 ### Les macros et les listes
 
@@ -278,7 +278,7 @@ helm upgrade falco falcosecurity/falco \
   --values values-falco.yaml
 ```
 
-## Falcosidekick — router les alertes
+## Falcosidekick : router les alertes
 
 Falco génère des alertes dans ses logs. Sans Falcosidekick, tu ne verras rien en temps réel. Falcosidekick est un proxy d'alerting qui supporte ~50 destinations.
 
@@ -336,8 +336,8 @@ falcosidekick:
 ```
 
 Métriques disponibles :
-- `falcosidekick_inputs_total` — événements reçus par priorité
-- `falcosidekick_outputs_total` — alertes envoyées par destination
+- `falcosidekick_inputs_total`, événements reçus par priorité
+- `falcosidekick_outputs_total`, alertes envoyées par destination
 
 ### Falco UI
 
@@ -357,9 +357,9 @@ Le dashboard affiche un historique des événements, filtrable par priorité, r�
 
 Un attaquant qui obtient l'exécution de code dans un conteneur ouvre souvent un reverse shell. Falco détecte ça via plusieurs règles combinées :
 
-1. `Shell spawned in container` — un shell est ouvert
-2. `Unexpected outbound connection` — connexion sortante vers une IP externe
-3. `Network activity from non-expected process` — processus shell qui fait du réseau
+1. `Shell spawned in container`, un shell est ouvert
+2. `Unexpected outbound connection`, connexion sortante vers une IP externe
+3. `Network activity from non-expected process`, processus shell qui fait du réseau
 
 Les trois alertes en moins d'une seconde, c'est un signal fort.
 
@@ -377,10 +377,10 @@ Si ton image est immutable (ce qu'elle devrait être), et qu'un exécutable appa
 ### Détection de lecture de credentials
 
 ```bash
-# /var/run/secrets/ — tokens K8s
-# /root/.kube/config — kubeconfig
-# /etc/kubernetes/ — certs cluster
-# ~/.aws/credentials — AWS
+# /var/run/secrets/ : tokens K8s
+# /root/.kube/config : kubeconfig
+# /etc/kubernetes/ : certs cluster
+# ~/.aws/credentials : AWS
 ```
 
 Falco surveille ces chemins par défaut. Un conteneur API qui lit `/etc/kubernetes/admin.conf`, c'est anormal.
@@ -429,9 +429,9 @@ falco:
 
 ### Ce que Falco ne fait pas
 
-- **Ne bloque pas** — Falco détecte et alerte, il n'arrête pas le processus. Pour bloquer, combine avec un admission controller ou un mécanisme d'isolation.
-- **Pas de forensics réseau complet** — Falco surveille les connexions (IP, port) mais pas le contenu des paquets.
-- **Ne remplace pas un SIEM** — Falco génère des événements, mais l'agrégation et la corrélation sur le long terme, c'est Elasticsearch/Splunk/Loki.
+- **Ne bloque pas** : Falco détecte et alerte, il n'arrête pas le processus. Pour bloquer, combine avec un admission controller ou un mécanisme d'isolation.
+- **Pas de forensics réseau complet** : Falco surveille les connexions (IP, port) mais pas le contenu des paquets.
+- **Ne remplace pas un SIEM** : Falco génère des événements, mais l'agrégation et la corrélation sur le long terme, c'est Elasticsearch/Splunk/Loki.
 
 ### Overhead kernel
 
@@ -499,6 +499,6 @@ Falco complète le triangle de sécurité Kubernetes :
 | Admission | Kyverno | Validation au déploiement |
 | Runtime | Falco | Surveillance en continu |
 
-Pas de ces trois couches n'est suffisante seule. Une image propre peut être compromise. Un déploiement conforme peut dériver. Falco est la dernière ligne de défense — il détecte ce qui échappe aux deux premières.
+Pas de ces trois couches n'est suffisante seule. Une image propre peut être compromise. Un déploiement conforme peut dériver. Falco est la dernière ligne de défense, il détecte ce qui échappe aux deux premières.
 
 L'overhead est faible (eBPF), le déploiement est simple (Helm en 5 minutes), et les règles par défaut couvrent l'essentiel. Le vrai travail, c'est le calibrage : réduire les faux positifs, écrire les règles métier, brancher les alertes sur ce que ton équipe surveille déjà.

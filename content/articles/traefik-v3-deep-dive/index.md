@@ -12,11 +12,11 @@ Si tu utilises Traefik uniquement pour exposer des Ingress HTTP basiques, tu pas
 
 La v3 n'est pas une réécriture complète, mais elle apporte des changements importants :
 
-- **Gateway API en GA** — plus besoin de feature gates expérimentaux (cf. [mon article sur la Gateway API](/articles/kubernetes-gateway-api/))
-- **Suppression de l'API v1alpha** — les IngressRoute passent en `traefik.io/v1alpha1` au lieu de l'ancien `traefik.containo.us/v1alpha1`
-- **HTTP/3 activable nativement** — QUIC sur les entrypoints HTTPS
-- **Métriques Prometheus natives** — labels par router, service et entrypoint sans config externe
-- **Wasm plugins** — extensions en WebAssembly, sans recompiler Traefik
+- **Gateway API en GA** : plus besoin de feature gates expérimentaux (cf. [mon article sur la Gateway API](/articles/kubernetes-gateway-api/))
+- **Suppression de l'API v1alpha** : les IngressRoute passent en `traefik.io/v1alpha1` au lieu de l'ancien `traefik.containo.us/v1alpha1`
+- **HTTP/3 activable nativement** : QUIC sur les entrypoints HTTPS
+- **Métriques Prometheus natives** : labels par router, service et entrypoint sans config externe
+- **Wasm plugins** : extensions en WebAssembly, sans recompiler Traefik
 
 ## Installation Helm : au-delà des valeurs par défaut
 
@@ -247,7 +247,7 @@ spec:
     secretName: app-tls
 ```
 
-L'ordre dans la liste `middlewares` est l'ordre d'exécution. Rate limit en premier, headers ensuite, auth en dernier — c'est intentionnel : pas la peine d'authentifier si la requête est déjà rejetée par le rate limit.
+L'ordre dans la liste `middlewares` est l'ordre d'exécution. Rate limit en premier, headers ensuite, auth en dernier, c'est intentionnel : pas la peine d'authentifier si la requête est déjà rejetée par le rate limit.
 
 ## TCP/UDP Routing
 
@@ -462,12 +462,12 @@ Les access logs en JSON sont directement ingérables par Loki, Elasticsearch ou 
 
 Avec les labels `addRoutersLabels` et `addServicesLabels` activés, tu peux construire des dashboards Grafana précis. Quelques panels essentiels :
 
-- **Requêtes par seconde par router** — `sum(rate(traefik_router_requests_total[5m])) by (router)`
-- **Latence P99 par service** — `histogram_quantile(0.99, sum(rate(traefik_service_request_duration_seconds_bucket[5m])) by (le, service))`
-- **Répartition des codes HTTP** — `sum(rate(traefik_router_requests_total[5m])) by (code)` en stacked bar
-- **Connexions ouvertes** — `traefik_entrypoint_open_connections` pour détecter les connexions pendantes
+- **Requêtes par seconde par router** : `sum(rate(traefik_router_requests_total[5m])) by (router)`
+- **Latence P99 par service** : `histogram_quantile(0.99, sum(rate(traefik_service_request_duration_seconds_bucket[5m])) by (le, service))`
+- **Répartition des codes HTTP** : `sum(rate(traefik_router_requests_total[5m])) by (code)` en stacked bar
+- **Connexions ouvertes** : `traefik_entrypoint_open_connections` pour détecter les connexions pendantes
 
-Le dashboard communautaire Grafana ID **17346** est un bon point de départ — il couvre les métriques entrypoint, router et service. À adapter ensuite selon tes besoins.
+Le dashboard communautaire Grafana ID **17346** est un bon point de départ, il couvre les métriques entrypoint, router et service. À adapter ensuite selon tes besoins.
 
 ## Cert-Manager et Traefik : TLS automatisé
 
@@ -495,14 +495,14 @@ Traefik lit automatiquement les secrets TLS référencés dans les IngressRoute.
 
 Quelques règles tirées de l'expérience :
 
-1. **Toujours au moins 2 replicas** — un reverse proxy qui tombe, c'est tout le cluster qui est coupé
-2. **PodDisruptionBudget** — `minAvailable: 1` minimum
-3. **Anti-affinité** — ne pas mettre les deux replicas sur le même nœud
+1. **Toujours au moins 2 replicas** : un reverse proxy qui tombe, c'est tout le cluster qui est coupé
+2. **PodDisruptionBudget** : `minAvailable: 1` minimum
+3. **Anti-affinité** : ne pas mettre les deux replicas sur le même nœud
 4. **Redirection HTTP → HTTPS** au niveau de l'entrypoint, pas dans chaque IngressRoute
-5. **Access logs en JSON** — indispensable pour le debug et le monitoring
-6. **Rate limit global** avant l'auth — économise des ressources
+5. **Access logs en JSON** : indispensable pour le debug et le monitoring
+6. **Rate limit global** avant l'auth, économise des ressources
 7. **Séparer les entrypoints** internes et externes si tu as du trafic intra-cluster
-8. **Monitorer les certificats** — l'alerte sur `traefik_tls_certs_not_after` peut sauver un week-end
+8. **Monitorer les certificats** : l'alerte sur `traefik_tls_certs_not_after` peut sauver un week-end
 
 ```yaml
 # PodDisruptionBudget
@@ -533,6 +533,6 @@ affinity:
 
 ## Conclusion
 
-Traefik v3 est bien plus qu'un Ingress Controller. C'est un reverse proxy complet avec du routage expressif, des middlewares chaînables, du TCP/UDP, des plugins, et une observabilité native. Si tu l'utilises déjà en mode basique, prends le temps d'explorer les IngressRoute CRD et les middlewares — c'est là que se trouve la vraie valeur ajoutée.
+Traefik v3 est bien plus qu'un Ingress Controller. C'est un reverse proxy complet avec du routage expressif, des middlewares chaînables, du TCP/UDP, des plugins, et une observabilité native. Si tu l'utilises déjà en mode basique, prends le temps d'explorer les IngressRoute CRD et les middlewares, c'est là que se trouve la vraie valeur ajoutée.
 
 Et si tu gères plusieurs équipes sur le même cluster, combine ça avec la [Gateway API](/articles/kubernetes-gateway-api/) pour la séparation des responsabilités. Les deux approches cohabitent parfaitement dans Traefik v3.

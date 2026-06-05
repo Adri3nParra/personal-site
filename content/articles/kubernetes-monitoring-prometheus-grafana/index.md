@@ -6,19 +6,19 @@ summary: "Mettre en place une stack de monitoring complète sur Kubernetes avec 
 tags: ["Kubernetes", "Prometheus", "Grafana", "Monitoring", "DevOps"]
 ---
 
-Un cluster Kubernetes sans monitoring, c'est piloter à l'aveugle. Tu ne sais pas quand un pod OOMKill, quand un nœud sature, ou quand la latence de ton API explose. La stack **Prometheus + Grafana** est le standard de facto pour le monitoring Kubernetes — et avec **kube-prometheus-stack**, tout s'installe en un seul chart Helm.
+Un cluster Kubernetes sans monitoring, c'est piloter à l'aveugle. Tu ne sais pas quand un pod OOMKill, quand un nœud sature, ou quand la latence de ton API explose. La stack **Prometheus + Grafana** est le standard de facto pour le monitoring Kubernetes, et avec **kube-prometheus-stack**, tout s'installe en un seul chart Helm.
 
 ## Pourquoi kube-prometheus-stack
 
 Il existe plusieurs façons d'installer Prometheus sur Kubernetes. La plus complète et la plus maintenue, c'est le chart Helm **kube-prometheus-stack** (anciennement prometheus-operator). Il embarque :
 
-- **Prometheus Operator** — gère les instances Prometheus via des CRDs
-- **Prometheus** — collecte et stocke les métriques (TSDB)
-- **Grafana** — dashboards et visualisation
-- **Alertmanager** — routage et notification des alertes
-- **kube-state-metrics** — métriques sur l'état des objets Kubernetes (pods, deployments, nodes…)
-- **node-exporter** — métriques système des nœuds (CPU, RAM, disque, réseau)
-- **Règles d'alerte préconfigurées** — plus de 100 alertes prêtes à l'emploi
+- **Prometheus Operator** : gère les instances Prometheus via des CRDs
+- **Prometheus** : collecte et stocke les métriques (TSDB)
+- **Grafana** : dashboards et visualisation
+- **Alertmanager** : routage et notification des alertes
+- **kube-state-metrics** : métriques sur l'état des objets Kubernetes (pods, deployments, nodes…)
+- **node-exporter** : métriques système des nœuds (CPU, RAM, disque, réseau)
+- **Règles d'alerte préconfigurées** : plus de 100 alertes prêtes à l'emploi
 
 L'alternative serait d'installer chaque composant séparément. C'est faisable, mais c'est du travail de maintenance en plus pour aucun bénéfice réel.
 
@@ -293,10 +293,10 @@ alertmanager:
 
 Points importants :
 
-- **group_by** — regroupe les alertes similaires pour éviter le spam
-- **inhibit_rules** — une alerte critical supprime les warnings associés
-- **send_resolved** — notifie quand l'alerte est résolue (pas juste quand elle se déclenche)
-- **repeat_interval** — 4h pour les warnings, 1h pour les criticals
+- **group_by** : regroupe les alertes similaires pour éviter le spam
+- **inhibit_rules** : une alerte critical supprime les warnings associés
+- **send_resolved** : notifie quand l'alerte est résolue (pas juste quand elle se déclenche)
+- **repeat_interval** : 4h pour les warnings, 1h pour les criticals
 
 ### Silencer une alerte
 
@@ -498,9 +498,9 @@ prometheus:
 
 Pour garder des métriques au-delà de 15-30 jours, Prometheus seul ne suffit pas. Les options :
 
-- **Thanos** — sidecar qui pousse les blocs vers du stockage objet (S3, MinIO), avec déduplication et compaction
-- **VictoriaMetrics** — remplacement drop-in de Prometheus avec meilleure compression et rétention native longue
-- **Cortex / Mimir** — stockage distribué pour du multi-tenant
+- **Thanos** : sidecar qui pousse les blocs vers du stockage objet (S3, MinIO), avec déduplication et compaction
+- **VictoriaMetrics** : remplacement drop-in de Prometheus avec meilleure compression et rétention native longue
+- **Cortex / Mimir** : stockage distribué pour du multi-tenant
 
 Pour la majorité des clusters, 15-30 jours en local suffisent. Les recording rules agrègent les données importantes, et les dashboards long terme s'appuient sur ces métriques précalculées.
 
@@ -532,13 +532,13 @@ spec:
 
 ## Bonnes pratiques
 
-1. **Toujours mettre du stockage persistant** sur Prometheus — sans PVC, un restart = perte de toutes les métriques
-2. **`serviceMonitorSelectorNilUsesHelmValues: false`** — sinon Prometheus ne scrape que les ServiceMonitors avec le label du chart
-3. **Dimensionner la mémoire** — Prometheus consomme ~2 octets par série active en RAM. 100k séries = ~200 Mo minimum, prévoir large
-4. **Ne pas scraper trop fréquemment** — 30s est un bon compromis. 10s sur un gros cluster, c'est un moyen rapide de saturer Prometheus
-5. **Utiliser les recording rules** pour les requêtes de dashboard complexes — un `histogram_quantile` sur 100k séries toutes les 5s, ça fait mal
+1. **Toujours mettre du stockage persistant** sur Prometheus, sans PVC, un restart = perte de toutes les métriques
+2. **`serviceMonitorSelectorNilUsesHelmValues: false`** : sinon Prometheus ne scrape que les ServiceMonitors avec le label du chart
+3. **Dimensionner la mémoire** : Prometheus consomme ~2 octets par série active en RAM. 100k séries = ~200 Mo minimum, prévoir large
+4. **Ne pas scraper trop fréquemment** : 30s est un bon compromis. 10s sur un gros cluster, c'est un moyen rapide de saturer Prometheus
+5. **Utiliser les recording rules** pour les requêtes de dashboard complexes, un `histogram_quantile` sur 100k séries toutes les 5s, ça fait mal
 6. **Labelliser les alertes** avec `namespace`, `severity`, et `team` pour le routage Alertmanager
-7. **Tester les alertes** — une alerte qui n'a jamais fired, personne ne sait si elle fonctionne. Utiliser `promtool` :
+7. **Tester les alertes** : une alerte qui n'a jamais fired, personne ne sait si elle fonctionne. Utiliser `promtool` :
 
 ```bash
 # Vérifier la syntaxe des règles
@@ -548,7 +548,7 @@ promtool check rules rules.yaml
 promtool query instant http://localhost:9090 'up == 0'
 ```
 
-8. **Séparer les alertes infra et applicatives** — les alertes infra dans le namespace `monitoring`, les alertes applicatives dans le namespace de l'app
+8. **Séparer les alertes infra et applicatives** : les alertes infra dans le namespace `monitoring`, les alertes applicatives dans le namespace de l'app
 
 ## Conclusion
 

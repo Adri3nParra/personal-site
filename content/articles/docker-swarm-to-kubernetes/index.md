@@ -6,17 +6,17 @@ summary: "Migrer de Docker Swarm à Kubernetes ne se fait pas en un week-end. Ma
 tags: ["Kubernetes", "Docker Swarm", "Migration", "DevOps", "Helm"]
 ---
 
-Docker Swarm a rendu service. Simple à mettre en place, intégré à Docker, suffisant pour des charges modestes. Mais à partir d'un certain point — scaling, observabilité, écosystème, recrutement — Kubernetes devient incontournable. Le problème, c'est que la migration n'est pas un simple changement de syntaxe. Les concepts ne mappent pas 1:1, et les pièges sont nombreux.
+Docker Swarm a rendu service. Simple à mettre en place, intégré à Docker, suffisant pour des charges modestes. Mais à partir d'un certain point (scaling, observabilité, écosystème, recrutement), Kubernetes devient incontournable. Le problème, c'est que la migration n'est pas un simple changement de syntaxe. Les concepts ne mappent pas 1:1, et les pièges sont nombreux.
 
 ## Pourquoi migrer ?
 
 Swarm fonctionne. Mais il stagne. Quelques constats qui poussent à la migration :
 
-- **Écosystème limité** — pas d'équivalent à Helm, ArgoCD, Kyverno, Prometheus Operator… L'outillage autour de Swarm est quasi inexistant
-- **Pas de CRD** — impossible d'étendre le modèle avec des ressources custom. Swarm ne gère que ce que Docker a prévu
-- **Recrutement** — trouver quelqu'un qui connaît Swarm en 2026, c'est plus dur que trouver un profil Kubernetes
-- **Support cloud** — OVH MKS, GKE, EKS, AKS… tous les clouds proposent du Kubernetes managé. Aucun ne propose du Swarm managé
-- **Observabilité** — le monitoring natif de Swarm se limite à `docker service ls`. Pour du vrai monitoring, tu finis par réinventer la roue
+- **Écosystème limité** : pas d'équivalent à Helm, ArgoCD, Kyverno, Prometheus Operator… L'outillage autour de Swarm est quasi inexistant
+- **Pas de CRD** : impossible d'étendre le modèle avec des ressources custom. Swarm ne gère que ce que Docker a prévu
+- **Recrutement** : trouver quelqu'un qui connaît Swarm en 2026, c'est plus dur que trouver un profil Kubernetes
+- **Support cloud** : OVH MKS, GKE, EKS, AKS… tous les clouds proposent du Kubernetes managé. Aucun ne propose du Swarm managé
+- **Observabilité** : le monitoring natif de Swarm se limite à `docker service ls`. Pour du vrai monitoring, tu finis par réinventer la roue
 
 La question n'est pas "faut-il migrer ?" mais "comment migrer proprement ?".
 
@@ -67,9 +67,9 @@ docker stack config mon-app > mon-app-compose.yml
 
 Classe tes services en trois catégories :
 
-1. **Stateless simples** — APIs, frontends, workers : migration facile
-2. **Stateful** — bases de données, queues : migration complexe, à faire en dernier
-3. **Infra** — reverse proxy, monitoring : à remplacer par l'équivalent Kubernetes natif
+1. **Stateless simples** : APIs, frontends, workers : migration facile
+2. **Stateful** : bases de données, queues : migration complexe, à faire en dernier
+3. **Infra** : reverse proxy, monitoring : à remplacer par l'équivalent Kubernetes natif
 
 Commence toujours par les stateless simples pour valider le process.
 
@@ -223,10 +223,10 @@ stringData:
 
 Points clés de la traduction :
 
-- **`update_config.order: start-first`** → `maxUnavailable: 0` + `maxSurge: 1` — le nouveau pod démarre avant de couper l'ancien
-- **`resources.reservations`** → `resources.requests` — même concept, nom différent
+- **`update_config.order: start-first`** → `maxUnavailable: 0` + `maxSurge: 1`, le nouveau pod démarre avant de couper l'ancien
+- **`resources.reservations`** → `resources.requests`, même concept, nom différent
 - **`restart_policy`** → géré nativement par le kubelet, pas besoin de le spécifier
-- **Probes** — Swarm n'a que le healthcheck Docker. Kubernetes sépare liveness (redémarrer) et readiness (retirer du load balancing)
+- **Probes** : Swarm n'a que le healthcheck Docker. Kubernetes sépare liveness (redémarrer) et readiness (retirer du load balancing)
 
 ### Phase 3 : Helm charts pour industrialiser
 
@@ -389,9 +389,9 @@ spec:
 
 Stratégie de migration des données :
 
-1. **Dump/restore** — le plus simple et le plus sûr pour les BDD
-2. **Réplication** — si tu peux te permettre un temps de migration plus long avec un follower sur le nouveau cluster
-3. **Copie de volume** — `rsync` du volume Docker vers un PV Kubernetes (nécessite un accès aux deux côtés)
+1. **Dump/restore** : le plus simple et le plus sûr pour les BDD
+2. **Réplication** : si tu peux te permettre un temps de migration plus long avec un follower sur le nouveau cluster
+3. **Copie de volume** : `rsync` du volume Docker vers un PV Kubernetes (nécessite un accès aux deux côtés)
 
 ```bash
 # Dump depuis Swarm
@@ -406,7 +406,7 @@ kubectl exec -n mon-app postgres-0 -- \
 
 ### Phase 6 : secrets
 
-Les secrets Docker Swarm sont stockés dans le Raft log du cluster. En Kubernetes, les secrets sont en base64 dans etcd — pas chiffrés par défaut.
+Les secrets Docker Swarm sont stockés dans le Raft log du cluster. En Kubernetes, les secrets sont en base64 dans etcd, pas chiffrés par défaut.
 
 Pour une migration propre, utilise [Sealed Secrets](https://github.com/bitnami-labs/sealed-secrets) :
 
@@ -534,7 +534,7 @@ spec:
 
 ## Outils de migration
 
-### Kompose — conversion automatique
+### Kompose : conversion automatique
 
 [Kompose](https://kompose.io/) convertit un `docker-compose.yml` en manifestes Kubernetes :
 
@@ -601,17 +601,17 @@ Et inversement, expose les services Kubernetes via un NodePort ou LoadBalancer a
 
 ## Bonnes pratiques
 
-1. **Migre en binôme** — quelqu'un qui connaît l'app Swarm + quelqu'un qui connaît Kubernetes
-2. **GitOps dès le premier service** — mets ArgoCD en place avant de commencer à migrer. Chaque service migré arrive directement en GitOps
-3. **Monitoring d'abord** — installe Prometheus + Grafana avant de migrer les workloads. Tu veux voir les problèmes, pas les deviner
-4. **Environnement de staging** — migre d'abord en staging, valide, puis reproduis en prod
-5. **Automatise les rollbacks** — teste `kubectl rollout undo` sur chaque service. En cas de problème, le retour sur Swarm doit être possible tant que le DNS n'est pas basculé
-6. **Documente les différences** — chaque service migré doit avoir une note sur ce qui a changé (URLs internes, variables d'env, volumes)
-7. **Ne migre pas les bases de données en premier** — c'est tentant de "tout faire d'un coup", mais les stateful sont les plus risqués. Garde-les pour la fin
-8. **Profite de la migration pour nettoyer** — c'est l'occasion de supprimer les services inutilisés, de standardiser les conventions de nommage, et de mettre en place les bonnes pratiques (probes, limits, network policies)
+1. **Migre en binôme** : quelqu'un qui connaît l'app Swarm + quelqu'un qui connaît Kubernetes
+2. **GitOps dès le premier service** : mets ArgoCD en place avant de commencer à migrer. Chaque service migré arrive directement en GitOps
+3. **Monitoring d'abord** : installe Prometheus + Grafana avant de migrer les workloads. Tu veux voir les problèmes, pas les deviner
+4. **Environnement de staging** : migre d'abord en staging, valide, puis reproduis en prod
+5. **Automatise les rollbacks** : teste `kubectl rollout undo` sur chaque service. En cas de problème, le retour sur Swarm doit être possible tant que le DNS n'est pas basculé
+6. **Documente les différences** : chaque service migré doit avoir une note sur ce qui a changé (URLs internes, variables d'env, volumes)
+7. **Ne migre pas les bases de données en premier** : c'est tentant de "tout faire d'un coup", mais les stateful sont les plus risqués. Garde-les pour la fin
+8. **Profite de la migration pour nettoyer** : c'est l'occasion de supprimer les services inutilisés, de standardiser les conventions de nommage, et de mettre en place les bonnes pratiques (probes, limits, network policies)
 
 ## Conclusion
 
 Migrer de Docker Swarm à Kubernetes, c'est un projet en soi. Pas un changement de format de fichier. Les concepts sont proches mais les détails divergent suffisamment pour que chaque service nécessite une attention individuelle.
 
-La clé, c'est la progressivité : infra d'abord, stateless ensuite, stateful en dernier. Avec du GitOps et du monitoring en place dès le départ, chaque étape est observable et réversible. Et une fois la migration terminée, tu accèdes à tout l'écosystème Kubernetes — [Helm](/articles/transfersh-helm-chart/), [ArgoCD](/articles/argocd-introduction/), [Traefik IngressRoute](/articles/traefik-v3-deep-dive/), [monitoring Prometheus](/articles/kubernetes-monitoring-prometheus-grafana/), [politiques Kyverno](/articles/container-security-trivy-kyverno/) — qui n'a pas d'équivalent côté Swarm.
+La clé, c'est la progressivité : infra d'abord, stateless ensuite, stateful en dernier. Avec du GitOps et du monitoring en place dès le départ, chaque étape est observable et réversible. Et une fois la migration terminée, tu accèdes à tout l'écosystème Kubernetes ([Helm](/articles/transfersh-helm-chart/), [ArgoCD](/articles/argocd-introduction/), [Traefik IngressRoute](/articles/traefik-v3-deep-dive/), [monitoring Prometheus](/articles/kubernetes-monitoring-prometheus-grafana/), [politiques Kyverno](/articles/container-security-trivy-kyverno/)) qui n'a pas d'équivalent côté Swarm.

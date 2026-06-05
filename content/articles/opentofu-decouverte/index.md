@@ -14,26 +14,26 @@ Si tu utilises Terraform au quotidien, tu as forcément entendu parler d'OpenTof
 
 Terraform a été créé par HashiCorp en 2014. Open source sous licence **MPL 2.0** (Mozilla Public License), il est rapidement devenu l'outil de référence pour gérer de l'infrastructure as code. Son modèle déclaratif, son système de providers extensible et son state file ont convaincu une communauté massive : des milliers de providers, des dizaines de milliers de modules, et une adoption quasi universelle dans l'écosystème DevOps.
 
-Pendant presque dix ans, l'écosystème s'est construit autour de Terraform en toute confiance — la licence MPL garantissait que le code restait libre.
+Pendant presque dix ans, l'écosystème s'est construit autour de Terraform en toute confiance, la licence MPL garantissait que le code restait libre.
 
 ### Le changement de licence
 
-Le **10 août 2023**, HashiCorp a annoncé le passage de tous ses produits — dont Terraform — sous licence **BSL 1.1** (Business Source License). Concrètement, la BSL permet l'utilisation, la modification et la redistribution du code, **sauf** pour proposer un produit concurrent d'HashiCorp.
+Le **10 août 2023**, HashiCorp a annoncé le passage de tous ses produits (dont Terraform) sous licence **BSL 1.1** (Business Source License). Concrètement, la BSL permet l'utilisation, la modification et la redistribution du code, **sauf** pour proposer un produit concurrent d'HashiCorp.
 
 Les conséquences immédiates :
 
 - Les **éditeurs** proposant des solutions d'IaC managée ne pouvaient plus s'appuyer sur le code Terraform.
 - Les **contributions communautaires** alimentaient désormais un projet dont la licence limitait l'usage.
-- L'**incertitude juridique** — la notion de "produit concurrent" restant floue — a refroidi une partie de l'écosystème.
+- L'**incertitude juridique** (la notion de "produit concurrent" restant floue) a refroidi une partie de l'écosystème.
 
 ### La réponse de la communauté
 
 La réaction a été rapide et massive :
 
-- **Mi-août 2023** — Publication du **manifeste OpenTofu**, demandant à HashiCorp de revenir à une licence open source. Plus de **130 entreprises** et **680 individus** signent le manifeste. Le dépôt GitHub accumule plus de **33 000 étoiles** en quelques semaines — un chiffre que Terraform avait mis presque dix ans à atteindre.
-- **Fin août 2023** — Un fork privé est créé à partir de la dernière version MPL de Terraform.
-- **5 septembre 2023** — Le dépôt public `github.com/opentofu/opentofu` est lancé, avec un dossier de candidature pour rejoindre la **Linux Foundation**.
-- **Janvier 2024** — **OpenTofu 1.6.0** sort en GA, première version stable du fork.
+- **Mi-août 2023** : Publication du **manifeste OpenTofu**, demandant à HashiCorp de revenir à une licence open source. Plus de **130 entreprises** et **680 individus** signent le manifeste. Le dépôt GitHub accumule plus de **33 000 étoiles** en quelques semaines, un chiffre que Terraform avait mis presque dix ans à atteindre.
+- **Fin août 2023** : Un fork privé est créé à partir de la dernière version MPL de Terraform.
+- **5 septembre 2023** : Le dépôt public `github.com/opentofu/opentofu` est lancé, avec un dossier de candidature pour rejoindre la **Linux Foundation**.
+- **Janvier 2024** : **OpenTofu 1.6.0** sort en GA, première version stable du fork.
 
 Le projet est désormais hébergé par la Linux Foundation, garantissant une gouvernance neutre et communautaire, sans contrôle par une seule entité commerciale.
 
@@ -69,7 +69,7 @@ Depuis le fork, OpenTofu a divergé de Terraform avec plusieurs fonctionnalités
 
 ### Chiffrement du state (1.7)
 
-C'est probablement la fonctionnalité la plus attendue. Le state file Terraform contient des données sensibles en clair — mots de passe, clés API, tokens. OpenTofu permet de le chiffrer **côté client**, quel que soit le backend de stockage.
+C'est probablement la fonctionnalité la plus attendue. Le state file Terraform contient des données sensibles en clair, mots de passe, clés API, tokens. OpenTofu permet de le chiffrer **côté client**, quel que soit le backend de stockage.
 
 ```hcl
 terraform {
@@ -126,7 +126,7 @@ import {
 }
 ```
 
-Pour les migrations à grande échelle — reprendre un compte AWS existant avec des dizaines de ressources — c'est un gain de temps considérable par rapport aux `terraform import` un par un.
+Pour les migrations à grande échelle (reprendre un compte AWS existant avec des dizaines de ressources), c'est un gain de temps considérable par rapport aux `terraform import` un par un.
 
 ### Fonctions définies par les providers (1.7)
 
@@ -189,7 +189,7 @@ tofu apply -exclude=aws_instance.expensive_one
 
 Utile pour appliquer partiellement un plan sans toucher à certaines ressources sensibles.
 
-## Terraform vs OpenTofu — où en est-on ?
+## Terraform vs OpenTofu : où en est-on ?
 
 | | Terraform | OpenTofu |
 |---|---|---|
@@ -246,12 +246,12 @@ Le `plan` ne devrait montrer aucun changement si l'infrastructure est en phase a
 - La commande `terraform` → `tofu`
 - La variable d'environnement `TF_VAR_*` reste supportée
 - Les fichiers `.tf` restent compatibles
-- Le state file est interchangeable (tant que tu ne chiffres pas avec OpenTofu — le chiffrement est unidirectionnel)
+- Le state file est interchangeable (tant que tu ne chiffres pas avec OpenTofu, le chiffrement est unidirectionnel)
 - Les providers et modules du registre Terraform sont mirrorés sur le registre OpenTofu
 
 ### Ce qui ne change pas
 
-La syntaxe HCL, la structure des projets, les backends, les provisioners, les data sources — tout fonctionne à l'identique.
+La syntaxe HCL, la structure des projets, les backends, les provisioners, les data sources, tout fonctionne à l'identique.
 
 ## L'écosystème aujourd'hui
 
@@ -268,8 +268,8 @@ La communauté est active : chaque release majeure compte entre 30 et 50 contrib
 
 ## Conclusion
 
-OpenTofu n'est pas juste un fork protestataire — c'est un projet qui avance plus vite que son aîné sur les fonctionnalités que la communauté demande depuis des années. Le chiffrement du state, le provider `for_each`, l'évaluation anticipée des variables : ce sont des vrais gains opérationnels, pas des gadgets.
+OpenTofu n'est pas juste un fork protestataire, c'est un projet qui avance plus vite que son aîné sur les fonctionnalités que la communauté demande depuis des années. Le chiffrement du state, le provider `for_each`, l'évaluation anticipée des variables : ce sont des vrais gains opérationnels, pas des gadgets.
 
-Si tu démarres un nouveau projet d'infrastructure, il n'y a plus de raison technique de choisir Terraform plutôt qu'OpenTofu. Si tu as un existant Terraform, la migration est quasi transparente — et réversible.
+Si tu démarres un nouveau projet d'infrastructure, il n'y a plus de raison technique de choisir Terraform plutôt qu'OpenTofu. Si tu as un existant Terraform, la migration est quasi transparente, et réversible.
 
-Le vrai risque aujourd'hui, c'est de rester sur un outil dont la licence peut évoluer au gré des décisions d'un éditeur, alors qu'une alternative gouvernée par la Linux Foundation offre les mêmes capacités — et plus.
+Le vrai risque aujourd'hui, c'est de rester sur un outil dont la licence peut évoluer au gré des décisions d'un éditeur, alors qu'une alternative gouvernée par la Linux Foundation offre les mêmes capacités, et plus.

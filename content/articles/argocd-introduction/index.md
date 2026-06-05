@@ -6,7 +6,7 @@ summary: "GitOps est le standard pour deployer sur Kubernetes, et ArgoCD en est 
 tags: ["GitOps", "ArgoCD", "Kubernetes", "DevOps"]
 ---
 
-GitLab CI, Jenkins, GitHub Actions — les pipelines CI/CD, tout le monde connaît. Mais quand tu gères plusieurs clusters Kubernetes en production, les scripts de déploiement dans une pipeline ça pose vite des questions : qui a modifié quoi ? Comment rollbacker proprement ? Comment avoir un état desired vs actual visible ?
+GitLab CI, Jenkins, GitHub Actions : les pipelines CI/CD, tout le monde connaît. Mais quand tu gères plusieurs clusters Kubernetes en production, les scripts de déploiement dans une pipeline ça pose vite des questions : qui a modifié quoi ? Comment rollbacker proprement ? Comment avoir un état desired vs actual visible ?
 
 GitOps répond à ces questions. ArgoCD en est l'implémentation la plus répandue. Voici comment ça fonctionne concrètement.
 
@@ -32,7 +32,7 @@ Dans un pipeline classique, tu pousses vers le cluster. Avec GitOps, ArgoCD tire
 
 ## Installation
 
-ArgoCD se déploie sur un cluster Kubernetes — souvent le même que celui qu'il gère, mais il peut gérer plusieurs clusters (y compris des clusters externes).
+ArgoCD se déploie sur un cluster Kubernetes, souvent le même que celui qu'il gère, mais il peut gérer plusieurs clusters (y compris des clusters externes).
 
 ```bash
 # Installation via Helm
@@ -91,10 +91,10 @@ Cette Application dit : "Syncronise le contenu de `apps/mon-app` dans le dépôt
 
 ArgoCD ne déploie pas que des manifests YAML bruts :
 
-- **Git repository** — manifests bruts, Kustomize, Helm (values inline ou fichiers)
-- **Helm repository** — charts depuis un registry Helm
-- **OCI registry** — charts Docker/OCI (depuis GitHub Container Registry, Docker Hub…)
-- **Bitbucket, GitLab, Azure DevOps** — en plus de GitHub
+- **Git repository** : manifests bruts, Kustomize, Helm (values inline ou fichiers)
+- **Helm repository** : charts depuis un registry Helm
+- **OCI registry** : charts Docker/OCI (depuis GitHub Container Registry, Docker Hub…)
+- **Bitbucket, GitLab, Azure DevOps** : en plus de GitHub
 
 ## Sync et Drift
 
@@ -224,7 +224,7 @@ argocd app get mon-app --show-yaml
 | **Contre** | Pas de fonctions conditionnelles | Complexité des templates pour les overlays |
 | **Use case ideal** | Tes propres apps | Charts tiers, apps avec beaucoup de config |
 
-## Projects — organiser les Applications
+## Projects : organiser les Applications
 
 Les **AppProjects** permettent de regrouper les Applications et imposer des contraintes :
 
@@ -250,10 +250,10 @@ spec:
 ```
 
 Les contraintes possibles :
-- **sourceRepos** — quels dépôts sont autorisés
-- **destinations** — quels clusters/namespaces sont autorisés
-- **namespaceResourceBlacklist** — resources que ArgoCD ne gère pas
-- **clusterResourceWhitelist** — resources cluster-wide autorisées
+- **sourceRepos** : quels dépôts sont autorisés
+- **destinations** : quels clusters/namespaces sont autorisés
+- **namespaceResourceBlacklist** : resources que ArgoCD ne gère pas
+- **clusterResourceWhitelist** : resources cluster-wide autorisées
 
 Ça permet d'isoler les équipes : le projet "production" ne peut déployer que dans le namespace `production`, pas dans `staging` ou `kube-system`.
 
@@ -274,7 +274,7 @@ ID  DATE                           COMMIT    MESSAGE
 argocd app rollback mon-app 2
 ```
 
-ArgoCD redéploie le manifest à l'état du commit `d4e5f6g`. Pas besoin de `helm rollback`, pas de manipulation de state — Git fait tout.
+ArgoCD redéploie le manifest à l'état du commit `d4e5f6g`. Pas besoin de `helm rollback`, pas de manipulation de state, Git fait tout.
 
 ## Intégration avec GitLab CI
 
@@ -335,9 +335,9 @@ spec:
     namespace: production
 ```
 
-Un seul ArgoCD, plusieurs clusters — c'est le setup que j'utilise en production.
+Un seul ArgoCD, plusieurs clusters, c'est le setup que j'utilise en production.
 
-## Webhooks — éviter le polling
+## Webhooks : éviter le polling
 
 Par défaut, ArgoCD poll le dépôt toutes les 3 minutes. Pour une réactivité immédiate, configure un webhook :
 
