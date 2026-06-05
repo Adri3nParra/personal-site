@@ -5,7 +5,7 @@ draft: false
 
 Platform Engineer avec 5 ans d'expérience, spécialisé sur **Kubernetes, Cloud, les pipelines CI/CD et Linux**.
 
-Je suis quelqu'un de très curieux — je teste régulièrement de nouveaux outils, je lis des annonces de releases comme d'autres lisent les actualités, et j'ai souvent un POC qui tourne en local sur un truc qui m'a intrigué la semaine d'avant. Cette curiosité n'est pas un à-côté : c'est ce qui fait que je comprends rapidement un nouvel environnement, que je propose des solutions auxquelles l'équipe n'avait pas pensé, et que je reste à jour dans un écosystème qui évolue vite.
+Je suis quelqu'un de très curieux, je teste régulièrement de nouveaux outils, je lis des annonces de releases comme d'autres lisent les actualités, et j'ai souvent un POC qui tourne en local sur un truc qui m'a intrigué la semaine d'avant. Cette curiosité n'est pas un à-côté : c'est ce qui fait que je comprends rapidement un nouvel environnement, que je propose des solutions auxquelles l'équipe n'avait pas pensé, et que je reste à jour dans un écosystème qui évolue vite.
 
 Le reste du temps, j'aime les environnements simples, fiables et proches de la production. Pragmatique, je privilégie les solutions robustes et reproductibles plutôt que la complexité pour la complexité.
 
@@ -89,7 +89,7 @@ Français — Natif · Anglais — B2 · Espagnol — B1
 
 ## Environnement de travail
 
-Je travaille **100%** Linux (**et j'y tiens énormément**) — **Ubuntu 24.04** au quotidien, Windows uniquement pour le jeu. Ça fait une vraie différence : les outils, les réflexes et les environnements sont cohérents du poste à la prod.
+Je travaille **100%** Linux (**et j'y tiens énormément**) - **Ubuntu 24.04** au quotidien, Windows uniquement pour le jeu. Ça fait une vraie différence : les outils, les réflexes et les environnements sont cohérents du poste à la prod.
 
 Pour le développement et la veille, je tourne un cluster **K3S** local qui me permet de tester des charts Helm, des manifests ou des nouvelles technos avant de les approcher en production. J'utilise **nerdctl** pour le build et la manipulation d'images — CLI compatible Docker mais par-dessus containerd, sans démon.
 
