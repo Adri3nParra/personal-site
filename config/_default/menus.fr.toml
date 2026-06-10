@@ -17,3 +17,9 @@
   name = "Contact"
   pageRef = "contact"
   weight = 50
+
+[[main]]
+  identifier = "locale"
+  weight = 80
+  [main.params]
+    action = "locale"

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Monitoring on Adrien PARRA</title>
+		<link>http://localhost:1313/en/tags/monitoring/</link>
+		<description>Recent content in Monitoring on Adrien PARRA</description>
+		<generator>Hugo</generator>
+		<language>en</language>
+		
+		
+		
+		
+			<lastBuildDate>Sun, 29 Mar 2026 00:00:00 +0000</lastBuildDate>
+		
+			<atom:link href="http://localhost:1313/en/tags/monitoring/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Kubernetes Monitoring: Prometheus &#43; Grafana stack</title>
+				<link>http://localhost:1313/en/articles/kubernetes-monitoring-prometheus-grafana/</link>
+				<pubDate>Sun, 29 Mar 2026 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/en/articles/kubernetes-monitoring-prometheus-grafana/</guid>
+				<description>Setting up a complete monitoring stack on Kubernetes with kube-prometheus-stack: installation, Grafana dashboards, alerting rules, Alertmanager and production best practices.</description>
+			</item>
+	</channel>
+</rss>

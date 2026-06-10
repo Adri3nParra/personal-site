@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Containerd on Adrien PARRA</title>
+		<link>http://localhost:1313/en/tags/containerd/</link>
+		<description>Recent content in Containerd on Adrien PARRA</description>
+		<generator>Hugo</generator>
+		<language>en</language>
+		
+		
+		
+		
+			<lastBuildDate>Sun, 01 Mar 2026 00:00:00 +0000</lastBuildDate>
+		
+			<atom:link href="http://localhost:1313/en/tags/containerd/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>nerdctl: the Docker CLI for containerd</title>
+				<link>http://localhost:1313/en/articles/nerdctl/</link>
+				<pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/en/articles/nerdctl/</guid>
+				<description>nerdctl mirrors Docker&amp;rsquo;s syntax exactly, but talks to containerd directly. A handy tool for debugging a Kubernetes cluster, working without a Docker daemon, or experimenting with features Docker doesn&amp;rsquo;t offer yet.</description>
+			</item>
+	</channel>
+</rss>

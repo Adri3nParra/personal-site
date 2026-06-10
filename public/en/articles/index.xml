@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Articles on Adrien PARRA</title>
+		<link>http://localhost:1313/en/articles/</link>
+		<description>Recent content in Articles on Adrien PARRA</description>
+		<generator>Hugo</generator>
+		<language>en</language>
+		
+		
+		
+		
+			<lastBuildDate>Sun, 12 Apr 2026 00:00:00 +0000</lastBuildDate>
+		
+			<atom:link href="http://localhost:1313/en/articles/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Advanced OpenTofu: State Encryption &amp; Multi-Environment Strategies</title>
+				<link>http://localhost:1313/en/articles/opentofu-advanced-state-encryption-multi-env/</link>
+				<pubDate>Sun, 12 Apr 2026 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/en/articles/opentofu-advanced-state-encryption-multi-env/</guid>
+				<description>The intro article covered the why of OpenTofu. This one covers the how in production: state encryption with several key providers, key rotation, migrating an existing state, and the multi-environment patterns that hold up at scale.</description>
+			</item>
+			<item>
+				<title>Falco: Runtime Security Monitoring on Kubernetes</title>
+				<link>http://localhost:1313/en/articles/falco-runtime-security-kubernetes/</link>
+				<pubDate>Sun, 12 Apr 2026 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/en/articles/falco-runtime-security-kubernetes/</guid>
+				<description>Trivy scans images, Kyverno validates deployments, but what watches over what happens once the containers are running? Falco, the CNCF project, monitors syscalls in real time and alerts as soon as abnormal behavior is detected.</description>
+			</item>
+			<item>
+				<title>Docker Swarm to Kubernetes: migration strategies</title>
+				<link>http://localhost:1313/en/articles/docker-swarm-to-kubernetes/</link>
+				<pubDate>Sun, 29 Mar 2026 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/en/articles/docker-swarm-to-kubernetes/</guid>
+				<description>Migrating from Docker Swarm to Kubernetes doesn&amp;rsquo;t happen over a weekend. Concept mapping, migration patterns, pitfalls to avoid and a concrete hands-on review of a production migration.</description>
+			</item>
+			<item>
+				<title>K3S for Local Development: a mini production cluster</title>
+				<link>http://localhost:1313/en/articles/k3s-local-development/</link>
+				<pubDate>Sun, 29 Mar 2026 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/en/articles/k3s-local-development/</guid>
+				<description>K3S isn&amp;rsquo;t just a cluster for IoT. Here&amp;rsquo;s how to use it as a local development environment that mirrors your production, without the €2,000 monthly cloud bills.</description>
+			</item>
+			<item>
+				<title>Kubernetes Monitoring: Prometheus &#43; Grafana stack</title>
+				<link>http://localhost:1313/en/articles/kubernetes-monitoring-prometheus-grafana/</link>
+				<pubDate>Sun, 29 Mar 2026 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/en/articles/kubernetes-monitoring-prometheus-grafana/</guid>
+				<description>Setting up a complete monitoring stack on Kubernetes with kube-prometheus-stack: installation, Grafana dashboards, alerting rules, Alertmanager and production best practices.</description>
+			</item>
+			<item>
+				<title>Traefik v3 Deep Dive: beyond basic Ingress</title>
+				<link>http://localhost:1313/en/articles/traefik-v3-deep-dive/</link>
+				<pubDate>Sun, 29 Mar 2026 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/en/articles/traefik-v3-deep-dive/</guid>
+				<description>Traefik v3 isn&amp;rsquo;t just an IngressController. Middlewares, IngressRoute CRD, TCP/UDP routing, plugins, dashboard and observability: everything that makes Traefik a complete reverse proxy on Kubernetes.</description>
+			</item>
+			<item>
+				<title>ArgoCD in practice: GitOps made simple</title>
+				<link>http://localhost:1313/en/articles/argocd-introduction/</link>
+				<pubDate>Sat, 28 Mar 2026 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/en/articles/argocd-introduction/</guid>
+				<description>GitOps is the standard for deploying to Kubernetes, and ArgoCD is its most popular implementation. A hands-on review: how it works, why it&amp;rsquo;s different from a classic CI/CD pipeline, and how to structure your deployments.</description>
+			</item>
+			<item>
+				<title>Cloud sovereignty: why switch to a European provider</title>
+				<link>http://localhost:1313/en/articles/sovereignete-cloud/</link>
+				<pubDate>Sat, 28 Mar 2026 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/en/articles/sovereignete-cloud/</guid>
+				<description>AWS, GCP and Azure dominate the public cloud, but European providers have matured. A hands-on review of OVHcloud and Scaleway, a technical comparison, and the case for a more sovereign cloud.</description>
+			</item>
+			<item>
+				<title>Container Security: Trivy and Kyverno in production</title>
+				<link>http://localhost:1313/en/articles/container-security-trivy-kyverno/</link>
+				<pubDate>Sat, 28 Mar 2026 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/en/articles/container-security-trivy-kyverno/</guid>
+				<description>Securing a production Kubernetes cluster isn&amp;rsquo;t just a networking question. Vulnerability scanning, admission policies, least privilege: a hands-on review with Trivy and Kyverno.</description>
+			</item>
+			<item>
+				<title>Taskfile: the modern replacement for Makefile</title>
+				<link>http://localhost:1313/en/articles/taskfile-introduction/</link>
+				<pubDate>Sat, 28 Mar 2026 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/en/articles/taskfile-introduction/</guid>
+				<description>Taskfile (Task) is a task runner written in Go that advantageously replaces Make for modern projects. A look at its history, its advantages, and a comparison with Make, Just and shell scripts.</description>
+			</item>
+			<item>
+				<title>CKA: a hands-on review of the Kubernetes Administrator certification</title>
+				<link>http://localhost:1313/en/articles/retour-experience-cka/</link>
+				<pubDate>Sun, 15 Mar 2026 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/en/articles/retour-experience-cka/</guid>
+				<description>I sat and passed the CKA (Certified Kubernetes Administrator) in March 2026. Here&amp;rsquo;s how I prepared, what the exam really tests, and what I concretely took away from it.</description>
+			</item>
+			<item>
+				<title>nerdctl: the Docker CLI for containerd</title>
+				<link>http://localhost:1313/en/articles/nerdctl/</link>
+				<pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/en/articles/nerdctl/</guid>
+				<description>nerdctl mirrors Docker&amp;rsquo;s syntax exactly, but talks to containerd directly. A handy tool for debugging a Kubernetes cluster, working without a Docker daemon, or experimenting with features Docker doesn&amp;rsquo;t offer yet.</description>
+			</item>
+			<item>
+				<title>Contributing to open source: a Helm chart for transfer.sh</title>
+				<link>http://localhost:1313/en/articles/transfersh-helm-chart/</link>
+				<pubDate>Fri, 20 Feb 2026 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/en/articles/transfersh-helm-chart/</guid>
+				<description>transfer.sh is a widely used command-line file-sharing tool, but it had no official Helm chart. I filled that gap with an open source contribution and opened a PR on the upstream repository.</description>
+			</item>
+			<item>
+				<title>GitLab CI/CD: inputs, components and the catalog — the end of copy-paste</title>
+				<link>http://localhost:1313/en/articles/gitlab-cicd-inputs-components/</link>
+				<pubDate>Tue, 20 Jan 2026 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/en/articles/gitlab-cicd-inputs-components/</guid>
+				<description>GitLab has thoroughly reworked the reusability of its pipelines. Typed inputs replace fragile variables, components structure sharing, and the catalog lets you discover them. A practical overview.</description>
+			</item>
+			<item>
+				<title>OpenTofu: the open source IaC tool carrying Terraform&#39;s torch</title>
+				<link>http://localhost:1313/en/articles/opentofu-decouverte/</link>
+				<pubDate>Fri, 05 Dec 2025 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/en/articles/opentofu-decouverte/</guid>
+				<description>In August 2023, HashiCorp changed Terraform&amp;rsquo;s license. A few weeks later, OpenTofu was born under the Linux Foundation&amp;rsquo;s umbrella. A look at the project&amp;rsquo;s genesis, what new things it brings, and why it deserves your attention.</description>
+			</item>
+			<item>
+				<title>Kubernetes Gateway API: the successor to Ingress is here</title>
+				<link>http://localhost:1313/en/articles/kubernetes-gateway-api/</link>
+				<pubDate>Mon, 10 Nov 2025 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/en/articles/kubernetes-gateway-api/</guid>
+				<description>The Gateway API has been GA since Kubernetes 1.28. Here&amp;rsquo;s why it advantageously replaces Ingress, how it works, and how to set it up with Traefik.</description>
+			</item>
+	</channel>
+</rss>

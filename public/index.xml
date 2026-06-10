@@ -18,7 +18,7 @@
 				<link>http://localhost:1313/articles/falco-runtime-security-kubernetes/</link>
 				<pubDate>Sun, 12 Apr 2026 00:00:00 +0000</pubDate>
 				<guid>http://localhost:1313/articles/falco-runtime-security-kubernetes/</guid>
-				<description>Trivy scanne les images, Kyverno valide les déploiements — mais qu&amp;rsquo;est-ce qui surveille ce qui se passe une fois les conteneurs lancés ? Falco, le CNCF project, surveille les syscalls en temps réel et alerte dès qu&amp;rsquo;un comportement anormal est détecté.</description>
+				<description>Trivy scanne les images, Kyverno valide les déploiements, mais qu&amp;rsquo;est-ce qui surveille ce qui se passe une fois les conteneurs lancés ? Falco, le CNCF project, surveille les syscalls en temps réel et alerte dès qu&amp;rsquo;un comportement anormal est détecté.</description>
 			</item>
 			<item>
 				<title>OpenTofu Avancé : State Encryption &amp; Stratégies Multi-Environnements</title>
@@ -102,10 +102,10 @@
 				<link>http://localhost:1313/articles/transfersh-helm-chart/</link>
 				<pubDate>Fri, 20 Feb 2026 00:00:00 +0000</pubDate>
 				<guid>http://localhost:1313/articles/transfersh-helm-chart/</guid>
-				<description>transfer.sh est un outil de partage de fichiers en ligne de commande très utilisé, mais il ne proposait aucun Helm chart officiel. J&amp;rsquo;ai comblé ce manque avec une contribution open source — et ouvert une PR sur le dépôt upstream.</description>
+				<description>transfer.sh est un outil de partage de fichiers en ligne de commande très utilisé, mais il ne proposait aucun Helm chart officiel. J&amp;rsquo;ai comblé ce manque avec une contribution open source, et ouvert une PR sur le dépôt upstream.</description>
 			</item>
 			<item>
-				<title>GitLab CI/CD : inputs, components et le catalogue — la fin du copier-coller</title>
+				<title>GitLab CI/CD : inputs, components et le catalogue, la fin du copier-coller</title>
 				<link>http://localhost:1313/articles/gitlab-cicd-inputs-components/</link>
 				<pubDate>Tue, 20 Jan 2026 00:00:00 +0000</pubDate>
 				<guid>http://localhost:1313/articles/gitlab-cicd-inputs-components/</guid>
@@ -130,7 +130,7 @@
 				<link>http://localhost:1313/about/</link>
 				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
 				<guid>http://localhost:1313/about/</guid>
-				<description>&lt;p&gt;Platform Engineer avec 5 ans d&amp;rsquo;expérience, spécialisé sur &lt;strong&gt;Kubernetes, Cloud, les pipelines CI/CD et Linux&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;p&gt;Je suis quelqu&amp;rsquo;un de très curieux — je teste régulièrement de nouveaux outils, je lis des annonces de releases comme d&amp;rsquo;autres lisent les actualités, et j&amp;rsquo;ai souvent un POC qui tourne en local sur un truc qui m&amp;rsquo;a intrigué la semaine d&amp;rsquo;avant. Cette curiosité n&amp;rsquo;est pas un à-côté : c&amp;rsquo;est ce qui fait que je comprends rapidement un nouvel environnement, que je propose des solutions auxquelles l&amp;rsquo;équipe n&amp;rsquo;avait pas pensé, et que je reste à jour dans un écosystème qui évolue vite.&lt;/p&gt;</description>
+				<description>&lt;p&gt;Platform Engineer avec 5 ans d&amp;rsquo;expérience, spécialisé sur &lt;strong&gt;Kubernetes, Cloud, les pipelines CI/CD et Linux&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;p&gt;Je suis quelqu&amp;rsquo;un de très curieux, je teste régulièrement de nouveaux outils, je lis des annonces de releases comme d&amp;rsquo;autres lisent les actualités, et j&amp;rsquo;ai souvent un POC qui tourne en local sur un truc qui m&amp;rsquo;a intrigué la semaine d&amp;rsquo;avant. Cette curiosité n&amp;rsquo;est pas un à-côté : c&amp;rsquo;est ce qui fait que je comprends rapidement un nouvel environnement, que je propose des solutions auxquelles l&amp;rsquo;équipe n&amp;rsquo;avait pas pensé, et que je reste à jour dans un écosystème qui évolue vite.&lt;/p&gt;</description>
 			</item>
 			<item>
 				<title>Contact</title>

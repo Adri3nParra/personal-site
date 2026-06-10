@@ -1,0 +1,1131 @@
+
+
+
+
+
+
+<!doctype html>
+<html
+  lang="en"
+  dir="ltr"
+  class="scroll-smooth"
+  data-default-appearance="light"
+  data-auto-appearance="true"
+><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#FFFFFF" />
+  
+  <title>Kubernetes Monitoring: Prometheus &#43; Grafana stack &middot; Adrien PARRA</title>
+    <meta name="title" content="Kubernetes Monitoring: Prometheus &#43; Grafana stack &middot; Adrien PARRA" />
+  
+  
+  
+  
+  
+  <script
+    type="text/javascript"
+    src="http://localhost:1313/js/appearance.min.8a082f81b27f3cb2ee528df0b0bdc39787034cf2cc34d4669fbc9977c929023c.js"
+    integrity="sha256-iggvgbJ/PLLuUo3wsL3Dl4cDTPLMNNRmn7yZd8kpAjw="
+  ></script>
+  
+  
+  
+  
+  
+  
+  
+    
+  
+  
+  <link
+    type="text/css"
+    rel="stylesheet"
+    href="http://localhost:1313/css/main.bundle.min.0de763b2899dc6cb9886d78b6c56064836bffc4b9441a2489023bd81177731f2.css"
+    integrity="sha256-DedjsomdxsuYhteLbFYGSDa//EuUQaJIkCO9gRd3MfI="
+  />
+  
+  
+  
+    
+    
+  
+  
+  
+  
+    
+    <script
+      defer
+      type="text/javascript"
+      id="script-bundle"
+      src="http://localhost:1313/js/main.bundle.min.08a9220ae61dd334b11a887737885eaf1530f54c827ad77237e0dba74a179ea6.js"
+      integrity="sha256-CKkiCuYd0zSxGoh3N4herxUw9UyCetdyN&#43;Dbp0oXnqY="
+      data-copy="Copy"
+      data-copied="Copied"
+    ></script>
+  
+  
+  <meta
+    name="description"
+    content="
+      
+        Setting up a complete monitoring stack on Kubernetes with kube-prometheus-stack: installation, Grafana dashboards, alerting rules, Alertmanager and production best practices.
+      
+    "
+  />
+  
+  
+  
+  
+    <link rel="canonical" href="http://localhost:1313/en/articles/kubernetes-monitoring-prometheus-grafana/" />
+  
+  
+  
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <meta property="og:url" content="http://localhost:1313/en/articles/kubernetes-monitoring-prometheus-grafana/">
+	<meta property="og:site_name" content="Adrien PARRA">
+	<meta property="og:title" content="Kubernetes Monitoring: Prometheus &#43; Grafana stack">
+	<meta property="og:description" content="Setting up a complete monitoring stack on Kubernetes with kube-prometheus-stack: installation, Grafana dashboards, alerting rules, Alertmanager and production best practices.">
+	<meta property="og:locale" content="en">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="articles">
+		<meta property="article:published_time" content="2026-03-29T00:00:00+00:00">
+		<meta property="article:modified_time" content="2026-03-29T00:00:00+00:00">
+		<meta property="article:tag" content="Kubernetes">
+		<meta property="article:tag" content="Prometheus">
+		<meta property="article:tag" content="Grafana">
+		<meta property="article:tag" content="Monitoring">
+		<meta property="article:tag" content="DevOps">
+
+  
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="Kubernetes Monitoring: Prometheus &#43; Grafana stack">
+	<meta name="twitter:description" content="Setting up a complete monitoring stack on Kubernetes with kube-prometheus-stack: installation, Grafana dashboards, alerting rules, Alertmanager and production best practices.">
+
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "articleSection": "Articles",
+    "name": "Kubernetes Monitoring: Prometheus \u002b Grafana stack",
+    "headline": "Kubernetes Monitoring: Prometheus \u002b Grafana stack",
+    
+    "abstract": "Setting up a complete monitoring stack on Kubernetes with kube-prometheus-stack: installation, Grafana dashboards, alerting rules, Alertmanager and production best practices.",
+    "inLanguage": "en",
+    "url" : "http:\/\/localhost:1313\/en\/articles\/kubernetes-monitoring-prometheus-grafana\/",
+    "author" : {
+      "@type": "Person",
+      "name": "Adrien PARRA"
+    },
+    "copyrightYear": "2026",
+    "dateCreated": "2026-03-29T00:00:00\u002b00:00",
+    "datePublished": "2026-03-29T00:00:00\u002b00:00",
+    
+    "dateModified": "2026-03-29T00:00:00\u002b00:00",
+    
+    "keywords": ["Kubernetes","Prometheus","Grafana","Monitoring","DevOps"],
+    
+    "mainEntityOfPage": "true",
+    "wordCount": "1757"
+  }
+  </script>
+    
+    <script type="application/ld+json">
+    {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+     {
+       "@type": "ListItem",
+       "item": "http://localhost:1313/en/",
+       "name": "Home",
+       "position": 1
+     },
+     {
+       "@type": "ListItem",
+       "item": "http://localhost:1313/en/articles/",
+       "name": "Articles",
+       "position": 2
+     },
+     {
+       "@type": "ListItem",
+       "name": "Kubernetes Monitoring Prometheus Grafana Stack",
+       "position": 3
+     }
+   ]
+ }
+  </script>
+
+  
+  
+    <meta name="author" content="Adrien PARRA" />
+  
+  
+    
+      <link href="https://www.linkedin.com/in/adrien-parra-5473a0159/" rel="me" />
+    
+      <link href="https://github.com/Adri3nParra" rel="me" />
+    
+  
+  
+  
+
+
+
+
+
+
+
+  
+  
+
+  
+  
+</head>
+<body
+    class="m-auto flex h-screen max-w-7xl flex-col bg-neutral px-6 text-lg leading-7 text-neutral-900 dark:bg-neutral-800 dark:text-neutral sm:px-14 md:px-24 lg:px-32"
+  >
+    <div id="the-top" class="absolute flex self-center">
+      <a
+        class="-translate-y-8 rounded-b-lg bg-primary-200 px-3 py-1 text-sm focus:translate-y-0 dark:bg-neutral-600"
+        href="#main-content"
+        ><span class="pe-2 font-bold text-primary-600 dark:text-primary-400">&darr;</span
+        >Skip to main content</a
+      >
+    </div>
+    
+    
+      <header class="py-6 font-semibold text-neutral-900 dark:text-neutral sm:py-10 print:hidden">
+  <nav class="flex items-start justify-between sm:items-center">
+    
+    <div class="flex flex-row items-center">
+      
+  <a
+    class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2"
+    rel="me"
+    href="/en/"
+    >Adrien PARRA</a
+  >
+
+    </div>
+    
+    
+      <ul class="flex list-none flex-col text-end sm:flex-row">
+        
+          
+            
+            <li class="group mb-1 sm:mb-0 sm:me-7 sm:last:me-0.5">
+              
+                <a
+                  href="/en/about/"
+                  title="About"
+                  
+                  
+                  ><span
+                      class="decoration-primary-500 group-hover:underline group-hover:decoration-2 group-hover:underline-offset-2"
+                      >About</span
+                    >
+                  </a
+                >
+              
+            </li>
+          
+            
+            <li class="group mb-1 sm:mb-0 sm:me-7 sm:last:me-0.5">
+              
+                <a
+                  href="/en/experience/"
+                  title="Experience"
+                  
+                  
+                  ><span
+                      class="decoration-primary-500 group-hover:underline group-hover:decoration-2 group-hover:underline-offset-2"
+                      >Experience</span
+                    >
+                  </a
+                >
+              
+            </li>
+          
+            
+            <li class="group mb-1 sm:mb-0 sm:me-7 sm:last:me-0.5">
+              
+                <a
+                  href="/en/articles/"
+                  title="Articles"
+                  
+                  
+                  ><span
+                      class="decoration-primary-500 group-hover:underline group-hover:decoration-2 group-hover:underline-offset-2"
+                      >Articles</span
+                    >
+                  </a
+                >
+              
+            </li>
+          
+            
+            <li class="group mb-1 sm:mb-0 sm:me-7 sm:last:me-0.5">
+              
+                <a
+                  href="/en/contact/"
+                  title="Contact"
+                  
+                  
+                  ><span
+                      class="decoration-primary-500 group-hover:underline group-hover:decoration-2 group-hover:underline-offset-2"
+                      >Contact</span
+                    >
+                  </a
+                >
+              
+            </li>
+          
+            
+            <li class="group mb-1 sm:mb-0 sm:me-7 sm:last:me-0.5">
+              
+                
+                
+  
+    
+    
+      <div class="group relative">
+        <button
+          class="group-dark:hover:text-primary-400 flex w-full items-center justify-end transition-colors group-hover:text-primary-600"
+        >
+          <span class="icon relative inline-block px-1 align-text-bottom"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+  <path fill="currentColor" d="M4.545 6.714 4.11 8H3l1.862-5h1.284L8 8H6.833l-.435-1.286H4.545zm1.634-.736L5.5 3.956h-.049l-.679 2.022H6.18z"/>
+  <path fill="currentColor" d="M0 2a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v3h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-3H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2zm7.138 9.995c.193.301.402.583.63.846-.748.575-1.673 1.001-2.768 1.292.178.217.451.635.555.867 1.125-.359 2.08-.844 2.886-1.494.777.665 1.739 1.165 2.93 1.472.133-.254.414-.673.629-.89-1.125-.253-2.057-.694-2.82-1.284.681-.747 1.222-1.651 1.621-2.757H14V8h-3v1.047h.765c-.318.844-.74 1.546-1.272 2.13a6.066 6.066 0 0 1-.415-.492 1.988 1.988 0 0 1-.94.31z"/>
+</svg>
+</span><span class="text-sm">EN</span
+          ><span class="text-[0.6rem]"
+            ><span class="icon relative inline-block px-1 align-text-bottom"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg>
+</span></span
+          >
+        </button>
+        
+          <div class="invisible w-full bg-transparent group-hover:visible"></div>
+        
+        <div
+          class=" invisible absolute z-50 flex flex-col whitespace-nowrap rounded border border-neutral-300 bg-neutral text-start text-base shadow group-hover:visible ltr:right-0 rtl:left-0 dark:border-neutral-600 dark:bg-neutral-800"
+        >
+          
+          
+          
+            
+            
+              
+                
+                <div class="flex flex-grow">
+                  
+                    <a
+                      href="http://localhost:1313/articles/kubernetes-monitoring-prometheus-grafana/"
+                      class="w-full py-1 pe-10 ps-2 decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2"
+                      >Français</a
+                    >
+                  
+                </div>
+              
+            
+              
+            
+          
+            
+            
+              
+            
+              
+                
+                <div class="flex flex-grow">
+                  
+                    <a
+                      href="http://localhost:1313/en/articles/kubernetes-monitoring-prometheus-grafana/"
+                      class="flex w-full items-center justify-between bg-primary-100 px-2 py-1 dark:bg-primary-900"
+                      >English<span
+                        class="ms-2 w-6 text-primary-600 dark:text-primary-400"
+                        ><span class="icon relative inline-block px-1 align-text-bottom"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M438.6 105.4C451.1 117.9 451.1 138.1 438.6 150.6L182.6 406.6C170.1 419.1 149.9 419.1 137.4 406.6L9.372 278.6C-3.124 266.1-3.124 245.9 9.372 233.4C21.87 220.9 42.13 220.9 54.63 233.4L159.1 338.7L393.4 105.4C405.9 92.88 426.1 92.88 438.6 105.4H438.6z"/></svg>
+</span></span
+                      ></a
+                    >
+                  
+                </div>
+              
+            
+          
+        </div>
+      </div>
+    
+  
+
+
+              
+            </li>
+          
+          
+        
+      </ul>
+    
+  </nav>
+</header>
+
+    
+    <div class="relative flex grow flex-col">
+      <main id="main-content" class="grow">
+        
+  <article>
+    <header class="max-w-prose">
+      
+        <ol class="text-sm text-neutral-500 dark:text-neutral-400 print:hidden">
+  
+  
+    
+  
+    
+  
+  <li class="hidden inline">
+    <a
+      class="dark:underline-neutral-600 decoration-neutral-300 hover:underline"
+      href="http://localhost:1313/en/"
+      >Home</a
+    ><span class="px-1 text-primary-500">/</span>
+  </li>
+
+  
+  <li class=" inline">
+    <a
+      class="dark:underline-neutral-600 decoration-neutral-300 hover:underline"
+      href="http://localhost:1313/en/articles/"
+      >Articles</a
+    ><span class="px-1 text-primary-500">/</span>
+  </li>
+
+  
+  <li class="hidden inline">
+    <a
+      class="dark:underline-neutral-600 decoration-neutral-300 hover:underline"
+      href="http://localhost:1313/en/articles/kubernetes-monitoring-prometheus-grafana/"
+      >Kubernetes Monitoring: Prometheus &#43; Grafana stack</a
+    ><span class="px-1 text-primary-500">/</span>
+  </li>
+
+</ol>
+
+
+      
+      <h1 class="mb-8 mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
+        Kubernetes Monitoring: Prometheus + Grafana stack
+      </h1>
+      
+      
+    </header>
+    <section class="prose mt-0 flex max-w-full flex-col dark:prose-invert lg:flex-row">
+      
+        <div class="order-first px-0 lg:order-last lg:max-w-xs lg:ps-8">
+          <div class="toc pe-5 lg:sticky lg:top-10 print:hidden">
+            <details open class="-ms-5 mt-0 overflow-hidden rounded-lg ps-5">
+  <summary
+    class="block cursor-pointer bg-neutral-100 py-1 ps-5 text-lg font-semibold text-neutral-800 dark:bg-neutral-700 dark:text-neutral-100 lg:hidden"
+  >
+    Table of Contents
+  </summary>
+  <div class="border-s border-dotted border-neutral-300 py-2 ps-5 dark:border-neutral-600">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#why-kube-prometheus-stack">Why kube-prometheus-stack</a></li>
+    <li><a href="#installation">Installation</a>
+      <ul>
+        <li><a href="#production-values">Production values</a></li>
+        <li><a href="#verifying-the-installation">Verifying the installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#the-prometheus-operator-crds">The Prometheus Operator CRDs</a>
+      <ul>
+        <li><a href="#servicemonitor">ServiceMonitor</a></li>
+        <li><a href="#podmonitor">PodMonitor</a></li>
+        <li><a href="#prometheusrule">PrometheusRule</a></li>
+      </ul>
+    </li>
+    <li><a href="#alertmanager-routing-and-notifications">Alertmanager: routing and notifications</a>
+      <ul>
+        <li><a href="#configuration">Configuration</a></li>
+        <li><a href="#silencing-an-alert">Silencing an alert</a></li>
+      </ul>
+    </li>
+    <li><a href="#the-alerts-that-really-matter">The alerts that really matter</a>
+      <ul>
+        <li><a href="#infrastructure">Infrastructure</a></li>
+        <li><a href="#workloads">Workloads</a></li>
+        <li><a href="#prometheus-itself">Prometheus itself</a></li>
+        <li><a href="#custom-rule-to-add-oomkilled">Custom rule to add: OOMKilled</a></li>
+      </ul>
+    </li>
+    <li><a href="#grafana-dashboards">Grafana dashboards</a>
+      <ul>
+        <li><a href="#built-in-dashboards">Built-in dashboards</a></li>
+        <li><a href="#custom-dashboard-sre-view">Custom dashboard: SRE view</a></li>
+        <li><a href="#essential-promql-panels">Essential PromQL panels</a></li>
+      </ul>
+    </li>
+    <li><a href="#recording-rules-promql-performance">Recording Rules: PromQL performance</a></li>
+    <li><a href="#retention-and-storage">Retention and storage</a>
+      <ul>
+        <li><a href="#estimating-disk-space">Estimating disk space</a></li>
+        <li><a href="#long-term-retention">Long-term retention</a></li>
+      </ul>
+    </li>
+    <li><a href="#exposing-grafana">Exposing Grafana</a></li>
+    <li><a href="#best-practices">Best practices</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+  </div>
+</details>
+
+          </div>
+        </div>
+      
+      <div class="min-h-0 min-w-0 max-w-prose grow">
+        <p>A Kubernetes cluster without monitoring is flying blind. You don&rsquo;t know when a pod gets OOMKilled, when a node saturates, or when your API&rsquo;s latency explodes. The <strong>Prometheus + Grafana</strong> stack is the de facto standard for Kubernetes monitoring, and with <strong>kube-prometheus-stack</strong>, everything installs in a single Helm chart.</p>
+<h2 id="why-kube-prometheus-stack" class="relative group">Why kube-prometheus-stack <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#why-kube-prometheus-stack" aria-label="Anchor">#</a></span></h2><p>There are several ways to install Prometheus on Kubernetes. The most complete and best maintained is the <strong>kube-prometheus-stack</strong> Helm chart (formerly prometheus-operator). It bundles:</p>
+<ul>
+<li><strong>Prometheus Operator</strong>: manages Prometheus instances via CRDs</li>
+<li><strong>Prometheus</strong>: collects and stores metrics (TSDB)</li>
+<li><strong>Grafana</strong>: dashboards and visualization</li>
+<li><strong>Alertmanager</strong>: alert routing and notification</li>
+<li><strong>kube-state-metrics</strong>: metrics on the state of Kubernetes objects (pods, deployments, nodes…)</li>
+<li><strong>node-exporter</strong>: node system metrics (CPU, RAM, disk, network)</li>
+<li><strong>Preconfigured alert rules</strong>: more than 100 ready-to-use alerts</li>
+</ul>
+<p>The alternative would be installing each component separately. It&rsquo;s doable, but it&rsquo;s extra maintenance work for no real benefit.</p>
+<h2 id="installation" class="relative group">Installation <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#installation" aria-label="Anchor">#</a></span></h2><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+</span></span><span style="display:flex;"><span>helm repo update
+</span></span></code></pre></div><h3 id="production-values" class="relative group">Production values <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#production-values" aria-label="Anchor">#</a></span></h3><p>The chart has hundreds of parameters. Here are the essentials for a production environment:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#75715e"># values-monitoring.yaml</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># --- Prometheus ---</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">prometheus</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">prometheusSpec</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">retention</span>: <span style="color:#ae81ff">15d</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">retentionSize</span>: <span style="color:#e6db74">&#34;40GB&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">resources</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">requests</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">cpu</span>: <span style="color:#ae81ff">500m</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">memory</span>: <span style="color:#ae81ff">2Gi</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">limits</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">cpu</span>: <span style="color:#e6db74">&#34;2&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">memory</span>: <span style="color:#ae81ff">4Gi</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">storageSpec</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">volumeClaimTemplate</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">storageClassName</span>: <span style="color:#ae81ff">csi-cinder-high-speed </span> <span style="color:#75715e"># adapt to the provider</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">accessModes</span>: [<span style="color:#e6db74">&#34;ReadWriteOnce&#34;</span>]
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">resources</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">requests</span>:
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">storage</span>: <span style="color:#ae81ff">50Gi</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Scrape every 30s instead of the default 1m</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">scrapeInterval</span>: <span style="color:#ae81ff">30s</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Select ServiceMonitors from all namespaces</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">serviceMonitorSelectorNilUsesHelmValues</span>: <span style="color:#66d9ef">false</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">podMonitorSelectorNilUsesHelmValues</span>: <span style="color:#66d9ef">false</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">ruleSelectorNilUsesHelmValues</span>: <span style="color:#66d9ef">false</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># --- Grafana ---</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">grafana</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">adminPassword</span>: <span style="color:#e6db74">&#34;&#34;</span>  <span style="color:#75715e"># managed by an external Secret</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">persistence</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">enabled</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">size</span>: <span style="color:#ae81ff">5Gi</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">dashboardProviders</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">dashboardproviders.yaml</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">providers</span>:
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">custom</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">orgId</span>: <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">folder</span>: <span style="color:#e6db74">&#34;Custom&#34;</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">type</span>: <span style="color:#ae81ff">file</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">disableDeletion</span>: <span style="color:#66d9ef">false</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">editable</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">options</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">path</span>: <span style="color:#ae81ff">/var/lib/grafana/dashboards/custom</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">sidecar</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">dashboards</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">enabled</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">searchNamespace</span>: <span style="color:#ae81ff">ALL</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">datasources</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">enabled</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># --- Alertmanager ---</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">alertmanager</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">alertmanagerSpec</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">resources</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">requests</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">cpu</span>: <span style="color:#ae81ff">50m</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">memory</span>: <span style="color:#ae81ff">64Mi</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">limits</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">cpu</span>: <span style="color:#ae81ff">200m</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">memory</span>: <span style="color:#ae81ff">128Mi</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># --- kube-state-metrics ---</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kube-state-metrics</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">resources</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">requests</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">cpu</span>: <span style="color:#ae81ff">50m</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">memory</span>: <span style="color:#ae81ff">64Mi</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">limits</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">cpu</span>: <span style="color:#ae81ff">200m</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">memory</span>: <span style="color:#ae81ff">128Mi</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># --- node-exporter ---</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">nodeExporter</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">resources</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">requests</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">cpu</span>: <span style="color:#ae81ff">50m</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">memory</span>: <span style="color:#ae81ff">32Mi</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">limits</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">cpu</span>: <span style="color:#ae81ff">200m</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">memory</span>: <span style="color:#ae81ff">64Mi</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>helm install kube-prometheus-stack prometheus-community/kube-prometheus-stack <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --namespace monitoring <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --create-namespace <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  -f values-monitoring.yaml
+</span></span></code></pre></div><h3 id="verifying-the-installation" class="relative group">Verifying the installation <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#verifying-the-installation" aria-label="Anchor">#</a></span></h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># All pods should be Running</span>
+</span></span><span style="display:flex;"><span>kubectl get pods -n monitoring
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># The Operator&#39;s CRDs</span>
+</span></span><span style="display:flex;"><span>kubectl get crd | grep monitoring.coreos.com
+</span></span></code></pre></div><p>You should see these CRDs:</p>
+<pre tabindex="0"><code>alertmanagerconfigs.monitoring.coreos.com
+alertmanagers.monitoring.coreos.com
+podmonitors.monitoring.coreos.com
+probes.monitoring.coreos.com
+prometheuses.monitoring.coreos.com
+prometheusrules.monitoring.coreos.com
+servicemonitors.monitoring.coreos.com
+thanosrulers.monitoring.coreos.com
+</code></pre><h2 id="the-prometheus-operator-crds" class="relative group">The Prometheus Operator CRDs <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#the-prometheus-operator-crds" aria-label="Anchor">#</a></span></h2><p>The Operator introduces CRDs that let you configure monitoring declaratively, directly in Kubernetes.</p>
+<h3 id="servicemonitor" class="relative group">ServiceMonitor <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#servicemonitor" aria-label="Anchor">#</a></span></h3><p>It&rsquo;s the most-used object. It tells Prometheus which Services to scrape and how.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">monitoring.coreos.com/v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ServiceMonitor</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">mon-app</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">production</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">release</span>: <span style="color:#ae81ff">kube-prometheus-stack </span> <span style="color:#75715e"># so Prometheus discovers it</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">selector</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">matchLabels</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">app</span>: <span style="color:#ae81ff">mon-app</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">endpoints</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">port</span>: <span style="color:#ae81ff">metrics</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">interval</span>: <span style="color:#ae81ff">30s</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">path</span>: <span style="color:#ae81ff">/metrics</span>
+</span></span></code></pre></div><p>Prometheus automatically discovers ServiceMonitors through the label selector. With <code>serviceMonitorSelectorNilUsesHelmValues: false</code> in the values, it picks them all up, without restriction.</p>
+<h3 id="podmonitor" class="relative group">PodMonitor <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#podmonitor" aria-label="Anchor">#</a></span></h3><p>For pods that don&rsquo;t have an associated Service (jobs, CronJobs…):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">monitoring.coreos.com/v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">PodMonitor</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">batch-jobs</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">production</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">selector</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">matchLabels</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">app</span>: <span style="color:#ae81ff">batch-processor</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">podMetricsEndpoints</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">port</span>: <span style="color:#ae81ff">metrics</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">interval</span>: <span style="color:#ae81ff">60s</span>
+</span></span></code></pre></div><h3 id="prometheusrule" class="relative group">PrometheusRule <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#prometheusrule" aria-label="Anchor">#</a></span></h3><p>Alerting and recording rules are also declared as a CRD:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">monitoring.coreos.com/v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">PrometheusRule</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">app-alerts</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">production</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">release</span>: <span style="color:#ae81ff">kube-prometheus-stack</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">groups</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">mon-app.rules</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">rules</span>:
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">alert</span>: <span style="color:#ae81ff">AppHighLatency</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">expr</span>: &gt;<span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            histogram_quantile(0.99,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              sum(rate(http_request_duration_seconds_bucket{app=&#34;mon-app&#34;}[5m]))
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              by (le)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            ) &gt; 1</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">for</span>: <span style="color:#ae81ff">5m</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">severity</span>: <span style="color:#ae81ff">warning</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">annotations</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">summary</span>: <span style="color:#e6db74">&#34;mon-app P99 latency &gt; 1s&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">description</span>: <span style="color:#e6db74">&#34;P99 latency has been at {{ $value }}s for 5 minutes.&#34;</span>
+</span></span></code></pre></div><p>The Operator automatically injects these rules into the Prometheus configuration. No need to touch the config files.</p>
+<h2 id="alertmanager-routing-and-notifications" class="relative group">Alertmanager: routing and notifications <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#alertmanager-routing-and-notifications" aria-label="Anchor">#</a></span></h2><p>Collecting metrics is good, being notified when things break is better. Alertmanager handles routing alerts to the right channels.</p>
+<h3 id="configuration" class="relative group">Configuration <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#configuration" aria-label="Anchor">#</a></span></h3><p>The Alertmanager config is done via a Kubernetes Secret or directly in the Helm values:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#75715e"># In values-monitoring.yaml</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">alertmanager</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">config</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">global</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">resolve_timeout</span>: <span style="color:#ae81ff">5m</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">route</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">receiver</span>: <span style="color:#ae81ff">default</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">group_by</span>: [<span style="color:#e6db74">&#34;alertname&#34;</span>, <span style="color:#e6db74">&#34;namespace&#34;</span>]
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">group_wait</span>: <span style="color:#ae81ff">30s</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">group_interval</span>: <span style="color:#ae81ff">5m</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">repeat_interval</span>: <span style="color:#ae81ff">4h</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">routes</span>:
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">receiver</span>: <span style="color:#ae81ff">critical-slack</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">match</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">severity</span>: <span style="color:#ae81ff">critical</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">repeat_interval</span>: <span style="color:#ae81ff">1h</span>
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">receiver</span>: <span style="color:#ae81ff">webhook-teams</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">match</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">severity</span>: <span style="color:#ae81ff">warning</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">receivers</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">default</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">slack_configs</span>:
+</span></span><span style="display:flex;"><span>          - <span style="color:#f92672">api_url</span>: <span style="color:#e6db74">&#34;https://hooks.slack.com/services/XXX/YYY/ZZZ&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">channel</span>: <span style="color:#e6db74">&#34;#monitoring&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">title</span>: <span style="color:#e6db74">&#39;{{ template &#34;slack.default.title&#34; . }}&#39;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">text</span>: <span style="color:#e6db74">&#39;{{ template &#34;slack.default.text&#34; . }}&#39;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">send_resolved</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">critical-slack</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">slack_configs</span>:
+</span></span><span style="display:flex;"><span>          - <span style="color:#f92672">api_url</span>: <span style="color:#e6db74">&#34;https://hooks.slack.com/services/XXX/YYY/ZZZ&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">channel</span>: <span style="color:#e6db74">&#34;#incidents&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">title</span>: <span style="color:#e6db74">&#39;{{ .GroupLabels.alertname }}&#39;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">text</span>: &gt;<span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              *Namespace:* {{ .CommonLabels.namespace }}
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              *Description:* {{ .CommonAnnotations.description }}</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">send_resolved</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">webhook-teams</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">webhook_configs</span>:
+</span></span><span style="display:flex;"><span>          - <span style="color:#f92672">url</span>: <span style="color:#e6db74">&#34;http://prometheus-msteams:2000/alertmanager&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">send_resolved</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">inhibit_rules</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">source_match</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">severity</span>: <span style="color:#ae81ff">critical</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">target_match</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">severity</span>: <span style="color:#ae81ff">warning</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">equal</span>: [<span style="color:#e6db74">&#34;alertname&#34;</span>, <span style="color:#e6db74">&#34;namespace&#34;</span>]
+</span></span></code></pre></div><p>Important points:</p>
+<ul>
+<li><strong>group_by</strong>: groups similar alerts to avoid spam</li>
+<li><strong>inhibit_rules</strong>: a critical alert suppresses the associated warnings</li>
+<li><strong>send_resolved</strong>: notifies when the alert is resolved (not just when it fires)</li>
+<li><strong>repeat_interval</strong>: 4h for warnings, 1h for criticals</li>
+</ul>
+<h3 id="silencing-an-alert" class="relative group">Silencing an alert <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#silencing-an-alert" aria-label="Anchor">#</a></span></h3><p>During a planned maintenance:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Via the Alertmanager API</span>
+</span></span><span style="display:flex;"><span>kubectl port-forward -n monitoring svc/kube-prometheus-stack-alertmanager 9093:9093
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Create a 2h silence on a namespace</span>
+</span></span><span style="display:flex;"><span>amtool silence add <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --alertmanager.url<span style="color:#f92672">=</span>http://localhost:9093 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --comment<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Planned maintenance&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --duration<span style="color:#f92672">=</span>2h <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  namespace<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;maintenance-ns&#34;</span>
+</span></span></code></pre></div><h2 id="the-alerts-that-really-matter" class="relative group">The alerts that really matter <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#the-alerts-that-really-matter" aria-label="Anchor">#</a></span></h2><p>kube-prometheus-stack comes with more than 100 preconfigured alert rules. It&rsquo;s a good starting point, but some are too sensitive (false positives) and others are missing. Here are the ones to watch in priority.</p>
+<h3 id="infrastructure" class="relative group">Infrastructure <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#infrastructure" aria-label="Anchor">#</a></span></h3><table>
+	<thead>
+			<tr>
+					<th>Alert</th>
+					<th>What it detects</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>KubeNodeNotReady</code></td>
+					<td>Node in NotReady state for 15min</td>
+			</tr>
+			<tr>
+					<td><code>KubeNodeUnreachable</code></td>
+					<td>Unreachable node</td>
+			</tr>
+			<tr>
+					<td><code>NodeFilesystemSpaceFillingUp</code></td>
+					<td>Disk filling up (linear prediction)</td>
+			</tr>
+			<tr>
+					<td><code>NodeMemoryHighUtilization</code></td>
+					<td>Node RAM &gt; 90%</td>
+			</tr>
+			<tr>
+					<td><code>KubeletTooManyPods</code></td>
+					<td>Node close to the pod limit</td>
+			</tr>
+	</tbody>
+</table>
+<h3 id="workloads" class="relative group">Workloads <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#workloads" aria-label="Anchor">#</a></span></h3><table>
+	<thead>
+			<tr>
+					<th>Alert</th>
+					<th>What it detects</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>KubePodCrashLooping</code></td>
+					<td>Pod in restart loop (&gt; 0 restarts over 15min)</td>
+			</tr>
+			<tr>
+					<td><code>KubePodNotReady</code></td>
+					<td>Pod not Ready for 15min</td>
+			</tr>
+			<tr>
+					<td><code>KubeDeploymentReplicasMismatch</code></td>
+					<td>Desired replicas ≠ available replicas</td>
+			</tr>
+			<tr>
+					<td><code>KubeStatefulSetReplicasMismatch</code></td>
+					<td>Same for StatefulSets</td>
+			</tr>
+			<tr>
+					<td><code>KubeJobFailed</code></td>
+					<td>Failed Kubernetes Job</td>
+			</tr>
+			<tr>
+					<td><code>KubeContainerOOMKilled</code></td>
+					<td>Container killed by the OOM killer</td>
+			</tr>
+	</tbody>
+</table>
+<h3 id="prometheus-itself" class="relative group">Prometheus itself <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#prometheus-itself" aria-label="Anchor">#</a></span></h3><table>
+	<thead>
+			<tr>
+					<th>Alert</th>
+					<th>What it detects</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>PrometheusTSDBCompactionsFailing</code></td>
+					<td>TSDB compaction failing</td>
+			</tr>
+			<tr>
+					<td><code>PrometheusRuleFailures</code></td>
+					<td>Evaluation rules erroring</td>
+			</tr>
+			<tr>
+					<td><code>AlertmanagerFailedNotifications</code></td>
+					<td>Alertmanager can&rsquo;t send</td>
+			</tr>
+	</tbody>
+</table>
+<h3 id="custom-rule-to-add-oomkilled" class="relative group">Custom rule to add: OOMKilled <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#custom-rule-to-add-oomkilled" aria-label="Anchor">#</a></span></h3><p>The default rule doesn&rsquo;t always detect OOMKills cleanly. Here&rsquo;s a more reliable one:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">monitoring.coreos.com/v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">PrometheusRule</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">oomkill-alerts</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">monitoring</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">release</span>: <span style="color:#ae81ff">kube-prometheus-stack</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">groups</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">oomkill</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">rules</span>:
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">alert</span>: <span style="color:#ae81ff">ContainerOOMKilled</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">expr</span>: &gt;<span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            kube_pod_container_status_last_terminated_reason{reason=&#34;OOMKilled&#34;} &gt; 0</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">for</span>: <span style="color:#ae81ff">0m</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">severity</span>: <span style="color:#ae81ff">warning</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">annotations</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">summary</span>: <span style="color:#e6db74">&#34;Container {{ $labels.container }} OOMKilled in {{ $labels.namespace }}/{{ $labels.pod }}&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">description</span>: <span style="color:#e6db74">&#34;The container was killed by the OOM killer. Check the memory limits.&#34;</span>
+</span></span></code></pre></div><h2 id="grafana-dashboards" class="relative group">Grafana dashboards <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#grafana-dashboards" aria-label="Anchor">#</a></span></h2><p>kube-prometheus-stack installs around twenty dashboards by default. The most useful day to day:</p>
+<h3 id="built-in-dashboards" class="relative group">Built-in dashboards <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#built-in-dashboards" aria-label="Anchor">#</a></span></h3><table>
+	<thead>
+			<tr>
+					<th>Dashboard</th>
+					<th>Usage</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>Kubernetes / Compute Resources / Cluster</strong></td>
+					<td>Global CPU/RAM view of the whole cluster</td>
+			</tr>
+			<tr>
+					<td><strong>Kubernetes / Compute Resources / Namespace (Pods)</strong></td>
+					<td>Consumption per namespace, drill-down per pod</td>
+			</tr>
+			<tr>
+					<td><strong>Kubernetes / Compute Resources / Pod</strong></td>
+					<td>Detail of a pod: CPU, RAM, network, filesystem</td>
+			</tr>
+			<tr>
+					<td><strong>Kubernetes / Networking / Cluster</strong></td>
+					<td>Network bandwidth between pods/namespaces</td>
+			</tr>
+			<tr>
+					<td><strong>Node Exporter / Nodes</strong></td>
+					<td>Node system metrics</td>
+			</tr>
+			<tr>
+					<td><strong>Alertmanager / Overview</strong></td>
+					<td>State of alerts and silences</td>
+			</tr>
+	</tbody>
+</table>
+<h3 id="custom-dashboard-sre-view" class="relative group">Custom dashboard: SRE view <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#custom-dashboard-sre-view" aria-label="Anchor">#</a></span></h3><p>For a daily operational dashboard, create a ConfigMap that Grafana loads automatically via the sidecar:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ConfigMap</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">grafana-dashboard-sre</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">monitoring</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">grafana_dashboard</span>: <span style="color:#e6db74">&#34;1&#34;</span>  <span style="color:#75715e"># the Grafana sidecar detects this label</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">data</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">sre-overview.json</span>: |<span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    {
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      &#34;title&#34;: &#34;SRE Overview&#34;,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      &#34;panels&#34;: [...]
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    }</span>
+</span></span></code></pre></div><p>The <code>grafana_dashboard: &quot;1&quot;</code> label is the sidecar convention. Any ConfigMap with this label is automatically mounted as a dashboard in Grafana.</p>
+<p>In practice, build the dashboard in the Grafana UI, export the JSON, then store it in a ConfigMap versioned in Git. That&rsquo;s the GitOps loop of monitoring.</p>
+<h3 id="essential-promql-panels" class="relative group">Essential PromQL panels <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#essential-promql-panels" aria-label="Anchor">#</a></span></h3><p>A few queries to know for building custom dashboards:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-promql" data-lang="promql"><span style="display:flex;"><span><span style="color:#75715e"># CPU used vs requested per namespace</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">sum</span><span style="color:#f92672">(</span><span style="color:#66d9ef">rate</span><span style="color:#f92672">(</span>container_cpu_usage_seconds_total{namespace<span style="color:#f92672">=</span>&#34;<span style="color:#e6db74">production</span>&#34;}[<span style="color:#e6db74">5m</span>]<span style="color:#f92672">))</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">/</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">sum</span><span style="color:#f92672">(</span>kube_pod_container_resource_requests{namespace<span style="color:#f92672">=</span>&#34;<span style="color:#e6db74">production</span>&#34;, resource<span style="color:#f92672">=</span>&#34;<span style="color:#e6db74">cpu</span>&#34;}<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Actual memory vs limits per pod</span>
+</span></span><span style="display:flex;"><span>container_memory_working_set_bytes{namespace<span style="color:#f92672">=</span>&#34;<span style="color:#e6db74">production</span>&#34;}
+</span></span><span style="display:flex;"><span><span style="color:#f92672">/</span>
+</span></span><span style="display:flex;"><span>kube_pod_container_resource_limits{namespace<span style="color:#f92672">=</span>&#34;<span style="color:#e6db74">production</span>&#34;, resource<span style="color:#f92672">=</span>&#34;<span style="color:#e6db74">memory</span>&#34;}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Restart rate per deployment</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">sum</span><span style="color:#f92672">(</span><span style="color:#66d9ef">increase</span><span style="color:#f92672">(</span>kube_pod_container_status_restarts_total{namespace<span style="color:#f92672">=</span>&#34;<span style="color:#e6db74">production</span>&#34;}[<span style="color:#e6db74">1h</span>]<span style="color:#f92672">))</span> <span style="color:#66d9ef">by</span> <span style="color:#f92672">(</span>pod<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Pods waiting to be scheduled</span>
+</span></span><span style="display:flex;"><span>kube_pod_status_phase{phase<span style="color:#f92672">=</span>&#34;<span style="color:#e6db74">Pending</span>&#34;} <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># PVC usage (if metrics-server or kubelet metrics enabled)</span>
+</span></span><span style="display:flex;"><span>kubelet_volume_stats_used_bytes <span style="color:#f92672">/</span> kubelet_volume_stats_capacity_bytes
+</span></span></code></pre></div><h2 id="recording-rules-promql-performance" class="relative group">Recording Rules: PromQL performance <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#recording-rules-promql-performance" aria-label="Anchor">#</a></span></h2><p>Recording rules precompute complex queries to speed up dashboards and alerts. kube-prometheus-stack includes many by default, but for custom metrics:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">monitoring.coreos.com/v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">PrometheusRule</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">recording-rules</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">monitoring</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">release</span>: <span style="color:#ae81ff">kube-prometheus-stack</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">groups</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">app.recording</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">interval</span>: <span style="color:#ae81ff">30s</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">rules</span>:
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">record</span>: <span style="color:#ae81ff">namespace:http_requests:rate5m</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">expr</span>: &gt;<span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            sum(rate(http_requests_total[5m])) by (namespace)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">record</span>: <span style="color:#ae81ff">namespace:http_request_duration:p99</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">expr</span>: &gt;<span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            histogram_quantile(0.99,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              sum(rate(http_request_duration_seconds_bucket[5m]))
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              by (le, namespace)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            )</span>
+</span></span></code></pre></div><p>Naming convention: <code>level:metric:operations</code>. This avoids recomputing a <code>histogram_quantile</code> over thousands of series on every dashboard refresh.</p>
+<h2 id="retention-and-storage" class="relative group">Retention and storage <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#retention-and-storage" aria-label="Anchor">#</a></span></h2><p>Prometheus stores its metrics in a local TSDB. In production, you need to size it correctly.</p>
+<h3 id="estimating-disk-space" class="relative group">Estimating disk space <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#estimating-disk-space" aria-label="Anchor">#</a></span></h3><p>Approximate formula:</p>
+<pre tabindex="0"><code>space = active_series × size_per_sample × samples_per_day × retention_days
+</code></pre><p>In practice, for a medium-sized cluster (50 pods, ~50,000 active series):</p>
+<ul>
+<li><strong>15 days of retention</strong> → ~20-30 GB</li>
+<li><strong>30 days of retention</strong> → ~40-60 GB</li>
+</ul>
+<p>The two parameters to configure:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">prometheus</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">prometheusSpec</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">retention</span>: <span style="color:#ae81ff">15d       </span> <span style="color:#75715e"># max duration</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">retentionSize</span>: <span style="color:#e6db74">&#34;40GB&#34;</span> <span style="color:#75715e"># max size (whichever is reached first wins)</span>
+</span></span></code></pre></div><h3 id="long-term-retention" class="relative group">Long-term retention <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#long-term-retention" aria-label="Anchor">#</a></span></h3><p>To keep metrics beyond 15-30 days, Prometheus alone isn&rsquo;t enough. The options:</p>
+<ul>
+<li><strong>Thanos</strong>: a sidecar that pushes blocks to object storage (S3, MinIO), with deduplication and compaction</li>
+<li><strong>VictoriaMetrics</strong>: a drop-in replacement for Prometheus with better compression and native long retention</li>
+<li><strong>Cortex / Mimir</strong>: distributed storage for multi-tenant setups</li>
+</ul>
+<p>For most clusters, 15-30 days locally is enough. Recording rules aggregate the important data, and long-term dashboards rely on these precomputed metrics.</p>
+<h2 id="exposing-grafana" class="relative group">Exposing Grafana <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#exposing-grafana" aria-label="Anchor">#</a></span></h2><p>In production, Grafana is exposed via an IngressRoute or a Gateway API. Example with a Traefik IngressRoute:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">traefik.io/v1alpha1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">IngressRoute</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">grafana</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">monitoring</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">entryPoints</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">websecure</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">routes</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">match</span>: <span style="color:#ae81ff">Host(`grafana.example.com`)</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Rule</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">middlewares</span>:
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">security-headers</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">traefik</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">services</span>:
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">kube-prometheus-stack-grafana</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">port</span>: <span style="color:#ae81ff">80</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">tls</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">secretName</span>: <span style="color:#ae81ff">grafana-tls</span>
+</span></span></code></pre></div><h2 id="best-practices" class="relative group">Best practices <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#best-practices" aria-label="Anchor">#</a></span></h2><ol>
+<li><strong>Always use persistent storage</strong> on Prometheus — without a PVC, a restart = losing all metrics</li>
+<li><strong><code>serviceMonitorSelectorNilUsesHelmValues: false</code></strong>: otherwise Prometheus only scrapes ServiceMonitors with the chart&rsquo;s label</li>
+<li><strong>Size the memory</strong>: Prometheus consumes ~2 bytes per active series in RAM. 100k series = ~200 MB minimum, plan generously</li>
+<li><strong>Don&rsquo;t scrape too frequently</strong>: 30s is a good compromise. 10s on a large cluster is a quick way to saturate Prometheus</li>
+<li><strong>Use recording rules</strong> for complex dashboard queries — a <code>histogram_quantile</code> over 100k series every 5s hurts</li>
+<li><strong>Label alerts</strong> with <code>namespace</code>, <code>severity</code>, and <code>team</code> for Alertmanager routing</li>
+<li><strong>Test alerts</strong>: an alert that has never fired — nobody knows if it works. Use <code>promtool</code>:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Check the rules&#39; syntax</span>
+</span></span><span style="display:flex;"><span>promtool check rules rules.yaml
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Test a PromQL expression</span>
+</span></span><span style="display:flex;"><span>promtool query instant http://localhost:9090 <span style="color:#e6db74">&#39;up == 0&#39;</span>
+</span></span></code></pre></div><ol start="8">
+<li><strong>Separate infra and application alerts</strong>: infra alerts in the <code>monitoring</code> namespace, application alerts in the app&rsquo;s namespace</li>
+</ol>
+<h2 id="conclusion" class="relative group">Conclusion <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#conclusion" aria-label="Anchor">#</a></span></h2><p>The Prometheus + Grafana stack via kube-prometheus-stack is the minimum foundation of any production Kubernetes cluster. The installation is simple, the default dashboards already cover 80% of the needs, and the Operator&rsquo;s CRDs let you add application monitoring declaratively.</p>
+<p>The real work starts after the installation: fine-tuning alerts to reduce noise, creating dashboards tailored to your teams, and sizing the retention. But with the basics laid out in this article, you have what you need to monitor a production cluster properly.</p>
+
+      </div>
+    </section>
+    <footer class="max-w-prose pt-8 print:hidden">
+      
+
+      
+
+      
+  
+    
+    
+    
+    <div class="pt-8">
+      <hr class="border-dotted border-neutral-300 dark:border-neutral-600" />
+      <div class="flex justify-between pt-3">
+        <span>
+          
+            <a class="group flex" href="http://localhost:1313/en/articles/traefik-v3-deep-dive/">
+              <span
+                class="me-2 text-neutral-700 transition-transform group-hover:-translate-x-[2px] group-hover:text-primary-600 dark:text-neutral dark:group-hover:text-primary-400"
+                ><span class="ltr:inline rtl:hidden">&larr;</span
+                ><span class="ltr:hidden rtl:inline">&rarr;</span></span
+              >
+              <span class="flex flex-col">
+                <span
+                  class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500"
+                  >Traefik v3 Deep Dive: beyond basic Ingress</span
+                >
+                <span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
+                  
+                </span>
+              </span>
+            </a>
+          
+        </span>
+        <span>
+          
+            <a class="group flex text-right" href="http://localhost:1313/en/articles/k3s-local-development/">
+              <span class="flex flex-col">
+                <span
+                  class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500"
+                  >K3S for Local Development: a mini production cluster</span
+                >
+                <span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
+                  
+                </span>
+              </span>
+              <span
+                class="ms-2 text-neutral-700 transition-transform group-hover:-translate-x-[-2px] group-hover:text-primary-600 dark:text-neutral dark:group-hover:text-primary-400"
+                ><span class="ltr:inline rtl:hidden">&rarr;</span
+                ><span class="ltr:hidden rtl:inline">&larr;</span></span
+              >
+            </a>
+          
+        </span>
+      </div>
+    </div>
+  
+
+
+      
+    </footer>
+  </article>
+
+      </main>
+      
+        <div
+          class="pointer-events-none absolute bottom-0 end-0 top-[100vh] w-12"
+          id="to-top"
+          hidden="true"
+        >
+          <a
+            href="#the-top"
+            class="pointer-events-auto sticky top-[calc(100vh-5.5rem)] flex h-12 w-12 items-center justify-center rounded-full bg-neutral/50 text-xl text-neutral-700 backdrop-blur hover:text-primary-600 dark:bg-neutral-800/50 dark:text-neutral dark:hover:text-primary-400"
+            aria-label="Scroll to top"
+            title="Scroll to top"
+          >
+            &uarr;
+          </a>
+        </div>
+      <footer class="py-10 print:hidden">
+  
+  
+  <div class="flex items-center justify-between">
+    <div>
+      
+      
+        <p class="text-sm text-neutral-500 dark:text-neutral-400">
+            &copy;
+            2026
+            Adrien PARRA
+        </p>
+      
+      
+      
+    </div>
+    <div class="flex flex-row items-center">
+      
+      
+      
+      
+    </div>
+  </div>
+  
+  
+    <div class="mt-3 flex items-center gap-4 text-xs text-neutral-400 dark:text-neutral-500">
+  <a href="https://www.docker.com" target="_blank" rel="noopener" class="flex items-center gap-1 hover:text-primary-500 transition-colors" title="Conteneurisé avec Docker">
+    <span class="h-4 w-4"><span class="icon relative inline-block px-1 align-text-bottom"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M13.983 11.078h2.119a.186.186 0 0 0 .186-.185V9.006a.186.186 0 0 0-.186-.186h-2.119a.185.185 0 0 0-.185.185v1.888c0 .102.083.185.185.185m-2.954-5.43h2.118a.186.186 0 0 0 .186-.186V3.574a.186.186 0 0 0-.186-.185h-2.118a.185.185 0 0 0-.185.185v1.888c0 .102.082.185.185.185m0 2.716h2.118a.187.187 0 0 0 .186-.186V6.29a.186.186 0 0 0-.186-.185h-2.118a.185.185 0 0 0-.185.185v1.887c0 .102.082.186.185.186m-2.93 0h2.12a.186.186 0 0 0 .184-.186V6.29a.185.185 0 0 0-.185-.185H8.1a.185.185 0 0 0-.185.185v1.887c0 .102.083.186.185.186m-2.964 0h2.119a.186.186 0 0 0 .185-.186V6.29a.185.185 0 0 0-.185-.185H5.136a.186.186 0 0 0-.186.185v1.887c0 .102.084.186.186.186m5.893 2.715h2.118a.186.186 0 0 0 .186-.185V9.006a.186.186 0 0 0-.186-.186h-2.118a.185.185 0 0 0-.185.185v1.888c0 .102.082.185.185.185m-2.93 0h2.12a.185.185 0 0 0 .184-.185V9.006a.185.185 0 0 0-.184-.186h-2.12a.185.185 0 0 0-.184.185v1.888c0 .102.083.185.185.185m-2.964 0h2.119a.185.185 0 0 0 .185-.185V9.006a.185.185 0 0 0-.184-.186h-2.12a.186.186 0 0 0-.186.186v1.887c0 .102.084.185.186.185m-2.92 0h2.12a.185.185 0 0 0 .184-.185V9.006a.185.185 0 0 0-.184-.186h-2.12a.185.185 0 0 0-.184.185v1.888c0 .102.082.185.185.185M23.763 9.89c-.065-.051-.672-.51-1.954-.51-.338.001-.676.03-1.01.087-.248-1.7-1.653-2.53-1.716-2.566l-.344-.199-.226.327c-.284.438-.49.922-.612 1.43-.23.97-.09 1.882.403 2.661-.595.332-1.55.413-1.744.42H.751a.751.751 0 0 0-.75.748 11.376 11.376 0 0 0 .692 4.062c.545 1.428 1.355 2.48 2.41 3.124 1.18.723 3.1 1.137 5.275 1.137.983.003 1.963-.086 2.93-.266a12.248 12.248 0 0 0 3.823-1.389c.98-.567 1.86-1.288 2.61-2.136 1.252-1.418 1.998-2.997 2.553-4.4h.221c1.372 0 2.215-.549 2.68-1.009.309-.293.55-.65.707-1.046l.098-.288Z"/></svg>
+</span></span>
+    Docker
+  </a>
+  <a href="https://www.scaleway.com" target="_blank" rel="noopener" class="flex items-center gap-1 hover:text-primary-500 transition-colors" title="Hébergé sur Scaleway">
+    <span class="h-4 w-4"><span class="icon relative inline-block px-1 align-text-bottom"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M14.193 12.014a2.179 2.179 0 0 1-2.176 2.176H7.383a2.179 2.179 0 0 1-2.176-2.176 2.179 2.179 0 0 1 2.176-2.176h4.634a2.179 2.179 0 0 1 2.176 2.176zm8.043-4.589C20.859 3.048 16.788 0 12.003 0 7.22 0 3.15 3.046 1.766 7.424A5.565 5.565 0 0 0 0 11.986a5.56 5.56 0 0 0 1.805 4.123C3.261 20.999 7.302 24 12.003 24c4.7 0 8.742-3.001 10.197-7.191A5.558 5.558 0 0 0 24 12.014c0-1.683-.748-3.19-1.764-4.589zm-1.843 7.593c-1.126 3.441-4.354 5.93-8.39 5.93-4.038 0-7.265-2.489-8.39-5.93a4.007 4.007 0 0 1-1.065-2.717c0-.922.313-1.771.838-2.449C4.514 6.41 7.853 4.048 12.003 4.048c4.149 0 7.488 2.362 8.617 5.804a4 4 0 0 1 .833 2.449 3.998 3.998 0 0 1-1.06 2.717z"/></svg>
+</span></span>
+    Scaleway
+  </a>
+  <a href="https://gohugo.io" target="_blank" rel="noopener" class="flex items-center gap-1 hover:text-primary-500 transition-colors" title="Généré par Hugo">
+    <span class="h-4 w-4"><span class="icon relative inline-block px-1 align-text-bottom"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M11.754 0a.75.75 0 0 0-.405.122L.344 7.205A.75.75 0 0 0 0 7.88v8.366a.75.75 0 0 0 .344.633l11.005 7.083c.25.161.568.161.818 0l5.58-3.592V24l.008-.006.008.006v-3.63l5.237-3.372a.75.75 0 0 0 .344-.633v-8.61a.75.75 0 0 0-.315-.61L12.178.122A.75.75 0 0 0 11.754 0zm.008 1.64 10.254 6.86v7.866l-4.486 2.89V8.38l.007-.006-.007-.005v-.006h-1.5v11.954L11.762 22.4 1.5 16.366V8.5zm-.75 7.24v5.63H9.547V12h-3.54v2.51H4.502v-5.63h1.505v1.62h3.54v-1.62z"/></svg>
+</span></span>
+    Hugo
+  </a>
+</div>
+
+  
+</footer>
+
+    </div>
+  </body>
+</html>

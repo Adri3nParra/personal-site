@@ -1,0 +1,25 @@
+[[main]]
+  name = "About"
+  pageRef = "about"
+  weight = 10
+
+[[main]]
+  name = "Experience"
+  pageRef = "experience"
+  weight = 30
+
+[[main]]
+  name = "Articles"
+  pageRef = "articles"
+  weight = 40
+
+[[main]]
+  name = "Contact"
+  pageRef = "contact"
+  weight = 50
+
+[[main]]
+  identifier = "locale"
+  weight = 80
+  [main.params]
+    action = "locale"

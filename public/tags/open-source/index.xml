@@ -18,7 +18,7 @@
 				<link>http://localhost:1313/articles/transfersh-helm-chart/</link>
 				<pubDate>Fri, 20 Feb 2026 00:00:00 +0000</pubDate>
 				<guid>http://localhost:1313/articles/transfersh-helm-chart/</guid>
-				<description>transfer.sh est un outil de partage de fichiers en ligne de commande très utilisé, mais il ne proposait aucun Helm chart officiel. J&amp;rsquo;ai comblé ce manque avec une contribution open source — et ouvert une PR sur le dépôt upstream.</description>
+				<description>transfer.sh est un outil de partage de fichiers en ligne de commande très utilisé, mais il ne proposait aucun Helm chart officiel. J&amp;rsquo;ai comblé ce manque avec une contribution open source, et ouvert une PR sur le dépôt upstream.</description>
 			</item>
 			<item>
 				<title>OpenTofu : l&#39;IaC open source qui reprend le flambeau de Terraform</title>

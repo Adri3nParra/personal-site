@@ -136,7 +136,7 @@
     "keywords": ["Kubernetes","Docker Swarm","Migration","DevOps","Helm"],
     
     "mainEntityOfPage": "true",
-    "wordCount": "2216"
+    "wordCount": "2210"
   }
   </script>
     
@@ -291,6 +291,86 @@
               
             </li>
           
+            
+            <li class="group mb-1 sm:mb-0 sm:me-7 sm:last:me-0.5">
+              
+                
+                
+  
+    
+    
+      <div class="group relative">
+        <button
+          class="group-dark:hover:text-primary-400 flex w-full items-center justify-end transition-colors group-hover:text-primary-600"
+        >
+          <span class="icon relative inline-block px-1 align-text-bottom"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+  <path fill="currentColor" d="M4.545 6.714 4.11 8H3l1.862-5h1.284L8 8H6.833l-.435-1.286H4.545zm1.634-.736L5.5 3.956h-.049l-.679 2.022H6.18z"/>
+  <path fill="currentColor" d="M0 2a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v3h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-3H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2zm7.138 9.995c.193.301.402.583.63.846-.748.575-1.673 1.001-2.768 1.292.178.217.451.635.555.867 1.125-.359 2.08-.844 2.886-1.494.777.665 1.739 1.165 2.93 1.472.133-.254.414-.673.629-.89-1.125-.253-2.057-.694-2.82-1.284.681-.747 1.222-1.651 1.621-2.757H14V8h-3v1.047h.765c-.318.844-.74 1.546-1.272 2.13a6.066 6.066 0 0 1-.415-.492 1.988 1.988 0 0 1-.94.31z"/>
+</svg>
+</span><span class="text-sm">FR</span
+          ><span class="text-[0.6rem]"
+            ><span class="icon relative inline-block px-1 align-text-bottom"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg>
+</span></span
+          >
+        </button>
+        
+          <div class="invisible w-full bg-transparent group-hover:visible"></div>
+        
+        <div
+          class=" invisible absolute z-50 flex flex-col whitespace-nowrap rounded border border-neutral-300 bg-neutral text-start text-base shadow group-hover:visible ltr:right-0 rtl:left-0 dark:border-neutral-600 dark:bg-neutral-800"
+        >
+          
+          
+          
+            
+            
+              
+                
+                <div class="flex flex-grow">
+                  
+                    <a
+                      href="http://localhost:1313/articles/docker-swarm-to-kubernetes/"
+                      class="flex w-full items-center justify-between bg-primary-100 px-2 py-1 dark:bg-primary-900"
+                      >Français<span
+                        class="ms-2 w-6 text-primary-600 dark:text-primary-400"
+                        ><span class="icon relative inline-block px-1 align-text-bottom"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M438.6 105.4C451.1 117.9 451.1 138.1 438.6 150.6L182.6 406.6C170.1 419.1 149.9 419.1 137.4 406.6L9.372 278.6C-3.124 266.1-3.124 245.9 9.372 233.4C21.87 220.9 42.13 220.9 54.63 233.4L159.1 338.7L393.4 105.4C405.9 92.88 426.1 92.88 438.6 105.4H438.6z"/></svg>
+</span></span
+                      ></a
+                    >
+                  
+                </div>
+              
+            
+              
+            
+          
+            
+            
+              
+            
+              
+                
+                <div class="flex flex-grow">
+                  
+                    <a
+                      href="http://localhost:1313/en/articles/docker-swarm-to-kubernetes/"
+                      class="w-full py-1 pe-10 ps-2 decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2"
+                      >English</a
+                    >
+                  
+                </div>
+              
+            
+          
+        </div>
+      </div>
+    
+  
+
+
+              
+            </li>
+          
           
         
       </ul>
@@ -389,7 +469,7 @@
     </li>
     <li><a href="#outils-de-migration">Outils de migration</a>
       <ul>
-        <li><a href="#kompose--conversion-automatique">Kompose — conversion automatique</a></li>
+        <li><a href="#kompose--conversion-automatique">Kompose : conversion automatique</a></li>
         <li><a href="#checklist-de-migration-par-service">Checklist de migration par service</a></li>
       </ul>
     </li>
@@ -410,14 +490,14 @@
         </div>
       
       <div class="min-h-0 min-w-0 max-w-prose grow">
-        <p>Docker Swarm a rendu service. Simple à mettre en place, intégré à Docker, suffisant pour des charges modestes. Mais à partir d&rsquo;un certain point — scaling, observabilité, écosystème, recrutement — Kubernetes devient incontournable. Le problème, c&rsquo;est que la migration n&rsquo;est pas un simple changement de syntaxe. Les concepts ne mappent pas 1:1, et les pièges sont nombreux.</p>
+        <p>Docker Swarm a rendu service. Simple à mettre en place, intégré à Docker, suffisant pour des charges modestes. Mais à partir d&rsquo;un certain point (scaling, observabilité, écosystème, recrutement), Kubernetes devient incontournable. Le problème, c&rsquo;est que la migration n&rsquo;est pas un simple changement de syntaxe. Les concepts ne mappent pas 1:1, et les pièges sont nombreux.</p>
 <h2 id="pourquoi-migrer-" class="relative group">Pourquoi migrer ? <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#pourquoi-migrer-" aria-label="Ancre">#</a></span></h2><p>Swarm fonctionne. Mais il stagne. Quelques constats qui poussent à la migration :</p>
 <ul>
-<li><strong>Écosystème limité</strong> — pas d&rsquo;équivalent à Helm, ArgoCD, Kyverno, Prometheus Operator… L&rsquo;outillage autour de Swarm est quasi inexistant</li>
-<li><strong>Pas de CRD</strong> — impossible d&rsquo;étendre le modèle avec des ressources custom. Swarm ne gère que ce que Docker a prévu</li>
-<li><strong>Recrutement</strong> — trouver quelqu&rsquo;un qui connaît Swarm en 2026, c&rsquo;est plus dur que trouver un profil Kubernetes</li>
-<li><strong>Support cloud</strong> — OVH MKS, GKE, EKS, AKS… tous les clouds proposent du Kubernetes managé. Aucun ne propose du Swarm managé</li>
-<li><strong>Observabilité</strong> — le monitoring natif de Swarm se limite à <code>docker service ls</code>. Pour du vrai monitoring, tu finis par réinventer la roue</li>
+<li><strong>Écosystème limité</strong> : pas d&rsquo;équivalent à Helm, ArgoCD, Kyverno, Prometheus Operator… L&rsquo;outillage autour de Swarm est quasi inexistant</li>
+<li><strong>Pas de CRD</strong> : impossible d&rsquo;étendre le modèle avec des ressources custom. Swarm ne gère que ce que Docker a prévu</li>
+<li><strong>Recrutement</strong> : trouver quelqu&rsquo;un qui connaît Swarm en 2026, c&rsquo;est plus dur que trouver un profil Kubernetes</li>
+<li><strong>Support cloud</strong> : OVH MKS, GKE, EKS, AKS… tous les clouds proposent du Kubernetes managé. Aucun ne propose du Swarm managé</li>
+<li><strong>Observabilité</strong> : le monitoring natif de Swarm se limite à <code>docker service ls</code>. Pour du vrai monitoring, tu finis par réinventer la roue</li>
 </ul>
 <p>La question n&rsquo;est pas &ldquo;faut-il migrer ?&rdquo; mais &ldquo;comment migrer proprement ?&rdquo;.</p>
 <h2 id="mapping-des-concepts" class="relative group">Mapping des concepts <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#mapping-des-concepts" aria-label="Ancre">#</a></span></h2><p>Avant de toucher au code, il faut comprendre comment les concepts Swarm se traduisent en Kubernetes.</p>
@@ -515,9 +595,9 @@
 </span></span><span style="display:flex;"><span>docker stack config mon-app &gt; mon-app-compose.yml
 </span></span></code></pre></div><p>Classe tes services en trois catégories :</p>
 <ol>
-<li><strong>Stateless simples</strong> — APIs, frontends, workers : migration facile</li>
-<li><strong>Stateful</strong> — bases de données, queues : migration complexe, à faire en dernier</li>
-<li><strong>Infra</strong> — reverse proxy, monitoring : à remplacer par l&rsquo;équivalent Kubernetes natif</li>
+<li><strong>Stateless simples</strong> : APIs, frontends, workers : migration facile</li>
+<li><strong>Stateful</strong> : bases de données, queues : migration complexe, à faire en dernier</li>
+<li><strong>Infra</strong> : reverse proxy, monitoring : à remplacer par l&rsquo;équivalent Kubernetes natif</li>
 </ol>
 <p>Commence toujours par les stateless simples pour valider le process.</p>
 <h3 id="phase-2--traduire-un-docker-compose-en-manifestes-kubernetes" class="relative group">Phase 2 : traduire un docker-compose en manifestes Kubernetes <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#phase-2--traduire-un-docker-compose-en-manifestes-kubernetes" aria-label="Ancre">#</a></span></h3><p>Prenons un service Swarm typique :</p>
@@ -660,10 +740,10 @@
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">DB_PASSWORD</span>: <span style="color:#e6db74">&#34;changeme&#34;</span>  <span style="color:#75715e"># En vrai, utilise Sealed Secrets / Vault / ESO</span>
 </span></span></code></pre></div><p>Points clés de la traduction :</p>
 <ul>
-<li><strong><code>update_config.order: start-first</code></strong> → <code>maxUnavailable: 0</code> + <code>maxSurge: 1</code> — le nouveau pod démarre avant de couper l&rsquo;ancien</li>
-<li><strong><code>resources.reservations</code></strong> → <code>resources.requests</code> — même concept, nom différent</li>
+<li><strong><code>update_config.order: start-first</code></strong> → <code>maxUnavailable: 0</code> + <code>maxSurge: 1</code>, le nouveau pod démarre avant de couper l&rsquo;ancien</li>
+<li><strong><code>resources.reservations</code></strong> → <code>resources.requests</code>, même concept, nom différent</li>
 <li><strong><code>restart_policy</code></strong> → géré nativement par le kubelet, pas besoin de le spécifier</li>
-<li><strong>Probes</strong> — Swarm n&rsquo;a que le healthcheck Docker. Kubernetes sépare liveness (redémarrer) et readiness (retirer du load balancing)</li>
+<li><strong>Probes</strong> : Swarm n&rsquo;a que le healthcheck Docker. Kubernetes sépare liveness (redémarrer) et readiness (retirer du load balancing)</li>
 </ul>
 <h3 id="phase-3--helm-charts-pour-industrialiser" class="relative group">Phase 3 : Helm charts pour industrialiser <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#phase-3--helm-charts-pour-industrialiser" aria-label="Ancre">#</a></span></h3><p>Traduire chaque service en YAML brut, ça marche pour un POC. En production, passe par Helm, au début c&rsquo;est compliqué mais maintenant Helm met indispensable :</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>helm create mon-api
@@ -792,9 +872,9 @@
 </span></span><span style="display:flex;"><span>            <span style="color:#f92672">storage</span>: <span style="color:#ae81ff">20Gi</span>
 </span></span></code></pre></div><p>Stratégie de migration des données :</p>
 <ol>
-<li><strong>Dump/restore</strong> — le plus simple et le plus sûr pour les BDD</li>
-<li><strong>Réplication</strong> — si tu peux te permettre un temps de migration plus long avec un follower sur le nouveau cluster</li>
-<li><strong>Copie de volume</strong> — <code>rsync</code> du volume Docker vers un PV Kubernetes (nécessite un accès aux deux côtés)</li>
+<li><strong>Dump/restore</strong> : le plus simple et le plus sûr pour les BDD</li>
+<li><strong>Réplication</strong> : si tu peux te permettre un temps de migration plus long avec un follower sur le nouveau cluster</li>
+<li><strong>Copie de volume</strong> : <code>rsync</code> du volume Docker vers un PV Kubernetes (nécessite un accès aux deux côtés)</li>
 </ol>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Dump depuis Swarm</span>
 </span></span><span style="display:flex;"><span>docker exec <span style="color:#66d9ef">$(</span>docker ps -q -f name<span style="color:#f92672">=</span>postgres<span style="color:#66d9ef">)</span> <span style="color:#ae81ff">\
@@ -804,7 +884,7 @@
 </span></span><span style="display:flex;"><span>kubectl cp dump.pgdata mon-app/postgres-0:/tmp/dump.pgdata
 </span></span><span style="display:flex;"><span>kubectl exec -n mon-app postgres-0 -- <span style="color:#ae81ff">\
 </span></span></span><span style="display:flex;"><span>  pg_restore -U app -d app /tmp/dump.pgdata
-</span></span></code></pre></div><h3 id="phase-6--secrets" class="relative group">Phase 6 : secrets <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#phase-6--secrets" aria-label="Ancre">#</a></span></h3><p>Les secrets Docker Swarm sont stockés dans le Raft log du cluster. En Kubernetes, les secrets sont en base64 dans etcd — pas chiffrés par défaut.</p>
+</span></span></code></pre></div><h3 id="phase-6--secrets" class="relative group">Phase 6 : secrets <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#phase-6--secrets" aria-label="Ancre">#</a></span></h3><p>Les secrets Docker Swarm sont stockés dans le Raft log du cluster. En Kubernetes, les secrets sont en base64 dans etcd, pas chiffrés par défaut.</p>
 <p>Pour une migration propre, utilise <a href="https://github.com/bitnami-labs/sealed-secrets" target="_blank" rel="noreferrer">Sealed Secrets</a> :</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Installer le controller</span>
 </span></span><span style="display:flex;"><span>helm repo add sealed-secrets https://bitnami-labs.github.io/sealed-secrets
@@ -893,7 +973,7 @@ Semaine 9-10 : Bascule DNS, décommissionnement Swarm
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">limits.cpu</span>: <span style="color:#e6db74">&#34;8&#34;</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">limits.memory</span>: <span style="color:#ae81ff">8Gi</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">pods</span>: <span style="color:#e6db74">&#34;20&#34;</span>
-</span></span></code></pre></div><h2 id="outils-de-migration" class="relative group">Outils de migration <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#outils-de-migration" aria-label="Ancre">#</a></span></h2><h3 id="kompose--conversion-automatique" class="relative group">Kompose — conversion automatique <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#kompose--conversion-automatique" aria-label="Ancre">#</a></span></h3><p><a href="https://kompose.io/" target="_blank" rel="noreferrer">Kompose</a> convertit un <code>docker-compose.yml</code> en manifestes Kubernetes :</p>
+</span></span></code></pre></div><h2 id="outils-de-migration" class="relative group">Outils de migration <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#outils-de-migration" aria-label="Ancre">#</a></span></h2><h3 id="kompose--conversion-automatique" class="relative group">Kompose : conversion automatique <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#kompose--conversion-automatique" aria-label="Ancre">#</a></span></h3><p><a href="https://kompose.io/" target="_blank" rel="noreferrer">Kompose</a> convertit un <code>docker-compose.yml</code> en manifestes Kubernetes :</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kompose convert -f docker-compose.yml
 </span></span></code></pre></div><p>C&rsquo;est un bon point de départ, mais le résultat nécessite toujours des ajustements :</p>
 <ul>
@@ -935,17 +1015,17 @@ api.example.com → Kubernetes (poids 100)
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">externalName</span>: <span style="color:#ae81ff">legacy.swarm.internal</span>
 </span></span></code></pre></div><p>Et inversement, expose les services Kubernetes via un NodePort ou LoadBalancer accessible depuis le réseau Swarm.</p>
 <h2 id="bonnes-pratiques" class="relative group">Bonnes pratiques <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#bonnes-pratiques" aria-label="Ancre">#</a></span></h2><ol>
-<li><strong>Migre en binôme</strong> — quelqu&rsquo;un qui connaît l&rsquo;app Swarm + quelqu&rsquo;un qui connaît Kubernetes</li>
-<li><strong>GitOps dès le premier service</strong> — mets ArgoCD en place avant de commencer à migrer. Chaque service migré arrive directement en GitOps</li>
-<li><strong>Monitoring d&rsquo;abord</strong> — installe Prometheus + Grafana avant de migrer les workloads. Tu veux voir les problèmes, pas les deviner</li>
-<li><strong>Environnement de staging</strong> — migre d&rsquo;abord en staging, valide, puis reproduis en prod</li>
-<li><strong>Automatise les rollbacks</strong> — teste <code>kubectl rollout undo</code> sur chaque service. En cas de problème, le retour sur Swarm doit être possible tant que le DNS n&rsquo;est pas basculé</li>
-<li><strong>Documente les différences</strong> — chaque service migré doit avoir une note sur ce qui a changé (URLs internes, variables d&rsquo;env, volumes)</li>
-<li><strong>Ne migre pas les bases de données en premier</strong> — c&rsquo;est tentant de &ldquo;tout faire d&rsquo;un coup&rdquo;, mais les stateful sont les plus risqués. Garde-les pour la fin</li>
-<li><strong>Profite de la migration pour nettoyer</strong> — c&rsquo;est l&rsquo;occasion de supprimer les services inutilisés, de standardiser les conventions de nommage, et de mettre en place les bonnes pratiques (probes, limits, network policies)</li>
+<li><strong>Migre en binôme</strong> : quelqu&rsquo;un qui connaît l&rsquo;app Swarm + quelqu&rsquo;un qui connaît Kubernetes</li>
+<li><strong>GitOps dès le premier service</strong> : mets ArgoCD en place avant de commencer à migrer. Chaque service migré arrive directement en GitOps</li>
+<li><strong>Monitoring d&rsquo;abord</strong> : installe Prometheus + Grafana avant de migrer les workloads. Tu veux voir les problèmes, pas les deviner</li>
+<li><strong>Environnement de staging</strong> : migre d&rsquo;abord en staging, valide, puis reproduis en prod</li>
+<li><strong>Automatise les rollbacks</strong> : teste <code>kubectl rollout undo</code> sur chaque service. En cas de problème, le retour sur Swarm doit être possible tant que le DNS n&rsquo;est pas basculé</li>
+<li><strong>Documente les différences</strong> : chaque service migré doit avoir une note sur ce qui a changé (URLs internes, variables d&rsquo;env, volumes)</li>
+<li><strong>Ne migre pas les bases de données en premier</strong> : c&rsquo;est tentant de &ldquo;tout faire d&rsquo;un coup&rdquo;, mais les stateful sont les plus risqués. Garde-les pour la fin</li>
+<li><strong>Profite de la migration pour nettoyer</strong> : c&rsquo;est l&rsquo;occasion de supprimer les services inutilisés, de standardiser les conventions de nommage, et de mettre en place les bonnes pratiques (probes, limits, network policies)</li>
 </ol>
 <h2 id="conclusion" class="relative group">Conclusion <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#conclusion" aria-label="Ancre">#</a></span></h2><p>Migrer de Docker Swarm à Kubernetes, c&rsquo;est un projet en soi. Pas un changement de format de fichier. Les concepts sont proches mais les détails divergent suffisamment pour que chaque service nécessite une attention individuelle.</p>
-<p>La clé, c&rsquo;est la progressivité : infra d&rsquo;abord, stateless ensuite, stateful en dernier. Avec du GitOps et du monitoring en place dès le départ, chaque étape est observable et réversible. Et une fois la migration terminée, tu accèdes à tout l&rsquo;écosystème Kubernetes — 
+<p>La clé, c&rsquo;est la progressivité : infra d&rsquo;abord, stateless ensuite, stateful en dernier. Avec du GitOps et du monitoring en place dès le départ, chaque étape est observable et réversible. Et une fois la migration terminée, tu accèdes à tout l&rsquo;écosystème Kubernetes (
       
     <a href="http://localhost:1313/articles/transfersh-helm-chart/">Helm</a>, 
       
@@ -955,7 +1035,7 @@ api.example.com → Kubernetes (poids 100)
       
     <a href="http://localhost:1313/articles/kubernetes-monitoring-prometheus-grafana/">monitoring Prometheus</a>, 
       
-    <a href="http://localhost:1313/articles/container-security-trivy-kyverno/">politiques Kyverno</a> — qui n&rsquo;a pas d&rsquo;équivalent côté Swarm.</p>
+    <a href="http://localhost:1313/articles/container-security-trivy-kyverno/">politiques Kyverno</a>) qui n&rsquo;a pas d&rsquo;équivalent côté Swarm.</p>
 
       </div>
     </section>

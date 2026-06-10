@@ -1,0 +1,887 @@
+
+
+
+
+
+
+<!doctype html>
+<html
+  lang="en"
+  dir="ltr"
+  class="scroll-smooth"
+  data-default-appearance="light"
+  data-auto-appearance="true"
+><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#FFFFFF" />
+  
+  <title>K3S for Local Development: a mini production cluster &middot; Adrien PARRA</title>
+    <meta name="title" content="K3S for Local Development: a mini production cluster &middot; Adrien PARRA" />
+  
+  
+  
+  
+  
+  <script
+    type="text/javascript"
+    src="http://localhost:1313/js/appearance.min.8a082f81b27f3cb2ee528df0b0bdc39787034cf2cc34d4669fbc9977c929023c.js"
+    integrity="sha256-iggvgbJ/PLLuUo3wsL3Dl4cDTPLMNNRmn7yZd8kpAjw="
+  ></script>
+  
+  
+  
+  
+  
+  
+  
+    
+  
+  
+  <link
+    type="text/css"
+    rel="stylesheet"
+    href="http://localhost:1313/css/main.bundle.min.0de763b2899dc6cb9886d78b6c56064836bffc4b9441a2489023bd81177731f2.css"
+    integrity="sha256-DedjsomdxsuYhteLbFYGSDa//EuUQaJIkCO9gRd3MfI="
+  />
+  
+  
+  
+    
+    
+  
+  
+  
+  
+    
+    <script
+      defer
+      type="text/javascript"
+      id="script-bundle"
+      src="http://localhost:1313/js/main.bundle.min.08a9220ae61dd334b11a887737885eaf1530f54c827ad77237e0dba74a179ea6.js"
+      integrity="sha256-CKkiCuYd0zSxGoh3N4herxUw9UyCetdyN&#43;Dbp0oXnqY="
+      data-copy="Copy"
+      data-copied="Copied"
+    ></script>
+  
+  
+  <meta
+    name="description"
+    content="
+      
+        K3S isn&rsquo;t just a cluster for IoT. Here&rsquo;s how to use it as a local development environment that mirrors your production, without the €2,000 monthly cloud bills.
+      
+    "
+  />
+  
+  
+  
+  
+    <link rel="canonical" href="http://localhost:1313/en/articles/k3s-local-development/" />
+  
+  
+  
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <meta property="og:url" content="http://localhost:1313/en/articles/k3s-local-development/">
+	<meta property="og:site_name" content="Adrien PARRA">
+	<meta property="og:title" content="K3S for Local Development: a mini production cluster">
+	<meta property="og:description" content="K3S isn’t just a cluster for IoT. Here’s how to use it as a local development environment that mirrors your production, without the €2,000 monthly cloud bills.">
+	<meta property="og:locale" content="en">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="articles">
+		<meta property="article:published_time" content="2026-03-29T00:00:00+00:00">
+		<meta property="article:modified_time" content="2026-03-29T00:00:00+00:00">
+		<meta property="article:tag" content="Kubernetes">
+		<meta property="article:tag" content="K3S">
+		<meta property="article:tag" content="Development">
+		<meta property="article:tag" content="DevOps">
+		<meta property="article:tag" content="Homelab">
+
+  
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="K3S for Local Development: a mini production cluster">
+	<meta name="twitter:description" content="K3S isn’t just a cluster for IoT. Here’s how to use it as a local development environment that mirrors your production, without the €2,000 monthly cloud bills.">
+
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "articleSection": "Articles",
+    "name": "K3S for Local Development: a mini production cluster",
+    "headline": "K3S for Local Development: a mini production cluster",
+    
+    "abstract": "K3S isn\u0026rsquo;t just a cluster for IoT. Here\u0026rsquo;s how to use it as a local development environment that mirrors your production, without the €2,000 monthly cloud bills.",
+    "inLanguage": "en",
+    "url" : "http:\/\/localhost:1313\/en\/articles\/k3s-local-development\/",
+    "author" : {
+      "@type": "Person",
+      "name": "Adrien PARRA"
+    },
+    "copyrightYear": "2026",
+    "dateCreated": "2026-03-29T00:00:00\u002b00:00",
+    "datePublished": "2026-03-29T00:00:00\u002b00:00",
+    
+    "dateModified": "2026-03-29T00:00:00\u002b00:00",
+    
+    "keywords": ["Kubernetes","K3S","Development","DevOps","Homelab"],
+    
+    "mainEntityOfPage": "true",
+    "wordCount": "1186"
+  }
+  </script>
+    
+    <script type="application/ld+json">
+    {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+     {
+       "@type": "ListItem",
+       "item": "http://localhost:1313/en/",
+       "name": "Home",
+       "position": 1
+     },
+     {
+       "@type": "ListItem",
+       "item": "http://localhost:1313/en/articles/",
+       "name": "Articles",
+       "position": 2
+     },
+     {
+       "@type": "ListItem",
+       "name": "K3 S for Local Development a Mini Production Cluster",
+       "position": 3
+     }
+   ]
+ }
+  </script>
+
+  
+  
+    <meta name="author" content="Adrien PARRA" />
+  
+  
+    
+      <link href="https://www.linkedin.com/in/adrien-parra-5473a0159/" rel="me" />
+    
+      <link href="https://github.com/Adri3nParra" rel="me" />
+    
+  
+  
+  
+
+
+
+
+
+
+
+  
+  
+
+  
+  
+</head>
+<body
+    class="m-auto flex h-screen max-w-7xl flex-col bg-neutral px-6 text-lg leading-7 text-neutral-900 dark:bg-neutral-800 dark:text-neutral sm:px-14 md:px-24 lg:px-32"
+  >
+    <div id="the-top" class="absolute flex self-center">
+      <a
+        class="-translate-y-8 rounded-b-lg bg-primary-200 px-3 py-1 text-sm focus:translate-y-0 dark:bg-neutral-600"
+        href="#main-content"
+        ><span class="pe-2 font-bold text-primary-600 dark:text-primary-400">&darr;</span
+        >Skip to main content</a
+      >
+    </div>
+    
+    
+      <header class="py-6 font-semibold text-neutral-900 dark:text-neutral sm:py-10 print:hidden">
+  <nav class="flex items-start justify-between sm:items-center">
+    
+    <div class="flex flex-row items-center">
+      
+  <a
+    class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2"
+    rel="me"
+    href="/en/"
+    >Adrien PARRA</a
+  >
+
+    </div>
+    
+    
+      <ul class="flex list-none flex-col text-end sm:flex-row">
+        
+          
+            
+            <li class="group mb-1 sm:mb-0 sm:me-7 sm:last:me-0.5">
+              
+                <a
+                  href="/en/about/"
+                  title="About"
+                  
+                  
+                  ><span
+                      class="decoration-primary-500 group-hover:underline group-hover:decoration-2 group-hover:underline-offset-2"
+                      >About</span
+                    >
+                  </a
+                >
+              
+            </li>
+          
+            
+            <li class="group mb-1 sm:mb-0 sm:me-7 sm:last:me-0.5">
+              
+                <a
+                  href="/en/experience/"
+                  title="Experience"
+                  
+                  
+                  ><span
+                      class="decoration-primary-500 group-hover:underline group-hover:decoration-2 group-hover:underline-offset-2"
+                      >Experience</span
+                    >
+                  </a
+                >
+              
+            </li>
+          
+            
+            <li class="group mb-1 sm:mb-0 sm:me-7 sm:last:me-0.5">
+              
+                <a
+                  href="/en/articles/"
+                  title="Articles"
+                  
+                  
+                  ><span
+                      class="decoration-primary-500 group-hover:underline group-hover:decoration-2 group-hover:underline-offset-2"
+                      >Articles</span
+                    >
+                  </a
+                >
+              
+            </li>
+          
+            
+            <li class="group mb-1 sm:mb-0 sm:me-7 sm:last:me-0.5">
+              
+                <a
+                  href="/en/contact/"
+                  title="Contact"
+                  
+                  
+                  ><span
+                      class="decoration-primary-500 group-hover:underline group-hover:decoration-2 group-hover:underline-offset-2"
+                      >Contact</span
+                    >
+                  </a
+                >
+              
+            </li>
+          
+            
+            <li class="group mb-1 sm:mb-0 sm:me-7 sm:last:me-0.5">
+              
+                
+                
+  
+    
+    
+      <div class="group relative">
+        <button
+          class="group-dark:hover:text-primary-400 flex w-full items-center justify-end transition-colors group-hover:text-primary-600"
+        >
+          <span class="icon relative inline-block px-1 align-text-bottom"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+  <path fill="currentColor" d="M4.545 6.714 4.11 8H3l1.862-5h1.284L8 8H6.833l-.435-1.286H4.545zm1.634-.736L5.5 3.956h-.049l-.679 2.022H6.18z"/>
+  <path fill="currentColor" d="M0 2a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v3h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-3H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2zm7.138 9.995c.193.301.402.583.63.846-.748.575-1.673 1.001-2.768 1.292.178.217.451.635.555.867 1.125-.359 2.08-.844 2.886-1.494.777.665 1.739 1.165 2.93 1.472.133-.254.414-.673.629-.89-1.125-.253-2.057-.694-2.82-1.284.681-.747 1.222-1.651 1.621-2.757H14V8h-3v1.047h.765c-.318.844-.74 1.546-1.272 2.13a6.066 6.066 0 0 1-.415-.492 1.988 1.988 0 0 1-.94.31z"/>
+</svg>
+</span><span class="text-sm">EN</span
+          ><span class="text-[0.6rem]"
+            ><span class="icon relative inline-block px-1 align-text-bottom"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg>
+</span></span
+          >
+        </button>
+        
+          <div class="invisible w-full bg-transparent group-hover:visible"></div>
+        
+        <div
+          class=" invisible absolute z-50 flex flex-col whitespace-nowrap rounded border border-neutral-300 bg-neutral text-start text-base shadow group-hover:visible ltr:right-0 rtl:left-0 dark:border-neutral-600 dark:bg-neutral-800"
+        >
+          
+          
+          
+            
+            
+              
+                
+                <div class="flex flex-grow">
+                  
+                    <a
+                      href="http://localhost:1313/articles/k3s-local-development/"
+                      class="w-full py-1 pe-10 ps-2 decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2"
+                      >Français</a
+                    >
+                  
+                </div>
+              
+            
+              
+            
+          
+            
+            
+              
+            
+              
+                
+                <div class="flex flex-grow">
+                  
+                    <a
+                      href="http://localhost:1313/en/articles/k3s-local-development/"
+                      class="flex w-full items-center justify-between bg-primary-100 px-2 py-1 dark:bg-primary-900"
+                      >English<span
+                        class="ms-2 w-6 text-primary-600 dark:text-primary-400"
+                        ><span class="icon relative inline-block px-1 align-text-bottom"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M438.6 105.4C451.1 117.9 451.1 138.1 438.6 150.6L182.6 406.6C170.1 419.1 149.9 419.1 137.4 406.6L9.372 278.6C-3.124 266.1-3.124 245.9 9.372 233.4C21.87 220.9 42.13 220.9 54.63 233.4L159.1 338.7L393.4 105.4C405.9 92.88 426.1 92.88 438.6 105.4H438.6z"/></svg>
+</span></span
+                      ></a
+                    >
+                  
+                </div>
+              
+            
+          
+        </div>
+      </div>
+    
+  
+
+
+              
+            </li>
+          
+          
+        
+      </ul>
+    
+  </nav>
+</header>
+
+    
+    <div class="relative flex grow flex-col">
+      <main id="main-content" class="grow">
+        
+  <article>
+    <header class="max-w-prose">
+      
+        <ol class="text-sm text-neutral-500 dark:text-neutral-400 print:hidden">
+  
+  
+    
+  
+    
+  
+  <li class="hidden inline">
+    <a
+      class="dark:underline-neutral-600 decoration-neutral-300 hover:underline"
+      href="http://localhost:1313/en/"
+      >Home</a
+    ><span class="px-1 text-primary-500">/</span>
+  </li>
+
+  
+  <li class=" inline">
+    <a
+      class="dark:underline-neutral-600 decoration-neutral-300 hover:underline"
+      href="http://localhost:1313/en/articles/"
+      >Articles</a
+    ><span class="px-1 text-primary-500">/</span>
+  </li>
+
+  
+  <li class="hidden inline">
+    <a
+      class="dark:underline-neutral-600 decoration-neutral-300 hover:underline"
+      href="http://localhost:1313/en/articles/k3s-local-development/"
+      >K3S for Local Development: a mini production cluster</a
+    ><span class="px-1 text-primary-500">/</span>
+  </li>
+
+</ol>
+
+
+      
+      <h1 class="mb-8 mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
+        K3S for Local Development: a mini production cluster
+      </h1>
+      
+      
+    </header>
+    <section class="prose mt-0 flex max-w-full flex-col dark:prose-invert lg:flex-row">
+      
+        <div class="order-first px-0 lg:order-last lg:max-w-xs lg:ps-8">
+          <div class="toc pe-5 lg:sticky lg:top-10 print:hidden">
+            <details open class="-ms-5 mt-0 overflow-hidden rounded-lg ps-5">
+  <summary
+    class="block cursor-pointer bg-neutral-100 py-1 ps-5 text-lg font-semibold text-neutral-800 dark:bg-neutral-700 dark:text-neutral-100 lg:hidden"
+  >
+    Table of Contents
+  </summary>
+  <div class="border-s border-dotted border-neutral-300 py-2 ps-5 dark:border-neutral-600">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#why-k3s-and-not-kind-or-minikube">Why K3S and not kind or Minikube?</a></li>
+    <li><a href="#installation">Installation</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation-script">Installation script</a></li>
+      </ul>
+    </li>
+    <li><a href="#setup-for-a-production-like-environment">Setup for a production-like environment</a>
+      <ul>
+        <li><a href="#storage">Storage</a></li>
+        <li><a href="#ingress">Ingress</a></li>
+        <li><a href="#namespaces-per-environment">Namespaces per environment</a></li>
+      </ul>
+    </li>
+    <li><a href="#development-workflow">Development workflow</a>
+      <ul>
+        <li><a href="#option-1-classic-apply-gitops-workflow">Option 1: classic apply (GitOps workflow)</a></li>
+        <li><a href="#option-2-dev-loop-with-tilt-or-skaffold">Option 2: dev loop with Tilt or Skaffold</a></li>
+        <li><a href="#option-3-helm-to-industrialize">Option 3: Helm to industrialize</a></li>
+      </ul>
+    </li>
+    <li><a href="#local-debugging">Local debugging</a>
+      <ul>
+        <li><a href="#accessing-logs">Accessing logs</a></li>
+        <li><a href="#shell-into-a-container">Shell into a container</a></li>
+        <li><a href="#port-forward-for-debugging">Port-forward for debugging</a></li>
+        <li><a href="#inspecting-resources">Inspecting resources</a></li>
+      </ul>
+    </li>
+    <li><a href="#dashboard-and-tooling">Dashboard and tooling</a>
+      <ul>
+        <li><a href="#kubernetes-dashboard">Kubernetes Dashboard</a></li>
+      </ul>
+    </li>
+    <li><a href="#limits-and-alternatives">Limits and alternatives</a>
+      <ul>
+        <li><a href="#no-built-in-load-balancer">No built-in load balancer</a></li>
+        <li><a href="#no-cloud-ingress-controller">No cloud ingress controller</a></li>
+        <li><a href="#limited-resources">Limited resources</a></li>
+        <li><a href="#if-you-need-multiple-nodes">If you need multiple nodes</a></li>
+      </ul>
+    </li>
+    <li><a href="#complete-setup-script">Complete setup script</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+  </div>
+</details>
+
+          </div>
+        </div>
+      
+      <div class="min-h-0 min-w-0 max-w-prose grow">
+        <p>When you work on microservice architectures that run on Kubernetes in production, developing locally on Docker Compose is a bit like rehearsing a play in your living room when the show is in a theater. The conditions are different, surprises are guaranteed, and the audience isn&rsquo;t fooled.</p>
+<p>K3S, Rancher&rsquo;s (SUSE) lightweight Kubernetes cluster, is a different approach. Instead of developing on a degraded version of your infra, you run a real Kubernetes cluster on your machine. The same manifests, the same tools, the same concepts.</p>
+<h2 id="why-k3s-and-not-kind-or-minikube" class="relative group">Why K3S and not kind or Minikube? <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#why-k3s-and-not-kind-or-minikube" aria-label="Anchor">#</a></span></h2><table>
+	<thead>
+			<tr>
+					<th>Criterion</th>
+					<th>K3S</th>
+					<th>kind</th>
+					<th>Minikube</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Multi-node</td>
+					<td>Yes</td>
+					<td>Yes (via extra nodes)</td>
+					<td>No</td>
+			</tr>
+			<tr>
+					<td>Persistent cluster</td>
+					<td>Yes</td>
+					<td>No (reset on each restart)</td>
+					<td>Yes</td>
+			</tr>
+			<tr>
+					<td>Startup time</td>
+					<td>~30s</td>
+					<td>~60s</td>
+					<td>~90s</td>
+			</tr>
+			<tr>
+					<td>Production-like</td>
+					<td>High</td>
+					<td>Medium</td>
+					<td>Medium</td>
+			</tr>
+			<tr>
+					<td>Resources</td>
+					<td>~512 MB RAM</td>
+					<td>~2 GB RAM</td>
+					<td>~2 GB RAM</td>
+			</tr>
+			<tr>
+					<td>Docker integration</td>
+					<td>native</td>
+					<td>native</td>
+					<td>native</td>
+			</tr>
+	</tbody>
+</table>
+<p>K3S starts fast, consumes little, and unlike kind, your cluster persists between sessions. It&rsquo;s the most relevant choice for a daily dev environment.</p>
+<h2 id="installation" class="relative group">Installation <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#installation" aria-label="Anchor">#</a></span></h2><h3 id="prerequisites" class="relative group">Prerequisites <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#prerequisites" aria-label="Anchor">#</a></span></h3><ul>
+<li>Linux (sorry, I don&rsquo;t work on another OS)</li>
+<li>2 GB RAM minimum (4 GB recommended)</li>
+<li>Docker installed or containerd</li>
+</ul>
+<h3 id="installation-script" class="relative group">Installation script <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#installation-script" aria-label="Anchor">#</a></span></h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl -sfL https://get.k3s.io | sh -
+</span></span></code></pre></div><p>Or via the binary if you prefer:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl -Lo /usr/local/bin/k3s https://github.com/k3s-io/k3s/releases/download/v1.30.0+k3s1/k3s
+</span></span><span style="display:flex;"><span>chmod +x /usr/local/bin/k3s
+</span></span><span style="display:flex;"><span>k3s server
+</span></span></code></pre></div><p>The K3S service automatically creates its kubectl context. To access it from your host:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mkdir -p ~/.kube
+</span></span><span style="display:flex;"><span>sudo k3s kubectl config view --flatten &gt; ~/.kube/config
+</span></span><span style="display:flex;"><span>sudo chmod <span style="color:#ae81ff">644</span> ~/.kube/config
+</span></span></code></pre></div><p>Check that it works:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get nodes
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># NAME        STATUS   ROLES                  AGE   VERSION</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># localhost   Ready    control-plane,master   10s   v1.30.0+k3s1</span>
+</span></span></code></pre></div><h2 id="setup-for-a-production-like-environment" class="relative group">Setup for a production-like environment <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#setup-for-a-production-like-environment" aria-label="Anchor">#</a></span></h2><p>Your dev cluster should resemble your production without its constraints (quotas, restrictive network policies, etc.).</p>
+<h3 id="storage" class="relative group">Storage <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#storage" aria-label="Anchor">#</a></span></h3><p>In production, you probably have a StorageClass on a cloud provider. Locally, use <code>local-path</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get storageclass
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># NAME                   PROVISIONER             RECLAIMPOLICY</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># local-path (default)   rancher.io/local-path  Delete</span>
+</span></span></code></pre></div><p>Create a PVC for your persistent data:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#75715e"># pvc.yaml</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">PersistentVolumeClaim</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">postgres-data</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">dev</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">accessModes</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">ReadWriteOnce</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">storageClassName</span>: <span style="color:#ae81ff">local-path</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">resources</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">requests</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">storage</span>: <span style="color:#ae81ff">1Gi</span>
+</span></span></code></pre></div><h3 id="ingress" class="relative group">Ingress <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#ingress" aria-label="Anchor">#</a></span></h3><p>In production, you probably have Traefik, NGINX, or a cloud Ingress. K3S includes Traefik by default:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#75715e"># ingress.yaml</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">networking.k8s.io/v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Ingress</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">api</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">dev</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">annotations</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">kubernetes.io/ingress.class</span>: <span style="color:#ae81ff">traefik</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">rules</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">host</span>: <span style="color:#ae81ff">api.local</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">http</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">paths</span>:
+</span></span><span style="display:flex;"><span>          - <span style="color:#f92672">path</span>: <span style="color:#ae81ff">/</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">pathType</span>: <span style="color:#ae81ff">Prefix</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">backend</span>:
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">service</span>:
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">name</span>: <span style="color:#ae81ff">api</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">port</span>:
+</span></span><span style="display:flex;"><span>                  <span style="color:#f92672">number</span>: <span style="color:#ae81ff">8080</span>
+</span></span></code></pre></div><p>Configure <code>/etc/hosts</code> for local resolution:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># /etc/hosts</span>
+</span></span><span style="display:flex;"><span>127.0.0.1 api.local
+</span></span><span style="display:flex;"><span>127.0.0.1 frontend.local
+</span></span><span style="display:flex;"><span>127.0.0.1 postgres.local
+</span></span></code></pre></div><h3 id="namespaces-per-environment" class="relative group">Namespaces per environment <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#namespaces-per-environment" aria-label="Anchor">#</a></span></h3><p>Isolate your namespaces like in production:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create namespace dev
+</span></span><span style="display:flex;"><span>kubectl create namespace staging
+</span></span><span style="display:flex;"><span>kubectl label namespaces dev env<span style="color:#f92672">=</span>dev
+</span></span><span style="display:flex;"><span>kubectl label namespaces staging env<span style="color:#f92672">=</span>staging
+</span></span></code></pre></div><h2 id="development-workflow" class="relative group">Development workflow <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#development-workflow" aria-label="Anchor">#</a></span></h2><h3 id="option-1-classic-apply-gitops-workflow" class="relative group">Option 1: classic apply (GitOps workflow) <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#option-1-classic-apply-gitops-workflow" aria-label="Anchor">#</a></span></h3><p>When you want to test your manifests:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Apply everything at once</span>
+</span></span><span style="display:flex;"><span>kubectl apply -k ./manifests/
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Or file by file</span>
+</span></span><span style="display:flex;"><span>kubectl apply -f ./manifests/api-deployment.yaml
+</span></span><span style="display:flex;"><span>kubectl apply -f ./manifests/api-service.yaml
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Check that everything is running</span>
+</span></span><span style="display:flex;"><span>kubectl get all -n dev
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># NAME                        READY   STATUS    RESTARTS   AGE</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># pod/api-7d9f8b4c6-x2kz9     1/1     Running   0          45s</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># pod/postgres-0              1/1     Running   0          2m</span>
+</span></span></code></pre></div><h3 id="option-2-dev-loop-with-tilt-or-skaffold" class="relative group">Option 2: dev loop with Tilt or Skaffold <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#option-2-dev-loop-with-tilt-or-skaffold" aria-label="Anchor">#</a></span></h3><p>For a faster refresh cycle, use <a href="https://tilt.dev/" target="_blank" rel="noreferrer">Tilt</a>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Installation</span>
+</span></span><span style="display:flex;"><span>curl -fsSL https://raw.githubusercontent.com/tilt-dev/tilt/master/scripts/get-tilt.sh | bash
+</span></span></code></pre></div><p><code>Tiltfile</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Tiltfile</span>
+</span></span><span style="display:flex;"><span>k8s_yaml([<span style="color:#e6db74">&#39;api-deployment.yaml&#39;</span>, <span style="color:#e6db74">&#39;api-service.yaml&#39;</span>, <span style="color:#e6db74">&#39;ingress.yaml&#39;</span>])
+</span></span><span style="display:flex;"><span>k8s_resource(<span style="color:#e6db74">&#39;api&#39;</span>, port_forwards<span style="color:#f92672">=</span><span style="color:#ae81ff">8080</span>)
+</span></span><span style="display:flex;"><span>docker_build(<span style="color:#e6db74">&#39;registry/api&#39;</span>, <span style="color:#e6db74">&#39;.&#39;</span>)
+</span></span></code></pre></div><p>Run <code>tilt up</code> and you get:</p>
+<ul>
+<li>Automatic Docker image rebuild on code change</li>
+<li>Log streaming</li>
+<li>Automatic port-forward</li>
+<li>A web interface to inspect resources</li>
+</ul>
+<h3 id="option-3-helm-to-industrialize" class="relative group">Option 3: Helm to industrialize <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#option-3-helm-to-industrialize" aria-label="Anchor">#</a></span></h3><p>If your production uses Helm (which should be the case), develop with Helm:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Template your chart locally</span>
+</span></span><span style="display:flex;"><span>helm template ./chart --namespace dev --set image.tag<span style="color:#f92672">=</span>dev
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Or install directly (not recommended in prod)</span>
+</span></span><span style="display:flex;"><span>helm install api ./chart --namespace dev --create-namespace
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Upgrade after a change</span>
+</span></span><span style="display:flex;"><span>helm upgrade api ./chart --namespace dev --set image.tag<span style="color:#f92672">=</span>dev2
+</span></span></code></pre></div><p>Values for development:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#75715e"># values-dev.yaml</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">replicaCount</span>: <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">image</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">tag</span>: <span style="color:#ae81ff">dev</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">resources</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">requests</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">cpu</span>: <span style="color:#ae81ff">100m</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">memory</span>: <span style="color:#ae81ff">64Mi</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">limits</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">cpu</span>: <span style="color:#ae81ff">200m</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">memory</span>: <span style="color:#ae81ff">128Mi</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">ingress</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">enabled</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">className</span>: <span style="color:#ae81ff">traefik</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">host</span>: <span style="color:#ae81ff">api.local</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">probes</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">enabled</span>: <span style="color:#66d9ef">true</span>
+</span></span></code></pre></div><h2 id="local-debugging" class="relative group">Local debugging <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#local-debugging" aria-label="Anchor">#</a></span></h2><h3 id="accessing-logs" class="relative group">Accessing logs <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#accessing-logs" aria-label="Anchor">#</a></span></h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Logs of a pod</span>
+</span></span><span style="display:flex;"><span>kubectl logs -n dev api-7d9f8b4c6-x2kz9 -f
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Logs of all pods in a deployment</span>
+</span></span><span style="display:flex;"><span>kubectl logs -n dev -l app<span style="color:#f92672">=</span>api -f
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Logs preceding a crash</span>
+</span></span><span style="display:flex;"><span>kubectl logs -n dev api-7d9f8b4c6-x2kz9 --previous
+</span></span></code></pre></div><h3 id="shell-into-a-container" class="relative group">Shell into a container <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#shell-into-a-container" aria-label="Anchor">#</a></span></h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl exec -it -n dev api-7d9f8b4c6-x2kz9 -- /bin/sh
+</span></span></code></pre></div><p>Or more directly with <code>kubectl debug</code> (K8s 1.20+):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl debug -it -n dev api-7d9f8b4c6-x2kz9 --image<span style="color:#f92672">=</span>busybox --share-processes --copy-to<span style="color:#f92672">=</span>api-debug
+</span></span></code></pre></div><h3 id="port-forward-for-debugging" class="relative group">Port-forward for debugging <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#port-forward-for-debugging" aria-label="Anchor">#</a></span></h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Forward a local port to the service</span>
+</span></span><span style="display:flex;"><span>kubectl port-forward -n dev svc/api 8080:8080
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Forward to a pod directly</span>
+</span></span><span style="display:flex;"><span>kubectl port-forward -n dev api-7d9f8b4c6-x2kz9 8080:8080
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Forward to the database</span>
+</span></span><span style="display:flex;"><span>kubectl port-forward -n dev svc/postgres 5432:5432
+</span></span></code></pre></div><h3 id="inspecting-resources" class="relative group">Inspecting resources <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#inspecting-resources" aria-label="Anchor">#</a></span></h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Describe to see events and conditions</span>
+</span></span><span style="display:flex;"><span>kubectl describe pod -n dev api-7d9f8b4c6-x2kz9
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># View resource requests/limits</span>
+</span></span><span style="display:flex;"><span>kubectl top pod -n dev
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># List events</span>
+</span></span><span style="display:flex;"><span>kubectl get events -n dev --sort-by<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;.lastTimestamp&#39;</span>
+</span></span></code></pre></div><h2 id="dashboard-and-tooling" class="relative group">Dashboard and tooling <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#dashboard-and-tooling" aria-label="Anchor">#</a></span></h2><h3 id="kubernetes-dashboard" class="relative group">Kubernetes Dashboard <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#kubernetes-dashboard" aria-label="Anchor">#</a></span></h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Installation via Helm</span>
+</span></span><span style="display:flex;"><span>helm repo add kubernetes-dashboard https://kubernetes.github.io/dashboard
+</span></span><span style="display:flex;"><span>helm install kubernetes-dashboard kubernetes-dashboard/kubernetes-dashboard -n kube-system
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Access via kubectl proxy</span>
+</span></span><span style="display:flex;"><span>kubectl proxy
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Then open http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/</span>
+</span></span></code></pre></div><p>Or use <code>k9s</code>, lighter and terminal-based (personally, I&rsquo;m more of a kubectl CLI person).</p>
+<p>A terminal interface with keyboard navigation, logs, describe, exec — everything you need without leaving your console.</p>
+<h2 id="limits-and-alternatives" class="relative group">Limits and alternatives <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#limits-and-alternatives" aria-label="Anchor">#</a></span></h2><p>K3S has limits for local dev:</p>
+<h3 id="no-built-in-load-balancer" class="relative group">No built-in load balancer <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#no-built-in-load-balancer" aria-label="Anchor">#</a></span></h3><p>In production, you have a LoadBalancer that gives you an external IP. Locally, use <code>NodePort</code> or <code>port-forward</code> to access services from outside the cluster.</p>
+<h3 id="no-cloud-ingress-controller" class="relative group">No cloud ingress controller <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#no-cloud-ingress-controller" aria-label="Anchor">#</a></span></h3><p>You have to configure <code>/etc/hosts</code> manually or use <a href="http://xip.io/" target="_blank" rel="noreferrer">xip.io</a> for local wildcard DNS.</p>
+<h3 id="limited-resources" class="relative group">Limited resources <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#limited-resources" aria-label="Anchor">#</a></span></h3><p>K3S runs on your machine. Don&rsquo;t launch 50 pods at once. Use namespaces to isolate and avoid conflicts.</p>
+<h3 id="if-you-need-multiple-nodes" class="relative group">If you need multiple nodes <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#if-you-need-multiple-nodes" aria-label="Anchor">#</a></span></h3><p>K3S supports multi-node to test distributed deployments:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># On the master</span>
+</span></span><span style="display:flex;"><span>k3s server
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># On a worker node (get the token first)</span>
+</span></span><span style="display:flex;"><span>cat /var/lib/rancher/k3s/server/node-token
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># On the worker</span>
+</span></span><span style="display:flex;"><span>curl -sfL https://get.k3s.io | K3S_URL<span style="color:#f92672">=</span>https://master:6443 K3S_TOKEN<span style="color:#f92672">=</span>&lt;token&gt; sh -
+</span></span></code></pre></div><p>For occasional multi-node tests, <a href="https://k3d.io/" target="_blank" rel="noreferrer">k3d</a> is more convenient (cluster inside Docker).</p>
+<h2 id="complete-setup-script" class="relative group">Complete setup script <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#complete-setup-script" aria-label="Anchor">#</a></span></h2><p>To start a K3S dev environment from scratch:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash
+</span></span></span><span style="display:flex;"><span>set -e
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>NAMESPACE<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;dev&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;Installing K3S...&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> ! command -v k3s &amp;&gt; /dev/null; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>    curl -sfL https://get.k3s.io | sh -
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;Configuring kubectl...&#34;</span>
+</span></span><span style="display:flex;"><span>mkdir -p ~/.kube
+</span></span><span style="display:flex;"><span>sudo k3s kubectl config view --flatten &gt; ~/.kube/config
+</span></span><span style="display:flex;"><span>sudo chmod <span style="color:#ae81ff">644</span> ~/.kube/config
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;Creating the dev namespace...&#34;</span>
+</span></span><span style="display:flex;"><span>kubectl create namespace $NAMESPACE 2&gt;/dev/null <span style="color:#f92672">||</span> true
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;Applying base manifests...&#34;</span>
+</span></span><span style="display:flex;"><span>kubectl apply -f manifests/storage.yaml
+</span></span><span style="display:flex;"><span>kubectl apply -f manifests/ingress.yaml
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;Verifying...&#34;</span>
+</span></span><span style="display:flex;"><span>kubectl get all -n $NAMESPACE
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;K3S ready! Cluster accessible via kubectl.&#34;</span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;Dashboard: kubectl proxy then http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/&#34;</span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;Or install k9s: brew install derailed-dev/tools/k9s&#34;</span>
+</span></span></code></pre></div><h2 id="conclusion" class="relative group">Conclusion <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#conclusion" aria-label="Anchor">#</a></span></h2><p>K3S for local development is the compromise between the simplicity of Docker Compose and the reality of Kubernetes in production. You validate your manifests, you test your Helm charts, you debug with the real tools, all without leaving your terminal.</p>
+<p>The Rancher tools (k3s, k3d) form a coherent ecosystem covering installation, management and destruction of clusters. Whether for a persistent cluster on your workstation or ephemeral clusters in CI, K3S adapts.</p>
+<p>The real gain is reducing the gap between &ldquo;it works in dev&rdquo; and &ldquo;it works in prod.&rdquo; If your deployment, your service, your ingress and your Helm chart work locally on K3S, they have a good chance of working on your production cluster, modulo the cloud resources and specific StorageClasses.</p>
+
+      </div>
+    </section>
+    <footer class="max-w-prose pt-8 print:hidden">
+      
+
+      
+
+      
+  
+    
+    
+    
+    <div class="pt-8">
+      <hr class="border-dotted border-neutral-300 dark:border-neutral-600" />
+      <div class="flex justify-between pt-3">
+        <span>
+          
+            <a class="group flex" href="http://localhost:1313/en/articles/kubernetes-monitoring-prometheus-grafana/">
+              <span
+                class="me-2 text-neutral-700 transition-transform group-hover:-translate-x-[2px] group-hover:text-primary-600 dark:text-neutral dark:group-hover:text-primary-400"
+                ><span class="ltr:inline rtl:hidden">&larr;</span
+                ><span class="ltr:hidden rtl:inline">&rarr;</span></span
+              >
+              <span class="flex flex-col">
+                <span
+                  class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500"
+                  >Kubernetes Monitoring: Prometheus + Grafana stack</span
+                >
+                <span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
+                  
+                </span>
+              </span>
+            </a>
+          
+        </span>
+        <span>
+          
+            <a class="group flex text-right" href="http://localhost:1313/en/articles/docker-swarm-to-kubernetes/">
+              <span class="flex flex-col">
+                <span
+                  class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500"
+                  >Docker Swarm to Kubernetes: migration strategies</span
+                >
+                <span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
+                  
+                </span>
+              </span>
+              <span
+                class="ms-2 text-neutral-700 transition-transform group-hover:-translate-x-[-2px] group-hover:text-primary-600 dark:text-neutral dark:group-hover:text-primary-400"
+                ><span class="ltr:inline rtl:hidden">&rarr;</span
+                ><span class="ltr:hidden rtl:inline">&larr;</span></span
+              >
+            </a>
+          
+        </span>
+      </div>
+    </div>
+  
+
+
+      
+    </footer>
+  </article>
+
+      </main>
+      
+        <div
+          class="pointer-events-none absolute bottom-0 end-0 top-[100vh] w-12"
+          id="to-top"
+          hidden="true"
+        >
+          <a
+            href="#the-top"
+            class="pointer-events-auto sticky top-[calc(100vh-5.5rem)] flex h-12 w-12 items-center justify-center rounded-full bg-neutral/50 text-xl text-neutral-700 backdrop-blur hover:text-primary-600 dark:bg-neutral-800/50 dark:text-neutral dark:hover:text-primary-400"
+            aria-label="Scroll to top"
+            title="Scroll to top"
+          >
+            &uarr;
+          </a>
+        </div>
+      <footer class="py-10 print:hidden">
+  
+  
+  <div class="flex items-center justify-between">
+    <div>
+      
+      
+        <p class="text-sm text-neutral-500 dark:text-neutral-400">
+            &copy;
+            2026
+            Adrien PARRA
+        </p>
+      
+      
+      
+    </div>
+    <div class="flex flex-row items-center">
+      
+      
+      
+      
+    </div>
+  </div>
+  
+  
+    <div class="mt-3 flex items-center gap-4 text-xs text-neutral-400 dark:text-neutral-500">
+  <a href="https://www.docker.com" target="_blank" rel="noopener" class="flex items-center gap-1 hover:text-primary-500 transition-colors" title="Conteneurisé avec Docker">
+    <span class="h-4 w-4"><span class="icon relative inline-block px-1 align-text-bottom"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M13.983 11.078h2.119a.186.186 0 0 0 .186-.185V9.006a.186.186 0 0 0-.186-.186h-2.119a.185.185 0 0 0-.185.185v1.888c0 .102.083.185.185.185m-2.954-5.43h2.118a.186.186 0 0 0 .186-.186V3.574a.186.186 0 0 0-.186-.185h-2.118a.185.185 0 0 0-.185.185v1.888c0 .102.082.185.185.185m0 2.716h2.118a.187.187 0 0 0 .186-.186V6.29a.186.186 0 0 0-.186-.185h-2.118a.185.185 0 0 0-.185.185v1.887c0 .102.082.186.185.186m-2.93 0h2.12a.186.186 0 0 0 .184-.186V6.29a.185.185 0 0 0-.185-.185H8.1a.185.185 0 0 0-.185.185v1.887c0 .102.083.186.185.186m-2.964 0h2.119a.186.186 0 0 0 .185-.186V6.29a.185.185 0 0 0-.185-.185H5.136a.186.186 0 0 0-.186.185v1.887c0 .102.084.186.186.186m5.893 2.715h2.118a.186.186 0 0 0 .186-.185V9.006a.186.186 0 0 0-.186-.186h-2.118a.185.185 0 0 0-.185.185v1.888c0 .102.082.185.185.185m-2.93 0h2.12a.185.185 0 0 0 .184-.185V9.006a.185.185 0 0 0-.184-.186h-2.12a.185.185 0 0 0-.184.185v1.888c0 .102.083.185.185.185m-2.964 0h2.119a.185.185 0 0 0 .185-.185V9.006a.185.185 0 0 0-.184-.186h-2.12a.186.186 0 0 0-.186.186v1.887c0 .102.084.185.186.185m-2.92 0h2.12a.185.185 0 0 0 .184-.185V9.006a.185.185 0 0 0-.184-.186h-2.12a.185.185 0 0 0-.184.185v1.888c0 .102.082.185.185.185M23.763 9.89c-.065-.051-.672-.51-1.954-.51-.338.001-.676.03-1.01.087-.248-1.7-1.653-2.53-1.716-2.566l-.344-.199-.226.327c-.284.438-.49.922-.612 1.43-.23.97-.09 1.882.403 2.661-.595.332-1.55.413-1.744.42H.751a.751.751 0 0 0-.75.748 11.376 11.376 0 0 0 .692 4.062c.545 1.428 1.355 2.48 2.41 3.124 1.18.723 3.1 1.137 5.275 1.137.983.003 1.963-.086 2.93-.266a12.248 12.248 0 0 0 3.823-1.389c.98-.567 1.86-1.288 2.61-2.136 1.252-1.418 1.998-2.997 2.553-4.4h.221c1.372 0 2.215-.549 2.68-1.009.309-.293.55-.65.707-1.046l.098-.288Z"/></svg>
+</span></span>
+    Docker
+  </a>
+  <a href="https://www.scaleway.com" target="_blank" rel="noopener" class="flex items-center gap-1 hover:text-primary-500 transition-colors" title="Hébergé sur Scaleway">
+    <span class="h-4 w-4"><span class="icon relative inline-block px-1 align-text-bottom"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M14.193 12.014a2.179 2.179 0 0 1-2.176 2.176H7.383a2.179 2.179 0 0 1-2.176-2.176 2.179 2.179 0 0 1 2.176-2.176h4.634a2.179 2.179 0 0 1 2.176 2.176zm8.043-4.589C20.859 3.048 16.788 0 12.003 0 7.22 0 3.15 3.046 1.766 7.424A5.565 5.565 0 0 0 0 11.986a5.56 5.56 0 0 0 1.805 4.123C3.261 20.999 7.302 24 12.003 24c4.7 0 8.742-3.001 10.197-7.191A5.558 5.558 0 0 0 24 12.014c0-1.683-.748-3.19-1.764-4.589zm-1.843 7.593c-1.126 3.441-4.354 5.93-8.39 5.93-4.038 0-7.265-2.489-8.39-5.93a4.007 4.007 0 0 1-1.065-2.717c0-.922.313-1.771.838-2.449C4.514 6.41 7.853 4.048 12.003 4.048c4.149 0 7.488 2.362 8.617 5.804a4 4 0 0 1 .833 2.449 3.998 3.998 0 0 1-1.06 2.717z"/></svg>
+</span></span>
+    Scaleway
+  </a>
+  <a href="https://gohugo.io" target="_blank" rel="noopener" class="flex items-center gap-1 hover:text-primary-500 transition-colors" title="Généré par Hugo">
+    <span class="h-4 w-4"><span class="icon relative inline-block px-1 align-text-bottom"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M11.754 0a.75.75 0 0 0-.405.122L.344 7.205A.75.75 0 0 0 0 7.88v8.366a.75.75 0 0 0 .344.633l11.005 7.083c.25.161.568.161.818 0l5.58-3.592V24l.008-.006.008.006v-3.63l5.237-3.372a.75.75 0 0 0 .344-.633v-8.61a.75.75 0 0 0-.315-.61L12.178.122A.75.75 0 0 0 11.754 0zm.008 1.64 10.254 6.86v7.866l-4.486 2.89V8.38l.007-.006-.007-.005v-.006h-1.5v11.954L11.762 22.4 1.5 16.366V8.5zm-.75 7.24v5.63H9.547V12h-3.54v2.51H4.502v-5.63h1.505v1.62h3.54v-1.62z"/></svg>
+</span></span>
+    Hugo
+  </a>
+</div>
+
+  
+</footer>
+
+    </div>
+  </body>
+</html>

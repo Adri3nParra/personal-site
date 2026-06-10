@@ -69,7 +69,7 @@
     name="description"
     content="
       
-        Trivy scanne les images, Kyverno valide les déploiements — mais qu&rsquo;est-ce qui surveille ce qui se passe une fois les conteneurs lancés ? Falco, le CNCF project, surveille les syscalls en temps réel et alerte dès qu&rsquo;un comportement anormal est détecté.
+        Trivy scanne les images, Kyverno valide les déploiements, mais qu&rsquo;est-ce qui surveille ce qui se passe une fois les conteneurs lancés ? Falco, le CNCF project, surveille les syscalls en temps réel et alerte dès qu&rsquo;un comportement anormal est détecté.
       
     "
   />
@@ -94,7 +94,7 @@
   <meta property="og:url" content="http://localhost:1313/articles/falco-runtime-security-kubernetes/">
 	<meta property="og:site_name" content="Adrien PARRA">
 	<meta property="og:title" content="Falco : Runtime Security Monitoring on Kubernetes">
-	<meta property="og:description" content="Trivy scanne les images, Kyverno valide les déploiements — mais qu’est-ce qui surveille ce qui se passe une fois les conteneurs lancés ? Falco, le CNCF project, surveille les syscalls en temps réel et alerte dès qu’un comportement anormal est détecté.">
+	<meta property="og:description" content="Trivy scanne les images, Kyverno valide les déploiements, mais qu’est-ce qui surveille ce qui se passe une fois les conteneurs lancés ? Falco, le CNCF project, surveille les syscalls en temps réel et alerte dès qu’un comportement anormal est détecté.">
 	<meta property="og:locale" content="fr">
 	<meta property="og:type" content="article">
 		<meta property="article:section" content="articles">
@@ -109,7 +109,7 @@
   
 	<meta name="twitter:card" content="summary">
 	<meta name="twitter:title" content="Falco : Runtime Security Monitoring on Kubernetes">
-	<meta name="twitter:description" content="Trivy scanne les images, Kyverno valide les déploiements — mais qu’est-ce qui surveille ce qui se passe une fois les conteneurs lancés ? Falco, le CNCF project, surveille les syscalls en temps réel et alerte dès qu’un comportement anormal est détecté.">
+	<meta name="twitter:description" content="Trivy scanne les images, Kyverno valide les déploiements, mais qu’est-ce qui surveille ce qui se passe une fois les conteneurs lancés ? Falco, le CNCF project, surveille les syscalls en temps réel et alerte dès qu’un comportement anormal est détecté.">
 
   
   <script type="application/ld+json">
@@ -120,7 +120,7 @@
     "name": "Falco : Runtime Security Monitoring on Kubernetes",
     "headline": "Falco : Runtime Security Monitoring on Kubernetes",
     
-    "abstract": "Trivy scanne les images, Kyverno valide les déploiements — mais qu\u0026rsquo;est-ce qui surveille ce qui se passe une fois les conteneurs lancés ? Falco, le CNCF project, surveille les syscalls en temps réel et alerte dès qu\u0026rsquo;un comportement anormal est détecté.",
+    "abstract": "Trivy scanne les images, Kyverno valide les déploiements, mais qu\u0026rsquo;est-ce qui surveille ce qui se passe une fois les conteneurs lancés ? Falco, le CNCF project, surveille les syscalls en temps réel et alerte dès qu\u0026rsquo;un comportement anormal est détecté.",
     "inLanguage": "fr",
     "url" : "http:\/\/localhost:1313\/articles\/falco-runtime-security-kubernetes\/",
     "author" : {
@@ -136,7 +136,7 @@
     "keywords": ["Kubernetes","Falco","Sécurité","DevOps","eBPF"],
     
     "mainEntityOfPage": "true",
-    "wordCount": "1902"
+    "wordCount": "1893"
   }
   </script>
     
@@ -291,6 +291,86 @@
               
             </li>
           
+            
+            <li class="group mb-1 sm:mb-0 sm:me-7 sm:last:me-0.5">
+              
+                
+                
+  
+    
+    
+      <div class="group relative">
+        <button
+          class="group-dark:hover:text-primary-400 flex w-full items-center justify-end transition-colors group-hover:text-primary-600"
+        >
+          <span class="icon relative inline-block px-1 align-text-bottom"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+  <path fill="currentColor" d="M4.545 6.714 4.11 8H3l1.862-5h1.284L8 8H6.833l-.435-1.286H4.545zm1.634-.736L5.5 3.956h-.049l-.679 2.022H6.18z"/>
+  <path fill="currentColor" d="M0 2a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v3h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-3H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2zm7.138 9.995c.193.301.402.583.63.846-.748.575-1.673 1.001-2.768 1.292.178.217.451.635.555.867 1.125-.359 2.08-.844 2.886-1.494.777.665 1.739 1.165 2.93 1.472.133-.254.414-.673.629-.89-1.125-.253-2.057-.694-2.82-1.284.681-.747 1.222-1.651 1.621-2.757H14V8h-3v1.047h.765c-.318.844-.74 1.546-1.272 2.13a6.066 6.066 0 0 1-.415-.492 1.988 1.988 0 0 1-.94.31z"/>
+</svg>
+</span><span class="text-sm">FR</span
+          ><span class="text-[0.6rem]"
+            ><span class="icon relative inline-block px-1 align-text-bottom"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg>
+</span></span
+          >
+        </button>
+        
+          <div class="invisible w-full bg-transparent group-hover:visible"></div>
+        
+        <div
+          class=" invisible absolute z-50 flex flex-col whitespace-nowrap rounded border border-neutral-300 bg-neutral text-start text-base shadow group-hover:visible ltr:right-0 rtl:left-0 dark:border-neutral-600 dark:bg-neutral-800"
+        >
+          
+          
+          
+            
+            
+              
+                
+                <div class="flex flex-grow">
+                  
+                    <a
+                      href="http://localhost:1313/articles/falco-runtime-security-kubernetes/"
+                      class="flex w-full items-center justify-between bg-primary-100 px-2 py-1 dark:bg-primary-900"
+                      >Français<span
+                        class="ms-2 w-6 text-primary-600 dark:text-primary-400"
+                        ><span class="icon relative inline-block px-1 align-text-bottom"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M438.6 105.4C451.1 117.9 451.1 138.1 438.6 150.6L182.6 406.6C170.1 419.1 149.9 419.1 137.4 406.6L9.372 278.6C-3.124 266.1-3.124 245.9 9.372 233.4C21.87 220.9 42.13 220.9 54.63 233.4L159.1 338.7L393.4 105.4C405.9 92.88 426.1 92.88 438.6 105.4H438.6z"/></svg>
+</span></span
+                      ></a
+                    >
+                  
+                </div>
+              
+            
+              
+            
+          
+            
+            
+              
+            
+              
+                
+                <div class="flex flex-grow">
+                  
+                    <a
+                      href="http://localhost:1313/en/articles/falco-runtime-security-kubernetes/"
+                      class="w-full py-1 pe-10 ps-2 decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2"
+                      >English</a
+                    >
+                  
+                </div>
+              
+            
+          
+        </div>
+      </div>
+    
+  
+
+
+              
+            </li>
+          
           
         
       </ul>
@@ -386,7 +466,7 @@
         <li><a href="#déployer-des-règles-personnalisées-via-helm">Déployer des règles personnalisées via Helm</a></li>
       </ul>
     </li>
-    <li><a href="#falcosidekick--router-les-alertes">Falcosidekick — router les alertes</a>
+    <li><a href="#falcosidekick--router-les-alertes">Falcosidekick : router les alertes</a>
       <ul>
         <li><a href="#configuration-slack">Configuration Slack</a></li>
         <li><a href="#intégration-prometheus--alertmanager">Intégration Prometheus + Alertmanager</a></li>
@@ -442,9 +522,9 @@
 <li>Établir une connexion vers un serveur C2</li>
 </ul>
 <p>Trivy ne voit pas ça. Kyverno ne voit pas ça. Falco, si.</p>
-<h2 id="quest-ce-que-falco-" class="relative group">Qu&rsquo;est-ce que Falco ? <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#quest-ce-que-falco-" aria-label="Ancre">#</a></span></h2><p>Falco est un outil open source de détection de menaces à l&rsquo;exécution, originellement créé par Sysdig, maintenant un projet CNCF incubé. Il surveille les appels système (syscalls) du kernel Linux — la couche la plus basse observable sans modifier les applications.</p>
+<h2 id="quest-ce-que-falco-" class="relative group">Qu&rsquo;est-ce que Falco ? <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#quest-ce-que-falco-" aria-label="Ancre">#</a></span></h2><p>Falco est un outil open source de détection de menaces à l&rsquo;exécution, originellement créé par Sysdig, maintenant un projet CNCF incubé. Il surveille les appels système (syscalls) du kernel Linux, la couche la plus basse observable sans modifier les applications.</p>
 <p>Son principe : définir des <strong>règles</strong> qui décrivent un comportement anormal. Si un conteneur viole une règle, Falco génère une alerte.</p>
-<p>Ce n&rsquo;est pas un WAF, pas un IDS réseau — c&rsquo;est un moniteur de comportement au niveau kernel.</p>
+<p>Ce n&rsquo;est pas un WAF, pas un IDS réseau, c&rsquo;est un moniteur de comportement au niveau kernel.</p>
 <pre tabindex="0"><code>Application
      │
      ▼
@@ -515,7 +595,7 @@ Falco intercepte et évalue les règles
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># falco-xxxxx                       2/2     Running</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># falco-falcosidekick-xxxxx         1/1     Running</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># falco-falcosidekick-ui-xxxxx      1/1     Running</span>
-</span></span></code></pre></div><p>Le DaemonSet Falco tourne sur chaque nœud — c&rsquo;est un prérequis pour intercepter tous les syscalls du cluster.</p>
+</span></span></code></pre></div><p>Le DaemonSet Falco tourne sur chaque nœud, c&rsquo;est un prérequis pour intercepter tous les syscalls du cluster.</p>
 <h3 id="vérifier-que-falco-détecte" class="relative group">Vérifier que Falco détecte <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#v%c3%a9rifier-que-falco-d%c3%a9tecte" aria-label="Ancre">#</a></span></h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Dans un namespace de test, lance un shell dans un conteneur</span>
 </span></span><span style="display:flex;"><span>kubectl run test-pod --image<span style="color:#f92672">=</span>ubuntu --rm -it -- bash
 </span></span><span style="display:flex;"><span>
@@ -590,10 +670,10 @@ Falco intercepte et évalue les règles
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">tags</span>: [<span style="color:#ae81ff">shell, intrusion]</span>
 </span></span></code></pre></div><p>Les éléments clés :</p>
 <ul>
-<li><strong><code>condition</code></strong> — filtre en langage Falco (proche de SQL)</li>
-<li><strong><code>output</code></strong> — message d&rsquo;alerte avec variables enrichies</li>
-<li><strong><code>priority</code></strong> — <code>DEBUG</code>, <code>INFO</code>, <code>NOTICE</code>, <code>WARNING</code>, <code>ERROR</code>, <code>CRITICAL</code></li>
-<li><strong><code>tags</code></strong> — pour filtrer et router les alertes</li>
+<li><strong><code>condition</code></strong> : filtre en langage Falco (proche de SQL)</li>
+<li><strong><code>output</code></strong> : message d&rsquo;alerte avec variables enrichies</li>
+<li><strong><code>priority</code></strong> : <code>DEBUG</code>, <code>INFO</code>, <code>NOTICE</code>, <code>WARNING</code>, <code>ERROR</code>, <code>CRITICAL</code></li>
+<li><strong><code>tags</code></strong> : pour filtrer et router les alertes</li>
 </ul>
 <h3 id="les-macros-et-les-listes" class="relative group">Les macros et les listes <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#les-macros-et-les-listes" aria-label="Ancre">#</a></span></h3><p>Falco est composable via des macros et des listes réutilisables :</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#75715e"># Liste de shells connus</span>
@@ -681,7 +761,7 @@ Falco intercepte et évalue les règles
 </span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>helm upgrade falco falcosecurity/falco <span style="color:#ae81ff">\
 </span></span></span><span style="display:flex;"><span>  --namespace falco <span style="color:#ae81ff">\
 </span></span></span><span style="display:flex;"><span>  --values values-falco.yaml
-</span></span></code></pre></div><h2 id="falcosidekick--router-les-alertes" class="relative group">Falcosidekick — router les alertes <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#falcosidekick--router-les-alertes" aria-label="Ancre">#</a></span></h2><p>Falco génère des alertes dans ses logs. Sans Falcosidekick, tu ne verras rien en temps réel. Falcosidekick est un proxy d&rsquo;alerting qui supporte ~50 destinations.</p>
+</span></span></code></pre></div><h2 id="falcosidekick--router-les-alertes" class="relative group">Falcosidekick : router les alertes <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#falcosidekick--router-les-alertes" aria-label="Ancre">#</a></span></h2><p>Falco génère des alertes dans ses logs. Sans Falcosidekick, tu ne verras rien en temps réel. Falcosidekick est un proxy d&rsquo;alerting qui supporte ~50 destinations.</p>
 <pre tabindex="0"><code>Falco ──► Falcosidekick ──► Slack
                        ├──► PagerDuty
                        ├──► Prometheus (Alertmanager)
@@ -715,8 +795,8 @@ Falco intercepte et évalue les règles
 </span></span><span style="display:flex;"><span>      <span style="color:#f92672">extralabels</span>: <span style="color:#e6db74">&#34;cluster=prod,team=platform&#34;</span>
 </span></span></code></pre></div><p>Métriques disponibles :</p>
 <ul>
-<li><code>falcosidekick_inputs_total</code> — événements reçus par priorité</li>
-<li><code>falcosidekick_outputs_total</code> — alertes envoyées par destination</li>
+<li><code>falcosidekick_inputs_total</code>, événements reçus par priorité</li>
+<li><code>falcosidekick_outputs_total</code>, alertes envoyées par destination</li>
 </ul>
 <h3 id="falco-ui" class="relative group">Falco UI <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#falco-ui" aria-label="Ancre">#</a></span></h3><p>Falcosidekick UI est un dashboard web pour visualiser les alertes en temps réel :</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Port-forward vers le UI</span>
@@ -725,19 +805,19 @@ Falco intercepte et évalue les règles
 </span></span></code></pre></div><p>Le dashboard affiche un historique des événements, filtrable par priorité, règle, namespace, et pod.</p>
 <h2 id="scénarios-de-détection-concrets" class="relative group">Scénarios de détection concrets <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#sc%c3%a9narios-de-d%c3%a9tection-concrets" aria-label="Ancre">#</a></span></h2><h3 id="détection-dun-reverse-shell" class="relative group">Détection d&rsquo;un reverse shell <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#d%c3%a9tection-dun-reverse-shell" aria-label="Ancre">#</a></span></h3><p>Un attaquant qui obtient l&rsquo;exécution de code dans un conteneur ouvre souvent un reverse shell. Falco détecte ça via plusieurs règles combinées :</p>
 <ol>
-<li><code>Shell spawned in container</code> — un shell est ouvert</li>
-<li><code>Unexpected outbound connection</code> — connexion sortante vers une IP externe</li>
-<li><code>Network activity from non-expected process</code> — processus shell qui fait du réseau</li>
+<li><code>Shell spawned in container</code>, un shell est ouvert</li>
+<li><code>Unexpected outbound connection</code>, connexion sortante vers une IP externe</li>
+<li><code>Network activity from non-expected process</code>, processus shell qui fait du réseau</li>
 </ol>
 <p>Les trois alertes en moins d&rsquo;une seconde, c&rsquo;est un signal fort.</p>
 <h3 id="détection-de-container-drift" class="relative group">Détection de container drift <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#d%c3%a9tection-de-container-drift" aria-label="Ancre">#</a></span></h3><p>Container drift = un nouveau binaire est créé ou modifié dans un conteneur en cours d&rsquo;exécution. Ce n&rsquo;est jamais censé arriver dans une image immutable :</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Règle intégrée : Container Drift Detected</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># Se déclenche si un nouveau fichier exécutable est créé dans un conteneur</span>
 </span></span></code></pre></div><p>Si ton image est immutable (ce qu&rsquo;elle devrait être), et qu&rsquo;un exécutable apparaît, c&rsquo;est une intrusion.</p>
-<h3 id="détection-de-lecture-de-credentials" class="relative group">Détection de lecture de credentials <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#d%c3%a9tection-de-lecture-de-credentials" aria-label="Ancre">#</a></span></h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># /var/run/secrets/ — tokens K8s</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># /root/.kube/config — kubeconfig</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># /etc/kubernetes/ — certs cluster</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># ~/.aws/credentials — AWS</span>
+<h3 id="détection-de-lecture-de-credentials" class="relative group">Détection de lecture de credentials <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#d%c3%a9tection-de-lecture-de-credentials" aria-label="Ancre">#</a></span></h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># /var/run/secrets/ : tokens K8s</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># /root/.kube/config : kubeconfig</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># /etc/kubernetes/ : certs cluster</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ~/.aws/credentials : AWS</span>
 </span></span></code></pre></div><p>Falco surveille ces chemins par défaut. Un conteneur API qui lit <code>/etc/kubernetes/admin.conf</code>, c&rsquo;est anormal.</p>
 <h2 id="ajuster-les-faux-positifs" class="relative group">Ajuster les faux positifs <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#ajuster-les-faux-positifs" aria-label="Ancre">#</a></span></h2><p>Les règles par défaut génèrent des faux positifs sur certains workloads légitimes. Pour les gérer :</p>
 <h3 id="exclure-des-containers-connus" class="relative group">Exclure des containers connus <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#exclure-des-containers-connus" aria-label="Ancre">#</a></span></h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>- <span style="color:#f92672">rule</span>: <span style="color:#ae81ff">Terminal shell in container</span>
@@ -761,9 +841,9 @@ Falco intercepte et évalue les règles
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">logLevel</span>: <span style="color:#ae81ff">warning</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">priority</span>: <span style="color:#ae81ff">warning </span> <span style="color:#75715e"># Ne loguer que WARNING et au-dessus</span>
 </span></span></code></pre></div><h2 id="limites" class="relative group">Limites <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#limites" aria-label="Ancre">#</a></span></h2><h3 id="ce-que-falco-ne-fait-pas" class="relative group">Ce que Falco ne fait pas <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#ce-que-falco-ne-fait-pas" aria-label="Ancre">#</a></span></h3><ul>
-<li><strong>Ne bloque pas</strong> — Falco détecte et alerte, il n&rsquo;arrête pas le processus. Pour bloquer, combine avec un admission controller ou un mécanisme d&rsquo;isolation.</li>
-<li><strong>Pas de forensics réseau complet</strong> — Falco surveille les connexions (IP, port) mais pas le contenu des paquets.</li>
-<li><strong>Ne remplace pas un SIEM</strong> — Falco génère des événements, mais l&rsquo;agrégation et la corrélation sur le long terme, c&rsquo;est Elasticsearch/Splunk/Loki.</li>
+<li><strong>Ne bloque pas</strong> : Falco détecte et alerte, il n&rsquo;arrête pas le processus. Pour bloquer, combine avec un admission controller ou un mécanisme d&rsquo;isolation.</li>
+<li><strong>Pas de forensics réseau complet</strong> : Falco surveille les connexions (IP, port) mais pas le contenu des paquets.</li>
+<li><strong>Ne remplace pas un SIEM</strong> : Falco génère des événements, mais l&rsquo;agrégation et la corrélation sur le long terme, c&rsquo;est Elasticsearch/Splunk/Loki.</li>
 </ul>
 <h3 id="overhead-kernel" class="relative group">Overhead kernel <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#overhead-kernel" aria-label="Ancre">#</a></span></h3><p>eBPF a un coût CPU (~1-3% par nœud selon la charge de syscalls). Sur des nœuds très actifs (beaucoup d&rsquo;I/O ou de fork), surveille les métriques du daemon Falco.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl top pod -n falco
@@ -820,7 +900,7 @@ Falco intercepte et évalue les règles
 			</tr>
 	</tbody>
 </table>
-<p>Pas de ces trois couches n&rsquo;est suffisante seule. Une image propre peut être compromise. Un déploiement conforme peut dériver. Falco est la dernière ligne de défense — il détecte ce qui échappe aux deux premières.</p>
+<p>Pas de ces trois couches n&rsquo;est suffisante seule. Une image propre peut être compromise. Un déploiement conforme peut dériver. Falco est la dernière ligne de défense, il détecte ce qui échappe aux deux premières.</p>
 <p>L&rsquo;overhead est faible (eBPF), le déploiement est simple (Helm en 5 minutes), et les règles par défaut couvrent l&rsquo;essentiel. Le vrai travail, c&rsquo;est le calibrage : réduire les faux positifs, écrire les règles métier, brancher les alertes sur ce que ton équipe surveille déjà.</p>
 
       </div>
