@@ -17,12 +17,12 @@ jobs:
 
       - name: Docker build and push
         env:
-          REGISTRY_TOKEN: ${{ secrets.REGISTRY_TOKEN }}
+          SCW_SECRET_KEY: ${{ secrets.SCW_SECRET_KEY }}
           BASE_URL: https://ops.adrienparra.eu
           IMAGE_NAME: rg.fr-par.scw.cloud/funcscwportfolio7b05b454/portfolio
           IMAGE_TAG: latest
         run: |
-          echo "${REGISTRY_TOKEN}" | docker login rg.fr-par.scw.cloud/funcscwportfolio7b05b454 -u nologin --password-stdin
+          docker login rg.fr-par.scw.cloud/funcscwportfolio7b05b454 -u nologin -p ${SCW_SECRET_KEY}
           docker image build -f packaging/Dockerfile --build-arg BASE_URL=${BASE_URL} -t ${IMAGE_NAME}:${IMAGE_TAG} .
           docker image push ${IMAGE_NAME}:${IMAGE_TAG}
 
