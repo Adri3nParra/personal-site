@@ -1,0 +1,5 @@
+---
+import MarkdownPage from '../../layouts/MarkdownPage.astro';
+import About, { frontmatter } from '../../../content/about/index.md';
+---
+<MarkdownPage title={frontmatter.title} locale="fr" description="Parcours, compétences et certifications d’Adrien Parra."><About /></MarkdownPage>

@@ -1,0 +1,14 @@
+---
+import { articleUrl, formatDate, tagUrl, type Article, type Locale } from '../lib/site';
+interface Props { article: Article; locale: Locale }
+const { article, locale } = Astro.props;
+---
+
+<article class="article-card">
+  <div class="article-meta"><time datetime={article.data.date.toISOString()}>{formatDate(article.data.date, locale)}</time></div>
+  <h2><a href={articleUrl(article)}>{article.data.title}</a></h2>
+  <p>{article.data.summary}</p>
+  <ul class="tag-list" aria-label={locale === 'fr' ? 'Sujets' : 'Topics'}>
+    {article.data.tags.map((tag) => <li><a href={tagUrl(tag, locale)}>#{tag}</a></li>)}
+  </ul>
+</article>

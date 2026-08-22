@@ -1,0 +1,16 @@
+---
+import { copy, site, type Locale } from '../lib/site';
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+---
+
+<footer class="site-footer">
+  <div class="footer-shell">
+    <p>© {new Date().getFullYear()} {site.name}</p>
+    <p>{copy[locale].footer}</p>
+    <div class="footer-links">
+      <a href={site.social.github} rel="me noopener" target="_blank">GitHub</a>
+      <a href={site.social.linkedin} rel="me noopener" target="_blank">LinkedIn</a>
+    </div>
+  </div>
+</footer>

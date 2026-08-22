@@ -1,0 +1,103 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { alternatePath, site, type Locale } from '../lib/site';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  locale?: Locale;
+  image?: string;
+  type?: 'website' | 'article';
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description = site.description.fr,
+  locale = 'fr',
+  image = '/img/avatar-clean.png',
+  type = 'website',
+  noindex = false,
+} = Astro.props;
+const pageTitle = title ? `${title} · ${site.name}` : `${site.name} — ${site.role[locale]}`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const alternate = new URL(alternatePath(Astro.url.pathname, locale), Astro.site);
+const socialImage = new URL(image, Astro.site);
+---
+
+<!doctype html>
+<html lang={locale} data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#f8fafc" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=2" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2" />
+    <link rel="manifest" href="/site.webmanifest?v=2" />
+    {noindex ? <meta name="robots" content="noindex, follow" /> : <>
+      <link rel="canonical" href={canonical} />
+      <link rel="alternate" hreflang={locale === 'fr' ? 'en' : 'fr'} href={alternate} />
+      <link rel="alternate" hreflang={locale} href={canonical} />
+    </>}
+    <link rel="alternate" type="application/rss+xml" title={`${site.name} RSS`} href={`${locale === 'en' ? '/en' : ''}/index.xml`} />
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:locale" content={locale === 'fr' ? 'fr_FR' : 'en_GB'} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <title>{pageTitle}</title>
+    <script is:inline>
+      (() => {
+        const stored = localStorage.getItem('theme');
+        const theme = stored || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">{locale === 'fr' ? 'Aller au contenu' : 'Skip to content'}</a>
+    <Header locale={locale} pathname={Astro.url.pathname} />
+    <main id="main-content">
+      <slot />
+    </main>
+    <Footer locale={locale} />
+    <script>
+      const themeButton = document.querySelector<HTMLButtonElement>('[data-theme-toggle]');
+      themeButton?.addEventListener('click', () => {
+        const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+        document.documentElement.dataset.theme = next;
+        localStorage.setItem('theme', next);
+      });
+
+      const menuButton = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+      const menu = document.querySelector<HTMLElement>('[data-menu]');
+      menuButton?.addEventListener('click', () => {
+        const open = menuButton.getAttribute('aria-expanded') === 'true';
+        menuButton.setAttribute('aria-expanded', String(!open));
+        menu?.toggleAttribute('data-open', !open);
+      });
+
+      document.querySelectorAll<HTMLPreElement>('pre').forEach((pre) => {
+        const button = document.createElement('button');
+        button.className = 'copy-code';
+        button.type = 'button';
+        button.textContent = document.documentElement.lang === 'fr' ? 'Copier' : 'Copy';
+        button.addEventListener('click', async () => {
+          await navigator.clipboard.writeText(pre.querySelector('code')?.textContent ?? '');
+          button.textContent = document.documentElement.lang === 'fr' ? 'Copié !' : 'Copied!';
+          setTimeout(() => button.textContent = document.documentElement.lang === 'fr' ? 'Copier' : 'Copy', 1600);
+        });
+        pre.append(button);
+      });
+    </script>
+  </body>
+</html>

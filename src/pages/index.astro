@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout locale="fr">
+  <section class="page-shell hero">
+    <div class="hero-copy">
+      <p class="terminal-prompt"><span>adrien@platform</span>:~$ whoami<span class="cursor" aria-hidden="true"></span></p>
+      <h1>Platform Engineer<span>Architectures cloud-native, du design à la production.</span></h1>
+      <p class="hero-lead">Je conçois, automatise et sécurise des plateformes Kubernetes et leurs fondations cloud. Six ans d’expérience pour transformer des besoins métiers en architectures fiables, observables et simples à exploiter.</p>
+      <ul class="stack-line" aria-label="Expertises principales">
+        <li><span class="status-dot"></span>Kubernetes</li>
+        <li>Linux</li>
+        <li>GitOps</li>
+        <li>Cloud Architecture</li>
+        <li>OVHCloud</li>
+        <li>Scaleway</li>
+        <li>AWS</li>
+      </ul>
+      <div class="hero-actions">
+        <a class="button primary" href="/experience/">Voir mon expérience <span aria-hidden="true">→</span></a>
+        <a class="button" href="/articles/">Lire mes articles</a>
+      </div>
+      <p class="hero-footnote"><span aria-hidden="true">//</span> Nantes, France</p>
+    </div>
+    <div class="hero-profile">
+      <div class="profile-bar"><span>profile.yaml</span><span class="profile-dots" aria-hidden="true">● ● ●</span></div>
+      <img src="/img/avatar-clean.png" alt="Portrait d’Adrien Parra" width="1254" height="1254" fetchpriority="high" />
+      <div class="profile-status"><span><i></i>Disponible</span><code>6y uptime</code></div>
+    </div>
+  </section>
+</BaseLayout>

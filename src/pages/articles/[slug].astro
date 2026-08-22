@@ -1,0 +1,15 @@
+---
+import { getCollection, render } from 'astro:content';
+import ArticlePage from '../../components/ArticlePage.astro';
+import { localeFromId, slugFromId } from '../../lib/site';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('articles', ({ data }) => !data.draft);
+  return articles.filter((article) => localeFromId(article.id) === 'fr').map((article) => ({
+    params: { slug: slugFromId(article.id) }, props: { article },
+  }));
+}
+const { article } = Astro.props;
+const { Content, headings } = await render(article);
+---
+<ArticlePage article={article} locale="fr" headings={headings}><Content /></ArticlePage>

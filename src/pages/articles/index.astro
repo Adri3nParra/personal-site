@@ -1,0 +1,15 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleList from '../../components/ArticleList.astro';
+import { localeFromId } from '../../lib/site';
+const articles = (await getCollection('articles', ({ data }) => !data.draft))
+  .filter((article) => localeFromId(article.id) === 'fr')
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+<BaseLayout title="Articles" description="Notes techniques sur Kubernetes, CI/CD, Linux et les pratiques DevOps." locale="fr">
+  <div class="page-shell">
+    <header class="page-heading"><p class="eyebrow">Veille & retours d’expérience</p><h1>Articles</h1><p>Notes techniques sur Kubernetes, CI/CD, Linux et les pratiques DevOps.</p></header>
+    <ArticleList articles={articles} locale="fr" />
+  </div>
+</BaseLayout>

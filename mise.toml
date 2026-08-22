@@ -1,0 +1,62 @@
+[env]
+IMAGE_NAME = "rg.fr-par.scw.cloud/funcscwportfolio7b05b454/portfolio"
+IMAGE_TAG = "latest"
+BASE_URL = "https://ops.adrienparra.eu"
+CONTAINER_CLI = "docker"
+NODE_IMAGE = "node:22-alpine"
+
+[tasks.dev]
+description = "Lance Astro dans un conteneur (aucun Node/npm local requis)"
+dir = "{{config_root}}"
+raw = true
+run = '''
+$CONTAINER_CLI run --rm -it \
+  -p 4321:4321 \
+  -v "$PWD:/app" \
+  -v /app/node_modules \
+  -w /app "$NODE_IMAGE" \
+  sh -c "npm ci && npm run dev -- --host 0.0.0.0"
+'''
+
+[tasks.check]
+description = "Vérifie les types et le contenu Astro dans un conteneur"
+dir = "{{config_root}}"
+run = '''
+$CONTAINER_CLI run --rm \
+  -v "$PWD:/app" \
+  -v /app/node_modules \
+  -w /app "$NODE_IMAGE" \
+  sh -c "npm ci && npm run check"
+'''
+
+[tasks.build]
+description = "Génère le site statique Astro dans un conteneur"
+dir = "{{config_root}}"
+run = '''
+$CONTAINER_CLI run --rm \
+  -v "$PWD:/app" \
+  -v /app/node_modules \
+  -w /app "$NODE_IMAGE" \
+  sh -c "npm ci && npm run build"
+'''
+
+[tasks."image:build"]
+description = "Construit l'image Astro/Nginx pour Scaleway Container"
+dir = "{{config_root}}"
+run = '''
+$CONTAINER_CLI build \
+  -f packaging/Dockerfile \
+  --build-arg "BASE_URL=$BASE_URL" \
+  -t "$IMAGE_NAME:$IMAGE_TAG" .
+'''
+
+[tasks."image:push"]
+description = "Publie l'image dans le registre Scaleway"
+dir = "{{config_root}}"
+run = '$CONTAINER_CLI push "$IMAGE_NAME:$IMAGE_TAG"'
+
+[tasks."image:publish"]
+description = "Construit puis publie l'image du portfolio"
+depends = ["image:build"]
+dir = "{{config_root}}"
+run = '$CONTAINER_CLI push "$IMAGE_NAME:$IMAGE_TAG"'

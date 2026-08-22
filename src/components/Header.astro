@@ -1,0 +1,36 @@
+---
+import { alternatePath, copy, site, type Locale } from '../lib/site';
+
+interface Props { locale: Locale; pathname: string }
+const { locale, pathname } = Astro.props;
+const t = copy[locale];
+const prefix = locale === 'en' ? '/en' : '';
+const links = [
+  { href: `${prefix}/about/`, label: t.nav.about },
+  { href: `${prefix}/experience/`, label: t.nav.experience },
+  { href: `${prefix}/articles/`, label: t.nav.articles },
+  { href: `${prefix}/contact/`, label: t.nav.contact },
+];
+const isActive = (href: string) => pathname === href || (href.includes('/articles/') && pathname.startsWith(href));
+---
+
+<header class="site-header">
+  <div class="nav-shell">
+    <a class="wordmark" href={`${prefix}/`} aria-label={`${site.name} — ${locale === 'fr' ? 'accueil' : 'home'}`}>
+      <span class="wordmark-mark">~/</span>
+      <span>{site.name}</span>
+    </a>
+    <button class="icon-button menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="main-nav" aria-label={t.menu}>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+    </button>
+    <nav id="main-nav" class="main-nav" data-menu aria-label={locale === 'fr' ? 'Navigation principale' : 'Main navigation'}>
+      {links.map(({ href, label }) => <a href={href} aria-current={isActive(href) ? 'page' : undefined}>{label}</a>)}
+      <span class="nav-separator" aria-hidden="true"></span>
+      <a class="language-link" href={alternatePath(pathname, locale)} hreflang={locale === 'fr' ? 'en' : 'fr'}>{t.language}</a>
+      <button class="icon-button" type="button" data-theme-toggle aria-label={t.theme} title={t.theme}>
+        <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41" /></svg>
+        <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5 8.5 8.5 0 1 0 20.5 14.2Z" /></svg>
+      </button>
+    </nav>
+  </div>
+</header>

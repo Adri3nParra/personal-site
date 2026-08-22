@@ -3,33 +3,36 @@ title: "About"
 draft: false
 ---
 
-Platform Engineer with 5 years of experience, specialized in **Kubernetes, Cloud, CI/CD pipelines and Linux**.
+Platform Engineer with **6 years of experience**, specializing in the architecture, industrialization and security of **Kubernetes platforms across cloud and hybrid infrastructure**.
 
 I'm a deeply curious person: I regularly try out new tools, I read release announcements the way others read the news, and I usually have a POC running locally on something that caught my eye the week before. This curiosity isn't a side hobby: it's what lets me quickly grasp a new environment, propose solutions the team hadn't thought of, and stay up to date in a fast-moving ecosystem.
 
-The rest of the time, I like environments that are simple, reliable and close to production. Pragmatic, I favor robust and reproducible solutions over complexity for the sake of complexity.
+The rest of the time, I like environments that are simple, reliable and close to production. Pragmatic, I favor robust and reproducible solutions over complexity for its own sake. I particularly enjoy starting from a requirement, identifying networking, security, resilience, data and operational constraints, then turning them into a coherent cloud architecture. My approach combines Linux, Infrastructure as Code, GitOps and observability to make these platforms understandable and operable by the whole team.
 
-Certified **CKA** (Certified Kubernetes Administrator), **CKAD** (Certified Kubernetes Application Developer), **CKS** (Certified Kubernetes Security Specialist), **KCNA** (Kubernetes and Cloud Native Associate), **KCSA** (Kubernetes and Cloud Native Security Associate).
+Certified **CKA**, **CKAD**, **CKS**, **KCNA** and **KCSA**, I am also a **CNCF Kubestronaut**.
 
 ## Technical skills
 
-**Orchestration & Cloud**
-Kubernetes · OVH MKS · GKE · Docker Swarm · Helm · OpenTofu
+**Cloud & Infrastructure as Code**
+AWS · OVHcloud · Scaleway · OpenStack · GCP/GKE · OpenTofu/Terraform · Terragrunt · S3 · IAM · Cloud networking
 
-**GitOps & CI/CD**
-ArgoCD · GitLab CI · Harbor · Nexus · SonarQube · Jenkins
+**Kubernetes & GitOps**
+Kubernetes · Helm · Argo CD · Argo Rollouts · Traefik · Gateway API · Docker Swarm
+
+**CI/CD & Supply Chain**
+GitLab CI/CD · Jenkins · Harbor · Nexus · SonarQube · Dependency-Track · Cosign
 
 **Security**
-Trivy · Kyverno · Falco · CrowdSec · Sealed Secrets · Gitleaks
+Kyverno · Falco · Trivy · CrowdSec · External Secrets · Sealed Secrets · Gitleaks · Keycloak
 
-**Monitoring**
-Prometheus · Grafana · Loki · Alertmanager · Zabbix
+**Observability**
+Prometheus · Grafana · Loki · Alloy · Alertmanager · Zabbix
 
 **Network & Ingress**
-Traefik · Cert-Manager · TCP/IP · DNS · HTTP/S
+Traefik · Cert-Manager · Calico · NetworkPolicy · DNS · TLS · HTTP/S
 
 **Systems & Databases**
-Linux (Debian / Ubuntu / RHEL) · PostgreSQL · MySQL · Shell
+Linux (Debian / Ubuntu / RHEL) · PostgreSQL · MySQL · Progress OpenEdge · Bash · PowerShell
 
 ## Education
 
@@ -93,7 +96,13 @@ I work **100%** on Linux (**and I really care about it**) - **Ubuntu 24.04** dai
 
 For development and tech watch, I run a local **K3S** cluster that lets me test Helm charts, manifests or new technologies before getting them anywhere near production. I use **nerdctl** to build and manage images — a Docker-compatible CLI but on top of containerd, daemonless.
 
-My editor is **VSCode**, my terminal is Bash, and my everyday tools are the ones you'd find in any serious DevOps environment: kubectl, Helm, OpenTofu, git.
+My editor is **VSCode**, my terminal is Bash, and my everyday tools are the ones you'd find in any serious Platform environment: kubectl, Helm, OpenTofu and git.
+
+## Open source
+
+I created a **complete Helm chart for [transfer.sh](/en/articles/transfersh-helm-chart/)**, covering multiple storage backends, Ingress and Gateway API, HPA, NetworkPolicy and security options. The contribution was submitted to the upstream project.
+
+I also contribute to charts I actively use, particularly around PostgreSQL integration. Open source is a practical way for me to test my engineering choices against other constraints and improve the tools I operate.
 
 ## Outside of work
 

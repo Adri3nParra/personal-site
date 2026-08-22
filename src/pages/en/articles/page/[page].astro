@@ -1,0 +1,6 @@
+---
+export function getStaticPaths() {
+  return ['1', '2'].map((page) => ({ params: { page } }));
+}
+return Astro.redirect('/en/articles/', 301);
+---

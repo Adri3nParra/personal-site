@@ -1,0 +1,19 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleList from '../../components/ArticleList.astro';
+import { localeFromId, tagSlug } from '../../lib/site';
+
+export async function getStaticPaths() {
+  const articles = (await getCollection('articles', ({ data }) => !data.draft)).filter((a) => localeFromId(a.id) === 'fr');
+  const tags = new Map<string, string>();
+  articles.flatMap((a) => a.data.tags).forEach((tag) => tags.set(tagSlug(tag), tag));
+  return [...tags].map(([slug, label]) => ({ params: { tag: slug }, props: { label } }));
+}
+const { tag } = Astro.params;
+const { label } = Astro.props;
+const articles = (await getCollection('articles', ({ data }) => !data.draft))
+  .filter((a) => localeFromId(a.id) === 'fr' && a.data.tags.some((value) => tagSlug(value) === tag))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+<BaseLayout title={`Sujet : ${label}`} locale="fr"><div class="page-shell"><header class="page-heading"><p class="eyebrow">Sujet</p><h1>#{label}</h1><p>{articles.length} article{articles.length > 1 ? 's' : ''}</p></header><ArticleList articles={articles} locale="fr" /></div></BaseLayout>

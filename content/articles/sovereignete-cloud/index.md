@@ -75,7 +75,7 @@ scw k8s cluster create \
 
 Scaleway a aussi des serverless containers (equivalent Fargate/Lambda), des functions serverless, et un marketplace avec des images preconstruites.
 
-Pour le perso, je suis plus sur du **serverless** que du bare metal. Containers est mon terrain de jeu : pas de serveur a gérer, deployer en une commande, scaler de zero a l'infini. Ce portfolio lui-meme tourne sur Scaleway Containers, un container Docker qui sert du Hugo, pour quelques centimes par mois.
+Pour le perso, je suis plus sur du **serverless** que du bare metal. Containers est mon terrain de jeu : pas de serveur a gérer, deployer en une commande, scaler de zero a l'infini. Ce portfolio lui-meme tourne sur Scaleway Containers, un container Docker qui sert un site Astro statique, pour quelques centimes par mois.
 
 Le use case ideal : sites statiques, APIs legères, bots, petits services qui ne justifient pas un cluster Kubernetes.
 

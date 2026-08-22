@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { copy, formatDate, tagUrl, type Article, type Locale } from '../lib/site';
+import type { MarkdownHeading } from 'astro';
+
+interface Props { article: Article; locale: Locale; headings: MarkdownHeading[] }
+const { article, locale, headings } = Astro.props;
+const t = copy[locale];
+const toc = headings.filter(({ depth }) => depth === 2 || depth === 3);
+---
+
+<BaseLayout title={article.data.title} description={article.data.summary} locale={locale} type="article">
+  <div class="page-shell">
+    <a class="back-link" href={`${locale === 'en' ? '/en' : ''}/articles/`}>← {t.back}</a>
+    <header class="article-header">
+      <p class="eyebrow"><time datetime={article.data.date.toISOString()}>{t.published} {formatDate(article.data.date, locale)}</time></p>
+      <h1>{article.data.title}</h1>
+      <p class="article-summary">{article.data.summary}</p>
+      <ul class="tag-list">
+        {article.data.tags.map((tag) => <li><a href={tagUrl(tag, locale)}>#{tag}</a></li>)}
+      </ul>
+    </header>
+    <div class="article-layout">
+      <article class="prose"><slot /></article>
+      {toc.length > 0 && <aside class="toc" aria-label={t.contents}>
+        <p>{t.contents}</p>
+        <ol>{toc.map((heading) => <li data-depth={heading.depth}><a href={`#${heading.slug}`}>{heading.text}</a></li>)}</ol>
+      </aside>}
+    </div>
+  </div>
+</BaseLayout>

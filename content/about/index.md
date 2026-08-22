@@ -3,33 +3,36 @@ title: "À propos"
 draft: false
 ---
 
-Platform Engineer avec 5 ans d'expérience, spécialisé sur **Kubernetes, Cloud, les pipelines CI/CD et Linux**.
+Platform Engineer avec **6 ans d'expérience**, spécialisé dans l'architecture, l'industrialisation et la sécurisation de **plateformes Kubernetes sur des infrastructures cloud et hybrides**.
 
 Je suis quelqu'un de très curieux, je teste régulièrement de nouveaux outils, je lis des annonces de releases comme d'autres lisent les actualités, et j'ai souvent un POC qui tourne en local sur un truc qui m'a intrigué la semaine d'avant. Cette curiosité n'est pas un à-côté : c'est ce qui fait que je comprends rapidement un nouvel environnement, que je propose des solutions auxquelles l'équipe n'avait pas pensé, et que je reste à jour dans un écosystème qui évolue vite.
 
-Le reste du temps, j'aime les environnements simples, fiables et proches de la production. Pragmatique, je privilégie les solutions robustes et reproductibles plutôt que la complexité pour la complexité.
+Le reste du temps, j'aime les environnements simples, fiables et proches de la production. Pragmatique, je privilégie les solutions robustes et reproductibles plutôt que la complexité pour la complexité. J'aime particulièrement partir d'un besoin, poser les contraintes de réseau, sécurité, résilience, données et exploitation, puis construire une architecture cloud cohérente. Mon approche s'appuie sur Linux, l'Infrastructure as Code, GitOps et l'observabilité pour rendre ces plateformes compréhensibles et exploitables par toute l'équipe.
 
-Certifié **CKA** (Certified Kubernetes Administrator), **CKAD** (Certified Kubernetes Application Developer), **CKS** (Certified Kubernetes Security Specialist), **KCNA** (Kubernetes and Cloud Native Associate), **KCSA** (Kubernetes and Cloud Native Security Associate).
+Certifié **CKA**, **CKAD**, **CKS**, **KCNA** et **KCSA**, je suis également **Kubestronaut CNCF**.
 
 ## Compétences techniques
 
-**Orchestration & Cloud**
-Kubernetes · OVH MKS · GKE · Docker Swarm · Helm · OpenTofu
+**Cloud & Infrastructure as Code**
+AWS · OVHcloud · Scaleway · OpenStack · GCP/GKE · OpenTofu/Terraform · Terragrunt · S3 · IAM · Réseaux cloud
 
-**GitOps & CI/CD**
-ArgoCD · GitLab CI · Harbor · Nexus · SonarQube · Jenkins
+**Kubernetes & GitOps**
+Kubernetes · Helm · Argo CD · Argo Rollouts · Traefik · Gateway API · Docker Swarm
+
+**CI/CD & Supply Chain**
+GitLab CI/CD · Jenkins · Harbor · Nexus · SonarQube · Dependency-Track · Cosign
 
 **Sécurité**
-Trivy · Kyverno · Falco · CrowdSec · Sealed Secrets · Gitleaks
+Kyverno · Falco · Trivy · CrowdSec · External Secrets · Sealed Secrets · Gitleaks · Keycloak
 
-**Monitoring**
-Prometheus · Grafana · Loki · Alertmanager · Zabbix
+**Observabilité**
+Prometheus · Grafana · Loki · Alloy · Alertmanager · Zabbix
 
 **Réseau & Ingress**
-Traefik · Cert-Manager · TCP/IP · DNS · HTTP/S
+Traefik · Cert-Manager · Calico · NetworkPolicy · DNS · TLS · HTTP/S
 
 **Systèmes & BDD**
-Linux (Debian / Ubuntu / RHEL) · PostgreSQL · MySQL · Shell
+Linux (Debian / Ubuntu / RHEL) · PostgreSQL · MySQL · Progress OpenEdge · Bash · PowerShell
 
 ## Formation
 
@@ -93,7 +96,13 @@ Je travaille **100%** Linux (**et j'y tiens énormément**) - **Ubuntu 24.04** a
 
 Pour le développement et la veille, je tourne un cluster **K3S** local qui me permet de tester des charts Helm, des manifests ou des nouvelles technos avant de les approcher en production. J'utilise **nerdctl** pour le build et la manipulation d'images — CLI compatible Docker mais par-dessus containerd, sans démon.
 
-L'éditeur c'est **VSCode**, le terminal c'est Bash, et les outils du quotidien sont ceux qu'on retrouve dans n'importe quel environnement DevOps sérieux : kubectl, Helm, OpenTofu, git.
+L'éditeur c'est **VSCode**, le terminal c'est Bash, et les outils du quotidien sont ceux qu'on retrouve dans n'importe quel environnement Platform sérieux : kubectl, Helm, OpenTofu, git.
+
+## Open source
+
+J'ai créé un **chart Helm complet pour [transfer.sh](/articles/transfersh-helm-chart/)**, avec plusieurs backends de stockage, Ingress et Gateway API, HPA, NetworkPolicy et options de sécurité. La contribution a été proposée au projet upstream.
+
+Je contribue également à des charts que j'utilise réellement, notamment autour de l'intégration de PostgreSQL. L'open source est pour moi une façon très concrète de tester mes pratiques face à d'autres contraintes et d'améliorer les outils que j'exploite.
 
 ## En dehors du travail
 

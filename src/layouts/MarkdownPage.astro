@@ -1,0 +1,18 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import type { Locale } from '../lib/site';
+interface Props { title: string; description?: string; locale?: Locale }
+const { title, description, locale = 'fr' } = Astro.props;
+---
+
+<BaseLayout title={title} description={description} locale={locale}>
+  <div class="page-shell narrow-shell">
+    <header class="page-heading">
+      <p class="eyebrow">{locale === 'fr' ? 'Portfolio' : 'Portfolio'}</p>
+      <h1>{title}</h1>
+    </header>
+    <article class="prose">
+      <slot />
+    </article>
+  </div>
+</BaseLayout>

@@ -1,0 +1,7 @@
+---
+import ArticleCard from './ArticleCard.astro';
+import { copy, type Article, type Locale } from '../lib/site';
+interface Props { articles: Article[]; locale: Locale }
+const { articles, locale } = Astro.props;
+---
+{articles.length ? <div class="articles-grid">{articles.map((article) => <ArticleCard article={article} locale={locale} />)}</div> : <p>{copy[locale].noArticles}</p>}

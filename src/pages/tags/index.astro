@@ -1,0 +1,8 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { localeFromId, tagSlug } from '../../lib/site';
+const articles = (await getCollection('articles', ({ data }) => !data.draft)).filter((a) => localeFromId(a.id) === 'fr');
+const tags = [...new Map(articles.flatMap((a) => a.data.tags).map((tag) => [tagSlug(tag), tag])).entries()].sort((a,b) => a[1].localeCompare(b[1], 'fr'));
+---
+<BaseLayout title="Sujets" locale="fr"><div class="page-shell narrow-shell"><header class="page-heading"><p class="eyebrow">Index</p><h1>Sujets</h1></header><ul class="tag-list">{tags.map(([slug, tag]) => <li><a href={`/tags/${slug}/`}>#{tag}</a></li>)}</ul></div></BaseLayout>
