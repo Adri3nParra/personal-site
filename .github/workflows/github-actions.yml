@@ -40,5 +40,5 @@ jobs:
           SCW_DEFAULT_ORGANIZATION_ID: ${{ secrets.SCW_DEFAULT_ORGANIZATION_ID }}
           SCW_CONTAINER_ID: ${{ secrets.SCW_CONTAINER_ID }}
         run: |
-          scw container container deploy ${SCW_CONTAINER_ID} region=fr-par --wait
+          scw container container deploy ${SCW_CONTAINER_ID} region=fr-par
 
